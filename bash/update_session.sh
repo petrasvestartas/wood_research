@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 # Bring every repo here onto the latest session kernel, then rebuild what compiles against it.
 #
-#   ./update_session.sh            update session_cpp, rebuild wood and wood_nano, update Python deps
-#   ./update_session.sh --no-build only update the sources and the Python packages
+#   bash/update_session.sh            update session_cpp, rebuild wood and wood_nano, update Python deps
+#   bash/update_session.sh --no-build only update the sources and the Python packages
 #
 # Safe to re-run: every step is a no-op when already up to date. One build at a time,
 # bounded to 4 parallel jobs - see wood/CLAUDE.md for why nothing here runs concurrently.
 set -euo pipefail
 
-HERE="$(cd "$(dirname "$0")" && pwd)"
+# ../ because this lives in bash/ alongside pull.sh, push.sh and publish_scene.sh; every path
+# below is anchored to the superproject root, not to this folder.
+HERE="$(cd "$(dirname "$0")/.." && pwd)"
 SESSION_CPP="$HERE/session_cpp"          # the submodule, see README.md
 BUILD=1
 [[ "${1:-}" == "--no-build" ]] && BUILD=0

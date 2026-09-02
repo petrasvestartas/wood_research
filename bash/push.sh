@@ -12,6 +12,9 @@
 # compas_tf and session_cpp are NOT pushed here. compas_tf belongs to BRG-research and
 # session_cpp is developed inside the `session` monorepo; both are consumed here, not
 # authored here. Their pointers still move in the superproject commit at the end.
+#
+# wood_research itself IS pushed, and not only its submodule pointers: README.md, bash/,
+# the plans and .claude/ are authored in this repository and nowhere else.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -37,6 +40,12 @@ if [ -z "$MESSAGE" ]; then
     for repo in "${ORDER[@]}"; do
         [ -n "$(git -C "$repo" status --porcelain)" ] && blocked+=("$repo")
     done
+    # This repository's OWN files, checked the same way. --ignore-submodules=all because the
+    # pointers are SUPPOSED to be dirty here - moving them is what the commit at the end is
+    # for - and counting them would make the script refuse to run precisely when it has work.
+    if [ -n "$(git status --porcelain --ignore-submodules=all)" ]; then
+        blocked+=("wood_research")
+    fi
     if [ ${#blocked[@]} -gt 0 ]; then
         echo "uncommitted changes in: ${blocked[*]}" >&2
         echo "commit them yourself, or re-run with -m \"message\" to commit all tracked changes." >&2
@@ -69,12 +78,17 @@ done
 # The superproject records WHICH commit of each submodule this stack was last known to
 # work at. Without this commit the pushes above are invisible to a fresh clone: it would
 # still check out the old pins.
+#
+# `git add -A`, not the submodule paths alone: wood_research is a REPOSITORY, not just a set
+# of pins. Staging only the pointers left every file authored here behind - committed
+# nothing, pushed nothing, and still printed "pushed". The pre-flight above is what makes
+# this safe with no -m: it refuses to start when something here needs a commit message.
 step "wood_research"
-git add -A -- "${ORDER[@]}" compas_tf session_cpp
+git add -A
 if git diff --cached --quiet; then
-    echo "   submodule pointers unchanged"
+    echo "   nothing to commit"
 else
-    git commit -q -m "${MESSAGE:-submodules: $(git diff --cached --name-only | tr '\n' ' ')}"
+    git commit -q -m "${MESSAGE:-superproject: $(git diff --cached --name-only | tr '\n' ' ')}"
     echo "   committed: $(git log --oneline -1)"
 fi
 git push -q origin "$(git rev-parse --abbrev-ref HEAD)"

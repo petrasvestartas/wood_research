@@ -61,5 +61,5 @@ fi
 cat <<'EOF'
 
 Sources are current. To rebuild what compiles against them:
-    ./update_session.sh
+    bash/update_session.sh
 EOF
