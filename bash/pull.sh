@@ -34,6 +34,11 @@ for path in $(git config -f .gitmodules --get-regexp '^submodule\..*\.path$' | a
     if [ -n "$(git -C "$path" status --porcelain)" ]; then
         dirty+=("$path")
         echo "   local changes - not moved, still at $(git -C "$path" log --oneline -1)"
+        # `submodule update` above leaves a submodule detached whenever the pin and the
+        # branch disagree, and this one is not being moved, so say so: uncommitted work on
+        # a detached HEAD is the case where a later update really does throw it away.
+        git -C "$path" symbolic-ref -q HEAD >/dev/null \
+            || echo "   WARNING: detached HEAD with uncommitted changes - commit on a branch before updating"
         continue
     fi
 
