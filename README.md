@@ -68,6 +68,21 @@ so open `wood_research`, not `wood` — and configure once first, or includes wi
 - **`wood_nano`** — nanobind bindings, CPython 3.13 via `uv`.
 - **`compas_wood`** — pure-Python COMPAS wrapper.
 
-Each repo has its own `SETUP.md`. `PLAN_LIVE_VIEWER.md` is the plan for driving
-`session_viewer` from these solvers; the static publishing route it builds on is in this
-file's history (`git log -p README.md`).
+Each repo has its own `SETUP.md`.
+
+## Seeing the geometry
+
+```bash
+cmake --build wood/build --target main_face_to_face --parallel 4 && wood/build/main_face_to_face
+bash/serve_scenes.py     # prints the viewer URL; re-run the example and the page redraws
+```
+
+`bash/serve_scenes.py` serves `wood/data/output` (the `pb/` + `scenes/` pair an example writes)
+with the CORS and private-network headers the viewer needs. The page polls the manifest and the
+files it lists every few seconds and swaps the scene in place — same canvas, same camera, no
+reload and nothing committed.
+
+To publish a scene instead of watching one, commit the `.pb` and an entry in
+`session_viewer.toml` on the [`session_viewer_data`](https://github.com/petrasvestartas/session/tree/session_viewer_data)
+branch of the session repo: https://petrasvestartas.github.io/session/ reads that branch at its
+tip commit, so nothing is built or deployed. `PLAN_LIVE_VIEWER.md` is the plan for the rest.
