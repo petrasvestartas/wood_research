@@ -1,0 +1,48 @@
+{
+  "//": [
+    "IntelliSense for the whole wood_project tree. VS Code only reads .vscode/ at the",
+    "folder that is actually OPEN, so wood/.vscode/c_cpp_properties.json is ignored when",
+    "the workspace root is wood_project - which is why examples/*.cpp squiggled on every",
+    "include. This is the same configuration, addressed from the outer root.",
+    "",
+    "compileCommands is the authority: every .cpp that CMake builds gets its real flags",
+    "from wood/build/compile_commands.json, so it must exist - run",
+    "  cmake -S wood -B wood/build -DCMAKE_BUILD_TYPE=Release",
+    "(or ./update_session.sh) once after a fresh clone.",
+    "",
+    "includePath is the FALLBACK for files the database does not name: headers, and any",
+    "source added since the last configure. It mirrors the -I flags CMake passes.",
+    "",
+    "session_cpp here is the symlink at the root of this repo, pointing at the one kernel",
+    "checkout (see README.md). '../src/session.h' in wood/examples resolves through the",
+    "session_cpp/src entry: session_cpp/src/../src/session.h. Without that entry the",
+    "kernel headers are unresolved even though the file compiles."
+  ],
+  "configurations": [
+    {
+      "name": "Linux",
+      "compileCommands": "${workspaceFolder}/wood/build/compile_commands.json",
+      "compilerPath": "/usr/bin/c++",
+      "cStandard": "c17",
+      "cppStandard": "c++23",
+      "intelliSenseMode": "linux-gcc-x64",
+      "includePath": [
+        "${workspaceFolder}/wood",
+        "${workspaceFolder}/wood/src",
+        "${workspaceFolder}/wood/src/joinery_solver",
+        "${workspaceFolder}/wood/src/templates",
+        "${workspaceFolder}/session_cpp",
+        "${workspaceFolder}/session_cpp/src",
+        "${workspaceFolder}/session_cpp/src/fmt/include",
+        "${workspaceFolder}/session_cpp/src/json/include",
+        "${workspaceFolder}/session_cpp/src/guid/include",
+        "${workspaceFolder}/session_cpp/src/yaml",
+        "${workspaceFolder}/session_cpp/generated",
+        "${workspaceFolder}/wood/build/_deps/absl-src",
+        "${workspaceFolder}/wood/build/_deps/protobuf-src/src",
+        "${workspaceFolder}/wood/build/_deps/protobuf-src/third_party/utf8_range"
+      ]
+    }
+  ],
+  "version": 4
+}

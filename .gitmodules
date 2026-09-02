@@ -1,0 +1,20 @@
+[submodule "session_cpp"]
+	path = session_cpp
+	url = https://github.com/petrasvestartas/session_cpp.git
+	branch = main
+[submodule "wood"]
+	path = wood
+	url = https://github.com/petrasvestartas/wood.git
+	branch = dev
+[submodule "wood_nano"]
+	path = wood_nano
+	url = https://github.com/petrasvestartas/wood_nano.git
+	branch = dev
+[submodule "compas_wood"]
+	path = compas_wood
+	url = https://github.com/petrasvestartas/compas_wood.git
+	branch = dev
+[submodule "compas_tf"]
+	path = compas_tf
+	url = https://github.com/BRG-research/compas_tf.git
+	branch = assembly-steps
