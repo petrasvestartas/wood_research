@@ -33,7 +33,7 @@ ENDPOINT="https://0520459c6817bd96c1e25fcb49461c4e.r2.cloudflarestorage.com"
 PUBLIC="https://pub-dfd304db921140a09a9ad44c30e0aceb.r2.dev"
 PROFILE="r2"
 SLOT="pb/view_live.pb"                               # the one key the manifest names
-MANIFEST="view_session.toml"
+MANIFEST="view_live.toml"
 NOTIFY_URL="https://ntfy.sh/wood-live-84eaac4a04729911"
 
 # `aws` is installed per-user by `uv tool install awscli`, which can land outside PATH.
