@@ -75,29 +75,36 @@ Each repo has its own `SETUP.md`.
 bash/publish_scene.sh    # build, run, publish; prints one line when the viewer has been told
 ```
 
-That is the whole loop. It builds `main_face_to_face`, runs it, publishes the
-`wood/data/output/pb/live.pb` it wrote to the branch the viewer reads, and tells the open page
+That is the whole loop. It builds `main_face_to_face`, runs it, uploads the
+`wood/data/output/pb/live.pb` it wrote to the bucket the viewer reads, and tells the open page
 so it redraws in place — same canvas, same camera, no reload. Build and run output appears only
 if something fails, so what you get back is one line:
 
 ```
-pb/live.pb  3.7 MB  3368172  viewer notified in 6335 ms
+pb/view_live.pb  3.7 MB  3368172  viewer notified in 1526 ms
 ```
 
+The third field is the file's md5, short — an identity for the bytes, since there is no commit.
 `--no-build` republishes what is already on disk, `--target NAME` runs a different example, and
-`--no-notify` skips the relay (open pages poll the push up within two minutes instead).
+`--no-notify` skips the relay (open pages poll the upload up within five seconds instead).
+Republishing byte-identical content says `unchanged - nothing published` and uploads nothing.
 
-It pushes the file to [`session_viewer_data`](https://github.com/petrasvestartas/session/tree/session_viewer_data)
-as the single fixed slot `pb/live.pb` — always the same path, so the manifest never needs an
-edit — and then announces the new commit sha on a relay topic. Nothing is built or deployed:
-https://petrasvestartas.github.io/session/ reads that branch directly.
+It uploads to the Cloudflare R2 bucket `session-viewer-data` as the single fixed key
+`pb/view_live.pb` — always the same key, so the manifest never needs an edit — and then pings a
+relay topic. Nothing is built or deployed: https://petrasvestartas.github.io/session/ reads that
+bucket directly. **R2 keeps no versions**, so a publish replaces bytes that are then gone.
 
-The announcement is what makes it feel live. Anonymous browsers get 60 GitHub API calls an hour
-per address, so a page that goes looking for changes can only afford to ask every couple of
-minutes — that quota, not the network, is the whole delay. The machine that pushed already knows
-the sha, so it says so, and every open page (holding an SSE connection since it loaded) goes
-straight to that commit. Push ~1 s + relay ~0.1 s + fetch ~0.7 s. Polling stays underneath as the
-fallback, so a page opened later, or a push made from anywhere else, still converges.
+This replaced the `session_viewer_data` git branch, which was deleted on 2026-09-03. Geometry does
+not go in git: the branch existed only to serve files over HTTP, and it cost a parentless-commit
+dance to stop history from growing without bound. An object store just overwrites.
+
+The announcement is what makes it feel live. Without it a page waits for its next poll; with it,
+every open page (holding an SSE connection since it loaded) re-reads immediately. Upload ~1 s +
+relay ~0.1 s + fetch. The message says only *that* something changed — the page then re-reads the
+URLs its manifest already named, so nothing on the public topic can name bytes. Polling stays
+underneath as the fallback, so a page opened later, or a publish made from anywhere else, still
+converges: every poll re-reads each listed file with `If-None-Match`, and an overwritten key is a
+new `ETag`.
 
 `main_face_to_face` takes an optional variant number (`main_face_to_face 3`) that tilts one plate,
 which is what `--demo` uses to make consecutive publishes visibly different.

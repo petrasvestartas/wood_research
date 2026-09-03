@@ -16,7 +16,8 @@ the bug this instruction exists to prevent.
 bash/publish_scene.sh
 ```
 
-The script builds `main_face_to_face`, runs it, publishes the `wood/data/output/pb/live.pb` it
-wrote, and tells the open pages. On success it prints one line naming the slot, its size, the
-commit, and whether the viewer was notified. On failure it prints the build or run log and exits
-non-zero - pass that through as it is too.
+The script builds `main_face_to_face`, runs it, uploads the `wood/data/output/pb/live.pb` it
+wrote to the R2 bucket the viewer reads, and tells the open pages. On success it prints one line
+naming the key, its size, the file's short md5, and whether the viewer was notified - or
+`unchanged - nothing published` when the bytes are identical to what is already live. On failure
+it prints the build or run log and exits non-zero - pass that through as it is too.

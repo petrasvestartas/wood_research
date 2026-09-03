@@ -8,31 +8,48 @@
 #   bash/publish_scene.sh some/other.pb   publish a file produced elsewhere (implies --no-build)
 #   bash/publish_scene.sh --no-notify     publish without telling the pages (they poll it up)
 #
-# WHY the notification. A push is on GitHub in about a second; everything after that is the page
-# waiting for permission to ask whether anything moved. Anonymous browsers get 60 GitHub API
-# calls an hour per address, so session_viewer budgets one every two minutes - that quota, not
-# the network, is the whole delay. The machine that pushed already knows the sha, so it says so,
-# on a relay the page has held an SSE connection to since it loaded. The topic is paired with
-# DEFAULT_NOTIFY in session_viewer/src/app/live.rs - change one, change the other. It carries a
-# commit sha and nothing else, never geometry, and the viewer refuses anything that is not hex.
+# WHY the notification. An upload is in the bucket in about a second; everything after that is
+# the page waiting for its next poll. The machine that published already knows, so it says so, on
+# a relay the page has held an SSE connection to since it loaded. The topic is paired with
+# DEFAULT_NOTIFY in session_viewer/src/app/live.rs - change one, change the other. The MESSAGE
+# CONTENT is ignored by the viewer: it means only "look now", and the page then re-reads the URLs
+# its manifest already named. Nothing a stranger puts on the public topic can name bytes.
 #
-# ONE SLOT, ONE COMMIT. Everything is published as pb/live.pb, the path the manifest already
-# names, so no manifest edit is ever needed. And each publish is a PARENTLESS commit that
-# replaces the branch: what it replaces becomes unreachable the moment it lands, so republishing
-# this slot forever costs the repository nothing. The trade is that the branch keeps no history -
-# it is a snapshot of what is published, not a record of what was - and only this script writes
-# to it. Nothing is built or deployed ON GITHUB by a push; see README.md.
+# ONE SLOT, OVERWRITTEN. Everything is published as pb/view_live.pb, the key the manifest already
+# names, so no manifest edit is ever needed. Cloudflare R2 keeps no versions: this REPLACES the
+# object and the bytes it replaces are gone. That is the whole reason the git machinery this
+# script used to carry - parentless commits, a sparse checkout, force-with-lease - is gone with
+# it. The storage keeps a snapshot of what is published, never a record of what was.
+#
+# The r2.dev public URL is not CDN-cached, so an overwrite is served on the very next request and
+# there is nothing to purge. The viewer notices it because every poll re-reads each listed file
+# with If-None-Match and the ETag moved. See session/bash/view_live.sh for publishing by hand.
+
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-REPO_URL="https://github.com/petrasvestartas/session.git"
-BRANCH="session_viewer_data"
-SLOT="pb/live.pb"                                    # the one path the manifest names
-MANIFEST="session_viewer.toml"
+BUCKET="session-viewer-data"
+ENDPOINT="https://0520459c6817bd96c1e25fcb49461c4e.r2.cloudflarestorage.com"
+PUBLIC="https://pub-dfd304db921140a09a9ad44c30e0aceb.r2.dev"
+PROFILE="r2"
+SLOT="pb/view_live.pb"                               # the one key the manifest names
+MANIFEST="view_session.toml"
 NOTIFY_URL="https://ntfy.sh/wood-live-84eaac4a04729911"
-# A persistent checkout, not a temp dir: the clone is partial and shallow, but re-cloning it on
-# every publish would still be the network round trip this whole script exists to avoid.
-CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/wood_research/$BRANCH"
+
+# `aws` is installed per-user by `uv tool install awscli`, which can land outside PATH.
+aws_r2() {
+    local bin=""
+    # `|| bin=""` matters: under `set -e` an assignment from a failing command substitution
+    # aborts the script, so a missing `aws` would exit 1 with NO message at all.
+    bin=$(command -v aws 2>/dev/null) || bin=""
+    if [ -z "$bin" ]; then
+        for c in "$HOME/.local/bin/aws" "$HOME"/snap/code/*/.local/bin/aws; do
+            [ -x "$c" ] && { bin="$c"; break; }
+        done
+    fi
+    [ -n "$bin" ] || { echo "no 'aws' on PATH - install it with: uv tool install awscli" >&2; return 127; }
+    "$bin" --profile "$PROFILE" --endpoint-url "$ENDPOINT" "$@"
+}
 
 TARGET="main_face_to_face"                           # the example whose live.pb is the scene
 JOBS=4
@@ -89,69 +106,62 @@ PB="${PB:-$ROOT/wood/data/output/pb/live.pb}"
 # -s, not -f: a zero-byte .pb is a run that died mid-write, and it publishes an empty page.
 [ -s "$PB" ] || { echo "not a scene: $PB is missing or empty" >&2; exit 1; }
 
-# --filter=blob:none + a sparse checkout of two paths: the branch is 130 MB of published scenes
-# and none of it needs to be here to add one file to it.
-if [ ! -d "$CACHE/.git" ]; then
-    echo "first run: cloning $BRANCH into $CACHE"
-    git clone --quiet --filter=blob:none --no-checkout --depth 1 --branch "$BRANCH" "$REPO_URL" "$CACHE"
-    git -C "$CACHE" sparse-checkout set --no-cone "$SLOT" "$MANIFEST"
-    git -C "$CACHE" checkout --quiet
+grep -q "^\\[${PROFILE}\\]" "$HOME/.aws/credentials" 2>/dev/null || {
+    echo "no [${PROFILE}] profile in ~/.aws/credentials - see session/bash/lib/view.sh" >&2
+    exit 1
+}
+
+# UNCHANGED MEANS UNPUBLISHED. R2 returns the object's md5 as its ETag for a single-part upload,
+# so the local digest answers "would this change anything?" without sending the file. A multipart
+# ETag carries a `-<parts>` suffix and is not an md5 of the whole object; there is nothing cheap
+# to compare then, so those always upload.
+if command -v md5sum >/dev/null 2>&1; then
+    LOCAL_MD5=$(md5sum "$PB" | cut -d' ' -f1)
+else
+    LOCAL_MD5=$(md5 -q "$PB")                        # BSD/macOS
 fi
+REMOTE_ETAG=$(curl -sSI "$PUBLIC/$SLOT" | tr -d '\r' | awk 'tolower($1)=="etag:" {gsub(/"/,"",$2); print $2}')
+case "$REMOTE_ETAG" in
+    *-*) ;;                                          # multipart: not comparable, upload anyway
+    "$LOCAL_MD5") echo "$SLOT  unchanged - nothing published"; exit 0 ;;
+esac
 
-# A commit with NO PARENT. git keeps every version of every file it is given and offers no
-# per-file opt out, so the only way to republish one slot indefinitely without the repository
-# growing is to leave nothing behind: this tree still carries every scene the branch publishes
-# (unchanged blobs are already on the remote), while the live.pb it replaces goes unreachable.
-stage() {
-    mkdir -p "$CACHE/$(dirname "$SLOT")"
-    cp "$PB" "$CACHE/$SLOT"
-    git -C "$CACHE" add -- "$SLOT"
+aws_r2 s3 cp "$PB" "s3://$BUCKET/$SLOT" --no-progress >/dev/null
+
+# VERIFY IT SERVES, not just that aws accepted it. An upload that lands but is not served leaves
+# the page drawing the previous scene, which looks like a success from here.
+SIZE=$(stat -c%s "$PB" 2>/dev/null || stat -f%z "$PB")
+SERVED=$(curl -sSI "$PUBLIC/$SLOT" | tr -d '\r' | awk 'tolower($1)=="content-length:" {print $2}')
+[ "$SERVED" = "$SIZE" ] || {
+    echo "published $SIZE bytes but $PUBLIC/$SLOT serves '${SERVED:-nothing}'" >&2
+    exit 1
 }
-commit() { git -C "$CACHE" commit-tree "$(git -C "$CACHE" write-tree)" -m "live: $(date -u +%FT%TZ)"; }
-
-stage
-# NO PRE-FETCH: this checkout is the only thing that writes here, so it is already at the tip.
-git -C "$CACHE" diff --cached --quiet && { echo "$SLOT  unchanged - nothing published"; exit 0; }
-
-SHA=$(commit)
-git -C "$CACHE" push --quiet --force-with-lease origin "$SHA:refs/heads/$BRANCH" 2>/dev/null || {
-    # The lease was refused: the branch is not where this checkout left it, so something else
-    # published. Take its tip and replay this scene on top - never overwrite a stranger's push
-    # without having looked at it first.
-    echo "branch moved under us - replaying this publish on top of it" >&2
-    git -C "$CACHE" fetch --quiet --depth 1 origin "$BRANCH"
-    git -C "$CACHE" reset --quiet --hard "origin/$BRANCH"
-    stage
-    SHA=$(commit)
-    git -C "$CACHE" push --quiet --force origin "$SHA:refs/heads/$BRANCH"
-}
-git -C "$CACHE" update-ref "refs/heads/$BRANCH" "$SHA"
-git -C "$CACHE" reset --quiet --soft "$SHA"
+TAG="${LOCAL_MD5:0:7}"
 
 # ONE LINE, ALWAYS THE SAME SHAPE: which slot was updated, how big it is, and whether the viewer
 # was told. Callers quote this line verbatim, so it must not vary with what the scene contains.
 #
 # "notified" is the honest claim and the strongest one available here: the relay accepted the
-# sha. Whether a page was open to hear it, and whether it finished drawing, is something only
+# message. Whether a page was open to hear it, and whether it finished drawing, is something only
 # the page knows - this script never hears back. It is also why no on-screen time is guessed any
-# more: the page still has to fetch the whole uncompressed file from raw.githubusercontent, so
+# more: the page still has to fetch the whole uncompressed file from the bucket, so
 # an estimate that ignored the size was wrong by seconds on a scene like this one.
 MB=$(awk -v b="$(stat -c%s "$PB" 2>/dev/null || stat -f%z "$PB")" 'BEGIN{printf "%.1f", b/1048576}')
 if [ "$NOTIFY" = 0 ]; then
-    echo "$SLOT  ${MB} MB  ${SHA:0:7}  published in $(( $(date +%s%N) / 1000000 - t0 )) ms, viewer not notified (--no-notify)"
+    echo "$SLOT  ${MB} MB  ${TAG}  published in $(( $(date +%s%N) / 1000000 - t0 )) ms, viewer not notified (--no-notify)"
 # --connect-timeout 1: the relay is a free public service and it does go down (measured
 # 2026-09-02, both A and AAAA refusing). When it does, a 5 s ceiling meant every publish sat
 # waiting out a dead socket - 5 s added to a 4 s job, to learn nothing. One second to open the
-# connection is generous for a POST that carries 40 bytes, and losing the notification only
+# connection is generous for a POST that carries a key name, and losing the notification only
 # costs what the line below says: the pages fall back to polling.
-elif curl -sf --connect-timeout 1 -m 3 -o /dev/null -d "$SHA" "$NOTIFY_URL"; then
-    echo "$SLOT  ${MB} MB  ${SHA:0:7}  viewer notified in $(( $(date +%s%N) / 1000000 - t0 )) ms"
+elif curl -sf --connect-timeout 1 -m 3 -o /dev/null -d "$SLOT" "$NOTIFY_URL"; then
+    echo "$SLOT  ${MB} MB  ${TAG}  viewer notified in $(( $(date +%s%N) / 1000000 - t0 )) ms"
 else
-    echo "$SLOT  ${MB} MB  ${SHA:0:7}  VIEWER NOT NOTIFIED - relay down, open pages poll it up within 2 min" >&2
+    echo "$SLOT  ${MB} MB  ${TAG}  VIEWER NOT NOTIFIED - relay down, open pages poll it up within 5 s" >&2
 fi
 
-# The manifest is what the page reads; a push it does not name shows nothing.
-grep -q "$SLOT" "$CACHE/$MANIFEST" || {
-    echo "WARNING: $MANIFEST on $BRANCH does not list \"$SLOT\" - the page will not show this." >&2
+# The manifest is what the page reads; an upload it does not name shows nothing.
+curl -sS "$PUBLIC/$MANIFEST" | grep -q "$SLOT" || {
+    echo "WARNING: $MANIFEST in $BUCKET does not list \"$SLOT\" - the page will not show this." >&2
     echo "         Add, once:  [[items]] / file = \"$SLOT\" / name = \"live\" / at = [0, 0, 0]" >&2
 }
