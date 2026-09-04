@@ -53,13 +53,14 @@ done
 
 # ── 3. wood: the C++ core. Reconfigure so a new kernel source file is picked up ───────────
 step "wood"
-cmake -S "$HERE/wood" -B "$HERE/wood/build" -DCMAKE_BUILD_TYPE=Release >/dev/null
+cmake -S "$HERE/wood" -B "$HERE/wood/build" -DCMAKE_BUILD_TYPE=Release -Wno-deprecated >/dev/null
 cmake --build "$HERE/wood/build" --parallel 4
 
 # ── 4. wood_nano: recompiles ../wood and ../session_cpp into the Python extension ─────────
 step "wood_nano"
 if [ -x "$HERE/wood_nano/.venv/bin/python" ]; then
-    (cd "$HERE/wood_nano" && CMAKE_BUILD_PARALLEL_LEVEL=4 uv pip install --no-build-isolation -e .)
+    (cd "$HERE/wood_nano" && SKBUILD_CMAKE_ARGS=-Wno-deprecated CMAKE_BUILD_PARALLEL_LEVEL=4 \
+        uv pip install --no-build-isolation -e .)
     "$HERE/wood_nano/.venv/bin/python" -c "import wood_nano, wood_nano._build_info as b; print('wood_nano', wood_nano.__version__, '| wood', b.WOOD_SHA, '| session_cpp', b.SESSION_SHA)"
 else
     echo "wood_nano: no .venv yet (see wood_nano/SETUP.md)"
