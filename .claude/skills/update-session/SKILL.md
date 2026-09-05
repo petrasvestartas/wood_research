@@ -1,5 +1,5 @@
 ---
-name: update_session
+name: update-session
 description: Move session_cpp to the latest kernel and rebuild wood and wood_nano against it. Use when asked to update the session kernel or rebuild the stack.
 allowed-tools: Bash
 ---
