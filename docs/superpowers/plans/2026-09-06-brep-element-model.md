@@ -565,121 +565,18 @@ git -C wood commit -m "data: floor_model as BReps, coplanar faces merged"
 
 ---
 
-### Task 6: Viewer stops drawing triangulation ink
+## Deferred to a follow-up plan: viewer true-edge wireframe
 
-**Files:**
-- Modify: `session/session_viewer/src/app/walk/brep.rs`
+Tasks 6-7 (suppress triangulation ink; draw the BRep's real edges) are NOT part of this
+plan. `session_viewer` is authored in `/home/petras/code/code_rust/session`, where
+`walk/brep.rs` and `walk/curves.rs` already carry uncommitted work: `walk_brep` now uses
+`b.face_meshes_q(Some((5.0, 0.001)))` and rebuilds a mesh with `Mesh::from_polylines`,
+replacing the `b.mesh()` call those tasks were written against. Editing the clean clone at
+`wood_research/session/session_viewer` instead would create a second diverging checkout.
 
-**Interfaces:**
-- Consumes: `session_rust::Mesh::set_linecolors(Vec<Color>, Vec<f64>)`, `mesh_ink`'s `width 0 = hidden` rule.
-- Produces: BReps drawn as fill only. Task 7 adds the edges back.
-
-- [ ] **Step 1: Suppress the ink**
-
-`mesh_ink.rs:37` documents `width 0 = hidden`, and `width_at` broadcasts a single entry
-to every edge, so one zero hides the whole tessellation. In `walk_brep`:
-
-```rust
-pub fn walk_brep(arena: &mut ArenaRows, ink: &mut Ink, b: &BRep, cx: &WalkCx) -> Row {
-    let mut bm = b.mesh();
-    bm.set_objectcolor(b.surfacecolor.clone());
-    // The tessellation is a fill, not a wireframe: its triangle edges are an artifact of
-    // meshing, not features of the solid. Width 0 hides them (mesh_ink::hidden); the real
-    // edges are drawn from the BRep's own curves below.
-    bm.set_linecolors(vec![b.surfacecolor.clone()], vec![0.0]);
-    walk_mesh(arena, ink, &bm, &MeshCx { cx, opts: &MeshOpts::MODEL })
-}
-```
-
-- [ ] **Step 2: Verify it compiles and renders**
-
-```bash
-cd session/session_viewer && cargo check
-cargo run --example selftest --target x86_64-unknown-linux-gnu --release -- /tmp/before.ppm assets/view_local.yaml
-```
-
-Expected: compiles; the printed ink count DROPS sharply versus the previous run (that
-count is the evidence — a silent shader change would not move it).
-
-- [ ] **Step 3: Commit**
-
-```bash
-git -C session/session_viewer add src/app/walk/brep.rs
-git -C session/session_viewer commit -m "viewer: a BRep's tessellation is a fill, not a wireframe"
-```
-
----
-
-### Task 7: Viewer draws the BRep's real edges
-
-**Files:**
-- Modify: `session/session_viewer/src/app/walk/brep.rs`
-- Modify: `session/session_viewer/src/app/walk/curves.rs` (widen `sample_nurbscurve` visibility if needed)
-
-**Interfaces:**
-- Consumes: `session_rust::BRep` public fields `m_edges`, `m_curves_3d`; `curves::sample_nurbscurve`; `SegRows`/`push_polyline`.
-- Produces: BReps drawn with true edges. Terminal task.
-
-- [ ] **Step 1: Draw one polyline per edge**
-
-Iterating `b.m_edges` rather than face wires means an edge shared by two faces is drawn
-ONCE. Add to `brep.rs`:
-
-```rust
-/// The solid's real edges: every non-degenerated edge sampled off its own 3D curve.
-/// Iterating edges (not face wires) draws a shared edge once. A cylinder becomes two
-/// exact circles plus its seam - no polygonised ring, because nothing is polygonised.
-fn walk_brep_edges(seg: &mut SegRows, b: &BRep, row: u32, bounds: &mut Aabb) {
-    let color = pack_rgba(b.surfacecolor.to_f32());
-    let pen = Pen { row, radius: encode_width(b.width), color };
-    for e in &b.m_edges {
-        if e.degenerated || e.curve_3d_index < 0 { continue; }
-        let pts: Vec<[f32; 3]> = sample_nurbscurve(&b.m_curves_3d[e.curve_3d_index as usize])
-            .into_iter()
-            .map(|p| p.map(|v| v as f32))
-            .collect();
-        if pts.len() < 2 { continue; }
-        push_polyline(seg, &pts, &pen, bounds);
-    }
-}
-```
-
-Import what `curves.rs` already uses for `walk_nurbscurve` — `Pen`, `encode_width`,
-`pack_rgba`, `push_polyline`, `Aabb`, `SegRows` — and make `sample_nurbscurve` reachable
-(it is `pub(super)`, so `use super::curves::sample_nurbscurve;` works from `brep.rs`).
-
-- [ ] **Step 2: Call it from `walk_brep`**
-
-`walk_brep` must merge the fill's row with the edge bounds it just produced. Follow the
-shape `walk_mesh` returns; extend the `Row`'s bounds with `bounds` before returning it
-so framing still includes the edges.
-
-- [ ] **Step 3: Verify**
-
-```bash
-cd session/session_viewer && cargo check && cargo xtest
-cargo run --example selftest --target x86_64-unknown-linux-gnu --release -- /tmp/after.ppm assets/view_local.yaml
-```
-
-Expected: compiles, tests pass, ink count rises from Task 6's floor but stays far below
-the original triangulated count. Compare `/tmp/before.ppm` and `/tmp/after.ppm`.
-
-- [ ] **Step 4: Publish and look**
-
-```bash
-cd /home/petras/code/code_cpp/wood_research
-./wood/build/main_face_to_face floor_model && bash/publish-scene.sh --no-build
-```
-
-Expected: columns and rib connectors draw as flat faces with clean outlines; cylinders
-show circular caps, not polygons.
-
-- [ ] **Step 5: Commit**
-
-```bash
-git -C session/session_viewer add src/app/walk/brep.rs src/app/walk/curves.rs
-git -C session/session_viewer commit -m "viewer: draw a BRep's real edges instead of its tessellation"
-```
+The wireframe problem is still open: `from_polylines` is fed `fm.face.values()`, the
+tessellation triangles, so `mesh_ink` still draws triangle edges. Rewrite those two tasks
+against the working copy once it is committed.
 
 ---
 
