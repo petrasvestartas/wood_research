@@ -11,7 +11,9 @@ set -euo pipefail
 # ../ because this lives in bash/ alongside pull.sh, push.sh and publish_scene.sh; every path
 # below is anchored to the superproject root, not to this folder.
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
-SESSION_CPP="$HERE/session_cpp"          # the submodule, see README.md
+# The kernel, inside the `session` monorepo submodule - see README.md. wood and wood_nano
+# resolve it as `../session/session_cpp`, which is this same directory.
+SESSION_CPP="$HERE/session/session_cpp"
 BUILD=1
 [[ "${1:-}" == "--no-build" ]] && BUILD=0
 
@@ -22,7 +24,7 @@ step() { printf '\n== %s ==\n' "$*"; }
 # onto its branch - and is what to run after a fresh clone.
 step "session_cpp"
 if [ ! -e "$SESSION_CPP/CMakeLists.txt" ]; then
-    echo "no session_cpp at $SESSION_CPP - the submodule is not checked out. Run:"
+    echo "no kernel at $SESSION_CPP - session/session_cpp is not checked out. Run:"
     echo "  bash/pull.sh"
     exit 1
 fi
@@ -35,6 +37,8 @@ else
 fi
 git -C "$SESSION_CPP" submodule update --init --recursive
 echo "session_cpp: $(git -C "$SESSION_CPP" log --oneline -1)"
+# Moving the kernel leaves the `session` submodule pointer dirty here. That is expected:
+# bash/push.sh commits the moved pointers at the end.
 
 # ── 2. Python packages that mirror the kernel (session_py, session_rhino) ───────────────
 step "session_py / session_rhino in the venvs"

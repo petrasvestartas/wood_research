@@ -6,7 +6,8 @@ working stack rather than five checkouts that happen to be on the right day.
 
 ```
 wood_research/
-├── session_cpp/   the geometry kernel everything compiles against     (main)
+├── session/       the session monorepo, where the kernel is authored    (main)
+│   └── session_cpp/   the geometry kernel everything compiles against
 ├── wood/          C++ core: contact detection + joint solver          (dev)
 ├── wood_nano/     nanobind bindings over wood                         (dev)
 ├── compas_wood/   COMPAS-friendly wrapper over wood_nano              (dev)
@@ -16,17 +17,26 @@ wood_research/
 
 Dependency direction: `compas_wood` → `wood_nano` → `wood` → `session_cpp`.
 
-`session_cpp` is one checkout shared by `wood` and `wood_nano`. Both CMake files look for
-it as `../session_cpp`, so updating that one directory updates the kernel everywhere and
-the two can never disagree about what an `Element` is.
+The kernel is **not** a submodule of its own here. It arrives inside `session`, the monorepo
+it is actually authored in, so there is one place a kernel edit can live and this repo can
+never hold a second copy that quietly drifts from it. Both `wood/CMakeLists.txt` and
+`wood_nano/CMakeLists.txt` list `../session/session_cpp` as a candidate and resolve it
+there, so the two can never disagree about what an `Element` is.
+
+Only `session/session_cpp` is checked out. `session_rust`, `session_py`, `session_viewer`
+and `session_data` are siblings this stack never compiles, and `bash/pull.sh` deliberately
+does not recurse into them - it is gigabytes of history for nothing.
 
 ## Clone
 
 ```bash
-git clone --recurse-submodules https://github.com/petrasvestartas/wood_research.git
+git clone https://github.com/petrasvestartas/wood_research.git
 cd wood_research
-bash/pull.sh          # puts every submodule on its branch, not a detached HEAD
+bash/pull.sh          # checks out the submodules and puts each on its branch, not a detached HEAD
 ```
+
+Plain `clone`, not `--recurse-submodules`: recursing pulls all of `session`, `session_rust`
+and `session_data` included. `pull.sh` takes the kernel out of it and leaves the rest alone.
 
 ## Day to day
 
@@ -40,19 +50,21 @@ bash/push.sh -m "contact areas"   # commit + push wood → wood_nano → compas_
 `push.sh` pushes in dependency order — `wood_nano` compiles `wood`, `compas_wood` runs on
 `wood_nano`, and each one's CI builds the others from their *pushed* branches — and ends by
 committing the moved submodule pointers here, without which the pushes are invisible to a
-fresh clone. `compas_tf` and `session_cpp` are consumed, not authored here, so they are not
-pushed; their pointers still move.
+fresh clone. `compas_tf` and `session` are consumed, not authored here, so they are not
+pushed; their pointers still move. A kernel change is committed and pushed from a checkout
+of the `session` monorepo, then picked up here with `bash/pull.sh`.
 
 ## Build by hand
 
 ```bash
-cmake -S wood -B wood/build -DCMAKE_BUILD_TYPE=Release   # wood: compiles ../session_cpp
+cmake -S wood -B wood/build -DCMAKE_BUILD_TYPE=Release   # wood: compiles ../session/session_cpp
 cmake --build wood/build --parallel 4
 cd wood_nano && uv pip install --no-build-isolation -e . && cd ..   # compiles ../wood too
 ```
 
 Both CMake files resolve the kernel the same way, first hit wins: `-DSESSION_CPP_LOCAL=<dir>`
-(or the env var), then `../session_cpp` (this layout), then a fresh clone of
+(or the env var), then `../session_cpp` (a plain checkout beside the repo), then
+`../session/session_cpp` (this layout), then a fresh clone of
 `github.com/petrasvestartas/session_cpp` `main` (CI and wheels).
 
 `.vscode/c_cpp_properties.json` here points IntelliSense at `wood/build/compile_commands.json`,

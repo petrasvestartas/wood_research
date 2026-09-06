@@ -7,7 +7,7 @@
 # the superproject pins, on a DETACHED HEAD - correct for reproducing a commit, wrong for
 # working in one: an edit committed there sits on no branch and the next update silently
 # leaves it behind. So every submodule is put back on the branch named in .gitmodules
-# (wood/wood_nano/compas_wood: dev, compas_tf: assembly-steps, session_cpp: main) and
+# (wood/wood_nano/compas_wood: dev, compas_tf: assembly-steps, session: main) and
 # fast-forwarded.
 #
 # A submodule with uncommitted changes is fetched but NOT moved. Pulling over local work
@@ -20,9 +20,10 @@ cd "$ROOT"
 step() { printf '\n== %s ==\n' "$*"; }
 
 step "checkout"
-# --init for a fresh clone, --recursive because session_cpp has its own two
-# (session_proto, session_data) and nothing compiles without them.
-git submodule update --init --recursive
+# --init for a fresh clone. NOT --recursive: `session` is the whole monorepo and recursing
+# would drag in session_rust, session_py and session_data at the top level - gigabytes this
+# stack never compiles. Only the kernel is pulled out of it, below.
+git submodule update --init
 
 dirty=()
 for path in $(git config -f .gitmodules --get-regexp '^submodule\..*\.path$' | awk '{print $2}'); do
@@ -47,9 +48,11 @@ for path in $(git config -f .gitmodules --get-regexp '^submodule\..*\.path$' | a
     echo "   $(git -C "$path" log --oneline -1)"
 done
 
-# session_cpp's own submodules move with it, and a kernel without its generated
-# protobuf sources fails to configure rather than to build - a confusing place to land.
-git -C session_cpp submodule update --init --recursive
+# The kernel is `session/session_cpp`, which wood and wood_nano resolve as
+# `../session/session_cpp`. --recursive because session_cpp has its own two (session_proto,
+# session_data) and a kernel without its generated protobuf sources fails to CONFIGURE
+# rather than to build - a confusing place to land.
+git -C session submodule update --init --recursive session_cpp
 
 step "summary"
 git submodule status

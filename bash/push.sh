@@ -9,9 +9,10 @@
 # from their pushed branches - so a wood_nano pushed before the wood commit it needs is
 # a red CI run against a wood that does not exist yet.
 #
-# compas_tf and session_cpp are NOT pushed here. compas_tf belongs to BRG-research and
-# session_cpp is developed inside the `session` monorepo; both are consumed here, not
-# authored here. Their pointers still move in the superproject commit at the end.
+# compas_tf and session are NOT pushed here. compas_tf belongs to BRG-research and the
+# kernel is authored in the `session` monorepo (push from your checkout of it, then
+# bash/pull.sh here); both are consumed here, not authored here. Their pointers still move
+# in the superproject commit at the end.
 #
 # wood_research itself IS pushed, and not only its submodule pointers: README.md, bash/,
 # the plans and .claude/ are authored in this repository and nowhere else.
