@@ -58,13 +58,28 @@ Two decisions taken during design:
 | `ElementGeometry = std::variant<std::monostate, Mesh, BRep>` | `element.h:23` |
 | `session_py` BRep binding, full kernel API | 0.167.0: `add_wire`, `add_pcurve`, `add_shell`, `add_solid`, `wire_edges`, `face_meshes`, `vertex_points` |
 | BRep element round-trips through `.pb` | verified: returns as `BRep` |
-| Viewer renders BRep | `session_viewer/src/app/walk/brep.rs` |
+| Viewer accepts BRep | `session_viewer/src/app/walk/brep.rs` — but by CPU tessellation, see below |
 | `NurbsSurface::is_planar(Plane*, tol)` | tests planarity **and** writes the plane |
 | `compas_occt` OCCBrep traversal | `vertices`, `edges`, `loops`, `faces`, `shells`, `solids`, `surfaces`, `curves`, `trims` |
 
 Note: `session_py 0.80.0` in `wood_nano/.venv` is stale and lacks most of this. The
 producer venv (`wood/data/face_to_face_detection/.venv`) has 0.167.0. Only the producer
 venv matters for writing; `wood_nano`'s should be refreshed separately.
+
+### The viewer does not benefit for free
+
+`walk_brep` is 25 lines and calls `b.mesh()` — the welded **triangle** mesh of every
+face — then hands it to `walk_mesh`. There is no BRep shader and no NURBS shader;
+`walk_surface` does the same. The wireframe comes from `mesh_ink.rs` ("one pipe per
+visible edge") of that triangle mesh, so the lines on screen are triangulation edges.
+
+**Storing BReps therefore fixes detection but not display**: `b.mesh()` would
+re-triangulate at render time and the same triangles would appear.
+
+A GPU surface shader is not the fix. WebGPU has no tessellation shader stage, so the
+options would be compute-shader tessellation or analytic ray-marching per surface type —
+a large project that would not change what is wrong here. What is wrong is the *ink*.
+Section 5 fixes that instead, reusing paths that already exist.
 
 ## Design
 
@@ -137,7 +152,29 @@ Smaller than it looks: `sync_faces()` already only calls `element.polylines()/pl
 - `WoodColumn::mesh()` — add a `brep.mesh()` branch alongside the Mesh one.
 - `add_faces_impl`, `contact_view`, `face_contacts` — unchanged.
 
-### 4. compas_tf — producer
+### 4. session_viewer — true-edge wireframe
+
+Two changes in `src/app/walk/brep.rs`, neither touching wgpu API or WGSL. Rows are built
+CPU-side through the same `SegRows`/`push_polyline` path `walk_nurbscurve` already uses,
+so there is no pipeline, bind group or host-shareable struct in scope. (wgpu pin: `29.0`,
+`session_viewer/Cargo.toml:16`.)
+
+- **Suppress triangulation ink.** `mesh_ink.rs:37` already documents `width 0 = hidden`,
+  and `width_at` broadcasts a single entry to every edge. So the tessellated fill asks
+  for no wireframe via `set_linecolors(vec![...], vec![0.0])`.
+- **Draw the real edges.** Iterate `b.m_edges` — all fields on `session_rust::BRep` are
+  public — and sample each `m_curves_3d[curve_3d_index]` through the existing
+  `sample_nurbscurve()`. Iterating edges rather than face wires means a shared edge is
+  drawn once, not twice.
+
+A cylinder then draws as two exact circles plus its seam, and a planar face as its true
+outline. No binding change is needed: `session_rust` is a full Rust port of the kernel,
+not a thin binding, and already exposes `wire_edges()` and `face_orientation()`.
+
+Note this means `face_polylines()` exists only in C++. The viewer does not need it — it
+draws edges, not face loops — so the Rust port is deliberately NOT kept in step here.
+
+### 5. compas_tf — producer
 
 - New `_brep(sp, element)`: `element.get_brep()` → OCCBrep → walk vertices, 3D curves,
   2D pcurves, edges, wires, faces, shells, solids into the session_py builders.
