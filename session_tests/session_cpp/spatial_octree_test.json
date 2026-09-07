@@ -1,0 +1,211 @@
+[
+  {
+    "group": "SpatialOctree",
+    "test_name": "Constructor",
+    "passed": true,
+    "time_ms": 0.005,
+    "line": 19,
+    "code": "    // uncomment #include \"spatial_octree.h\"\n    // uncomment #include \"point.h\"\n    // SpatialOctree: per-node spacing-limited subsamples for LOD point rendering\n    // leaf_capacity 16 > 9 points: the root absorbs everything, one node\n    SpatialOctree tree(octree_test_points(), 4.0, 16);",
+    "checks": [
+      {
+        "line": 26,
+        "code_line": "tree.node_count() == 1",
+        "passed": true
+      },
+      {
+        "line": 27,
+        "code_line": "tree.node_range(0) == std::make_pair(0, 9)",
+        "passed": true
+      },
+      {
+        "line": 28,
+        "code_line": "tree.order() == std::vector<int>({0, 1, 2, 3, 4, 5, 6, 7, 8})",
+        "passed": true
+      }
+    ],
+    "failures": []
+  },
+  {
+    "group": "SpatialOctree",
+    "test_name": "Node Count",
+    "passed": true,
+    "time_ms": 0.005,
+    "line": 31,
+    "code": "    // 9 points on X: root cube size 8, spacing 4 -> 2 cells, first-wins accepts x=0\n    // and x=4; the 7 leftovers split into two octants -> two leaf children\n    SpatialOctree tree(octree_test_points(), 4.0, 4);",
+    "checks": [
+      {
+        "line": 36,
+        "code_line": "tree.node_count() == 3",
+        "passed": true
+      }
+    ],
+    "failures": []
+  },
+  {
+    "group": "SpatialOctree",
+    "test_name": "Node Cube",
+    "passed": true,
+    "time_ms": 0.003,
+    "line": 39,
+    "code": "    // Root cube: aabb (0..8, 0, 0) grown to a cube -> center (4,0,0), size 8.\n    // Child in octant 6 (x<cx, y>=cy, z>=cz): min (0,0,0), size 4 -> center (2,2,2)\n    SpatialOctree tree(octree_test_points(), 4.0, 4);\n    auto [center, size] = tree.node_cube(0);\n    auto [child_center, child_size] = tree.node_cube(1);",
+    "checks": [
+      {
+        "line": 46,
+        "code_line": "TOLERANCE.is_close(center[0], 4.0) && TOLERANCE.is_close(center[1], 0.0)",
+        "passed": true
+      },
+      {
+        "line": 47,
+        "code_line": "TOLERANCE.is_close(size, 8.0)",
+        "passed": true
+      },
+      {
+        "line": 48,
+        "code_line": "TOLERANCE.is_close(child_center[0], 2.0) && TOLERANCE.is_close(child_center[2], 2.0)",
+        "passed": true
+      },
+      {
+        "line": 49,
+        "code_line": "TOLERANCE.is_close(child_size, 4.0)",
+        "passed": true
+      }
+    ],
+    "failures": []
+  },
+  {
+    "group": "SpatialOctree",
+    "test_name": "Node Level",
+    "passed": true,
+    "time_ms": 0.002,
+    "line": 52,
+    "code": "    SpatialOctree tree(octree_test_points(), 4.0, 4);",
+    "checks": [
+      {
+        "line": 55,
+        "code_line": "tree.node_level(0) == 0",
+        "passed": true
+      },
+      {
+        "line": 56,
+        "code_line": "tree.node_level(1) == 1",
+        "passed": true
+      },
+      {
+        "line": 57,
+        "code_line": "tree.node_level(2) == 1",
+        "passed": true
+      }
+    ],
+    "failures": []
+  },
+  {
+    "group": "SpatialOctree",
+    "test_name": "Node Spacing",
+    "passed": true,
+    "time_ms": 0.002,
+    "line": 60,
+    "code": "    // Spacing halves per level, like Potree\n    SpatialOctree tree(octree_test_points(), 4.0, 4);",
+    "checks": [
+      {
+        "line": 64,
+        "code_line": "TOLERANCE.is_close(tree.node_spacing(0), 4.0)",
+        "passed": true
+      },
+      {
+        "line": 65,
+        "code_line": "TOLERANCE.is_close(tree.node_spacing(1), 2.0)",
+        "passed": true
+      },
+      {
+        "line": 66,
+        "code_line": "TOLERANCE.is_close(tree.node_spacing(2), 2.0)",
+        "passed": true
+      }
+    ],
+    "failures": []
+  },
+  {
+    "group": "SpatialOctree",
+    "test_name": "Node Range",
+    "passed": true,
+    "time_ms": 0.002,
+    "line": 69,
+    "code": "    // Every node's points are contiguous in order(): root [0..2), children after\n    SpatialOctree tree(octree_test_points(), 4.0, 4);",
+    "checks": [
+      {
+        "line": 73,
+        "code_line": "tree.node_range(0) == std::make_pair(0, 2)",
+        "passed": true
+      },
+      {
+        "line": 74,
+        "code_line": "tree.node_range(1) == std::make_pair(2, 3)",
+        "passed": true
+      },
+      {
+        "line": 75,
+        "code_line": "tree.node_range(2) == std::make_pair(5, 4)",
+        "passed": true
+      }
+    ],
+    "failures": []
+  },
+  {
+    "group": "SpatialOctree",
+    "test_name": "Children",
+    "passed": true,
+    "time_ms": 0.002,
+    "line": 78,
+    "code": "    SpatialOctree tree(octree_test_points(), 4.0, 4);",
+    "checks": [
+      {
+        "line": 81,
+        "code_line": "tree.children(0) == std::vector<int>({1, 2})",
+        "passed": true
+      },
+      {
+        "line": 82,
+        "code_line": "tree.children(1).empty()",
+        "passed": true
+      }
+    ],
+    "failures": []
+  },
+  {
+    "group": "SpatialOctree",
+    "test_name": "Order",
+    "passed": true,
+    "time_ms": 0.002,
+    "line": 85,
+    "code": "    // Root's grid accepts x=0 and x=4 (first point wins its cell); the octant\n    // leaves absorb the rest in input order\n    SpatialOctree tree(octree_test_points(), 4.0, 4);",
+    "checks": [
+      {
+        "line": 90,
+        "code_line": "tree.order() == std::vector<int>({0, 4, 1, 2, 3, 5, 6, 7, 8})",
+        "passed": true
+      }
+    ],
+    "failures": []
+  },
+  {
+    "group": "SpatialOctree",
+    "test_name": "From Coords",
+    "passed": true,
+    "time_ms": 0.002,
+    "line": 93,
+    "code": "    // The flat-array constructor is the renderer's path (no per-point Point allocs)\n    std::vector<double> coords;\n    for (int x = 0; x < 9; x++) {\n        coords.push_back(static_cast<double>(x));\n        coords.push_back(0.0);\n        coords.push_back(0.0);\n    }\n    SpatialOctree tree = SpatialOctree::from_coords(coords, 4.0, 4);",
+    "checks": [
+      {
+        "line": 103,
+        "code_line": "tree.node_count() == 3",
+        "passed": true
+      },
+      {
+        "line": 104,
+        "code_line": "tree.order() == std::vector<int>({0, 4, 1, 2, 3, 5, 6, 7, 8})",
+        "passed": true
+      }
+    ],
+    "failures": []
+  }
+]
