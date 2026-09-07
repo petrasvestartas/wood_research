@@ -1,3 +1,57 @@
 {
-    "cmake.sourceDirectory": "/home/petras/code/code_cpp/wood_research/session_cpp/build/_deps/session_proto_files-src/cpp_build_examples"
+  "//": [
+    "Remote/tunnel responsiveness. The workspace is ~24G / ~80k files across five",
+    "submodules plus 2.5G of build trees. Without these excludes the VS Code file",
+    "watcher and the cpptools browse database walk all of it, which shows up as",
+    "typing lag over the tunnel. Build outputs are excluded from watching and",
+    "searching, NOT from IntelliSense input: wood/build/compile_commands.json is",
+    "still read (c_cpp_properties.json points at it) because compileCommands is a",
+    "direct file read, not a workspace scan."
+  ],
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/modules/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/build/**": true,
+    "**/_deps/**": true,
+    "**/node_modules/**": true,
+    "**/.venv/**": true,
+    "**/venv/**": true,
+    "**/__pycache__/**": true,
+    "**/*.ipch": true,
+    "**/session/session_cpp/build/**": true,
+    "**/wood_nano/build/**": true
+  },
+  "search.exclude": {
+    "**/build": true,
+    "**/_deps": true,
+    "**/node_modules": true,
+    "**/.venv": true,
+    "**/__pycache__": true,
+    "**/*.pb.cc": true,
+    "**/*.pb.h": true
+  },
+  "search.followSymlinks": false,
+  "C_Cpp.files.exclude": {
+    "**/.git": true,
+    "**/build/CMakeFiles": true,
+    "**/build/_deps/**/test/**": true,
+    "**/build/_deps/**/tests/**": true,
+    "**/build/_deps/**/examples/**": true,
+    "**/node_modules": true,
+    "**/.venv": true,
+    "**/compas_wood/**": true,
+    "**/wood_nano/build/**": true
+  },
+  "C_Cpp.workspaceParsingPriority": "medium",
+  "C_Cpp.intelliSenseCacheSize": 2048,
+  "C_Cpp.maxCachedProcesses": 4,
+  "C_Cpp.codeAnalysis.runAutomatically": false,
+  "cmake.sourceDirectory": "${workspaceFolder}/wood",
+  "cmake.buildDirectory": "${workspaceFolder}/wood/build",
+  "cmake.configureOnOpen": false,
+  "cmake.automaticReconfigure": false,
+  "terminal.integrated.localEchoLatencyThreshold": 0,
+  "terminal.integrated.localEchoEnabled": "on",
+  "terminal.integrated.gpuAcceleration": "on"
 }
