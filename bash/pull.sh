@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
-# Bring every submodule to the tip of the branch this superproject tracks for it.
+# Bring wood_research and every submodule to the tip of the branch it tracks.
 #
 #   bash/pull.sh
+#
+# The mirror of bash/push.sh: the same three repos in the same dependency order
+# (wood -> wood_nano -> compas_wood), and the superproject itself - whose bash/, README.md
+# and plans are authored here, so a run that moved only the submodules would leave the
+# tooling that drives them behind.
 #
 # `git submodule update` alone is not enough. It checks each submodule out at the commit
 # the superproject pins, on a DETACHED HEAD - correct for reproducing a commit, wrong for
@@ -19,14 +24,35 @@ cd "$ROOT"
 
 step() { printf '\n== %s ==\n' "$*"; }
 
+step "wood_research"
+branch=$(git rev-parse --abbrev-ref HEAD)
+if [ -n "$(git status --porcelain --ignore-submodules=all)" ]; then
+    echo "   local changes - not moved, still at $(git log --oneline -1)"
+elif git pull -q --ff-only origin "$branch"; then
+    echo "   $(git log --oneline -1)"
+else
+    echo "   not a fast-forward - merge it yourself, then re-run" >&2
+    exit 1
+fi
+
 step "checkout"
 # --init for a fresh clone. NOT --recursive: `session` is the whole monorepo and recursing
 # would drag in session_rust, session_py and session_data at the top level - gigabytes this
 # stack never compiles. Only the kernel is pulled out of it, below.
 git submodule update --init
 
-dirty=()
+# The same order bash/push.sh uses. Pulling is independent per repo, so this changes no
+# outcome today - it is here so that reordering .gitmodules cannot silently reorder a run,
+# and so a stack pulled top to bottom can be built as it goes. compas_tf and session follow:
+# consumed here, authored elsewhere.
+ORDER=(wood wood_nano compas_wood)
+rest=()
 for path in $(git config -f .gitmodules --get-regexp '^submodule\..*\.path$' | awk '{print $2}'); do
+    case " ${ORDER[*]} " in *" $path "*) ;; *) rest+=("$path") ;; esac
+done
+
+dirty=()
+for path in "${ORDER[@]}" "${rest[@]}"; do
     branch=$(git config -f .gitmodules "submodule.$path.branch" || echo main)
     printf '\n-- %s (%s) --\n' "$path" "$branch"
 
@@ -60,9 +86,3 @@ if [ ${#dirty[@]} -gt 0 ]; then
     printf '\nNOT updated (uncommitted changes): %s\n' "${dirty[*]}"
     echo "Commit or stash there, then re-run."
 fi
-
-cat <<'EOF'
-
-Sources are current. To rebuild what compiles against them:
-    bash/update_session.sh
-EOF
