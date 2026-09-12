@@ -1,7 +1,7 @@
 # Plan: live session_viewer for compas_wood (what is left)
 
 Trimmed 2026-09-02. The `wood` half of this plan shipped; two compas_wood items did not, and
-they are what this file is now for. Latency work has moved to `PLAN_LIVE_LATENCY.md`.
+they are what this file is now for. Latency work has moved to `live_latency.md`.
 
 Goal, unchanged: run the solver natively and have the browser redraw the result in place,
 keeping the camera. No Pyodide - that was about running the solver INSIDE the browser, a
@@ -18,7 +18,7 @@ different goal (runnable docs cells) that stays optional.
   wrap it and post messages in. `bash/publish_scene.sh` builds, runs and publishes it.
 - **wood writes a manifest**: `wood/data/output/scenes/live.toml` beside `pb/`.
 - **The websocket idea** is no longer "later, only if needed" - it is step 3 of
-  `PLAN_LIVE_LATENCY.md`, with the measurements that justify it and the message-size cap that
+  `live_latency.md`, with the measurements that justify it and the message-size cap that
   picks its host.
 
 ## 1. compas_wood `live.py`

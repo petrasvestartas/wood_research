@@ -10,7 +10,8 @@ wood_research/
 ├── wood_nano/     nanobind bindings over wood                          (dev)
 ├── compas_wood/   COMPAS wrapper over wood_nano                        (dev)
 ├── compas_tf/     topology-finding, BRG-research          (assembly-steps)
-└── bash/          pull.sh, push.sh, publish-scene.sh
+├── bash/          publish-scene.sh
+└── .claude/       hooks/pull_mono.sh, hooks/push_mono.sh, settings.json
 ```
 
 `compas_wood` → `wood_nano` → `wood` → `session_cpp`.
@@ -24,7 +25,7 @@ so this repo can never hold a second copy that drifts; `wood/CMakeLists.txt` and
 ```bash
 git clone https://github.com/petrasvestartas/wood_research.git
 cd wood_research
-bash/pull.sh
+.claude/hooks/pull_mono.sh
 ```
 
 Plain `clone`, not `--recurse-submodules`: recursing drags in `session_rust`, `session_py` and
@@ -33,15 +34,16 @@ Plain `clone`, not `--recurse-submodules`: recursing drags in `session_rust`, `s
 ## Day to day
 
 ```bash
-bash/pull.sh                      # wood_research, then wood → wood_nano → compas_wood, to each branch tip
-bash/push.sh -m "contact areas"   # commit + push wood → wood_nano → compas_wood, then this repo
+pullmono                  # in Claude Code: wood_research, then every submodule, to each branch tip
+pushmono contact areas    # in Claude Code: commit + push session_cpp/py/rust → session → wood → wood_nano → compas_wood, then this repo
 ```
 
-The order is not cosmetic: each repo's CI builds the other two from their *pushed* branches.
-Neither script moves a repo with uncommitted changes, and `push.sh` ends by committing the
-moved pointers here, without which the pushes are invisible to a fresh clone. `compas_tf` and
-`session` are consumed, not authored here — pulled, never pushed. A kernel change is pushed
-from a checkout of `session`, then picked up with `bash/pull.sh`.
+Both are `UserPromptSubmit` hooks (`.claude/settings.json`) over `.claude/hooks/pull_mono.sh`
+and `.claude/hooks/push_mono.sh`, which also run from a terminal (`push_mono.sh -m "msg"`).
+The order is not cosmetic: each repo's CI builds its dependencies from their *pushed* branches.
+Neither script moves a repo with uncommitted changes, and the push ends by committing the
+moved pointers here, without which the pushes are invisible to a fresh clone. `compas_tf` is
+consumed, not authored here — pulled, never pushed.
 
 ## Build
 
@@ -61,7 +63,7 @@ IntelliSense at `wood/build/compile_commands.json`. Configure once first.
 ## What is where
 
 - **`wood`** — `WoodElement`, `BlockElement`, `WoodJoint` over `session_cpp::Element`; contact
-  detection in `src/joinery_solver/wood_face_to_face.h`, example `examples/main_face_to_face.cpp`
+  detection in `src/joinery_solver/wood_face_to_face.h`, example `examples/2_contact_detection.cpp`
 - **`wood_nano`** — nanobind bindings, CPython 3.13 via `uv`
 - **`compas_wood`** — pure-Python COMPAS wrapper
 
@@ -71,7 +73,7 @@ IntelliSense at `wood/build/compile_commands.json`. Configure once first.
 bash/publish-scene.sh    # build, run, upload, notify
 ```
 
-Builds `main_face_to_face`, runs it, uploads the `wood/data/output/pb/live.pb` it wrote to the
+Builds `2_contact_detection`, runs it, uploads the `wood/data/output/pb/live.pb` it wrote to the
 R2 bucket `session-viewer-data` under the fixed key `pb/view_live.pb`, and pings a relay so
 every open page re-reads in place — same canvas, same camera, no reload. Output is one line:
 
@@ -86,4 +88,4 @@ https://petrasvestartas.github.io/session/ reads that bucket directly; nothing i
 skips the relay (open pages poll within five seconds instead). Byte-identical content says
 `unchanged - nothing published`.
 
-Each repo has its own `SETUP.md`. `PLAN_LIVE_VIEWER.md` is the plan for the rest.
+Each repo has its own `SETUP.md`. `docs/plans/live_viewer.md` is the plan for the rest.

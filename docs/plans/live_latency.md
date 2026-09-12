@@ -2,7 +2,7 @@
 
 Goal: keep the viewer on the internet, not on localhost, and make the time from "go" to
 geometry on screen short enough that it stops being a thing you wait for. The previous plan
-(`PLAN_LIVE_VIEWER.md`) got the loop working; this one is about what it costs.
+(`live_viewer.md`) got the loop working; this one is about what it costs.
 
 Everything below was measured on 2026-09-02, on this machine, against the deployed page. The
 numbers are the whole argument: three of the four steps are only worth doing because of what

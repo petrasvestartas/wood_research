@@ -2,7 +2,7 @@
 # Build the example, run it, publish the scene it wrote, then TELL the open pages instead of
 # letting them find out. One command is the whole loop from source to geometry on screen.
 #
-#   bash/publish_scene.sh                 build main_face_to_face, run it, publish its live.pb
+#   bash/publish_scene.sh                 build 2_contact_detection, run it, publish its live.pb
 #   bash/publish_scene.sh --no-build      publish the live.pb already in wood/data/output
 #   bash/publish_scene.sh --target NAME   build and run a different example
 #   bash/publish_scene.sh some/other.pb   publish a file produced elsewhere (implies --no-build)
@@ -51,7 +51,7 @@ aws_r2() {
     "$bin" --profile "$PROFILE" --endpoint-url "$ENDPOINT" "$@"
 }
 
-TARGET="main_face_to_face"                           # the example whose live.pb is the scene
+TARGET="2_contact_detection"                         # the example whose live.pb is the scene
 JOBS=4
 NOTIFY=1
 BUILD=1

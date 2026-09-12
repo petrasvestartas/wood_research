@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 # Bring wood_research and every submodule to the tip of the branch it tracks.
 #
-#   bash/pull.sh
+#   .claude/hooks/pull_mono.sh
 #
-# The mirror of bash/push.sh: the same three repos in the same dependency order
-# (wood -> wood_nano -> compas_wood), and the superproject itself - whose bash/, README.md
-# and plans are authored here, so a run that moved only the submodules would leave the
-# tooling that drives them behind.
+# As a Claude Code hook (UserPromptSubmit, wired in .claude/settings.json with --hook) the
+# prompt `pullmono` runs it; every other prompt passes through untouched and the output
+# goes to Claude as context.
+#
+# The mirror of push_mono.sh: the same repos in the same dependency order (session
+# kernels -> session -> wood -> wood_nano -> compas_wood), then compas_tf, and the
+# superproject itself - whose bash/, README.md, docs/ and .claude/ are authored here, so a
+# run that moved only the submodules would leave the tooling that drives them behind.
 #
 # `git submodule update` alone is not enough. It checks each submodule out at the commit
 # the superproject pins, on a DETACHED HEAD - correct for reproducing a commit, wrong for
@@ -19,8 +23,19 @@
 # is how it gets lost; the script reports it and goes on to the next one.
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$ROOT"
+
+if [ "${1:-}" = "--hook" ]; then
+    # Hook mode: run only for the prompt `pullmono`, re-run as a plain command and hand
+    # everything it printed to Claude. Always exit 0 so the output becomes context.
+    prompt=$(python3 -c 'import json,sys; print(json.load(sys.stdin).get("prompt",""))' 2>/dev/null || true)
+    [ "$prompt" = "pullmono" ] || exit 0
+    echo "pullmono: running .claude/hooks/pull_mono.sh"
+    set +e; bash "$0" 2>&1; rc=$?
+    echo "pullmono: exited $rc - report the result above to the user, do nothing else."
+    exit 0
+fi
 
 step() { printf '\n== %s ==\n' "$*"; }
 
@@ -41,11 +56,11 @@ step "checkout"
 # stack never compiles. Only the kernel is pulled out of it, below.
 git submodule update --init
 
-# The same order bash/push.sh uses. Pulling is independent per repo, so this changes no
+# The same order push_mono.sh uses. Pulling is independent per repo, so this changes no
 # outcome today - it is here so that reordering .gitmodules cannot silently reorder a run,
-# and so a stack pulled top to bottom can be built as it goes. compas_tf and session follow:
-# consumed here, authored elsewhere.
-ORDER=(wood wood_nano compas_wood)
+# and so a stack pulled top to bottom can be built as it goes. compas_tf follows: consumed
+# here, authored elsewhere.
+ORDER=(session wood wood_nano compas_wood)
 rest=()
 for path in $(git config -f .gitmodules --get-regexp '^submodule\..*\.path$' | awk '{print $2}'); do
     case " ${ORDER[*]} " in *" $path "*) ;; *) rest+=("$path") ;; esac
@@ -79,6 +94,24 @@ done
 # session_data) and a kernel without its generated protobuf sources fails to CONFIGURE
 # rather than to build - a confusing place to land.
 git -C session submodule update --init --recursive session_cpp
+
+# The kernels are authored here too (push_mono.sh pushes them), so each one that is checked
+# out goes back on its branch and fast-forwards, under the same dirty rule as above.
+for kernel in session_cpp session_py session_rust; do
+    path="session/$kernel"
+    [ -f "$path/.git" ] || [ -d "$path/.git" ] || continue
+    branch=$(git -C session config -f .gitmodules "submodule.$kernel.branch" || echo main)
+    printf '\n-- %s (%s) --\n' "$path" "$branch"
+    git -C "$path" fetch -q origin
+    if [ -n "$(git -C "$path" status --porcelain)" ]; then
+        dirty+=("$path")
+        echo "   local changes - not moved, still at $(git -C "$path" log --oneline -1)"
+        continue
+    fi
+    git -C "$path" checkout -q "$branch"
+    git -C "$path" pull -q --ff-only
+    echo "   $(git -C "$path" log --oneline -1)"
+done
 
 step "summary"
 git submodule status
