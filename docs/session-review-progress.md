@@ -341,4 +341,9 @@ Validated completed functionality is backed up on `codex/session-review-foundati
 Shared working-tree HEADs and indexes were not changed. The checkpoint excludes
 unfinished NurbsKnot, split, viewer and other pre-existing refactors. Functional
 test gates passed as recorded above; baseline lint and ignored/manual test limits
-remain explicit. GitHub Actions trigger discovery is pending.
+remain explicit. No GitHub Actions runs were triggered by these backup-branch pushes; the
+configured push workflows target main/develop. This is local validation, not a
+claim of cross-platform CI passing. The exact source hashes, commit IDs and test
+outcomes are saved in `session-review-foundations-checkpoint.json`.
+
+Root reviewer configuration/ledger checkpoint: `a305514a4e8b790b2508d9eb4d864213d2b8d015` (remote verified).
