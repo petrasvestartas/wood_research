@@ -1869,7 +1869,7 @@
     },
     {
       "name": "element",
-      "review": "not reviewed",
+      "review": "functional corrective pass complete",
       "languages": {
         "cpp": {
           "sources": [
@@ -2291,11 +2291,11 @@
         }
       },
       "missing_languages": [],
-      "api_review": "not reviewed",
-      "safety_review": "not reviewed",
-      "style_review": "not reviewed",
-      "validation": "not run for this module",
-      "test_name_order_parity": "matched at snapshot (behavioral assertions require review)"
+      "api_review": "Element and ElementFeature geometry, cache, mutation, serialization and polymorphic registry APIs reviewed across three ports",
+      "safety_review": "Computed caches now invalidate on geometry mutation and dirty state clears after successful recomputation; geometry variant remains API-compatible",
+      "style_review": "C++/Python/Rust cache lifecycle and regression registrations aligned; Element-owned Clippy finding resolved with documented API-preserving allowance",
+      "validation": "C++798/798; Python797/797; Rust debug/release798/798; Rust all-target/all-feature and doctests pass; viewer native163+13 ignored/GPU13/13/doctests pass; formatter tests8/8",
+      "test_name_order_parity": "26 matching Element/ElementFeature tests across C++, Python and Rust"
     },
     {
       "name": "file_encoders",

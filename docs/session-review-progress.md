@@ -37,8 +37,9 @@ Rust all-target/all-feature/doctests, viewer wasm/native/GPU/doctests, and share
 formatter tests. The C++ encoder now reports stream write failures instead of
 silently accepting them.
 
-Completed shared functional passes: 15/45 (tolerance, color, matrix, nurbsknot,
-session_config, file_encoders, graph, spatial_rtree, tree, vector, xform, aabb, boolean_polyline, closest, convex_hull); 30 original shared groups remain, plus the separately added SimpleSplit group and
+Completed shared functional passes: 16/45 (tolerance, color, matrix, nurbsknot,
+session_config, file_encoders, graph, spatial_rtree, tree, vector, xform, aabb,
+boolean_polyline, closest, convex_hull, element); 29 original shared groups remain, plus the separately added SimpleSplit group and
 three language-specific modules. The overall review and final style/documentation
 audit remain active.
 
@@ -88,6 +89,14 @@ C++798/798, Python797/797, Rust debug/release798/798, Rust all-target/all-featur
 tests and doctests, viewer wasm/native163+13 ignored, viewer GPU13/13, and viewer
 doctests. Strict Clippy has no ConvexHull diagnostics; remaining failures are
 assigned to later modules.
+
+`element`: lazy geometry caches now clear their dirty flag after computation, and
+geometry mutations clear all derived caches before marking the element dirty. The
+three ports share the regression for clean-after-compute and invalidation after a
+geometry operation. Final gates passed C++798/798, Python797/797, Rust
+debug/release798/798, Rust all-target/all-feature tests and doctests, viewer
+wasm/native163+13 ignored, viewer GPU13/13, and viewer doctests. Strict Clippy
+has no Element diagnostics; remaining failures are assigned to later modules.
 
 `tree`: direct node attachment and GUID reparenting now reject self/ancestor
 cycles before changing parent links, consistently across C++, Python, and Rust.
