@@ -14385,7 +14385,7 @@
     },
     {
       "name": "tree",
-      "review": "not reviewed",
+      "review": "functional corrective pass complete",
       "languages": {
         "cpp": {
           "sources": [
@@ -14777,11 +14777,11 @@
         }
       },
       "missing_languages": [],
-      "api_review": "not reviewed",
-      "safety_review": "not reviewed",
-      "style_review": "not reviewed",
-      "validation": "not run for this module",
-      "test_name_order_parity": "matched at snapshot (behavioral assertions require review)"
+      "api_review": "TreeNode and Tree hierarchy, traversal and serialization APIs reviewed across three ports",
+      "safety_review": "Self and ancestor cycle attempts are rejected before parent links change",
+      "style_review": "C++/Python/Rust guards and 25-test registrations aligned; Tree-owned Clippy findings resolved",
+      "validation": "C++798/798; Python797/797; Rust debug/release798/798; Rust all-target/all-feature and doctests pass; viewer wasm/native163+13 ignored/GPU13/13/doctests pass",
+      "test_name_order_parity": "25 matching TreeNode/Tree tests across C++, Python and Rust"
     },
     {
       "name": "vector",

@@ -37,10 +37,19 @@ Rust all-target/all-feature/doctests, viewer wasm/native/GPU/doctests, and share
 formatter tests. The C++ encoder now reports stream write failures instead of
 silently accepting them.
 
-Completed shared functional passes: 8/45 (tolerance, color, matrix, nurbsknot,
-session_config, file_encoders, graph, spatial_rtree); 37 original shared groups remain, plus the separately added SimpleSplit group and
+Completed shared functional passes: 9/45 (tolerance, color, matrix, nurbsknot,
+session_config, file_encoders, graph, spatial_rtree, tree); 36 original shared groups remain, plus the separately added SimpleSplit group and
 three language-specific modules. The overall review and final style/documentation
 audit remain active.
+
+`tree`: direct node attachment and GUID reparenting now reject self/ancestor
+cycles before changing parent links, consistently across C++, Python, and Rust.
+The existing 25-test parity suite exercises both a direct self-attachment and a
+descendant reparent attempt; all preserve the original hierarchy. Final gates
+passed C++798/798, Python797/797, Rust debug/release798/798, Rust all-target and
+all-feature tests, kernel doctests, viewer wasm/native163+13 ignored, viewer GPU
+13/13, and viewer doctests. Strict Clippy has no Tree or TreeNode diagnostics;
+remaining failures are assigned to later modules.
 
 `spatial_rtree`: reversed bounds are normalized per axis before insertion, search,
 or removal so split volumes remain non-negative and inverted caller ranges behave
