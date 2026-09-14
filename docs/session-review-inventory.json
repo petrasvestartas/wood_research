@@ -4,7 +4,7 @@
   "modules": [
     {
       "name": "aabb",
-      "review": "not reviewed",
+      "review": "functional corrective pass complete",
       "languages": {
         "cpp": {
           "sources": [
@@ -90,11 +90,11 @@
         }
       },
       "missing_languages": [],
-      "api_review": "not reviewed",
-      "safety_review": "not reviewed",
-      "style_review": "not reviewed",
-      "validation": "not run for this module",
-      "test_name_order_parity": "matched at snapshot (behavioral assertions require review)"
+      "api_review": "AABB construction, geometry bounds, merging, queries, inflation and serialization APIs reviewed across three ports",
+      "safety_review": "Point-bound initialization handles all-negative coordinates without inverted boxes",
+      "style_review": "C++/Python/Rust implementations and 2-test registrations aligned; AABB-owned Clippy findings absent",
+      "validation": "C++798/798; Python797/797; Rust debug/release798/798; Rust all-target/all-feature and doctests pass; viewer wasm/native163+13 ignored/GPU13/13/doctests pass",
+      "test_name_order_parity": "2 matching AABB tests across C++, Python and Rust"
     },
     {
       "name": "boolean_polyline",
