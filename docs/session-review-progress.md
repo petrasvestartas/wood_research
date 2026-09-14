@@ -37,9 +37,9 @@ Rust all-target/all-feature/doctests, viewer wasm/native/GPU/doctests, and share
 formatter tests. The C++ encoder now reports stream write failures instead of
 silently accepting them.
 
-Completed shared functional passes: 16/45 (tolerance, color, matrix, nurbsknot,
+Completed shared functional passes: 17/45 (tolerance, color, matrix, nurbsknot,
 session_config, file_encoders, graph, spatial_rtree, tree, vector, xform, aabb,
-boolean_polyline, closest, convex_hull, element); 29 original shared groups remain, plus the separately added SimpleSplit group and
+boolean_polyline, closest, convex_hull, element, quaternion); 28 original shared groups remain, plus the separately added SimpleSplit group and
 three language-specific modules. The overall review and final style/documentation
 audit remain active.
 
@@ -97,6 +97,14 @@ geometry operation. Final gates passed C++798/798, Python797/797, Rust
 debug/release798/798, Rust all-target/all-feature tests and doctests, viewer
 wasm/native163+13 ignored, viewer GPU13/13, and viewer doctests. Strict Clippy
 has no Element diagnostics; remaining failures are assigned to later modules.
+
+`quaternion`: zero-axis rotations now return identity, and SLERP flips antipodal
+representations to follow the shortest path without a near-zero denominator. The
+three ports share regressions for both cases. Final gates passed C++798/798,
+Python797/797, Rust debug/release798/798, Rust all-target/all-feature tests and
+doctests, viewer native163+13 ignored, viewer GPU13/13, and viewer doctests.
+Strict Clippy has no Quaternion diagnostics; remaining failures are assigned to
+later modules.
 
 `tree`: direct node attachment and GUID reparenting now reject self/ancestor
 cycles before changing parent links, consistently across C++, Python, and Rust.
