@@ -2299,7 +2299,7 @@
     },
     {
       "name": "file_encoders",
-      "review": "not reviewed",
+      "review": "functional corrective pass complete",
       "languages": {
         "cpp": {
           "sources": [
@@ -2373,9 +2373,13 @@
             [
               "FileEncoders",
               "Dict Of Dicts"
+            ],
+            [
+              "FileEncoders",
+              "Write Error"
             ]
           ],
-          "registration_count": 16
+          "registration_count": 17
         },
         "python": {
           "sources": [
@@ -2462,9 +2466,13 @@
             [
               "FileEncoders",
               "Dict Of Dicts"
+            ],
+            [
+              "FileEncoders",
+              "Write Error"
             ]
           ],
-          "registration_count": 16
+          "registration_count": 17
         },
         "rust": {
           "sources": [
@@ -2538,17 +2546,21 @@
             [
               "FileEncoders",
               "Dict Of Dicts"
+            ],
+            [
+              "FileEncoders",
+              "Write Error"
             ]
           ],
-          "registration_count": 16
+          "registration_count": 17
         }
       },
       "missing_languages": [],
-      "api_review": "not reviewed",
-      "safety_review": "not reviewed",
-      "style_review": "not reviewed",
-      "validation": "not run for this module",
-      "test_name_order_parity": "matched at snapshot (behavioral assertions require review)"
+      "api_review": "JSON file/string and collection encode/decode APIs reviewed across three ports",
+      "safety_review": "C++ write-stream failures now raise; invalid destination regression passes; native error contracts retained",
+      "style_review": "Scoped formatting, Python test execution and Rust formatter checks pass",
+      "validation": "C++797/797; Python796/796; Rust dev/release797/797; Rust all-target/all-feature and doctests pass; viewer wasm/native163+8/GPU13/13/doctests pass",
+      "test_name_order_parity": "17 matching FileEncoders tests across C++, Python and Rust"
     },
     {
       "name": "file_obj",
@@ -3085,7 +3097,7 @@
     },
     {
       "name": "graph",
-      "review": "not reviewed",
+      "review": "functional corrective pass complete",
       "languages": {
         "cpp": {
           "sources": [
@@ -3567,11 +3579,11 @@
         }
       },
       "missing_languages": [],
-      "api_review": "not reviewed",
-      "safety_review": "not reviewed",
-      "style_review": "not reviewed",
-      "validation": "not run for this module",
-      "test_name_order_parity": "matched at snapshot (behavioral assertions require review)"
+      "api_review": "Vertex, Edge and Graph APIs reviewed across three ports",
+      "safety_review": "Duplicate-edge accounting and edge reindexing after node removal corrected across three ports",
+      "style_review": "Scoped Rust formatting and current-owner Clippy findings resolved",
+      "validation": "C++797/797; Python796/796; Rust debug/release797/797; Rust all-target/all-feature and doctests pass; viewer wasm/native163+8/GPU13/13/doctests pass",
+      "test_name_order_parity": "Graph tests aligned; behavioral assertions cover duplicate edge and removal counts"
     },
     {
       "name": "guid_serde",
@@ -12389,7 +12401,7 @@
     },
     {
       "name": "session_config",
-      "review": "not reviewed",
+      "review": "functional corrective pass complete",
       "languages": {
         "cpp": {
           "sources": [
@@ -12469,11 +12481,11 @@
         }
       },
       "missing_languages": [],
-      "api_review": "not reviewed",
-      "safety_review": "not reviewed",
-      "style_review": "not reviewed",
-      "validation": "not run for this module",
-      "test_name_order_parity": "matched at snapshot (behavioral assertions require review)"
+      "api_review": "Independent local configuration and process-wide global settings reviewed across three ports",
+      "safety_review": "Python local/global state separation tested; Rust RwLock synchronization retained",
+      "style_review": "Public docs/type hints and scoped formatting checks pass",
+      "validation": "C++796/796; Python795/795; Rust debug/release796/796; Rust all-target/all-feature and doctests pass; viewer wasm/native163+8/GPU13/13/doctests pass",
+      "test_name_order_parity": "Matching Runtime Modification test across all three ports"
     },
     {
       "name": "simple_split",
@@ -13627,7 +13639,7 @@
     },
     {
       "name": "spatial_rtree",
-      "review": "not reviewed",
+      "review": "functional corrective pass complete",
       "languages": {
         "cpp": {
           "sources": [
@@ -13718,10 +13730,14 @@
             ],
             [
               "SpatialRTree",
+              "Normalizes Reversed Bounds"
+            ],
+            [
+              "SpatialRTree",
               "Search 100 Boxes"
             ]
           ],
-          "registration_count": 11
+          "registration_count": 12
         },
         "python": {
           "sources": [
@@ -13805,10 +13821,14 @@
             ],
             [
               "SpatialRTree",
+              "Normalizes Reversed Bounds"
+            ],
+            [
+              "SpatialRTree",
               "Search 100 Boxes"
             ]
           ],
-          "registration_count": 11
+          "registration_count": 12
         },
         "rust": {
           "sources": [
@@ -13892,18 +13912,22 @@
             ],
             [
               "SpatialRTree",
+              "Normalizes Reversed Bounds"
+            ],
+            [
+              "SpatialRTree",
               "Search 100 Boxes"
             ]
           ],
-          "registration_count": 11
+          "registration_count": 12
         }
       },
       "missing_languages": [],
-      "api_review": "not reviewed",
-      "safety_review": "not reviewed",
-      "style_review": "not reviewed",
-      "validation": "not run for this module",
-      "test_name_order_parity": "matched at snapshot (behavioral assertions require review)"
+      "api_review": "public insert, search, remove and count signatures preserved; Rust Default added",
+      "safety_review": "bounds normalized before volume and overlap operations; removal/count invariants tested",
+      "style_review": "C++/Python/Rust implementations and registrations aligned; Rust class-owned Clippy findings resolved",
+      "validation": "C++798/798; Python797/797; Rust debug/release798/798; Rust all-target/all-feature and doctests pass; viewer wasm/native163+13 ignored/GPU13/13/doctests pass",
+      "test_name_order_parity": "12 matching SpatialRTree tests across C++, Python and Rust"
     },
     {
       "name": "tolerance",

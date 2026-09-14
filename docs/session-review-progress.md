@@ -22,16 +22,35 @@ exports; the snapshot alone does not establish semantic parity or completed revi
 
 ## Current run
 
-`session_config`: corrective review is starting after the completed NurbsKnot pass.
-Review the complete public API and native global-state mechanisms, align meaningful
-behavioral tests and documentation across all three ports, and preserve legitimate
-language-specific synchronization differences. Full validation must pass before
-advancing to file_encoders.
+`session_config`: corrective review and combined validation completed after
+the NurbsKnot pass. Python now constructs independent local settings while the
+module-level `SESSION_CONFIG` remains shared; Rust keeps its required `RwLock`
+wrapper. The combined gates have passed C++796/796, Python795/795, Rust debug and
+release796/796, Rust all-target/all-feature tests, kernel doctests, and viewer
+wasm/native/GPU/doctest checks. Strict Clippy reports114 later-owner diagnostics,
+with none in the five foundation modules. One compatibility assertion was corrected
+to compare unpacked Color RGBA values rather than a preset name; the Rust debug gate
+was rerun successfully. FileEncoders has now also completed its corrective pass:
+the three ports have matching17 tests, including failed-write handling, and the
+post-change full gate passed C++797/797, Python796/796, Rust debug/release797/797,
+Rust all-target/all-feature/doctests, viewer wasm/native/GPU/doctests, and shared
+formatter tests. The C++ encoder now reports stream write failures instead of
+silently accepting them.
 
-Completed shared functional passes: 4/45 (tolerance, color, matrix, nurbsknot);
-41 original shared groups remain, plus the separately added SimpleSplit group and
+Completed shared functional passes: 8/45 (tolerance, color, matrix, nurbsknot,
+session_config, file_encoders, graph, spatial_rtree); 37 original shared groups remain, plus the separately added SimpleSplit group and
 three language-specific modules. The overall review and final style/documentation
 audit remain active.
+
+`spatial_rtree`: reversed bounds are normalized per axis before insertion, search,
+or removal so split volumes remain non-negative and inverted caller ranges behave
+consistently across C++, Python, and Rust. Rust also implements `Default` and uses
+an iterator-based seed-area pass to satisfy the class-owned Clippy checks. The
+cross-language regression passes in all three ports. Final gates passed C++
+all-targets 798/798, Python 797/797, Rust debug/release 798/798, Rust all-target
+and all-feature tests plus doctests, viewer wasm/native 163+13 ignored, viewer
+GPU 13/13, and viewer doctests. Strict Clippy has no SpatialRTree diagnostics;
+remaining failures are assigned to later modules.
 
 ## Formatter incident and recovery
 
