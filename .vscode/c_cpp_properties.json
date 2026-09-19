@@ -32,6 +32,8 @@
         "${workspaceFolder}/wood/src/joinery_solver",
         "${workspaceFolder}/wood/src/joinery_solver/wood_elements",
         "${workspaceFolder}/wood/src/joinery_solver/wood_interaction",
+        "${workspaceFolder}/wood/src/joinery_solver/wood_interaction/wood_interaction_contact",
+        "${workspaceFolder}/wood/src/joinery_solver/wood_interaction/wood_interaction_feature",
         "${workspaceFolder}/wood/src/joinery_solver/wood_algorithms",
         "${workspaceFolder}/wood/generated",
         "${workspaceFolder}/wood/src/templates",
