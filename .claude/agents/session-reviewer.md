@@ -149,118 +149,106 @@ points that matter most in review:
   gets the same name in all three.
 - **No cleverness for its own sake.** Operator overloading, macros, generics, traits and
   metaprogramming are for the API surface the user calls, not for saving lines inside a method.
-- Where possible use operators, specially for coordinates maths of points, vectors and other types. 
-  Use `+`, `-`, `*`, `/` instead of `add`, `sub`, `mul`, `div`. Use `==` instead of
-  `equals`. Use `[]` instead of `get`/`set`. Use `<<` instead of `write`.
-- **Class and Function and attributes docstrings.** The docstrings must be single line for functions and other types except of attributes, and they must start with prior empty line.
-  Not this:
-    /// Outline extent in the plate's own frame, thickness in z.
-    session_cpp::Vector nominal_dimensions() const;
-    /// One ElementFeature per face with a joint type.
-    std::vector<session_cpp::ElementFeature> face_features() const;
-  But such style:
-    /// Outline extent in the plate's own frame, thickness in z.
-    session_cpp::Vector nominal_dimensions() const;
+- **Prefer operators over named methods**, especially for coordinate math on points, vectors,
+  and other types. Use `+`, `-`, `*`, `/` instead of `add`, `sub`, `mul`, `div`. Use `==` instead
+  of `equals`. Use `[]` instead of `get`/`set`. Use `<<` instead of `write`.
+- **Docstrings are a single line with a blank line before them** (classes, functions, and other
+  types - not attributes). Not this:
 
-    /// One ElementFeature per face with a joint type.
-    std::vector<session_cpp::ElementFeature> face_features() const;
-  For attributes, we must type each attribute in a separate line, and docstrings must be as a comment on the right side, never above the attribute.
-    session_cpp::Vector direction; // Insertion vector.
-    std::vector<session_cpp::ElementFeature> face_features; // One ElementFeature per face with a joint type.
-- **Single line for loops, if statements write in separate lines.** Never write single line for and if statements:
-    for (const Polyline& outline : joint.m_outlines[0]) add_polyline(ring(outline, color, name + "_male_bottom_cut"), group);
-  instead separate them into multiple lines, without curly braces:
-    for (const Polyline& outline : joint.m_outlines[0])
-        add_polyline(ring(outline, color, name + "_male_bottom_cut"), group);
-- **Dont use auto** write full type for variables, specially for function return types. Use auto only for iterators and lambdas.
-- **Dont create code without empty lines, they help to separate logical sections and read** It is important to separate logical sections of code with empty lines, specially for function return types, and for function calls with multiple arguments. For example:
-  void WoodSession::add_to_tree(bool geometry, bool outlines, bool contacts, bool joints) {
-      std::map<std::string, Group> groups;
-      std::map<std::string, Group> children;
-      size_t index = 0;
-      for (const std::shared_ptr<Element>& element : *objects.elements) {
-          if (!element)
+  ```cpp
+  /// Outline extent in the plate's own frame, thickness in z.
+  session_cpp::Vector nominal_dimensions() const;
+  /// One ElementFeature per face with a joint type.
+  std::vector<session_cpp::ElementFeature> face_features() const;
+  ```
+
+  but this:
+
+  ```cpp
+  /// Outline extent in the plate's own frame, thickness in z.
+  session_cpp::Vector nominal_dimensions() const;
+
+  /// One ElementFeature per face with a joint type.
+  std::vector<session_cpp::ElementFeature> face_features() const;
+  ```
+
+- **Attributes go one per line, with the docstring as a comment on the right, never above the
+  attribute:**
+
+  ```cpp
+  session_cpp::Vector direction; // Insertion vector.
+  std::vector<session_cpp::ElementFeature> face_features; // One ElementFeature per face with a joint type.
+  ```
+
+- **No single-line `for`/`if` bodies.** Never write the body on the header line:
+
+  ```cpp
+  for (const Polyline& outline : joint.m_outlines[0]) add_polyline(ring(outline, color, name + "_male_bottom_cut"), group);
+  ```
+
+  put it on its own line instead, without braces:
+
+  ```cpp
+  for (const Polyline& outline : joint.m_outlines[0])
+      add_polyline(ring(outline, color, name + "_male_bottom_cut"), group);
+  ```
+
+- **No `auto`**, except for iterators and lambdas. Write out the full type, especially for
+  function return types.
+- **Blank lines separate logical sections.** Put a blank line between setup, each loop or
+  branch, and the return - it matters most around multi-line signatures and multi-argument
+  calls. Not this:
+
+  ```cpp
+  void process(std::vector<int>& values, bool filter) {
+      int total = 0;
+      for (int value : values) {
+          if (filter && value < 0)
               continue;
-          const Group group = add_group(fmt::format("{}_{}", element->name, index++));
-          groups[element->guid()] = group;
-          if (geometry) {
-              const std::shared_ptr<TreeNode> node = node_of(tree, element->guid());
-              if (!node)
-                  add(std::make_shared<TreeNode>(element->guid()), group);
-              else if (const std::shared_ptr<TreeNode> parent = node->parent()) {
-                  parent->remove(node);
-                  group->add(node);
-              }
-          }
-          if (!outlines)
-              continue;
-          const Group child = child_group(*this, children, group, "outlines");
-          for (const Polyline& outline : element_outlines(*element)) {
-              auto copy = std::make_shared<Polyline>(outline);
-              copy->name = fmt::format("{}_outline", element->name);
-              add_polyline(copy, child);
-          }
+          total += value;
       }
-      if (contacts)
-          add_contacts_to(groups, children);
-      if (joints)
-          add_joints_to(groups, children);
+      if (total > 0)
+          report(total);
   }
+  ```
 
-  to
+  but this:
 
-  void WoodSession::add_to_tree(bool geometry, bool outlines, bool contacts, bool joints) {
+  ```cpp
+  void process(std::vector<int>& values, bool filter) {
 
-      std::map<std::string, Group> groups;
-      std::map<std::string, Group> children;
-    
-      size_t index = 0;
-      for (const std::shared_ptr<Element>& element : *objects.elements) {
-    
-          if (!element)
-              continue;
-      
-          const Group group = add_group(fmt::format("{}_{}", element->name, index++));
-          groups[element->guid()] = group;
-    
-          if (geometry) {
-              const std::shared_ptr<TreeNode> node = node_of(tree, element->guid());
-              if (!node)
-                  add(std::make_shared<TreeNode>(element->guid()), group);
-              else if (const std::shared_ptr<TreeNode> parent = node->parent()) {
-                  parent->remove(node);
-                  group->add(node);
-              }
-          }
+      int total = 0;
 
-          if (!outlines)
+      for (int value : values) {
+          if (filter && value < 0)
               continue;
 
-          const Group child = child_group(*this, children, group, "outlines");
-          for (const Polyline& outline : element_outlines(*element)) {
-              auto copy = std::make_shared<Polyline>(outline);
-              copy->name = fmt::format("{}_outline", element->name);
-              add_polyline(copy, child);
-          }
+          total += value;
       }
 
-      if (contacts)
-          add_contacts_to(groups, children);
-    
-      if (joints)
-          add_joints_to(groups, children);
+      if (total > 0)
+          report(total);
   }
-- **No lamdas** Unless there is really performance or memory benefit, do not use lambdas. They are hard to read and understand, specially for people that are not familiar with them. Use normal functions instead.
-- **For cpp use std::cout<< instead of printf or fmt::print**. Use std::cout<< for printing in cpp, never printf. Use fmt::format for formatting strings, never sprintf or snprintf.
-- **Every class structure key implementation blocks** each class must have the following sections, for different language the structure is the same, but the syntax is different. The sections are:
+  ```
+
+- **No lambdas** unless there is a real performance or memory benefit - they are hard to read,
+  especially for people unfamiliar with them. Use a named function instead.
+- **In C++, use `std::cout <<` for printing**, never `printf`. Use `fmt::format` for building
+  strings, never `sprintf`/`snprintf`.
+- **Every class follows the same section structure** - the same sections in every language, only
+  the syntax differs:
+
+  ```cpp
   // ═══════════════════════════════════════════════════════════════════════════
   // Static constructors
   // ═══════════════════════════════════════════════════════════════════════════
-  Overloads of static constructors, if any.
+  // overloads of static constructors, if any
+
   // ═══════════════════════════════════════════════════════════════════════════
   // Operators
   // ═══════════════════════════════════════════════════════════════════════════
-  If there are use.
+  // if used
+
   // ═══════════════════════════════════════════════════════════════════════════
   // Transformation
   // ═══════════════════════════════════════════════════════════════════════════
@@ -269,10 +257,12 @@ points that matter most in review:
 
   /// Return a transformed copy.
   Line transformed(const Xform& xform) const;
+
   // ═══════════════════════════════════════════════════════════════════════════
   // Geometry
   // ═══════════════════════════════════════════════════════════════════════════
-  Geometry related operations, like distance, closest point, intersection, etc.
+  // distance, closest point, intersection, etc.
+
   // ═══════════════════════════════════════════════════════════════════════════
   // JSON
   // ═══════════════════════════════════════════════════════════════════════════
@@ -293,6 +283,7 @@ points that matter most in review:
 
   /// Read from a JSON file.
   static Line file_json_load(const std::string& filename);
+
   // ═══════════════════════════════════════════════════════════════════════════
   // Protobuf
   // ═══════════════════════════════════════════════════════════════════════════
@@ -307,13 +298,79 @@ points that matter most in review:
 
   /// Read from a protobuf file.
   static Line pb_load(const std::string& filename);
+
   // ═══════════════════════════════════════════════════════════════════════════
   // String
   // ═══════════════════════════════════════════════════════════════════════════
   /// Return a string representation of the object.
   std::string str() const;
+
   /// Return a string representation of the object for debugging.
   std::string repr() const;
+  ```
+
+- **Use `std::string`, not `char*`.** Use `std::string` for string manipulation, never `char*`
+  or char arrays, and `std::string_view` for read-only views.
+- **Attributes always sit at the top of the class**, right after the access specifier - never in
+  the middle, at the end, or scattered around:
+
+  ```cpp
+  class Line {
+  private:
+      Point m_a; // Start point of the line.
+      Point m_b; // End point of the line.
+  };
+  ```
+
+- **Enum values are formatted like class attributes** - no blank lines, no docstrings above,
+  comment on the right instead. Not this:
+
+  ```cpp
+  enum cut_type : int {
+      /// No cut.
+      nothing = 0,
+
+      /// Plate: a hole through the face.
+      hole = 1,
+  };
+  ```
+
+  but this:
+
+  ```cpp
+  enum cut_type : int {
+      nothing = 0, // No cut.
+      hole = 1, // Plate: a hole through the face.
+  };
+  ```
+
+- **Use one project-wide `using` declaration, not a list of symbols.** Not this:
+
+  ```cpp
+  using session_cpp::AABB;
+  using session_cpp::Line;
+  using session_cpp::Point;
+  using session_cpp::Polyline;
+  using session_cpp::Vector;
+  ```
+
+  but this:
+
+  ```cpp
+  using namespace session_cpp;
+  ```
+
+- **Never create a shortcut alias for a type, function, or variable.** Not this:
+
+  ```cpp
+  using RTree3 = session_cpp::SpatialRTree<int, double, 3>;
+  ```
+
+  write the full type at every use site instead, even where it repeats:
+
+  ```cpp
+  session_cpp::SpatialRTree<int, double, 3>
+  ```
 
 ## 4. Safety - the Power of Ten, the part that fits a geometry kernel
 
@@ -342,11 +399,11 @@ registry and callbacks are the API).
 
 
 
-## Implement by class -> push to github -> check if ci works -> fix if not -> repeat
+## Implement one class at a time: push, wait for CI, fix, repeat
 
-- The review and corrections must be done class by class not everything at once.
-- When on class is finished push the code to github.
-- Then wait until CI for session_cpp, session_py and session_rust passes. If it fails, fix the code and push again.
+- Review and correct one class at a time, never everything at once.
+- When a class is finished, push the code to GitHub.
+- Wait until CI for `session_cpp`, `session_py`, and `session_rust` passes. If it fails, fix the code and push again.
 
 ## Output
 
