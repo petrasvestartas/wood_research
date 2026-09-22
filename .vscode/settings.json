@@ -53,5 +53,27 @@
   "cmake.automaticReconfigure": false,
   "terminal.integrated.localEchoLatencyThreshold": 0,
   "terminal.integrated.localEchoEnabled": "on",
-  "terminal.integrated.gpuAcceleration": "on"
+  "terminal.integrated.gpuAcceleration": "on",
+  "rust-analyzer.linkedProjects": [
+    "session/session_rust/Cargo.toml",
+    "session/session_view/Cargo.toml",
+    "session/session_viewer/Cargo.toml"
+  ],
+  "rust-analyzer.files.excludeDirs": [
+    "**/target",
+    "**/build",
+    "**/_deps",
+    "session/session_viewer_archive"
+  ],
+  "rust-analyzer.checkOnSave": false,
+  "rust-analyzer.diagnostics.disabled": [
+    "missing-fields",
+    "type-mismatch",
+    "mismatched-arg-count",
+    "unused-variables",
+    "unused-mut",
+    "need-mut",
+    "dead-code",
+    "missing-match-arm"
+  ]
 }
