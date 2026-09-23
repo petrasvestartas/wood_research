@@ -16,9 +16,18 @@ f=$(python3 -c 'import json,sys; print(json.load(sys.stdin).get("tool_input",{})
 
 need() { command -v "$1" >/dev/null 2>&1 && return 0; echo "WARNING: $1 not installed - $f left unformatted (run .claude/hooks/setup_formatters.sh)"; return 1; }
 
+# The edition of the nearest Cargo.toml above the file; a wrong one re-sorts every import in it.
+edition() {
+    local d
+    d=$(dirname "$1")
+    while [ "$d" != "/" ] && [ ! -f "$d/Cargo.toml" ]; do d=$(dirname "$d"); done
+    sed -n 's/^edition *= *"\([0-9]*\)".*/\1/p' "$d/Cargo.toml" 2>/dev/null | head -1 | grep . || echo 2021
+}
+
 case "$f" in
     *.py)             need ruff         && ruff format -q "$f" ;;
-    *.rs)             need rustfmt      && rustfmt --edition 2021 "$f" ;;
+    # through stdin: rustfmt on a path also reformats every module file that one declares
+    *.rs)             need rustfmt      && out=$(rustfmt --edition "$(edition "$f")" --emit stdout < "$f" 2>/dev/null) && [ -n "$out" ] && printf '%s\n' "$out" > "$f" ;;
     *.cpp|*.h|*.hpp)  need clang-format && clang-format -i --style=file --fallback-style=none "$f" ;;
 esac
 exit 0
