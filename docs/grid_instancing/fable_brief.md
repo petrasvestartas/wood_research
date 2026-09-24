@@ -60,3 +60,37 @@ These are petras's requirements, collected 2026-09-23. This file wins over every
 4. Implement it.
 5. Clash, contact and comparison verification, looping until clean.
 6. Docs and screenshots.
+
+## Added 2026-09-24 (petras)
+
+7. **The session-reviewer rules apply to all of wood.** They are in `.claude/agents/session-reviewer.md`:
+   - section 3 (style)
+   - section 4 (safety)
+   - "Never write functions into one line"
+
+   Everything written or touched follows them. The key points:
+   - no file headers
+   - comments are 75-`═` banners or one-line docstrings, with a blank line before each docstring
+   - attribute docstrings sit on the right of the attribute
+   - never a function body or a for/if body on the header line
+   - no `auto` except iterators and lambdas
+   - no lambdas unless they have a real performance benefit
+   - no type aliases
+   - `using namespace session_cpp;`
+   - blank lines between logical sections
+   - functions at most about 60 lines
+   - no recursion in traversals
+   - every loop bounded
+   - zero warnings
+8. **Interaction API: shared pointers of elements only.**
+   - The public WoodSession interaction API takes `std::shared_ptr<session_cpp::Element>` only: `add_interaction(a, b)`, `add_interaction(a, b, Interaction)`, `has_interaction`, `remove_interaction`, `get_interaction`.
+   - Guid-based helpers are private.
+   - Never add overloads for `Element&`, guid strings, or one per payload type. One overload per concept, and minimal.
+   - The same principle holds for every new API: one input type, no overload families.
+
+## Added 2026-09-24 (petras): column heads
+
+9. **The head shape follows the joint.**
+   - Beams resting on top of the head (bearing, nothing cut): the head is the column section extruded, the same shape as the column.
+   - Head cutting into or carrying the slab (point supported, or a member cut by the head): the head is conical (tapered frustum from the column section to a larger top), or stepped like a typical concrete column head (capital + drop panel), selectable in `Framing`.
+   - In every case the head stays inside the deck or perimeter outline and touches its neighbours face to face.
