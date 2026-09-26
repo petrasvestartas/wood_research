@@ -71,3 +71,18 @@ What the grid template at wood `451299f` carries that does no work, measured aga
 Every file in a row is the previous one with other consts and a different name; the office and
 institutional presets add nothing the residential L and the courtyard do not show. One example per
 row, its variants side by side in one scene, is five files.
+
+## Moved to the kernel (2026-09-26)
+
+The plan geometry now calls session_cpp/py/rust (branch `grid-helpers`); wood no longer calls
+Clipper2 in the grid. `Mesh::section_by_plane` replaces `compute_section`, `Line::split_at_crossings`
+replaces `compute_crossings` (the ring priority is a `boundary` line list), `Mesh::from_arrangement`
+is the `Mesh::from_lines` half of `compute_arrangement` (the grid keeps the id mapping), core wall
+rings use the existing `Intersection::offset_in_3d`, per-side deck offsets the new
+`Polyline::offset_sides`, and the ring booleans `BooleanPolyline::compute_regions`, the existing
+Vatti port taking ring lists with holes. Sections, split, arrangement and offsets leave every
+count unchanged. The booleans do not: the port works at full precision where the grid ran
+Clipper2 on a 0.001 grid, so deck differences keep sub-micron vertex clusters and the union of
+sections keeps other collinear points. Counts that moved: solid `curved` 348 to 344 purlins and
+4912 to 4895 contacts; footprint `courtyard` 864 to 866, `skewed` 837 to 840, `triangular` 1239
+to 1236 contacts; reference `branch_residential` 1975 to 1979 contacts. Core 2,427 to 2,164 lines.
