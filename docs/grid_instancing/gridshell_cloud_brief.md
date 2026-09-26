@@ -35,6 +35,38 @@ straight flat strips; webs of 3 families (AAG, AGG, GGG); discrete asymptotic cu
 discrete geodesics n_i.b_i = 0; global objective E_c + l_fair E_fair + l_appro E_appro by Levenberg-Marquardt;
 propagation from an initial strip with guide curves; asymptotic curves exist only where K < 0, the first curve must be
 free of inflection points.
+The journal paper is paywalled and must not be committed to this public repo; its content, summarised from a full
+reading (2026-09-26), is below - use it instead of the PDF:
+- Why straight flat strips: along an asymptotic curve the osculating plane is the tangent plane, so the curve's
+  curvature vector lies in the tangent plane; a strip standing orthogonal to the surface (spanned by t and n) is then
+  bent only about its weak axis and unrolls to a straight strip (its geodesic curvature in the strip = normal
+  curvature of S = 0). Dually, a strip tangent to S along a geodesic unrolls straight. Asymptotic curves exist only
+  where K < 0; minimal surfaces (H = 0) have orthogonal asymptotic families.
+- Webs: triangular 3-webs sampled from iso-u, iso-v and iso-w (w = u + v) curves of x(u,v). Types: GGG, AGG, AAG
+  (A = asymptotic, G = geodesic). AAG is the most constrained, GGG the most flexible. A 2-family AA web is a discrete
+  A-net: a quad mesh whose vertex stars are planar.
+- Discrete asymptotic curve (vertices p_i, auxiliary normals n_i): n_i.(p_i - p_{i+1}) = 0 and n_i.(p_{i-1} - p_i) = 0;
+  E_a = sum (n_i.(p_i - p_{i+1}))^2 + (n_i.(p_{i-1} - p_i))^2. Normals are unit and tangent to the web:
+  E_n = sum (|n_i|^2 - 1)^2 + (n_i.(p_{i+1} - p_{i-1}))^2 + (n_i.(p_{i+n} - p_{i-n}))^2 (both families through p_i).
+- Discrete geodesic: surface normal lies in the discrete osculating plane, i.e. orthogonal to the binormal b_i:
+  E_g = sum (n_i.b_i)^2, with E_b = sum (|b_i|^2 - 1)^2 + (b_i.(p_{i+1} - p_i))^2 + (b_i.(p_i - p_{i-1}))^2.
+- Totals: E_aag = E_a^u + E_g^v + E_a^w + E_b^v + E_n (and analogues for AGG, GGG); fairness
+  E_f = sum |2 p_i - p_{i-1} - p_{i+1}|^2 per family; approximation of the first strip E_appro = sum |p_i - p_i^ori|^2;
+  E = E_c + l_fair E_fair + l_appro E_appro (+ l_guide E_guide), solved by Levenberg-Marquardt. Typical weights
+  l_fair 1e-4, l_appro 1 (reduced as the web grows), l_guide 0.1; accuracy target ~1e-5.
+- Propagation (their key contribution): start from an initial strip of two neighbouring curves V0, V1; add one new
+  curve V_k at a time so the previous curve V_{k-1} satisfies its type, then run 10-20 global LM iterations; repeat.
+  Their GGG/AGG/AAG propagation constructs the new vertices from discrete osculating / rectifying planes (for AAG: the
+  new point lies on the intersection line of the tangent planes at p_i and p_{i-1}, then a block-coordinate update
+  enforces (n'.u) = 0, (n'.w) = 0 and the geodesic det condition). Simple offsetting instead of this propagation
+  gives highly non-smooth, self-intersecting webs.
+- Initial strip: V0 an arbitrary fair polyline free of inflection points (an inflection forces a third asymptotic
+  direction, only possible at flat points); first points placed so the strip triangles are equilateral and lie in
+  the rectifying planes of V0. Guide curves steer the surface (a guide acts as a geodesic of the web; its binormals
+  must lie nearly tangent to the surface, else it fails).
+- Fabrication in their Fig. 1/2: gridshells extracted from the inner vertices of the web; normal lamellas on A curves,
+  tangential lamellas on G curves.
+
 Write `docs/grid_instancing/gridshell_design.md` (under 250 lines): key ideas with equations, critique of the current
 template, recommended algorithm for surfaces and for meshes, fabrication geometry, 3-5 main example scenes, minimal
 API, kernel candidates.
