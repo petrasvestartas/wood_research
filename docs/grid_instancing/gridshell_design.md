@@ -139,7 +139,7 @@ half; the example uses 1.3 without relaxing it.
 ```cpp
 Gridshell::from_surface(const NurbsSurface&, int curves /*0 iso, 1 asymptotic*/, int count_top, int count_bottom, const Lamella&);
 Gridshell::from_mesh(const Mesh&, int count_top, int count_bottom, const Lamella&);   // asymptotic
-Gridshell { top, bottom /*Board*/, studs /*Column*/, frames };
+Gridshell { top, bottom /*BeamCurved*/, studs /*Column*/, frames };
 BeamCurved(points, directions, section) { axis, parameters, directions, section; sections(); rails(); element_geometry_brep(); }
 ```
 Next: `from_mesh(..., const Polyline& seed)` for a user spine, and `Gridshell::optimise()` for stage 2.
