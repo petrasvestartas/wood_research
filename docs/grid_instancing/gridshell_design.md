@@ -65,13 +65,16 @@ evenly spread.
   tessellation, which puts it on the circle through a chord's ends, so traced curves do not follow the
   facets (with flat facets and area-weighted normals the largest normal curvature was 3e-4 to 1.3e-3 1/mm). Tracing stops at the band of triangles
   touching the boundary, whose one-sided normals are poor (that cut the largest error about four times).
-- **BRep boards.** `Board : Beam` keeps the station sections (the joinery and contacts read them) and adds
-  four corner rails, `NurbsCurve::create_interpolated` through one corner of every section (chord
-  parameters; uniform ones tilt the rulings more). Four `Primitives::create_ruled` faces between neighbouring
-  rails and two bilinear planar caps are assembled into one closed BRep solid with shared rail and cap edges
-  and pcurves on the domain sides, so the kernel meshes each face directly. The board kinks only at its four
-  long edges and two ends. Studs are `Column` prisms, already BRep. Every element is written as BRep.
-- **Contact mesh.** The board's mesh is the sweep through its sections: every vertex lies on a rail, so it
+- **BRep boards: `BeamCurved`**, a new wood element (`wood_element_beam_curved.h/.cpp`, `wood_proto.BeamCurved`,
+  registered). It holds a central axis (the cubic `NurbsCurve::create_interpolated` through the lamella's
+  stations, shared by both boards), the station parameters on it, an up direction per station (the surface
+  normal) and one closed cross-section in the station frame (x across, y up). The sweep places the section
+  at every station and interpolates one rail per section corner; `Primitives::create_ruled` faces between
+  neighbouring rails and two planar caps are assembled into one closed BRep solid with shared rail and cap
+  edges and pcurves on the domain sides, so the kernel meshes each face directly. The board kinks only at
+  its section's corners and two ends. Studs are `Column` prisms, already BRep. Every element is written as
+  BRep, and a saved session loads back as `BeamCurved` (the example checks all 156).
+- **Contact mesh.** `BeamCurved`'s mesh is the sweep through its placed sections: every vertex lies on a rail, so it
   is a tessellation of the BRep, and its faces at a crossing are exactly the flats the stud touches. A BRep
   tessellation by the kernel's adaptive grid lost 3 of 25 iso contacts (faces straddling the straight run)
   and was dropped for contacts.
@@ -137,7 +140,7 @@ half; the example uses 1.3 without relaxing it.
 Gridshell::from_surface(const NurbsSurface&, int curves /*0 iso, 1 asymptotic*/, int count_top, int count_bottom, const Lamella&);
 Gridshell::from_mesh(const Mesh&, int count_top, int count_bottom, const Lamella&);   // asymptotic
 Gridshell { top, bottom /*Board*/, studs /*Column*/, frames };
-Board : Beam { rings, rails; element_geometry_brep(); element_geometry_mesh(); }
+BeamCurved(points, directions, section) { axis, parameters, directions, section; sections(); rails(); element_geometry_brep(); }
 ```
 Next: `from_mesh(..., const Polyline& seed)` for a user spine, and `Gridshell::optimise()` for stage 2.
 
@@ -146,7 +149,7 @@ Next: `from_mesh(..., const Polyline& seed)` for a user spine, and `Gridshell::o
 - `compute_asymptotic(l, m, n)` - asymptotic directions of a quadratic form; `NurbsSurface::asymptotic_directions(u, v)`.
 - `MeshField` pieces: `Mesh::vertex_normals_max()`, `Mesh::shape_operators()` (per-vertex tensor),
   `Mesh::closest_point` with barycentrics (brute force now - needs the AABB tree), Phong-lifted point.
-- `BRep::from_rails(rails)` - a closed solid from n corner rails, ruled faces, planar caps (the `Board` builder).
+- `BRep::from_rails(rails)` - a closed solid from n corner rails, ruled faces, planar caps (the `BeamCurved` sweep).
 - `NurbsCurve::create_interpolated(points, parameters)` - explicit parameters, so several rails share them.
 - `Mesh::relax_minimal(fixed, sweeps)` - cotangent Laplacian relaxation.
 - A generic RK4 field tracer over a surface or mesh (Bowerbird's role).
@@ -155,6 +158,5 @@ Next: `from_mesh(..., const Polyline& seed)` for a user spine, and `Gridshell::o
 
 - Stage-2 A-net optimisation on meshes (section 5); AG and AAG webs; seeding from a user curve.
 - `MeshField::compute_foot` is brute force: 34 s for the five scenes, almost all of it mesh queries.
-- `Board` saves as a `Beam` (element type "Beam"): a reload rebuilds the faceted sweep, the file's BRep slot
-  keeps the smooth solid.
+- `BeamCurved` has no cuts and takes no part in the beam joinery (axis contacts) yet; face contacts work.
 - Screenshots of the new scenes (`templates_gridshell.png`) are to be retaken locally.
