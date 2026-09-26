@@ -5,7 +5,11 @@ Each submodule has its own `CLAUDE.md`; this file holds only what spans them.
 
 ## Build limits (this machine has crashed from ignoring these)
 
-- `--parallel 4` / `-j4`, never `-j$(nproc)`. 32 jobs ran the box out of 30 GB.
+- `-j8` for cargo, `-j6` for C++ (ninja / `cmake --build --parallel 6`), never `-j$(nproc)`:
+  32 jobs ran the box out of 30 GB. Measured 2026-09-26: two builds at these limits peak at
+  ~10 GB together. Builds go through `buildslot` (at most two at once).
+- cmake must be `~/.local/bin/cmake` (uv tool), never the snap: snap cmake leaves the
+  `systemd-run --scope`, so its MemoryMax cap does nothing.
 - One heavy command at a time: never start a second build, solver or dataset sweep while
   one is running. Run long jobs with a wall-clock timeout and a memory cap
   (`timeout 10m systemd-run --user --scope -p MemoryMax=6G <cmd>`); anything not finished
