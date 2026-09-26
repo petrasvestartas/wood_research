@@ -43,13 +43,18 @@ API, kernel candidates.
 petras: "you draw gridshells as meshes but they must be breps and lattices are nurbs", and "the lamellas must be
 lofted curves, not these little segments".
 - Lamella centre and edge curves are `NurbsCurve` (`NurbsCurve::create_interpolated` through the traced samples).
-- Each board is ONE closed BRep solid whose faces are single smooth NURBS surfaces along the whole lamella, never one
-  face or one mesh band per segment: the two side faces and the top and bottom faces are each ONE lofted/ruled
-  surface through the full-length edge curves (`primitives.h`: `NurbsSurface::create_ruled` / `create_loft`), plus
-  two planar end caps. Assemble with the BRep builder (`brep.h` `add_surface/add_vertex/add_edge/add_pcurve/add_wire/
-  add_face/add_shell/add_solid`; see `BRep::create_box` for a closed solid), sharing edges and vertices.
-- The edge curves come from the local frame at each sample: offsets +-b*(gap/2), +-b*(gap/2 + thickness) and +-n*h/2
-  along the LOCAL surface normal n and binormal b = n x t, then interpolated as NurbsCurves.
+- petras, precisely: "not lofted, but along the segments have interpolated curves, with kinks only at the 4 corners
+  and the ends of the beams, to form the faces - when lofted they are faceted."
+- So each board is built from FOUR RAILS: one smooth interpolated `NurbsCurve` per corner of the rectangular section,
+  running the full length of the lamella. The rail points come from the local frame at every sample: corner = centre
+  + b*(gap/2 or gap/2 + thickness) + n*(offset +- height/2), with n the LOCAL surface normal and b = n x t; then
+  `NurbsCurve::create_interpolated` through them (degree 3, smooth along the length).
+- Each of the 4 long faces is ONE ruled surface between two neighbouring rails (`NurbsSurface::create_ruled`), smooth
+  along the length and straight across; the only kinks are the 4 corner rails and the 2 ends. Do NOT loft through a
+  sequence of section rectangles (that faces the board into bands), and never one face or mesh band per segment.
+- The 2 end caps are planar faces bounded by the rail end points. Assemble one closed BRep solid with the BRep builder
+  (`brep.h` `add_surface/add_vertex/add_edge/add_pcurve/add_wire/add_face/add_shell/add_solid`; see `BRep::create_box`),
+  the rails as the shared long edges.
 - Studs are BRep prisms. The element carries the BRep (`element_geometry_brep()`); its tessellated mesh still feeds
   `compute_contacts` and the overlap check. Keep the printed numbers the same or better. The viewer must draw smooth
   boards (no ladder of section rings).
