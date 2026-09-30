@@ -87,10 +87,9 @@ for repo in "${ORDER[@]}"; do
         echo "   committed: $(git -C "$repo" log --oneline -1)"
     fi
 
-    # --ff-only: if the remote moved, stop and let a human merge. A push script is the
-    # last place that should be resolving someone else's history.
-    git -C "$repo" pull -q --ff-only origin "$branch"
-    git -C "$repo" push -q origin "$branch"
+    # Local history is authoritative for this monorepo stack. Do not pull/rebase here:
+    # overwrite the remote branch if it diverged so every package is pushed consistently.
+    git -C "$repo" push -q --force origin "$branch"
     echo "   pushed: $(git -C "$repo" log --oneline -1)"
 done
 
@@ -110,8 +109,8 @@ else
     git commit -q -m "${MESSAGE:-superproject: $(git diff --cached --name-only | tr '\n' ' ')}"
     echo "   committed: $(git log --oneline -1)"
 fi
-git push -q origin "$(git rev-parse --abbrev-ref HEAD)"
-echo "   pushed"
+git push -q --force origin "$(git rev-parse --abbrev-ref HEAD)"
+echo "   pushed (force)"
 
 step "state"
 git submodule status

@@ -93,6 +93,10 @@ For every class (or the classes named in the request), read all six files and al
 - Same variable names inside method bodies. Same method order:
   constructors → accessors → mutators (`*_self`) → operators → utilities → serialization → str/repr.
 - Coordinate access is `p[0]`, `p[1]`, `p[2]` in all three - never `.x`, `.y`, `.z`.
+- Use shorter coonstructors of class instances such as points and vectors, for example here in curly braces i defined points and vectors instead of typing full class name:
+```cpp
+  Plate::from_rectangle({0, 0, 0}, {1, 0, 0}, {0, 1, 0}, 400, 300, {0, 0, 40});
+```
 - Conversions are `to_<type>()` / `from_<type>()`, computation is `compute_*`, access is `get_*` / `set_*`.
   Never `load_*`, `make_*`, `convert_*`.
 - JSON fields alphabetical in all three. Serialization is the same six methods everywhere.
@@ -397,7 +401,21 @@ Not applied, on purpose: no dynamic allocation after init (the data model is
 checks, and an assert in a library aborts the caller), and no function pointers (the test
 registry and callbacks are the API).
 
+## Never write functions into one line
 
+- Even if you have a single line header function never write in a single line:
+
+  Intstead of this:
+  ```cpp
+  Interaction& add_interaction(const session_cpp::Element& a, const session_cpp::Element& b, Interaction data) { return add_interaction(a.guid(), b.guid(), std::move(data)); }
+  ```
+
+  Do this:
+  ```cpp
+  Interaction& add_interaction(const session_cpp::Element& a, const session_cpp::Element& b, Interaction data) { 
+    return add_interaction(a.guid(), b.guid(), std::move(data));   
+  }
+  ```
 
 ## Implement one class at a time: push, wait for CI, fix, repeat
 
