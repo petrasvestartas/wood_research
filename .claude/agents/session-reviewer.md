@@ -314,7 +314,9 @@ points that matter most in review:
   ```
 
 - **Use `std::string`, not `char*`.** Use `std::string` for string manipulation, never `char*`
-  or char arrays, and `std::string_view` for read-only views.
+  or char arrays, and `std::string_view` for read-only views. The strings must print the class name and the values of all attributes, in the same order as the constructor. Important it ends with a newline so that we not need to add a `\n` when printing the string representation of the object. 
+  
+  ```cpp
 - **Attributes always sit at the top of the class**, right after the access specifier - never in
   the middle, at the end, or scattered around:
 
