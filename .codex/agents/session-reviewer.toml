@@ -148,13 +148,13 @@ must be reconciled with all discovered sources and their current dependencies:
  2. tree vector
  3. xform point plane instance_ref
  4. quaternion line pointcloud nurbscurve spatial_kdtree spatial_octree
- 5. polyline aabb io
+ 5. polyline aabb file_xyz
  6. obb boolean_polyline spatial_aabbtree
  7. closest spatial_bvh remesh_cdt
  8. mesh
- 9. nurbssurface mesh_offset convex_hull file_obj
+ 9. nurbssurface convex_hull file_obj
 10. primitives nurbssurface_trimmed remesh_nurbssurface_grid remesh_nurbssurface_adaptive brep
-11. element file_step
+11. element file_step split
 12. intersection objects
 13. history
 14. session

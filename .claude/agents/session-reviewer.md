@@ -33,13 +33,13 @@ header includes; a class only ever includes classes above it):
  2. xform tree
  3. point vector plane instance_ref
  4. quaternion line pointcloud nurbscurve spatial_kdtree spatial_octree
- 5. polyline aabb io
+ 5. polyline aabb file_xyz
  6. obb boolean_polyline closest spatial_aabbtree
  7. spatial_bvh
  8. mesh
- 9. nurbssurface remesh_cdt mesh_offset convex_hull file_obj
+ 9. nurbssurface remesh_cdt convex_hull file_obj
 10. nurbssurface_trimmed primitives remesh_nurbssurface_grid remesh_nurbssurface_adaptive brep
-11. element file_step
+11. element file_step split
 12. intersection objects
 13. history
 14. session
