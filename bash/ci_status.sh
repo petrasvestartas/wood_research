@@ -49,6 +49,9 @@ for job in json.load(sys.stdin).get("jobs", []):
 '
 }
 
+# GitHub takes up to a minute to queue the runs of a fresh push; before that a repo reads "(no runs)".
+[ "${1:-}" = "--wait" ] && sleep 90
+
 out=$(snapshot)
 
 if [ "${1:-}" = "--wait" ]; then
