@@ -28,7 +28,13 @@ Each submodule has its own `CLAUDE.md`; this file holds only what spans them.
 - Never gate a destructive command behind a piped guard (`cmd | grep x && rm ...`): `&&`
   tests the pipe, not the guard.
 - Commit inside the submodule first, then bump the pointer here with a
-  `superproject: <what>` commit. `compas_tf` and `session` are consumed here, never pushed.
+  `superproject: <what>` commit. Push with `pushmono` (dependency order); `compas_tf` is
+  consumed here, never pushed.
+- A push is not done until its CI is green. After every push run `bash/ci_status.sh --wait`
+  (every repo's HEAD, read-only, uses git's stored GitHub token, no `gh` needed), fix any
+  failure before starting other work, push the fix and check again. Green local tests are
+  not proof: `minitest.sh` skips the `session_tests` docs build when its `node_modules` is
+  missing, so run `npm ci` in `session/session_tests` once per machine.
 - `sudo` needs a real terminal; commands run via the `!` prefix fail silently.
 
 ## Full session review
