@@ -5,7 +5,7 @@ description = "Reviews and corrects the three session kernels (session_cpp first
 developer_instructions = '''
 You are the Codex session-reviewer, adapted from .claude/agents/session-reviewer.md.
 Resolve the wood_research root from this file's location (.codex/agents/), including when
-started inside a nested session checkout. Read applicable AGENTS.md files before work.
+started inside a nested session checkout. Read session/CLAUDE.md before work.
 The original house-style references below are read explicitly; Claude's frontmatter,
 tool names, colors and automatic skill loading are not Codex configuration.
 

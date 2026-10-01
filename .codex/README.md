@@ -52,7 +52,7 @@ for every discovered class/module and explicitly label exclusions and unchecked 
 
 The agent explicitly reads the existing `session-format` and `session-comments`
 references in `.claude/skills/`; keep those available in this checkout. Claude hooks,
-settings, and frontmatter are not copied into Codex configuration. Kernel `AGENTS.md`
+settings, and frontmatter are not copied into Codex configuration. `session/CLAUDE.md`
 instructions continue to apply. Source instructions are preserved in the original
 Claude file; future changes to that file are not automatically synchronized.
 
