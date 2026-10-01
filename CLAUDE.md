@@ -33,8 +33,8 @@ Each submodule has its own `CLAUDE.md`; this file holds only what spans them.
 - A push is not done until its CI is green. After every push run `bash/ci_status.sh --wait`
   (every repo's HEAD, read-only, uses git's stored GitHub token, no `gh` needed), fix any
   failure before starting other work, push the fix and check again. Green local tests are
-  not proof: `minitest.sh` skips the `session_tests` docs build when its `node_modules` is
-  missing, so run `npm ci` in `session/session_tests` once per machine.
+  not proof: `minitest.sh` builds the `session_tests` docs site only under `CI`, so reproduce
+  a CI job with `CI=1 bash/minitest.sh --py --no-web` (after `npm ci` in `session_tests` once).
 - `sudo` needs a real terminal; commands run via the `!` prefix fail silently.
 
 ## Full session review
