@@ -49,12 +49,39 @@ for job in json.load(sys.stdin).get("jobs", []):
 '
 }
 
-# GitHub takes up to a minute to queue the runs of a fresh push; before that a repo reads "(no runs)".
+# Whether the commit before a repo's HEAD ran any workflow: a repo with CI that reads "(no runs)"
+# has not been queued yet, while wood_nano or this repository never get runs at all.
+had_runs() {
+    local slug="$1" candidate previous
+    for candidate in "${REPOS[@]}"; do
+        [ "$(git -C "$ROOT/$candidate" remote get-url origin | sed -E 's#.*github.com[:/]##; s#\.git$##')" = "$slug" ] || continue
+        previous=$(git -C "$ROOT/$candidate" rev-parse HEAD~1 2>/dev/null) || return 1
+        curl -s "${AUTH[@]}" "https://api.github.com/repos/$slug/actions/runs?head_sha=$previous&per_page=1" |
+            python3 -c 'import json, sys; sys.exit(0 if json.load(sys.stdin).get("total_count", 0) else 1)'
+        return
+    done
+    return 1
+}
+
+# Repositories reading "(no runs)" whose previous commit did run: their runs are still to come.
+not_queued() {
+    echo "$1" | grep " (no runs)" | while read -r slug _; do
+        had_runs "$slug" && echo "$slug"
+    done
+}
+
+# GitHub takes from one to several minutes to queue the runs of a fresh push.
 [ "${1:-}" = "--wait" ] && sleep 90
 
 out=$(snapshot)
 
 if [ "${1:-}" = "--wait" ]; then
+    for _ in $(seq 20); do
+        [ -z "$(not_queued "$out")" ] && break
+        sleep 30
+        out=$(snapshot)
+    done
+
     while echo "$out" | grep -qE " (in_progress|queued|pending|waiting|requested) "; do
         sleep 120
         out=$(snapshot)
