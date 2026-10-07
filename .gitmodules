@@ -1,7 +1,7 @@
 [submodule "wood"]
 	path = wood
 	url = https://github.com/petrasvestartas/wood.git
-	branch = dev
+	branch = main
 [submodule "wood_nano"]
 	path = wood_nano
 	url = https://github.com/petrasvestartas/wood_nano.git
