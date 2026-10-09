@@ -162,6 +162,28 @@ points that matter most in review:
 
   A named intermediate is worth it when it is reused or when the line would otherwise run past
   about 100 columns; a short `a.b().c()` that reads as one idea may stay.
+- **More than three arguments: one per line.** A call, constructor or signature with more than
+  three arguments puts each on its own line, indented one step, the closing `)` on its own line;
+  three or fewer stay on one line. A `fmt::format` / `std::format` string with its values counts as
+  one string and stays on one line. Not this:
+
+  ```cpp
+  made.seam_wedge = JointBeam::wedge(*seam.a, *seam.b, *seam.face, 1.5 * beam, 2.0 * beam / 3.0, outer_face);
+  ```
+
+  but this:
+
+  ```cpp
+  made.seam_wedge = JointBeam::wedge(
+      *seam.a,
+      *seam.b,
+      *seam.face,
+      1.5 * beam,
+      2.0 * beam / 3.0,
+      outer_face
+  );
+  ```
+
 - **Lambdas and closures only when they earn it.** A lambda that is called once, or that hides
   a loop a reader would follow faster, becomes a loop or a named function. Keep one when it is
   genuinely shorter *and* measurably faster (an iterator chain that avoids an allocation).
