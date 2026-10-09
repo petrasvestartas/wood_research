@@ -144,6 +144,24 @@ points that matter most in review:
   single-statement loops and ifs without braces, calls on one line or broken as
   `f(\n    a,\n    b\n);`. No print statements in library code. No argparse/clap/env args;
   options are one capitalised `const bool` at the top.
+- **No piled-up chains.** At most one call or index on a value per expression step: a chain like
+  `a.b(q).c[0][0].d(e(0.0, 0.0, f.g))` is split into named results, each on its own line, so
+  every line says one thing and stays short. Not this:
+
+  ```cpp
+  const Plane outer_face = guide.construction_planes(q).outer_ribs[0][0].transformed(Xform::translation(0.0, 0.0, guide.bay_height));
+  ```
+
+  but this:
+
+  ```cpp
+  const ConstructionPlanes& planes = guide.construction_planes(q);
+  const Xform lift = Xform::translation(0.0, 0.0, guide.bay_height);
+  const Plane outer_face = planes.outer_ribs[0][0].transformed(lift);
+  ```
+
+  A named intermediate is worth it when it is reused or when the line would otherwise run past
+  about 100 columns; a short `a.b().c()` that reads as one idea may stay.
 - **Lambdas and closures only when they earn it.** A lambda that is called once, or that hides
   a loop a reader would follow faster, becomes a loop or a named function. Keep one when it is
   genuinely shorter *and* measurably faster (an iterator chain that avoids an allocation).
