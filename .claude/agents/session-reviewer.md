@@ -144,6 +144,9 @@ points that matter most in review:
   single-statement loops and ifs without braces, calls on one line or broken as
   `f(\n    a,\n    b\n);`. No print statements in library code. No argparse/clap/env args;
   options are one capitalised `const bool` at the top.
+- **Docstrings stay minimal: one short sentence**, about twenty words at most, saying what the item is or does.
+  No rationale, no history, no "so that" clauses, no lists of cases; the docs pages explain the rest. The only list
+  allowed is a struct's or class's fields, one short line each, so hovering the type shows what it stores.
 - **No piled-up chains.** At most one call or index on a value per expression step: a chain like
   `a.b(q).c[0][0].d(e(0.0, 0.0, f.g))` is split into named results, each on its own line, so
   every line says one thing and stays short. Not this:
