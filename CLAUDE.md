@@ -73,3 +73,9 @@ runs; the only question is `pushmono` at the end. The gap table is shown, not as
 - AGENT runs in its own context: say "use <agent-name> to ..." and it returns one report.
 - HOOK costs no tokens, only runs a shell command on an event: wire it in `.claude/settings.json`, trigger words like `pushmono` are typed as a prompt.
 - AGENT TEAM shares a task list and messages between teammates: say "start an agent team: ..." and the main session leads it.
+
+## Geometry types
+
+### Plane
+
+- Primary use default constructor with the point and two vectors, use other plane overloads only when needed. 

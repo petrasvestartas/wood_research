@@ -3,3 +3,6 @@
 .claude/skills/
 .claude/settings.local.json
 CLAUDE.local.md
+
+# Separate local worktree; never stage it as an embedded repository.
+/wood-head/
