@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Force-sync wood_research and its working submodules to their configured remote branches.
+# Force-sync wood_research and all its submodules to their configured remote branches.
 #
 #   .claude/hooks/pull_mono.sh
 #
@@ -34,7 +34,7 @@ force_repo() {
     local repo="$1"
     local branch="$2"
 
-    git -C "$repo" fetch -q --prune --no-recurse-submodules origin "$branch"
+    git -C "$repo" fetch -q --prune --no-recurse-submodules origin "+refs/heads/$branch:refs/remotes/origin/$branch"
 
     # Throw away tracked local changes/commits first, then put the requested local branch
     # directly on the freshly fetched remote branch.
@@ -76,71 +76,33 @@ fi
 branch=${branch:-main}
 force_repo "." "$branch"
 
-# The reset above may have replaced .gitmodules, so sync URLs/config only afterwards.
-git submodule sync -q
-
-# Same dependency order as push_mono.sh. Any remaining top-level submodules follow after it.
-ORDER=(session wood wood_nano compas_wood)
-rest=()
-while read -r _ path; do
-    case " ${ORDER[*]} " in
-        *" $path "*) ;;
-        *) rest+=("$path") ;;
-    esac
-done < <(git config -f .gitmodules --get-regexp '^submodule\..*\.path$' || true)
-
-step "submodules"
-for path in "${ORDER[@]}" "${rest[@]}"; do
-    # Skip names from ORDER that are not present in this checkout's .gitmodules.
-    name=$(git config -f .gitmodules --get-regexp '^submodule\..*\.path$' 2>/dev/null \
-        | awk -v p="$path" '$2 == p {k=$1; sub(/^submodule\./,"",k); sub(/\.path$/,"",k); print k; exit}')
-    [ -n "$name" ] || continue
-
-    branch=$(git config -f .gitmodules "submodule.$name.branch" 2>/dev/null || true)
-    branch=${branch:-main}
-    printf '\n-- %s (%s) --\n' "$path" "$branch"
-    force_submodule "." "$path" "$branch"
-done
-
-# `session` is itself a monorepo. Only session_cpp is guaranteed to be initialised here;
-# session_py/session_rust are force-synced only if they already exist, matching the old
-# script's intent and avoiding a large accidental checkout.
-if [ -d session ] && [ -f session/.gitmodules ]; then
-    git -C session submodule sync -q
-
-    for kernel in session_cpp session_py session_rust; do
-        name=$(git -C session config -f .gitmodules --get-regexp '^submodule\..*\.path$' 2>/dev/null \
-            | awk -v p="$kernel" '$2 == p {k=$1; sub(/^submodule\./,"",k); sub(/\.path$/,"",k); print k; exit}')
-        [ -n "$name" ] || continue
-
-        path="session/$kernel"
-        if [ "$kernel" != "session_cpp" ] && [ ! -e "$path/.git" ]; then
-            continue
-        fi
-
-        branch=$(git -C session config -f .gitmodules "submodule.$name.branch" 2>/dev/null || true)
-        branch=${branch:-main}
-        printf '\n-- %s (%s) --\n' "$path" "$branch"
-        force_submodule "session" "$kernel" "$branch"
-    done
-fi
-
-# session_cpp has its own small required submodules (for example generated proto/data).
-# Follow their configured remote branches too, one by one, so no stale pinned SHA is needed.
-if [ -d session/session_cpp ] && [ -f session/session_cpp/.gitmodules ]; then
-    git -C session/session_cpp submodule sync -q
-
-    while read -r key dep; do
+# Read each repository after resetting it: its remote may add or remove submodules.
+force_children() {
+    local parent="$1"
+    local entry key path name branch full
+    [ -f "$parent/.gitmodules" ] || return 0
+    git -C "$parent" submodule sync -q
+    while IFS= read -r -d '' entry; do
+        key=${entry%%$'\n'*}
+        path=${entry#*$'\n'}
         name=${key#submodule.}
         name=${name%.path}
-        branch=$(git -C session/session_cpp config -f .gitmodules "submodule.$name.branch" 2>/dev/null || true)
+        branch=$(git -C "$parent" config -f .gitmodules "submodule.$name.branch" || true)
         branch=${branch:-main}
-        printf '\n-- session/session_cpp/%s (%s) --\n' "$dep" "$branch"
-        force_submodule "session/session_cpp" "$dep" "$branch"
-    done < <(git -C session/session_cpp config -f .gitmodules --get-regexp '^submodule\..*\.path$' || true)
-fi
+        if [ "$branch" = "." ]; then
+            branch=$(git -C "$parent" symbolic-ref --short HEAD)
+        fi
+        full="$parent/$path"
+        printf '\n-- %s (%s) --\n' "$full" "$branch"
+        force_submodule "$parent" "$path" "$branch"
+        force_children "$full"
+    done < <(git -C "$parent" config -z -f .gitmodules --get-regexp '^submodule\..*\.path$' || true)
+}
+
+step "submodules"
+force_children "."
 
 step "summary"
 git status --short --branch --ignore-submodules=dirty
-git submodule status || true
+git submodule status --recursive
 printf '\nForce sync complete. Remote branch tips won; local commits/changes/untracked files were discarded.\n'

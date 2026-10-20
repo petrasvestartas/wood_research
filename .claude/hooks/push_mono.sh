@@ -8,24 +8,15 @@
 # prompt `pushmono` runs the first form and `pushmono <message>` the second; every other
 # prompt passes through untouched and the output goes to Claude as context.
 #
-# The order is session_cpp/py/rust -> session -> wood -> wood_nano -> compas_wood, and it
-# is not cosmetic. wood compiles session_cpp, wood_nano compiles wood, compas_wood runs on
-# wood_nano, and each one's CI builds its dependencies from their pushed branches - so a
-# wood_nano pushed before the wood commit it needs is a red CI run against a wood that
-# does not exist yet. The three kernels come before the `session` monorepo for the same
-# reason: its pointer bump must not name a commit that is not on GitHub yet.
-#
-# compas_tf is NOT pushed here: it belongs to BRG-research and is consumed here, not
-# authored here. Its pointer still moves in the superproject commit at the end.
-#
-# wood_research itself IS pushed, and not only its submodule pointers: README.md, bash/,
-# docs/ and .claude/ are authored in this repository and nowhere else.
+# Discover all initialized submodules, pushing children before their parents.
+# Keep the package order session -> wood -> wood_nano -> compas_wood so CI can
+# resolve dependency commits. Every other configured repository is included too.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$ROOT"
 
-ORDER=(session/session_cpp session/session_py session/session_rust session wood wood_nano compas_wood)
+ORDER=()
 
 MESSAGE=""
 if [ "${1:-}" = "--hook" ]; then
@@ -52,25 +43,49 @@ done
 
 step() { printf '\n== %s ==\n' "$*"; }
 
-# One pass over everything BEFORE anything is pushed: a stack half-pushed because repo
-# three turned out to be dirty is worse than one that refused to start.
-if [ -z "$MESSAGE" ]; then
-    blocked=()
-    for repo in "${ORDER[@]}"; do
-        [ -n "$(git -C "$repo" status --porcelain)" ] && blocked+=("$repo")
-    done
-    # This repository's OWN files, checked the same way. --ignore-submodules=all because the
-    # pointers are SUPPOSED to be dirty here - moving them is what the commit at the end is
-    # for - and counting them would make the script refuse to run precisely when it has work.
-    if [ -n "$(git status --porcelain --ignore-submodules=all)" ]; then
-        blocked+=("wood_research")
+# Build a postorder traversal. Uninitialized repositories have no local work to push.
+collect_repos() {
+    local parent="$1"
+    local entry key path full
+    local paths=()
+    [ -f "$parent/.gitmodules" ] || return 0
+    if [ "$parent" = "." ]; then
+        paths=(session wood wood_nano compas_wood)
     fi
-    if [ ${#blocked[@]} -gt 0 ]; then
-        echo "uncommitted changes in: ${blocked[*]}" >&2
-        echo "commit them yourself, or re-run with -m \"message\" (pushmono <message>) to commit all tracked changes." >&2
+    while IFS= read -r -d '' entry; do
+        key=${entry%%$'\n'*}
+        path=${entry#*$'\n'}
+        case " ${paths[*]:-} " in
+            *" $path "*) ;;
+            *) paths+=("$path") ;;
+        esac
+    done < <(git -C "$parent" config -z -f .gitmodules --get-regexp '^submodule\..*\.path$' || true)
+    for path in ${paths[@]+"${paths[@]}"}; do
+        git -C "$parent" ls-files --error-unmatch -- "$path" >/dev/null 2>&1 || continue
+        full="$parent/$path"
+        if [ ! -e "$full/.git" ]; then
+            echo "   skipping uninitialized repository: $full"
+            continue
+        fi
+        collect_repos "$full"
+        ORDER+=("$full")
+    done
+}
+collect_repos "."
+ORDER+=(".")
+
+# Validate every repository before pushing anything. Pointer changes are committed
+# after children are pushed, even when no explicit message was supplied.
+for repo in "${ORDER[@]}"; do
+    if ! git -C "$repo" symbolic-ref --quiet HEAD >/dev/null; then
+        echo "detached HEAD in $repo - run pullmono first" >&2
         exit 1
     fi
-fi
+    if [ -z "$MESSAGE" ] && [ -n "$(git -C "$repo" status --porcelain --ignore-submodules=all)" ]; then
+        echo "uncommitted changes in $repo; commit them or re-run with -m \"message\"" >&2
+        exit 1
+    fi
+done
 
 for repo in "${ORDER[@]}"; do
     branch=$(git -C "$repo" rev-parse --abbrev-ref HEAD)
@@ -81,9 +96,9 @@ for repo in "${ORDER[@]}"; do
         exit 1
     fi
 
-    if [ -n "$MESSAGE" ] && [ -n "$(git -C "$repo" status --porcelain)" ]; then
-        git -C "$repo" add -A
-        git -C "$repo" commit -q -m "$MESSAGE"
+    git -C "$repo" add -A
+    if ! git -C "$repo" diff --cached --quiet; then
+        git -C "$repo" commit -q -m "${MESSAGE:-Update submodule pointers}"
         echo "   committed: $(git -C "$repo" log --oneline -1)"
     fi
 
@@ -93,24 +108,5 @@ for repo in "${ORDER[@]}"; do
     echo "   pushed: $(git -C "$repo" log --oneline -1)"
 done
 
-# The superproject records WHICH commit of each submodule this stack was last known to
-# work at. Without this commit the pushes above are invisible to a fresh clone: it would
-# still check out the old pins.
-#
-# `git add -A`, not the submodule paths alone: wood_research is a REPOSITORY, not just a set
-# of pins. Staging only the pointers left every file authored here behind - committed
-# nothing, pushed nothing, and still printed "pushed". The pre-flight above is what makes
-# this safe with no -m: it refuses to start when something here needs a commit message.
-step "wood_research"
-git add -A
-if git diff --cached --quiet; then
-    echo "   nothing to commit"
-else
-    git commit -q -m "${MESSAGE:-superproject: $(git diff --cached --name-only | tr '\n' ' ')}"
-    echo "   committed: $(git log --oneline -1)"
-fi
-git push -q --force origin "$(git rev-parse --abbrev-ref HEAD)"
-echo "   pushed (force)"
-
 step "state"
-git submodule status
+git submodule status --recursive
