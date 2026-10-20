@@ -8,7 +8,7 @@
 # prompt `pushmono` runs the first form and `pushmono <message>` the second; every other
 # prompt passes through untouched and the output goes to Claude as context.
 #
-# Discover all initialized submodules, pushing children before their parents.
+# Discover and initialize all submodules, pushing children before their parents.
 # Keep the package order session -> wood -> wood_nano -> compas_wood so CI can
 # resolve dependency commits. Every other configured repository is included too.
 set -euo pipefail
@@ -43,10 +43,10 @@ done
 
 step() { printf '\n== %s ==\n' "$*"; }
 
-# Build a postorder traversal. Uninitialized repositories have no local work to push.
+# Initialize missing submodules and build a postorder traversal.
 collect_repos() {
     local parent="$1"
-    local entry key path full
+    local entry key path full name branch
     local paths=()
     [ -f "$parent/.gitmodules" ] || return 0
     if [ "$parent" = "." ]; then
@@ -64,8 +64,23 @@ collect_repos() {
         git -C "$parent" ls-files --stage -- "$path" | grep -q '^160000 ' || continue
         full="$parent/$path"
         if [ ! -e "$full/.git" ]; then
-            echo "   skipping uninitialized repository: $full"
-            continue
+            echo "   initializing repository: $full"
+            git -C "$parent" -c fetch.recurseSubmodules=false \
+                submodule update -q --init --remote -- "$path"
+            while IFS= read -r -d '' entry; do
+                if [ "${entry#*$'\n'}" = "$path" ]; then
+                    key=${entry%%$'\n'*}
+                    name=${key#submodule.}
+                    name=${name%.path}
+                    break
+                fi
+            done < <(git -C "$parent" config -z -f .gitmodules --get-regexp '^submodule\..*\.path$')
+            branch=$(git -C "$parent" config -f .gitmodules "submodule.$name.branch" || true)
+            branch=${branch:-main}
+            if [ "$branch" = "." ]; then
+                branch=$(git -C "$parent" symbolic-ref --short HEAD)
+            fi
+            git -C "$full" checkout -q -B "$branch" "origin/$branch"
         fi
         collect_repos "$full"
         ORDER+=("$full")
