@@ -85,6 +85,10 @@ force_children() {
     while IFS= read -r -d '' entry; do
         key=${entry%%$'\n'*}
         path=${entry#*$'\n'}
+        if ! git -C "$parent" ls-files --stage -- "$path" | grep -q '^160000 '; then
+            printf '   skipping stale .gitmodules entry: %s/%s\n' "$parent" "$path"
+            continue
+        fi
         name=${key#submodule.}
         name=${name%.path}
         branch=$(git -C "$parent" config -f .gitmodules "submodule.$name.branch" || true)

@@ -61,7 +61,7 @@ collect_repos() {
         esac
     done < <(git -C "$parent" config -z -f .gitmodules --get-regexp '^submodule\..*\.path$' || true)
     for path in ${paths[@]+"${paths[@]}"}; do
-        git -C "$parent" ls-files --error-unmatch -- "$path" >/dev/null 2>&1 || continue
+        git -C "$parent" ls-files --stage -- "$path" | grep -q '^160000 ' || continue
         full="$parent/$path"
         if [ ! -e "$full/.git" ]; then
             echo "   skipping uninitialized repository: $full"
