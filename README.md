@@ -28,6 +28,23 @@ cd wood_research
 .claude/hooks/pull_mono.sh
 ```
 
+On Windows, use Git for Windows and the command launcher (works from PowerShell or cmd):
+
+```powershell
+.\.claude\hooks\pull_mono.cmd -AllSources
+```
+
+On Linux and macOS, use `bash .claude/hooks/pull_mono.sh --all-sources` for all nested
+sources, including the Python/Rust kernels and data. Omit the option for the smaller
+default checkout. After an interrupted top-level sync, `-NestedOnly` on Windows or
+`--nested-only` with Bash resumes nested sources without resetting top-level repositories.
+The Windows launcher selects Git Bash explicitly and needs no Python installation or
+system execution-policy change.
+
+Pull refuses any local changes in the parent or initialized submodules before syncing.
+`--help` is read-only on every launcher. `--force` explicitly allows discarding local
+commits, tracked edits and untracked files; ignored files remain. Preserve your work first.
+
 Plain `clone`, not `--recurse-submodules`: recursing drags in `session_rust`, `session_py` and
 `session_data`, gigabytes this stack never compiles.
 
@@ -41,7 +58,7 @@ pushmono contact areas    # in Claude Code: commit + push session_cpp/py/rust â†
 Both are `UserPromptSubmit` hooks (`.claude/settings.json`) over `.claude/hooks/pull_mono.sh`
 and `.claude/hooks/push_mono.sh`, which also run from a terminal (`push_mono.sh -m "msg"`).
 The order is not cosmetic: each repo's CI builds its dependencies from their *pushed* branches.
-Neither script moves a repo with uncommitted changes, and the push ends by committing the
+Push refuses a repo with uncommitted changes and ends by committing the
 moved pointers here, without which the pushes are invisible to a fresh clone. `compas_tf` is
 consumed, not authored here â€” pulled, never pushed.
 
