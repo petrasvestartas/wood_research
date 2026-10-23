@@ -421,6 +421,18 @@ points that matter most in review:
   session_cpp::SpatialRTree<int, double, 3>
   ```
 
+- **Math constants come from `Tolerance`, never `M_PI`, a local `constexpr double pi` or a
+  `_USE_MATH_DEFINES` flag.** `M_PI` is not standard C++ and MSVC fails on it (`C2065: 'M_PI':
+  undeclared identifier`). Use `Tolerance::PI`, `Tolerance::TWO_PI`, `Tolerance::HALF_PI`, and
+  `Tolerance::TO_RADIANS` / `Tolerance::TO_DEGREES` instead of `* M_PI / 180.0` or `* 180.0 / M_PI`
+  (the same names in py and rust). This holds for wood, its tests and its tools as well as the
+  kernels. A review greps for `M_PI` and fixes every hit:
+
+  ```cpp
+  const double tilt = pin_angle * 0.5 * Tolerance::TO_RADIANS;
+  const double angle = Tolerance::TWO_PI * k / corners;
+  ```
+
 ## 4. Safety - the Power of Ten, the part that fits a geometry kernel
 
 From Holzmann's ten rules, the ones that apply here. C++ is checked as written; Python and
