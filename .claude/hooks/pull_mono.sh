@@ -29,7 +29,7 @@ for argument in "$@"; do
         --force) FORCE=true ;;
         --help|-h)
             echo 'Usage: bash .claude/hooks/pull_mono.sh [--all-sources | --nested-only] [--hook] [--force]'
-            echo 'Sync remote branches. Refuses local changes unless --force is explicit.'
+            echo 'Sync remote branches. Refuses local changes or unpublished commits unless --force is explicit.'
             echo '--all-sources initializes every nested submodule, including the Python and Rust kernels and data.'
             echo '--nested-only resumes nested source synchronization without resetting top-level repositories.'
             return 0 ;;
@@ -51,7 +51,7 @@ if $HOOK; then
         "pullmono --all-sources"|"pull mono --all-sources") ALL_SOURCES=true ;;
         *) return 0 ;;
     esac
-    echo "pullmono: FORCE syncing to remotes; local work will be discarded"
+    echo "pullmono: syncing remote branches; local work requires explicit --force"
     options=()
     $FORCE && options+=(--force)
     $ALL_SOURCES && options+=(--all-sources)
@@ -63,8 +63,9 @@ fi
 # Check every existing checkout before any mutation, including the parent reset.
 if ! $FORCE; then
     if [ -n "$(git status --porcelain --untracked-files=normal --ignore-submodules=none)" ] ||
-       ! git submodule foreach --quiet --recursive 'test -z "$(git status --porcelain --untracked-files=normal --ignore-submodules=none)"'; then
-        echo 'Local work detected. Preserve it before syncing; --force explicitly discards it.' >&2
+       [ -n "$(git log -1 --format=%H HEAD --branches --not --remotes)" ] ||
+       ! git submodule foreach --quiet --recursive 'test -z "$(git status --porcelain --untracked-files=normal --ignore-submodules=none)" && test -z "$(git log -1 --format=%H HEAD --branches --not --remotes)"'; then
+        echo 'Local changes or unpublished commits detected. Preserve them before syncing; --force explicitly discards them.' >&2
         return 2
     fi
 fi
@@ -78,7 +79,11 @@ force_repo() {
     local repo="$1"
     local branch="$2"
 
-    git -C "$repo" fetch -q --prune --no-recurse-submodules origin "$branch"
+    git -C "$repo" fetch -q --prune --no-recurse-submodules origin "+refs/heads/$branch:refs/remotes/origin/$branch"
+    if ! $FORCE && ! git -C "$repo" merge-base --is-ancestor HEAD "origin/$branch"; then
+        echo "Refusing divergent history in $repo; preserve it before using --force." >&2
+        return 2
+    fi
 
     # Throw away tracked local changes/commits first, then put the requested local branch
     # directly on the freshly fetched remote branch.

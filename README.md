@@ -41,7 +41,8 @@ default checkout. After an interrupted top-level sync, `-NestedOnly` on Windows 
 The Windows launcher selects Git Bash explicitly and needs no Python installation or
 system execution-policy change.
 
-Pull refuses any local changes in the parent or initialized submodules before syncing.
+Pull refuses local changes or unpublished commits in the parent or initialized
+submodules before syncing.
 `--help` is read-only on every launcher. `--force` explicitly allows discarding local
 commits, tracked edits and untracked files; ignored files remain. Preserve your work first.
 

@@ -22,7 +22,7 @@ foreach ($option in $Options) {
 }
 if ($Help) {
     Write-Output 'Usage: pull_mono.cmd [--all-sources | --nested-only] [--hook] [--force]'
-    Write-Output 'Sync remote branches. Local work blocks syncing unless --force explicitly discards it.'
+    Write-Output 'Sync remote branches. Local changes or unpublished commits block syncing unless --force explicitly discards them.'
     exit 0
 }
 $gitPath = (Get-Command git -CommandType Application | Select-Object -First 1).Source
