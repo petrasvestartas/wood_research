@@ -46,6 +46,9 @@ def scan(root):
                 if len(relative.parts) > 1:
                     name = relative.parts[0]
                     directories[name] = directories.get(name, 0) + size
+        except FileNotFoundError as error:
+            if entry == root:
+                result["errors"].append(f"{entry}: {error}")
         except OSError as error:
             result["errors"].append(f"{entry}: {error}")
     result["largestRootDirectories"] = [dict(name=name, bytes=size) for name, size in

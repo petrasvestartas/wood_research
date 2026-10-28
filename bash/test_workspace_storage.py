@@ -7,6 +7,7 @@ import sys
 import tempfile
 import time
 import unittest
+from unittest import mock
 
 
 SCRIPT = Path(__file__).with_name("workspace_storage.py")
@@ -82,6 +83,55 @@ class StorageTests(unittest.TestCase):
             file.write_text("source")
             self.assertTrue(storage.scan(file)["errors"])
             self.assertTrue(storage.scan(Path(tmp) / "missing")["errors"])
+
+    def test_disappearing_compiler_files_and_directories_do_not_stop_monitoring(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.put(root, "src/keep", 11)
+            self.put(root, "target/transient.o", 13)
+            vanished = root / "target/transient.o"
+            original_stat = Path.stat
+
+            def after_enumeration(path, *args, **kwargs):
+                if path == vanished:
+                    vanished.unlink()
+                return original_stat(path, *args, **kwargs)
+
+            with mock.patch.object(Path, "stat", after_enumeration):
+                report = storage.scan(root)
+            self.assertEqual(report["errors"], [])
+            self.assertEqual(report["totalBytes"], 11)
+            self.assertEqual(report["generatedBytes"], 0)
+
+            directory = root / "target/rustc-temporary"
+            directory.mkdir()
+            original_scandir = os.scandir
+
+            def before_open(path):
+                if path == directory:
+                    directory.rmdir()
+                return original_scandir(path)
+
+            with mock.patch.object(os, "scandir", before_open):
+                report = storage.scan(root)
+            self.assertEqual(report["errors"], [])
+            self.assertEqual(report["totalBytes"], 11)
+
+    def test_unreadable_files_still_fail_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.put(root, "denied", 11)
+            original_stat = Path.stat
+
+            def deny(path, *args, **kwargs):
+                if path == root / "denied":
+                    raise PermissionError("unreadable")
+                return original_stat(path, *args, **kwargs)
+
+            with mock.patch.object(Path, "stat", deny):
+                report = storage.scan(root)
+            self.assertEqual(len(report["errors"]), 1)
+            self.assertIn("unreadable", report["errors"][0])
 
     def test_budget_rejects_before_starting_command(self):
         with tempfile.TemporaryDirectory() as tmp:
