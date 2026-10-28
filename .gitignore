@@ -6,3 +6,18 @@ CLAUDE.local.md
 
 # Separate local worktree; never stage it as an embedded repository.
 /wood-head/
+
+# Local storage reports, recovery cache and one-time maintenance tools.
+/.codex/disk-usage-20261028.json
+/.codex/git-storage-inventory-20261028.json
+/.codex/data-pack-dedup-plan.json
+/.codex/local-history-plan.json
+/.codex/floor-resume-audit.json
+/.codex/floor-recovery-v67/
+/.codex/history-maintenance/
+/.codex/plan-local-history.py
+/.codex/shorten-local-history.py
+/.codex/test-shorten-local-history.py
+/.codex/geometry-coordination-*.md
+/.codex/storage-coordination-*.md
+/docs/coordination/storage-and-floor-2026-10-28.md
