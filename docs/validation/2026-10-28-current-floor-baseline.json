@@ -1,0 +1,3710 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Fresh private floor diagnostic against current unmodified Wood source; no production promotion",
+  "startedUtc": "2026-10-28T20:07:03.6358891Z",
+  "status": "FAIL",
+  "historicalComparison": {
+    "historicalFailureCount": 87,
+    "historicalCountIsCurrent": false,
+    "exactHistoricalReplay": false,
+    "reason": "Old private candidate objects and detailed historical control datasets are unavailable. This run checks all 153 original model members through current Wood, with newly defined controls; counts do not establish a regression or improvement from the old candidate."
+  },
+  "source": {
+    "woodHead": "47600aff16576b09ec70374b885cf5dc129a77ca",
+    "woodProductionChangedByThisRecheck": false,
+    "cppHead": "11442e76ffeb1d24d81b6d94df11b790a2a685ca",
+    "cppWorkingSourceWasDirty": true,
+    "cppSourceFingerprint": "504ff39e3f5efaca339df41792c5579174568c9ee23c9a37a70ec06a7859ef4f",
+    "cppScope": "Frozen owner build27302 included uncommitted native changes and temporary SSI diagnostics; no clean-HEAD or green-CI claim.",
+    "sourceFilesHashed": 538,
+    "dependenciesHashed": 3481,
+    "existingCoreArtifactsReusedByReference": 131,
+    "kernelCompilations": 0,
+    "preparedSnapshotSha256": "064213080c946304006d15493038d3b505ed492342d971651f8167355814f5bc",
+    "privateEvidenceRelativePath": ".codex/floor-recovery-v67/build/runs/20261028T200703250572Z",
+    "privateSourceClosure": {
+      "path": ".codex/floor-recovery-v67/build/current-baseline-source-closure.zip",
+      "sha256": "d5da3e14c7d981784a8c1f062e1176dd7dc5d50f50e1ec6efa6b5bded2e2c45f",
+      "sizeBytes": 666583,
+      "scope": "Exact source-matched private harness, frozen dirty-kernel patch/code and immutable prepared manifest; no compiled artifacts copied or production source promoted."
+    }
+  },
+  "strictMemberRecheck": {
+    "visited": 153,
+    "geometryAndSourcePass": 34,
+    "geometryAndSourceFail": 119,
+    "expectedPopulation": 153,
+    "allSessionSourceRecordsPreserved": true
+  },
+  "export": {
+    "error": "Solid booleans require closed meshes: Manifold status 2",
+    "status": "FAIL"
+  },
+  "serializedGeometry": {
+    "status": "NOT_RUN_EXPORT_FAILED"
+  },
+  "freshReload": {
+    "status": "NOT_RUN_EXPORT_FAILED"
+  },
+  "freshRecompute": {
+    "status": "NOT_RUN_EXPORT_FAILED"
+  },
+  "materialIntent": {
+    "status": "NOT_VERIFIED",
+    "scope": "Strict geometric predicates and preservation of input records do not independently prove the author-intended solid for every model member."
+  },
+  "controls": {
+    "passed": 21,
+    "failed": [
+      {
+        "error": "Plate control failed strict geometry predicates",
+        "name": "new-Plate-touching-edge",
+        "status": "FAIL"
+      },
+      {
+        "error": "Plate control failed strict geometry predicates",
+        "name": "new-Plate-crossing-notch",
+        "status": "FAIL"
+      },
+      {
+        "error": "Plate control failed strict geometry predicates",
+        "name": "new-Plate-slanted-paired-no-volume-oracle",
+        "status": "FAIL"
+      },
+      {
+        "error": "Plate control failed strict geometry predicates",
+        "name": "new-Plate-concave-crossing",
+        "status": "FAIL"
+      },
+      {
+        "error": "Slanted edge geometry failed",
+        "name": "new-Plate-slanted-edge-198",
+        "status": "FAIL"
+      }
+    ],
+    "results": [
+      {
+        "name": "new-exact-dyadic-import-and-nonfinite",
+        "status": "PASS"
+      },
+      {
+        "name": "new-SAT-separated_planes",
+        "status": "PASS"
+      },
+      {
+        "name": "new-SAT-coplanar_disjoint",
+        "status": "PASS"
+      },
+      {
+        "name": "new-SAT-shared_indexed_vertex",
+        "status": "PASS"
+      },
+      {
+        "name": "new-SAT-coincident_position_distinct_key",
+        "status": "PASS"
+      },
+      {
+        "name": "new-SAT-true_crossing",
+        "status": "PASS"
+      },
+      {
+        "name": "new-SAT-coplanar_overlap",
+        "status": "PASS"
+      },
+      {
+        "name": "new-SAT-degenerate_triangle",
+        "status": "PASS"
+      },
+      {
+        "name": "new-SAT-same_key_different_coordinate",
+        "status": "PASS"
+      },
+      {
+        "name": "new-SAT-shared_edge_requires_original_checker",
+        "status": "PASS"
+      },
+      {
+        "name": "new-physical-separated_triangles",
+        "status": "PASS"
+      },
+      {
+        "name": "new-physical-indexed_shared_vertex",
+        "status": "PASS"
+      },
+      {
+        "name": "new-physical-indexed_shared_edge",
+        "status": "PASS"
+      },
+      {
+        "name": "new-physical-coplanar_adjacent_triangles",
+        "status": "PASS"
+      },
+      {
+        "name": "new-physical-true_interior_crossing",
+        "status": "PASS"
+      },
+      {
+        "name": "new-physical-coplanar_interior_overlap",
+        "status": "PASS"
+      },
+      {
+        "name": "new-physical-duplicate_geometric_triangle_distinct_keys",
+        "status": "PASS"
+      },
+      {
+        "name": "new-physical-retained_nearly_parallel_crossing",
+        "status": "PASS"
+      },
+      {
+        "name": "new-Plate-closed-cutout",
+        "status": "PASS"
+      },
+      {
+        "error": "Plate control failed strict geometry predicates",
+        "name": "new-Plate-touching-edge",
+        "status": "FAIL"
+      },
+      {
+        "error": "Plate control failed strict geometry predicates",
+        "name": "new-Plate-crossing-notch",
+        "status": "FAIL"
+      },
+      {
+        "error": "Plate control failed strict geometry predicates",
+        "name": "new-Plate-slanted-paired-no-volume-oracle",
+        "status": "FAIL"
+      },
+      {
+        "error": "Plate control failed strict geometry predicates",
+        "name": "new-Plate-concave-crossing",
+        "status": "FAIL"
+      },
+      {
+        "error": "Slanted edge geometry failed",
+        "name": "new-Plate-slanted-edge-198",
+        "status": "FAIL"
+      },
+      {
+        "name": "new-add-before-full-cut-216-versus-228",
+        "status": "PASS"
+      },
+      {
+        "name": "new-tilted-stock-blind-cut-246",
+        "status": "PASS"
+      }
+    ],
+    "historicalDatasetsReplayed": false
+  },
+  "failedPredicateGroups": [
+    {
+      "predicate": "brepTessellation",
+      "error": "BRep tessellation invalid/open/nonmanifold",
+      "count": 84
+    },
+    {
+      "predicate": "meshClosed",
+      "error": "Open mesh",
+      "count": 64
+    },
+    {
+      "predicate": "meshManifold",
+      "error": "Current Manifold rejects mesh",
+      "count": 84
+    },
+    {
+      "predicate": "physicalTriangles",
+      "error": "Stored physical triangulation is empty",
+      "count": 72
+    },
+    {
+      "predicate": "physicalTriangles",
+      "error": "Physical triangle touches another face outside shared topology",
+      "count": 7
+    },
+    {
+      "predicate": "physicalTriangles",
+      "error": "Physical triangle interiors intersect",
+      "count": 3
+    },
+    {
+      "predicate": "brepConstruction",
+      "error": "Solid booleans require closed meshes: Manifold status 2",
+      "count": 28
+    },
+    {
+      "predicate": "meshConstruction",
+      "error": "Solid booleans require closed meshes: Manifold status 2",
+      "count": 28
+    },
+    {
+      "predicate": "brepTessellation",
+      "error": "Physical triangle interiors intersect",
+      "count": 2
+    },
+    {
+      "predicate": "brepTessellation",
+      "error": "Physical triangle touches another face outside shared topology",
+      "count": 5
+    }
+  ],
+  "failureCountsOverlap": true,
+  "members": [
+    {
+      "guid": "36e552e4-9689-47c7-8657-b429fe6b8869",
+      "name": "beds_0_0_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6994269.442439522,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "f73059fe-27fd-4d88-8008-a150088e4d33",
+      "name": "beds_0_1_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6382710.535812866,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "9f104c63-754b-42a9-b15c-adc138531276",
+      "name": "beds_0_2_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 7493164.480325942,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "1fc79312-0a73-42ca-ab29-3134c16f2096",
+      "name": "beds_0_3_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 14075158.816428438,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Physical triangle touches another face outside shared topology"
+      }
+    },
+    {
+      "guid": "9b38886a-61e8-4fac-914e-ff614638a80a",
+      "name": "beds_0_4_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 17318915.380674187,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Physical triangle interiors intersect"
+      }
+    },
+    {
+      "guid": "32430ac5-8859-462b-8b42-27fdd0c507de",
+      "name": "beds_0_5_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 9222097.842774967,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "e54fab48-3e1a-4e81-b789-ef3dcb99dc35",
+      "name": "beds_1_0_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 5716913.5320246555,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "3b393921-929c-4a66-80f1-812d85e6c8a3",
+      "name": "beds_1_1_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 5080423.179808926,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "dfd5259b-a7a0-4aee-b9d9-efbb38a2b69a",
+      "name": "beds_1_2_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 5913509.725436091,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "20ecb982-61bd-49d2-bdd6-deb2a259f5d6",
+      "name": "beds_1_3_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6750815.351708456,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "8fb60e89-a03d-4cd7-921e-2d4789ea338a",
+      "name": "beds_1_4_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 7610596.243360111,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "9d376297-0d99-428d-a5b0-75c96325d867",
+      "name": "beds_1_5_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6891172.213416123,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "3f9c6f85-8024-42fa-8fa6-0b0a086959b2",
+      "name": "beds_2_0_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6994269.242733079,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "b0e7d80d-8d42-4dcd-a63d-61d43d6f6fd2",
+      "name": "beds_2_1_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 334271589.6375968,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "6c748723-8fba-4c70-8c64-af64d251bf28",
+      "name": "beds_2_2_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 7493165.391449536,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "f9daed6f-f0ec-455a-9403-0ec8863d64c2",
+      "name": "beds_2_3_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 8588933.783695685,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "7dc8ab10-89e5-479f-9c93-5f1d23e39a08",
+      "name": "beds_2_4_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 9691660.899188852,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "03dbad5b-f8b4-4206-9be0-c64db3afd1ca",
+      "name": "beds_2_5_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 9222097.868629312,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "70196a0c-733d-42aa-9fe0-3dd11413e113",
+      "name": "tsections_0_0",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2396031.418174499,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "39767f6f-707b-4fbb-98fe-c930972476eb",
+      "name": "tsections_1_0",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 3058331.1089386195,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "eae587f4-0627-4dbd-8c21-71003d09e719",
+      "name": "tsections_2_0",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2888791.899205096,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "a77baba1-20b4-4316-a048-0532ef187297",
+      "name": "tsections_3_0",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2888790.9668238363,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "efdb7202-c84a-4f1c-b635-f2bc1b310bea",
+      "name": "tsections_4_0",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 3058331.108933311,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "6645645c-8187-44a8-a5f4-eb4768c3f87c",
+      "name": "tsections_5_0",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2396034.2306779176,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "f96a792b-8a5b-4dfd-a90e-5c41e677645b",
+      "name": "outer_ribs_0_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "19a79b44-26ba-459e-9ab2-b1b00e66714a",
+      "name": "outer_ribs_1_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "d2e3c66a-d4b2-4e4d-a52f-0c21538422f0",
+      "name": "inner_ribs_0_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "833f971c-4ba8-42e0-9e25-ba6f5844b494",
+      "name": "inner_ribs_1_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "20fc6fcc-2a7a-42de-bf95-60cfbbc0bac2",
+      "name": "wedges_inner_beams_0_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 25084195.738690946,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Physical triangle interiors intersect"
+      }
+    },
+    {
+      "guid": "d7dd5958-a10d-4050-b651-a7d7bfb00c98",
+      "name": "wedges_inner_beams_1_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 25887130.325906605,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "8171dda7-170e-47c9-985d-dba1688363dc",
+      "name": "wedges_inner_beams_2_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 18380824.990424067,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "a969812b-34c3-4d67-b0cb-bb56e5e9f907",
+      "name": "inner_beams_0_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "89471aeb-8bfe-4758-94d5-74aef45a0f0f",
+      "name": "inner_beams_1_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 18027004.846935313,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "Physical triangle interiors intersect"
+      }
+    },
+    {
+      "guid": "35bfa0c8-2139-4c66-8845-3d2038d68610",
+      "name": "inner_beams_2_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "39bb94f6-3886-4c1e-8cea-70bfe02d6674",
+      "name": "beds_0_0_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6994269.442440725,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "9873dd3d-77b3-4de1-8b41-9eae8a4e82b6",
+      "name": "beds_0_1_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6382710.5358834015,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "1cc276c1-9011-49ff-82ba-48605ebe1475",
+      "name": "beds_0_2_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 7493164.480293582,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "bc4d3684-95fb-4660-a7ce-d0f0d7b096f6",
+      "name": "beds_0_3_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 14075158.816446066,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Physical triangle touches another face outside shared topology"
+      }
+    },
+    {
+      "guid": "3db3b7e3-1229-4271-ae22-810436297696",
+      "name": "beds_0_4_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 17318915.380674534,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Physical triangle touches another face outside shared topology"
+      }
+    },
+    {
+      "guid": "993aad82-dabf-4543-ac9c-2bdfcb0965a3",
+      "name": "beds_0_5_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 9222097.34099867,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "87484a6d-6a46-4f53-911b-2f81b609287f",
+      "name": "beds_1_0_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 5716913.532018983,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "71b6d17d-ac08-46c4-884c-36578d9d55d6",
+      "name": "beds_1_1_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 5080423.773216255,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "e505bd90-2d70-4b70-99be-46dfafec8db0",
+      "name": "beds_1_2_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 5913509.745687425,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "8d1019d4-14e9-4b10-b987-e6c40798c3a2",
+      "name": "beds_1_3_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 466536769.6316963,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "eb76a7c0-f93b-42af-9fa5-ce8dc42cdb4d",
+      "name": "beds_1_4_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 7610596.234614211,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "823c6866-c580-4230-826b-96bfe88a273a",
+      "name": "beds_1_5_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6891172.213370922,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "689b673f-752b-46e0-af82-2d98d5bf40c6",
+      "name": "beds_2_0_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6994269.242732066,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "a2395b70-1e65-4a1f-b796-0b5c4ae8e452",
+      "name": "beds_2_1_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 334271589.63751787,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "a16325f6-8212-4255-b418-d7c5b7593bef",
+      "name": "beds_2_2_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 7493165.391408206,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "71712c77-5604-4ce7-bb4f-88582c3cf4c5",
+      "name": "beds_2_3_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 8588933.783687359,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "14ffea04-d151-435f-a909-d45a5b936328",
+      "name": "beds_2_4_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 9691660.899213968,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "d5eb02fe-532b-458e-b19b-f047b652fdba",
+      "name": "beds_2_5_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 9222097.868628306,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "459945bb-025b-4f1f-b242-cb3dbffc1db9",
+      "name": "tsections_0_1",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2396031.4181742608,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "43b404fa-5bb9-47e3-8421-d54269adada9",
+      "name": "tsections_1_1",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 3058331.8617095947,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "d139086f-1621-4105-8502-acfacddb6a33",
+      "name": "tsections_2_1",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2888790.4798174948,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "26e309b1-91cf-46ca-ac1c-0fb399cafae8",
+      "name": "tsections_3_1",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2888791.5005811453,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "0f9d05ff-e6d7-4a68-ba62-f6862f75325c",
+      "name": "tsections_4_1",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 3058331.108938761,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "c6641685-e028-443f-967d-3e29a71cd7c2",
+      "name": "tsections_5_1",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2396034.230670544,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "a0517f33-1d48-4977-8563-e6274d408937",
+      "name": "outer_ribs_0_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "b3da13ce-ffc1-41be-9d82-8c6d94f4cea6",
+      "name": "outer_ribs_1_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "3b743f57-6f06-4b81-8d45-bf38f97b1650",
+      "name": "inner_ribs_0_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "4df01dfe-3b8b-447b-a47a-1a6c318cf839",
+      "name": "inner_ribs_1_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "92b80fd4-5172-45a9-afed-bcef5ba3c8af",
+      "name": "wedges_inner_beams_0_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 25084195.73870028,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Physical triangle interiors intersect"
+      }
+    },
+    {
+      "guid": "f2d91291-02f9-4e4e-bb42-9e832767266b",
+      "name": "wedges_inner_beams_1_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 25887130.325906128,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "2ea2653a-ee79-4514-9124-aa3579f756cf",
+      "name": "wedges_inner_beams_2_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 18380824.990431204,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "9da7fa07-f4c4-45d4-8663-d7309922afd3",
+      "name": "inner_beams_0_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "9ff2726b-a673-4dd6-987b-f341ad9f6d6a",
+      "name": "inner_beams_1_1",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 18027004.84693713,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "dc3762ed-ee21-4b95-a7bd-fab4782c381d",
+      "name": "inner_beams_2_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "c11798ad-39bd-48a2-ab2a-562e61f35df7",
+      "name": "beds_0_0_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6994269.442389573,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "21815ac3-b00e-40e4-a049-3914e131094a",
+      "name": "beds_0_1_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6382710.535845366,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "3d905d1f-6e32-493a-9edf-c66adbaab30d",
+      "name": "beds_0_2_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 7493164.480278132,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "24bf719a-c570-4729-92ec-4fee2706507c",
+      "name": "beds_0_3_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 14075158.816451373,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Physical triangle touches another face outside shared topology"
+      }
+    },
+    {
+      "guid": "f0dd68e8-2cd1-4917-8543-d6095c42a6f6",
+      "name": "beds_0_4_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 17318915.380669963,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Physical triangle touches another face outside shared topology"
+      }
+    },
+    {
+      "guid": "41f454e3-e212-4874-b58c-453ed737f1be",
+      "name": "beds_0_5_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 9222097.842771167,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "2d0a43fc-cce1-47e2-8e19-dbf2ac53d655",
+      "name": "beds_1_0_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 5716913.531976697,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "d6df42e9-dd77-4c3e-8184-fa46183e571f",
+      "name": "beds_1_1_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 5080423.773274652,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "b6ec9b78-b632-433e-a9e8-65fbad6cfc63",
+      "name": "beds_1_2_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 5913509.745760065,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "ee1a2d1e-2475-4d46-8394-f494d6145ab3",
+      "name": "beds_1_3_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 466536769.6316897,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "1eb60a4a-ed79-4146-a589-75710de1e25a",
+      "name": "beds_1_4_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 7610596.234565017,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "9a7c61ae-abef-46fb-92d8-a7f82acdbe59",
+      "name": "beds_1_5_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6891172.213398691,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "886c7755-0817-41c1-9830-8be3970da06b",
+      "name": "beds_2_0_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6994269.242677522,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "94ae8a0f-2547-4aad-939f-df3158868069",
+      "name": "beds_2_1_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 334271589.6376062,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "eae2ec06-07ff-48b0-be7f-54d4650d6928",
+      "name": "beds_2_2_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 7493165.39149338,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "69168648-aea1-44cd-ad2e-bea83082ce54",
+      "name": "beds_2_3_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 8588933.78384894,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "f491796c-ee5c-4cc5-8ea6-e1432d17ebcf",
+      "name": "beds_2_4_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 9691660.899366563,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "f3c6d1e3-9474-45a9-bef8-8c0163c241cc",
+      "name": "beds_2_5_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 9222097.868590955,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "b6c0cd05-c463-4582-a812-c119de259160",
+      "name": "tsections_0_2",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2396031.418176519,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "7d517d76-4a72-405f-97e4-a29ce57edff2",
+      "name": "tsections_1_2",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 3058331.108936891,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "a8fd81f2-5422-4b8e-be5d-162b334e17be",
+      "name": "tsections_2_2",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2888790.479814163,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "70db2d1d-e07f-411e-b390-01ed8f2d3836",
+      "name": "tsections_3_2",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2888791.5005807527,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "0c3cc15a-cebc-4930-92ad-1143275f88c3",
+      "name": "tsections_4_2",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 3058331.1089364686,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "c46ae74d-f5a0-41b0-a188-c41536e41b0a",
+      "name": "tsections_5_2",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2396034.2306771576,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "0c1c3822-3e1a-48be-af16-ca7fbe83a6bb",
+      "name": "outer_ribs_0_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "4e7450dd-d5f0-46ff-9681-605e858f4095",
+      "name": "outer_ribs_1_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "c362ffad-b8f8-474c-a9e7-77badfb4054b",
+      "name": "inner_ribs_0_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "42ee1d02-8b93-4d3a-ac83-bdf4f036ab3d",
+      "name": "inner_ribs_1_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "b2caa52b-f2fe-4265-a629-49d9b8a78a9b",
+      "name": "wedges_inner_beams_0_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 25084195.738691967,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh"
+      }
+    },
+    {
+      "guid": "4776cc69-09d8-428e-8961-b459725f0a1e",
+      "name": "wedges_inner_beams_1_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 25887130.32589589,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "16e955a7-ca04-4a49-8420-b580faaac1a3",
+      "name": "wedges_inner_beams_2_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 18380824.990417473,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "7d65ce1e-bb18-462b-868c-f0af69f481b1",
+      "name": "inner_beams_0_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "702e06de-9d6d-47a5-9546-6eae8bb2c811",
+      "name": "inner_beams_1_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 18027004.846934717,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "Physical triangle interiors intersect"
+      }
+    },
+    {
+      "guid": "818c3b15-9f2c-41bd-ad54-315f052da584",
+      "name": "inner_beams_2_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "9faf10af-c870-4007-9688-623eef5d2baa",
+      "name": "beds_0_0_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6994269.442393735,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "1a3e1135-16e2-4809-8796-6c40cf16ac47",
+      "name": "beds_0_1_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6382710.53583918,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "f892b393-9aa4-459a-9e6a-ee7c4f1bf5f4",
+      "name": "beds_0_2_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 7493164.48024563,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "04a336aa-8e75-4332-b991-0fb15e5a45b7",
+      "name": "beds_0_3_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 14075158.816474305,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Physical triangle touches another face outside shared topology"
+      }
+    },
+    {
+      "guid": "f677bbab-0de8-47c7-8c84-dddf2be1be9c",
+      "name": "beds_0_4_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 17318915.38066669,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Physical triangle touches another face outside shared topology"
+      }
+    },
+    {
+      "guid": "607b664a-5a1c-4c01-8910-e980385f05ce",
+      "name": "beds_0_5_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 9222097.842810174,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "ccff3d1c-5c9e-438a-9289-c7b1438675dc",
+      "name": "beds_1_0_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 5716913.53197262,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "009a0a7a-ccf3-4a4e-a645-5c50f3a075cb",
+      "name": "beds_1_1_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 5080423.773247987,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "6925d0a1-e423-45f2-b11c-59389f69db31",
+      "name": "beds_1_2_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 5913509.745662206,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "c38d27f5-665b-4a75-8aac-24337ae68b54",
+      "name": "beds_1_3_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 466536769.6316805,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "ce225c82-30f7-4363-a23b-0034a94b81bf",
+      "name": "beds_1_4_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 7610596.234627957,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "750a2511-0337-4c1b-ab44-cb6c898530b3",
+      "name": "beds_1_5_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6891172.213367351,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "cdb78ffa-f256-482c-bf2a-0a3dffb1a7d6",
+      "name": "beds_2_0_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 6994269.242678794,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "94a17086-c928-4f91-90e1-3c7b57eda10d",
+      "name": "beds_2_1_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 334271589.6375741,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "3e16718d-4833-4542-bd67-6efcc0451970",
+      "name": "beds_2_2_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 7493165.391316064,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "56e90866-ac79-49b3-83e6-0f8568e9c53f",
+      "name": "beds_2_3_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 8588933.783785664,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "10698716-702b-408c-8fbd-7f371b9e4357",
+      "name": "beds_2_4_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 9691660.899309356,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "125b39fa-00af-44d0-a152-a00ffca71515",
+      "name": "beds_2_5_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 9222097.868605642,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshClosed": "Open mesh",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "5d963594-f27f-41de-bc0f-59135ffc0713",
+      "name": "tsections_0_3",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2396031.4181741313,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "03c49f21-e7f6-42cb-aa54-6a5a5ecdf6aa",
+      "name": "tsections_1_3",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 3058331.1089381874,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "c2c9d202-7bd4-4d95-acdf-498e6a8a1dac",
+      "name": "tsections_2_3",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2888790.479815165,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "77994147-9a1b-49e8-94c5-4cc15a634d89",
+      "name": "tsections_3_3",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2888791.500576347,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "2d7083e0-6fe8-4173-ab40-0a0959845307",
+      "name": "tsections_4_3",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 3058331.108942535,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "d3f74d9c-41c9-48cf-be86-ac0286d05cb0",
+      "name": "tsections_5_3",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 2396034.230666543,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "06a88591-cff5-4259-b9e7-93c1320101c2",
+      "name": "outer_ribs_0_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "04d5fb65-22cf-48c3-bfae-59610ea706cf",
+      "name": "outer_ribs_1_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "4e62a491-d2dd-4168-b638-7bd26deebb37",
+      "name": "inner_ribs_0_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "0b411ad5-e3d1-45c3-92bb-8dfab15c871b",
+      "name": "inner_ribs_1_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "e93bc229-48ea-47b8-bd65-ec2dea5d82bf",
+      "name": "wedges_inner_beams_0_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 25084195.738682818,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh"
+      }
+    },
+    {
+      "guid": "aa6f0834-88e2-43cb-b8ce-7179aea9e5c8",
+      "name": "wedges_inner_beams_1_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 25887130.32581945,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "d30d2d97-e648-45a0-a969-18c75409190c",
+      "name": "wedges_inner_beams_2_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 18380824.990416758,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshValidity",
+        "originalRecords",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "BRep tessellation invalid/open/nonmanifold",
+        "meshManifold": "Current Manifold rejects mesh",
+        "physicalTriangles": "Stored physical triangulation is empty"
+      }
+    },
+    {
+      "guid": "baea8dc3-8fe2-4436-8754-584f71bf360d",
+      "name": "inner_beams_0_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "63ea3dfa-385b-4217-9d48-53ec23201b89",
+      "name": "inner_beams_1_3",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 18027004.84693628,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "c3e2bf29-23f2-411b-94dd-9224dc74df31",
+      "name": "inner_beams_2_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "80171d77-0f6e-44d3-815c-993c4c60365f",
+      "name": "oculus_0",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "5eba1b70-ae90-4282-a993-f3199c391538",
+      "name": "oculus_1",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "c8b9cae0-21b5-4833-accb-0708997f24c0",
+      "name": "oculus_2",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "81855818-bdb9-4370-a0aa-bc78c5367230",
+      "name": "oculus_3",
+      "geometryPredicatesPassed": false,
+      "signedVolume": null,
+      "passedPredicates": [
+        "originalRecords"
+      ],
+      "failedPredicates": {
+        "brepConstruction": "Solid booleans require closed meshes: Manifold status 2",
+        "meshConstruction": "Solid booleans require closed meshes: Manifold status 2"
+      },
+      "otherPredicates": {
+        "brepDependentChecks": {
+          "status": "NOT_RUN"
+        },
+        "meshDependentChecks": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "guid": "5bb75b22-edf7-4c6b-a644-b05b2a9b4921",
+      "name": "oculus_4",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 1312547.511382322,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "Physical triangle touches another face outside shared topology"
+      }
+    },
+    {
+      "guid": "75dcd7d6-f831-413d-9b23-6a44922184f3",
+      "name": "oculus_5",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 1312547.5113816543,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "Physical triangle touches another face outside shared topology"
+      }
+    },
+    {
+      "guid": "2bea4e1b-81fa-472f-9abf-da6f394fa6e1",
+      "name": "oculus_6",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 1312547.5113822366,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "Physical triangle touches another face outside shared topology"
+      }
+    },
+    {
+      "guid": "75e38278-bc35-4d4a-92c5-9c22d7e9128d",
+      "name": "oculus_7",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 1312547.5113815784,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "Physical triangle touches another face outside shared topology"
+      }
+    },
+    {
+      "guid": "3d7b23fb-a6b2-478a-8e53-7ba2833b795e",
+      "name": "oculus_8",
+      "geometryPredicatesPassed": false,
+      "signedVolume": 46820369.61347285,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {
+        "brepTessellation": "Physical triangle touches another face outside shared topology"
+      }
+    },
+    {
+      "guid": "44bddf97-73dd-4e79-b45c-5c944e7ffb6e",
+      "name": "connector_wedge_0",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 11249293.251919925,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "e5766094-e947-4ff9-b2e6-9d3c395d41f7",
+      "name": "connector_wedge_1",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 6878830.812187965,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "ff34fe69-74bc-4e7c-9526-f1db5b90cc96",
+      "name": "connector_wedge_2",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 11249293.251919905,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "22816cd1-df0f-492a-a1b6-83026066365f",
+      "name": "connector_wedge_3",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 11249293.251919925,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "1e34da62-1624-410d-b158-7ff97c68deb7",
+      "name": "connector_wedge_4",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 6878830.812188074,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "5efd15de-7cdd-47fd-8a51-37b006b76ffb",
+      "name": "connector_wedge_5",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 11249293.251919886,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "b86c6d86-ed42-4e91-885e-e8e56e90115d",
+      "name": "connector_wedge_6",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 6878830.812188178,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    },
+    {
+      "guid": "4615ce19-c36d-4386-83f7-77aacdb1f10d",
+      "name": "connector_wedge_7",
+      "geometryPredicatesPassed": true,
+      "signedVolume": 6878830.8121879,
+      "passedPredicates": [
+        "brepConstruction",
+        "brepPlanarSeams",
+        "brepSolid",
+        "brepTessellation",
+        "brepValidity",
+        "finiteCoordinates",
+        "meshClosed",
+        "meshConstruction",
+        "meshManifold",
+        "meshValidity",
+        "originalRecords",
+        "physicalTriangles",
+        "positiveFiniteVolume"
+      ],
+      "failedPredicates": {}
+    }
+  ],
+  "execution": {
+    "exitCode": 70,
+    "elapsedSeconds": 5.980177799938247,
+    "postflight": "PASS",
+    "executionReceiptSha256": "56f8345d99abbb806a53d02f08d3a904cad57262b5bdb66721c8bffc925e0760",
+    "rawResultSha256": "d04d7ca490ae6df0babf6ed4706375b2eef4796592d5aa64cd9ba189564d58b4",
+    "preparedSnapshotSha256": "064213080c946304006d15493038d3b505ed492342d971651f8167355814f5bc",
+    "sourceArtifactsAndExecutableUnchangedDuringRun": true
+  },
+  "resources": {
+    "processors": 8,
+    "memoryCapBytes": 8589934592,
+    "peakCommitBytes": 210964480,
+    "wallClockTimeoutSeconds": 0,
+    "zeroSwapEnforced": false,
+    "descendantsAtCleanup": 0,
+    "rawScopeLabelQualification": "Copied guard raw resource scope string still says image-only; the actual recorded executable/command was private native floor validation, not a browser/image/canonical behavior job. CPU/memory/mutex/cleanup facts are unchanged."
+  },
+  "remaining": [
+    "Repair or classify the failed Plate-domain, closure, triangulation and Boolean paths without weakening the geometric checks.",
+    "Complete successful export, serialized geometry, fresh reload and recomputation before accepting the private generator.",
+    "Production CPP CI and native Boolean fixes remain owned by the separate geometry agent."
+  ],
+  "tutorialStatus": "Published tutorial/image completion is separate and is not reopened or restyled by this diagnostic.",
+  "subsequentRemoteUpdate": {
+    "woodOriginMain": "776dd923e056a9b17f3ce974e9c329592e9cd58d",
+    "scope": "Observed after this run; not pulled or tested in this 47600aff baseline. Do not relabel this report as evidence for that new commit."
+  }
+}
