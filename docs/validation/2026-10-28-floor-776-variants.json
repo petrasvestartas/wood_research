@@ -1,0 +1,734 @@
+{
+  "scope": "Actual frozen2144 current776 baseline and private diagnostic variants; no production promotion or whole-model acceptance",
+  "woodHead": "776dd923e056a9b17f3ce974e9c329592e9cd58d",
+  "kernelSourceFingerprint": "e7cf304f9f604675acc35d0dcb78c1d8275729e7e6b2a29d0d0d1adc42ff9db0",
+  "variants": {
+    "baseline": {
+      "run": "C:\\pc\\3_code\\code_rust\\wood_research\\.codex\\floor-recovery-v67\\build\\runs\\20261028T204949459264Z",
+      "resultSha256": "09f474e5b45ab7fc4684b3c6258d8a21596c51e2a56bdac63923bfd4f94866d8",
+      "executionSha256": "c04b7bc12b3760b7f4651a893cf80dd6bc9d0541aec3dbc9bce30c99c55e1633",
+      "exitCode": 70,
+      "postflight": "PASS",
+      "elapsedSeconds": 6.2683100999565795,
+      "visited": 153,
+      "geometryPass": 34,
+      "geometryFail": 119,
+      "controlsPass": 24,
+      "controlsTotal": 34,
+      "failedControls": [
+        {
+          "error": "Plate control failed strict geometry predicates",
+          "name": "new-Plate-touching-edge",
+          "status": "FAIL"
+        },
+        {
+          "error": "Plate control failed strict geometry predicates",
+          "name": "new-Plate-crossing-notch",
+          "status": "FAIL"
+        },
+        {
+          "error": "Plate control failed strict geometry predicates",
+          "name": "new-Plate-slanted-paired-no-volume-oracle",
+          "status": "FAIL"
+        },
+        {
+          "error": "Plate control failed strict geometry predicates",
+          "name": "new-Plate-concave-crossing",
+          "status": "FAIL"
+        },
+        {
+          "error": "Slanted edge geometry failed",
+          "name": "new-Plate-slanted-edge-198",
+          "status": "FAIL"
+        },
+        {
+          "error": "Exterior negative result invalid",
+          "name": "new-exterior-negative-keeps-200",
+          "status": "FAIL"
+        },
+        {
+          "error": "Enclosing negative did not reach explicit empty-result rejection",
+          "name": "new-enclosing-negative-explicit-empty-rejection",
+          "status": "FAIL"
+        },
+        {
+          "error": "Split result invalid",
+          "name": "new-split-stock-two-components-80-each",
+          "status": "FAIL"
+        },
+        {
+          "analyticTopology": {
+            "blindCaps": [
+              {
+                "surface": 1,
+                "wires": 1,
+                "z": 0.0
+              },
+              {
+                "surface": 2,
+                "wires": 1,
+                "z": 2.0
+              }
+            ],
+            "counts": {
+              "blindCaps": 2,
+              "bottomHostFaces": 1,
+              "curvedSurfaces": 1,
+              "topHostFaces": 1
+            },
+            "curvedSurfaces": [
+              {
+                "rational": true,
+                "surface": 0,
+                "uDegree": 2,
+                "vDegree": 1
+              }
+            ],
+            "endZ": 2.0,
+            "expectedBlindCaps": 0,
+            "expectedBottomOpening": true,
+            "expectedTopOpening": true,
+            "hostFaces": [
+              {
+                "surface": 3,
+                "wires": 1,
+                "z": 0.0
+              },
+              {
+                "surface": 4,
+                "wires": 1,
+                "z": 2.0
+              }
+            ],
+            "scope": "Actual analytic topology; no internal t0/t1 trace or pi/chordal equality claim",
+            "startZ": 0.0
+          },
+          "error": "Endpoint host opening wire classification wrong",
+          "name": "new-drill-exact-through-endpoints",
+          "status": "FAIL"
+        },
+        {
+          "analyticTopology": {
+            "blindCaps": [
+              {
+                "surface": 1,
+                "wires": 1,
+                "z": 0.0
+              },
+              {
+                "surface": 2,
+                "wires": 1,
+                "z": 1.0
+              }
+            ],
+            "counts": {
+              "blindCaps": 2,
+              "bottomHostFaces": 1,
+              "curvedSurfaces": 1,
+              "topHostFaces": 1
+            },
+            "curvedSurfaces": [
+              {
+                "rational": true,
+                "surface": 0,
+                "uDegree": 2,
+                "vDegree": 1
+              }
+            ],
+            "endZ": 1.0,
+            "expectedBlindCaps": 1,
+            "expectedBottomOpening": true,
+            "expectedTopOpening": false,
+            "hostFaces": [
+              {
+                "surface": 3,
+                "wires": 1,
+                "z": 0.0
+              },
+              {
+                "surface": 4,
+                "wires": 1,
+                "z": 2.0
+              }
+            ],
+            "scope": "Actual analytic topology; no internal t0/t1 trace or pi/chordal equality claim",
+            "startZ": 0.0
+          },
+          "error": "Endpoint host opening wire classification wrong",
+          "name": "new-drill-one-boundary-one-blind",
+          "status": "FAIL"
+        }
+      ],
+      "originalRecordsPass": 153,
+      "originalGeneratorExport": {
+        "error": "Solid booleans require closed meshes: Manifold status 2",
+        "status": "FAIL"
+      },
+      "reloadPipeline": {
+        "error": "Export failed; no valid reload prerequisite",
+        "status": "FAIL"
+      },
+      "improvedMembers": [],
+      "regressedMembers": [],
+      "failureGroups": [
+        {
+          "stage": "brepTessellation",
+          "error": "BRep tessellation invalid/open/nonmanifold",
+          "count": 84
+        },
+        {
+          "stage": "meshClosed",
+          "error": "Open mesh",
+          "count": 64
+        },
+        {
+          "stage": "meshManifold",
+          "error": "Current Manifold rejects mesh",
+          "count": 84
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Stored physical triangulation is empty",
+          "count": 72
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Physical triangle touches another face outside shared topology",
+          "count": 7
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Physical triangle interiors intersect",
+          "count": 3
+        },
+        {
+          "stage": "brepConstruction",
+          "error": "Solid booleans require closed meshes: Manifold status 2",
+          "count": 28
+        },
+        {
+          "stage": "meshConstruction",
+          "error": "Solid booleans require closed meshes: Manifold status 2",
+          "count": 28
+        },
+        {
+          "stage": "brepTessellation",
+          "error": "Physical triangle interiors intersect",
+          "count": 2
+        },
+        {
+          "stage": "brepTessellation",
+          "error": "Physical triangle touches another face outside shared topology",
+          "count": 5
+        }
+      ]
+    },
+    "plate": {
+      "run": "C:\\pc\\3_code\\code_rust\\wood_research\\.codex\\floor-recovery-v67\\build\\runs\\20261028T205121450413Z",
+      "resultSha256": "1abb79e1e5567f724a29dbb4c5d4a9c8b5b86b44542fb6d809c9d241147d12fa",
+      "executionSha256": "b1f0462a1f4b9de045648f923ac5c408963355cb5f119f37478ec3024f27ea61",
+      "exitCode": 70,
+      "postflight": "PASS",
+      "elapsedSeconds": 13.16728900000453,
+      "visited": 153,
+      "geometryPass": 36,
+      "geometryFail": 117,
+      "controlsPass": 31,
+      "controlsTotal": 34,
+      "failedControls": [
+        {
+          "error": "Plate control failed strict geometry predicates",
+          "name": "new-Plate-slanted-paired-no-volume-oracle",
+          "status": "FAIL"
+        },
+        {
+          "analyticTopology": {
+            "blindCaps": [
+              {
+                "surface": 1,
+                "wires": 1,
+                "z": 0.0
+              },
+              {
+                "surface": 2,
+                "wires": 1,
+                "z": 2.0
+              }
+            ],
+            "counts": {
+              "blindCaps": 2,
+              "bottomHostFaces": 1,
+              "curvedSurfaces": 1,
+              "topHostFaces": 1
+            },
+            "curvedSurfaces": [
+              {
+                "rational": true,
+                "surface": 0,
+                "uDegree": 2,
+                "vDegree": 1
+              }
+            ],
+            "endZ": 2.0,
+            "expectedBlindCaps": 0,
+            "expectedBottomOpening": true,
+            "expectedTopOpening": true,
+            "hostFaces": [
+              {
+                "surface": 3,
+                "wires": 1,
+                "z": 0.0
+              },
+              {
+                "surface": 4,
+                "wires": 1,
+                "z": 2.0
+              }
+            ],
+            "scope": "Actual analytic topology; no internal t0/t1 trace or pi/chordal equality claim",
+            "startZ": 0.0
+          },
+          "error": "Endpoint host opening wire classification wrong",
+          "name": "new-drill-exact-through-endpoints",
+          "status": "FAIL"
+        },
+        {
+          "analyticTopology": {
+            "blindCaps": [
+              {
+                "surface": 1,
+                "wires": 1,
+                "z": 0.0
+              },
+              {
+                "surface": 2,
+                "wires": 1,
+                "z": 1.0
+              }
+            ],
+            "counts": {
+              "blindCaps": 2,
+              "bottomHostFaces": 1,
+              "curvedSurfaces": 1,
+              "topHostFaces": 1
+            },
+            "curvedSurfaces": [
+              {
+                "rational": true,
+                "surface": 0,
+                "uDegree": 2,
+                "vDegree": 1
+              }
+            ],
+            "endZ": 1.0,
+            "expectedBlindCaps": 1,
+            "expectedBottomOpening": true,
+            "expectedTopOpening": false,
+            "hostFaces": [
+              {
+                "surface": 3,
+                "wires": 1,
+                "z": 0.0
+              },
+              {
+                "surface": 4,
+                "wires": 1,
+                "z": 2.0
+              }
+            ],
+            "scope": "Actual analytic topology; no internal t0/t1 trace or pi/chordal equality claim",
+            "startZ": 0.0
+          },
+          "error": "Endpoint host opening wire classification wrong",
+          "name": "new-drill-one-boundary-one-blind",
+          "status": "FAIL"
+        }
+      ],
+      "originalRecordsPass": 153,
+      "originalGeneratorExport": {
+        "error": "Plate trim has an invalid designated outer solid",
+        "status": "FAIL"
+      },
+      "reloadPipeline": {
+        "error": "Export failed; no valid reload prerequisite",
+        "status": "FAIL"
+      },
+      "improvedMembers": [
+        {
+          "guid": "71712c77-5604-4ce7-bb4f-88582c3cf4c5",
+          "name": "beds_2_3_1"
+        },
+        {
+          "guid": "04d5fb65-22cf-48c3-bfae-59610ea706cf",
+          "name": "outer_ribs_1_3"
+        }
+      ],
+      "regressedMembers": [],
+      "failureGroups": [
+        {
+          "stage": "brepPlanarSeams",
+          "error": "Artificial coplanar internal BRep triangle edge",
+          "count": 68
+        },
+        {
+          "stage": "brepTessellation",
+          "error": "Physical triangles cross away from shared topology",
+          "count": 15
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Physical triangles cross away from shared topology",
+          "count": 24
+        },
+        {
+          "stage": "brepTessellation",
+          "error": "Physical triangle interiors intersect",
+          "count": 23
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Physical triangle interiors intersect",
+          "count": 27
+        },
+        {
+          "stage": "brepTessellation",
+          "error": "Physical coplanar triangles overlap",
+          "count": 17
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Physical coplanar triangles overlap",
+          "count": 20
+        },
+        {
+          "stage": "brepTessellation",
+          "error": "BRep tessellation invalid/open/nonmanifold",
+          "count": 22
+        },
+        {
+          "stage": "brepSolid",
+          "error": "Non-solid BRep",
+          "count": 9
+        },
+        {
+          "stage": "brepTessellation",
+          "error": "Duplicate physical triangle",
+          "count": 15
+        },
+        {
+          "stage": "meshManifold",
+          "error": "Current Manifold rejects mesh",
+          "count": 12
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Stored physical triangulation is empty",
+          "count": 8
+        },
+        {
+          "stage": "brepConstruction",
+          "error": "Plate trim has an invalid designated outer solid",
+          "count": 8
+        },
+        {
+          "stage": "meshConstruction",
+          "error": "Plate trim has an invalid designated outer solid",
+          "count": 8
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Physical coplanar edges overlap outside shared topology",
+          "count": 1
+        },
+        {
+          "stage": "brepTessellation",
+          "error": "Physical triangle touches another face outside shared topology",
+          "count": 8
+        }
+      ]
+    },
+    "drill": {
+      "run": "C:\\pc\\3_code\\code_rust\\wood_research\\.codex\\floor-recovery-v67\\build\\runs\\20261028T205227217890Z",
+      "resultSha256": "41f453296bb32d3294d08b7a571584942cdb3d47db4787b79387c7b494cdcbe4",
+      "executionSha256": "14d5e0ae86c726ae3cc43c111baf66390c82fdedec3088a59d4ab06af6109be4",
+      "exitCode": 70,
+      "postflight": "PASS",
+      "elapsedSeconds": 6.0039841999532655,
+      "visited": 153,
+      "geometryPass": 39,
+      "geometryFail": 114,
+      "controlsPass": 26,
+      "controlsTotal": 34,
+      "failedControls": [
+        {
+          "error": "Plate control failed strict geometry predicates",
+          "name": "new-Plate-touching-edge",
+          "status": "FAIL"
+        },
+        {
+          "error": "Plate control failed strict geometry predicates",
+          "name": "new-Plate-crossing-notch",
+          "status": "FAIL"
+        },
+        {
+          "error": "Plate control failed strict geometry predicates",
+          "name": "new-Plate-slanted-paired-no-volume-oracle",
+          "status": "FAIL"
+        },
+        {
+          "error": "Plate control failed strict geometry predicates",
+          "name": "new-Plate-concave-crossing",
+          "status": "FAIL"
+        },
+        {
+          "error": "Slanted edge geometry failed",
+          "name": "new-Plate-slanted-edge-198",
+          "status": "FAIL"
+        },
+        {
+          "error": "Exterior negative result invalid",
+          "name": "new-exterior-negative-keeps-200",
+          "status": "FAIL"
+        },
+        {
+          "error": "Enclosing negative did not reach explicit empty-result rejection",
+          "name": "new-enclosing-negative-explicit-empty-rejection",
+          "status": "FAIL"
+        },
+        {
+          "error": "Split result invalid",
+          "name": "new-split-stock-two-components-80-each",
+          "status": "FAIL"
+        }
+      ],
+      "originalRecordsPass": 153,
+      "originalGeneratorExport": {
+        "error": "Solid booleans require closed meshes: Manifold status 2",
+        "status": "FAIL"
+      },
+      "reloadPipeline": {
+        "error": "Export failed; no valid reload prerequisite",
+        "status": "FAIL"
+      },
+      "improvedMembers": [
+        {
+          "guid": "5bb75b22-edf7-4c6b-a644-b05b2a9b4921",
+          "name": "oculus_4"
+        },
+        {
+          "guid": "75dcd7d6-f831-413d-9b23-6a44922184f3",
+          "name": "oculus_5"
+        },
+        {
+          "guid": "2bea4e1b-81fa-472f-9abf-da6f394fa6e1",
+          "name": "oculus_6"
+        },
+        {
+          "guid": "75e38278-bc35-4d4a-92c5-9c22d7e9128d",
+          "name": "oculus_7"
+        },
+        {
+          "guid": "3d7b23fb-a6b2-478a-8e53-7ba2833b795e",
+          "name": "oculus_8"
+        }
+      ],
+      "regressedMembers": [],
+      "failureGroups": [
+        {
+          "stage": "brepTessellation",
+          "error": "BRep tessellation invalid/open/nonmanifold",
+          "count": 84
+        },
+        {
+          "stage": "meshClosed",
+          "error": "Open mesh",
+          "count": 64
+        },
+        {
+          "stage": "meshManifold",
+          "error": "Current Manifold rejects mesh",
+          "count": 84
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Stored physical triangulation is empty",
+          "count": 72
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Physical triangle touches another face outside shared topology",
+          "count": 7
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Physical triangle interiors intersect",
+          "count": 3
+        },
+        {
+          "stage": "brepConstruction",
+          "error": "Solid booleans require closed meshes: Manifold status 2",
+          "count": 28
+        },
+        {
+          "stage": "meshConstruction",
+          "error": "Solid booleans require closed meshes: Manifold status 2",
+          "count": 28
+        },
+        {
+          "stage": "brepTessellation",
+          "error": "Physical triangle interiors intersect",
+          "count": 2
+        }
+      ]
+    },
+    "combined": {
+      "run": "C:\\pc\\3_code\\code_rust\\wood_research\\.codex\\floor-recovery-v67\\build\\runs\\20261028T205329024976Z",
+      "resultSha256": "cfca151383b295848adddb3e1816771b57c234e980419ae904fcfdddc213bbb2",
+      "executionSha256": "14f3f4b5afc66f6bc59517bfbb22f7c1d0ca2cf4c6485ba6bc59411b3f4eb1ff",
+      "exitCode": 70,
+      "postflight": "PASS",
+      "elapsedSeconds": 12.884376599919051,
+      "visited": 153,
+      "geometryPass": 41,
+      "geometryFail": 112,
+      "controlsPass": 33,
+      "controlsTotal": 34,
+      "failedControls": [
+        {
+          "error": "Plate control failed strict geometry predicates",
+          "name": "new-Plate-slanted-paired-no-volume-oracle",
+          "status": "FAIL"
+        }
+      ],
+      "originalRecordsPass": 153,
+      "originalGeneratorExport": {
+        "error": "Plate trim has an invalid designated outer solid",
+        "status": "FAIL"
+      },
+      "reloadPipeline": {
+        "error": "Export failed; no valid reload prerequisite",
+        "status": "FAIL"
+      },
+      "improvedMembers": [
+        {
+          "guid": "71712c77-5604-4ce7-bb4f-88582c3cf4c5",
+          "name": "beds_2_3_1"
+        },
+        {
+          "guid": "04d5fb65-22cf-48c3-bfae-59610ea706cf",
+          "name": "outer_ribs_1_3"
+        },
+        {
+          "guid": "5bb75b22-edf7-4c6b-a644-b05b2a9b4921",
+          "name": "oculus_4"
+        },
+        {
+          "guid": "75dcd7d6-f831-413d-9b23-6a44922184f3",
+          "name": "oculus_5"
+        },
+        {
+          "guid": "2bea4e1b-81fa-472f-9abf-da6f394fa6e1",
+          "name": "oculus_6"
+        },
+        {
+          "guid": "75e38278-bc35-4d4a-92c5-9c22d7e9128d",
+          "name": "oculus_7"
+        },
+        {
+          "guid": "3d7b23fb-a6b2-478a-8e53-7ba2833b795e",
+          "name": "oculus_8"
+        }
+      ],
+      "regressedMembers": [],
+      "failureGroups": [
+        {
+          "stage": "brepPlanarSeams",
+          "error": "Artificial coplanar internal BRep triangle edge",
+          "count": 68
+        },
+        {
+          "stage": "brepTessellation",
+          "error": "Physical triangles cross away from shared topology",
+          "count": 15
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Physical triangles cross away from shared topology",
+          "count": 24
+        },
+        {
+          "stage": "brepTessellation",
+          "error": "Physical triangle interiors intersect",
+          "count": 23
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Physical triangle interiors intersect",
+          "count": 27
+        },
+        {
+          "stage": "brepTessellation",
+          "error": "Physical coplanar triangles overlap",
+          "count": 17
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Physical coplanar triangles overlap",
+          "count": 20
+        },
+        {
+          "stage": "brepTessellation",
+          "error": "BRep tessellation invalid/open/nonmanifold",
+          "count": 22
+        },
+        {
+          "stage": "brepSolid",
+          "error": "Non-solid BRep",
+          "count": 9
+        },
+        {
+          "stage": "brepTessellation",
+          "error": "Duplicate physical triangle",
+          "count": 15
+        },
+        {
+          "stage": "meshManifold",
+          "error": "Current Manifold rejects mesh",
+          "count": 12
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Stored physical triangulation is empty",
+          "count": 8
+        },
+        {
+          "stage": "brepConstruction",
+          "error": "Plate trim has an invalid designated outer solid",
+          "count": 8
+        },
+        {
+          "stage": "meshConstruction",
+          "error": "Plate trim has an invalid designated outer solid",
+          "count": 8
+        },
+        {
+          "stage": "physicalTriangles",
+          "error": "Physical coplanar edges overlap outside shared topology",
+          "count": 1
+        },
+        {
+          "stage": "brepTessellation",
+          "error": "Physical triangle touches another face outside shared topology",
+          "count": 3
+        }
+      ]
+    }
+  },
+  "sourceClosure": {
+    "path": "source-closure-2144-v2.json",
+    "sha256": "5ec3d68fdafd52b74918117975538e655f3bd4a1fca8ee40af4266415edc6a51"
+  },
+  "heavyLease": "RELEASED; all four guarded runs terminal; no further job authorized",
+  "historicalComparison": "The old87 failure count belongs to a different private candidate; these actual current-source variants do not reconstruct deleted historical control datasets.",
+  "promotion": "Neither private repair was promoted. Full generator export/reload acceptance remains blocked."
+}
