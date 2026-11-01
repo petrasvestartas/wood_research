@@ -21,3 +21,7 @@ CLAUDE.local.md
 /.codex/geometry-coordination-*.md
 /.codex/storage-coordination-*.md
 /docs/coordination/storage-and-floor-2026-10-28.md
+/.codex/viewer-quality-20261028/
+/.codex/viewer-display-independent-review.json
+/.codex/viewer-display-quality-review.json
+/.codex/occt-visualization-reference.json
