@@ -17,6 +17,8 @@ Each submodule has its own `CLAUDE.md`; this file holds only what spans them.
   right after `mkdir`; `rmdir` yours when the build ends, also on kill (trap TERM/INT/HUP). A waiter
   may remove a lock only when the pid in its `owner` is gone, and says so. A lock without `owner`
   held for an hour on 2026-11-05 stalled every agent.
+  Waiting is FIFO: `touch wood/build/.buildqueue/<unix_seconds>_<agent>` first, take a free slot
+  only when that ticket is the oldest file there, delete it on taking the slot.
 - One heavy command at a time: never start a second build, solver or dataset sweep while
   one is running. Run long jobs with a wall-clock timeout and a memory cap
   (`timeout 10m systemd-run --user --scope -p MemoryMax=6G <cmd>`); anything not finished
