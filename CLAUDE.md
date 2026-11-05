@@ -12,6 +12,11 @@ Each submodule has its own `CLAUDE.md`; this file holds only what spans them.
   `nproc`: always run them as `MINITEST_JOBS=6` (C++) or `MINITEST_JOBS=8` (Rust).
 - cmake: `~/.local/bin/cmake` (uv tool) where installed, else `/usr/bin/cmake`; never the snap
   (`/snap/bin/cmake`): it leaves the `systemd-run --scope`, so its MemoryMax cap does nothing.
+- Build slots: `wood/build/.buildlock` and `.buildlock2` (`mkdir` takes one, at most two builds
+  on the machine, kernel builds included). Write `<agent> <pid> <HH:MM> <what>` into `<lock>/owner`
+  right after `mkdir`; `rmdir` yours when the build ends, also on kill (trap TERM/INT/HUP). A waiter
+  may remove a lock only when the pid in its `owner` is gone, and says so. A lock without `owner`
+  held for an hour on 2026-11-05 stalled every agent.
 - One heavy command at a time: never start a second build, solver or dataset sweep while
   one is running. Run long jobs with a wall-clock timeout and a memory cap
   (`timeout 10m systemd-run --user --scope -p MemoryMax=6G <cmd>`); anything not finished
