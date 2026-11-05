@@ -14,7 +14,7 @@ Each submodule has its own `CLAUDE.md`; this file holds only what spans them.
   (`/snap/bin/cmake`): it leaves the `systemd-run --scope`, so its MemoryMax cap does nothing.
 - Build slots: `wood/build/.buildlock` and `.buildlock2` (`mkdir` takes one, at most two builds
   on the machine, kernel builds included). Write `<agent> <pid> <HH:MM> <what>` into `<lock>/owner`
-  right after `mkdir`; `rmdir` yours when the build ends, also on kill (trap TERM/INT/HUP). A waiter
+  right after `mkdir` (pid = the Windows pid: `cat /proc/$$/winpid` in Git bash, `$PID` in PowerShell); `rmdir` yours when the build ends, also on kill (trap TERM/INT/HUP). A waiter
   may remove a lock only when the pid in its `owner` is gone, and says so. A lock without `owner`
   held for an hour on 2026-11-05 stalled every agent.
   Waiting is FIFO: `touch wood/build/.buildqueue/<unix_seconds>_<agent>` first, take a free slot
