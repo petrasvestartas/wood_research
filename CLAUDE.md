@@ -12,13 +12,13 @@ Each submodule has its own `CLAUDE.md`; this file holds only what spans them.
   `nproc`: always run them as `MINITEST_JOBS=6` (C++) or `MINITEST_JOBS=8` (Rust).
 - cmake: `~/.local/bin/cmake` (uv tool) where installed, else `/usr/bin/cmake`; never the snap
   (`/snap/bin/cmake`): it leaves the `systemd-run --scope`, so its MemoryMax cap does nothing.
-- Build slots: `wood/build/.buildlock` and `.buildlock2` (`mkdir` takes one, at most two builds
-  on the machine, kernel builds included). Write `<agent> <pid> <HH:MM> <what>` into `<lock>/owner`
-  right after `mkdir` (pid = the Windows pid: `cat /proc/$$/winpid` in Git bash, `$PID` in PowerShell); `rmdir` yours when the build ends, also on kill (trap TERM/INT/HUP). A waiter
-  may remove a lock only when the pid in its `owner` is gone, and says so. A lock without `owner`
-  held for an hour on 2026-11-05 stalled every agent.
-  Waiting is FIFO: `touch wood/build/.buildqueue/<unix_seconds>_<agent>` first, take a free slot
-  only when that ticket is the oldest file there, delete it on taking the slot.
+- Build slots: every heavy command (build, test sweep, dataset run, kernel or WSL build) runs
+  through `bash wood/tools/buildslot.sh <agent> <command...>`: it queues FIFO in
+  `wood/build/.buildqueue/`, takes `.buildlock` or `.buildlock2` (at most two on the machine),
+  writes `<agent> <windows pid> <HH:MM> <command>` into `<lock>/owner`, and releases on exit and
+  on TERM/INT/HUP. Never `mkdir` the locks by hand and never remove another's lock; a lock whose
+  owner pid is gone is reported to the lead, who decides. (2026-11-05: hand-made locks without
+  owners stalled every agent for hours.)
 - One heavy command at a time: never start a second build, solver or dataset sweep while
   one is running. Run long jobs with a wall-clock timeout and a memory cap
   (`timeout 10m systemd-run --user --scope -p MemoryMax=6G <cmd>`); anything not finished
