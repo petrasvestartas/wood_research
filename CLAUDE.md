@@ -13,8 +13,9 @@ Each submodule has its own `CLAUDE.md`; this file holds only what spans them.
 - cmake: `~/.local/bin/cmake` (uv tool) where installed, else `/usr/bin/cmake`; never the snap
   (`/snap/bin/cmake`): it leaves the `systemd-run --scope`, so its MemoryMax cap does nothing.
 - Build slots: every heavy command (build, test sweep, dataset run, kernel or WSL build) runs
-  through `bash wood/tools/buildslot.sh <agent> <command...>`: it queues FIFO in
-  `wood/build/.buildqueue/`, takes `.buildlock` or `.buildlock2` (at most two on the machine),
+  through `bash wood/tools/buildslot.sh [--run] <agent> <command...>`: builds queue FIFO in
+  `wood/build/.buildqueue/` for `.buildlock` or `.buildlock2` (at most two compiles on the
+  machine); `--run` commands (tests, sweeps: no compiler, about 1 GB) may also take `.buildlock3`,
   writes `<agent> <windows pid> <HH:MM> <command>` into `<lock>/owner`, and releases on exit and
   on TERM/INT/HUP. Never `mkdir` the locks by hand and never remove another's lock; a lock whose
   owner pid is gone is reported to the lead, who decides. (2026-11-05: hand-made locks without
