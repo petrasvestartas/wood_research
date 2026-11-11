@@ -8,13 +8,13 @@ wood_research/
 ├── session/       kernel monorepo; only session_cpp is checked out    (main)
 ├── wood/          C++ core: contact detection + joint solver           (dev)
 ├── wood_nano/     nanobind bindings over wood                          (dev)
-├── compas_wood/   COMPAS wrapper over wood_nano                        (dev)
 ├── compas_tf/     topology-finding, BRG-research          (assembly-steps)
+├── archive/       old repositories, not part of the stack: compas_wood
 ├── bash/          publish-scene.sh
 └── .claude/       hooks/pull_mono.sh, hooks/push_mono.sh, settings.json
 ```
 
-`compas_wood` → `wood_nano` → `wood` → `session_cpp`.
+`wood_nano` → `wood` → `session_cpp`.
 
 The kernel is not a submodule of its own. It arrives inside `session`, where it is authored,
 so this repo can never hold a second copy that drifts; `wood/CMakeLists.txt` and
@@ -53,7 +53,7 @@ Plain `clone`, not `--recurse-submodules`: recursing drags in `session_rust`, `s
 
 ```bash
 pullmono                  # in Claude Code: wood_research, then every submodule, to each branch tip
-pushmono contact areas    # in Claude Code: commit + push session_cpp/py/rust → session → wood → wood_nano → compas_wood, then this repo
+pushmono contact areas    # in Claude Code: commit + push session_cpp/py/rust → session → wood → wood_nano, then this repo
 ```
 
 Both are `UserPromptSubmit` hooks (`.claude/settings.json`) over `.claude/hooks/pull_mono.sh`
@@ -83,7 +83,7 @@ IntelliSense at `wood/build/compile_commands.json`. Configure once first.
 - **`wood`** — `WoodElement`, `BlockElement`, `WoodJoint` over `session_cpp::Element`; contact
   detection in `src/joinery_solver/wood_face_to_face.h`, example `examples/2_contact_detection.cpp`
 - **`wood_nano`** — nanobind bindings, CPython 3.13 via `uv`
-- **`compas_wood`** — pure-Python COMPAS wrapper
+- **`archive/compas_wood`** — pure-Python COMPAS wrapper, archived
 
 ## Seeing the geometry
 

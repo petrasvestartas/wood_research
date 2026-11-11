@@ -9,7 +9,7 @@
 # prompt passes through untouched and the output goes to Claude as context.
 #
 # Discover and initialize all submodules, pushing children before their parents.
-# Keep the package order session -> wood -> wood_nano -> compas_wood so CI can
+# Keep the package order session -> wood -> wood_nano so CI can
 # resolve dependency commits. Every other configured repository is included too.
 set -euo pipefail
 
@@ -50,7 +50,7 @@ collect_repos() {
     local paths=()
     [ -f "$parent/.gitmodules" ] || return 0
     if [ "$parent" = "." ]; then
-        paths=(session wood wood_nano compas_wood)
+        paths=(session wood wood_nano)
     fi
     while IFS= read -r -d '' entry; do
         key=${entry%%$'\n'*}

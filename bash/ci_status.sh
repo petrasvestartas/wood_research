@@ -9,7 +9,7 @@
 set -uo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-REPOS=(session/session_cpp/session_proto session/session_cpp session/session_py session/session_rust session wood wood_nano compas_wood .)
+REPOS=(session/session_cpp/session_proto session/session_cpp session/session_py session/session_rust session wood wood_nano .)
 TOKEN=$(printf "protocol=https\nhost=github.com\n\n" | git credential fill 2>/dev/null | sed -n 's/^password=//p')
 AUTH=()
 [ -n "$TOKEN" ] && AUTH=(-H "Authorization: Bearer $TOKEN")

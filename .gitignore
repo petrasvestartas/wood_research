@@ -25,3 +25,5 @@ CLAUDE.local.md
 /.codex/viewer-display-independent-review.json
 /.codex/viewer-display-quality-review.json
 /.codex/occt-visualization-reference.json
+
+.DS_Store

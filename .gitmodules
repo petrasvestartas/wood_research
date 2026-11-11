@@ -7,7 +7,7 @@
 	url = https://github.com/petrasvestartas/wood_nano.git
 	branch = dev
 [submodule "compas_wood"]
-	path = compas_wood
+	path = archive/compas_wood
 	url = https://github.com/petrasvestartas/compas_wood.git
 	branch = dev
 [submodule "compas_tf"]

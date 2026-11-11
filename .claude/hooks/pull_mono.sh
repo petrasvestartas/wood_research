@@ -131,7 +131,7 @@ fi
 git submodule sync -q
 
 # Same dependency order as push_mono.sh. Any remaining top-level submodules follow after it.
-ORDER=(session wood wood_nano compas_wood)
+ORDER=(session wood wood_nano)
 rest=()
 while read -r _ path; do
     case " ${ORDER[*]} " in
