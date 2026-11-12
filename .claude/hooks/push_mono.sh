@@ -16,6 +16,22 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$ROOT"
 
+# Publish explicitly prepared branches without touching shared indexes or history.
+if [ "${1:-}" = "--prepared" ]; then
+    shift
+    [ "$#" -gt 0 ] || { echo 'usage: push_mono.sh --prepared repo...' >&2; exit 2; }
+    for repo in "$@"; do
+        git -C "$repo" rev-parse --verify HEAD >/dev/null
+        git -C "$repo" symbolic-ref --quiet HEAD >/dev/null || exit 1
+        git -C "$repo" diff --cached --quiet || { echo "staged changes in $repo" >&2; exit 1; }
+    done
+    for repo in "$@"; do
+        branch=$(git -C "$repo" symbolic-ref --short HEAD)
+        git -C "$repo" push --set-upstream origin "$branch"
+    done
+    exit 0
+fi
+
 ORDER=()
 
 MESSAGE=""
