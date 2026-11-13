@@ -91,6 +91,63 @@ same-parameter certificate still at the model tolerance; `volume_exact` finishes
 cases without touching its budget; the exact volumes in existing tests still hold to 1e-6;
 the fuzz sweep of three seeds in both modes stays at 147 of 147.
 
+Done, `4ca55030`. Full table in `docs/validation/2026-11-13-boolean-bench-wp2.txt`.
+
+What changed (`intersection.cpp`, `nurbs_hermite.h`):
+
+- `nurbs_hermite::quintic`: a join whose two one-sided jets are equal takes a knot of
+  multiplicity 3 (C2): three control points per smooth span, five before.
+- `even_nodes`, shared by the plane and marched routes: the nodes of the fit are chosen among
+  the walked samples from the measured gap of each span (sixth root of gap over gap allowed),
+  moved to equal shares for three passes, then cut. OCCT does the same from the discrete
+  curvature (`ApproxInt_KnotTools::BuildKnots`).
+- Plane tracer (`quintic_plane_piece`): world curve and pcurve as quintic pieces from the
+  exact jets of the section, broken only where the pcurve crosses a knot of the surface; the
+  plane's own pcurve stays the affine image of the world curve, as in
+  `IntTools_FaceFace::MakeCurve`. All 16 budget overruns came from this route.
+- Marched and pullback routes: start from the ends and breaks, refine only the spans that
+  are off. The old spline routes remain as the fallback near tangencies.
+
+| Case | boolean s | pcurve control points | largest pcurve | over budget |
+| --- | --- | --- | --- | --- |
+| 6 5 3 0 drilled block, torus | 240 > 23 | 92454 > 13230 | 1173 > 168 | 5 > 0 |
+| 6 5 3 1 drilled block, torus | 216 > 19 | 86406 > 11910 | 1139 > 159 | 5 > 0 |
+| 5 0 1 0 torus, box | 133 > 12 | 50328 > 8244 | 596 > 125 | 5 > 0 |
+| 5 4 1 0 torus, pyramid | 93 > 9.8 | 84486 > 8718 | 2749 > 201 | 0 > 0 |
+| 5 0 1 1 torus, box | 99 > 11 | 39258 > 7146 | 765 > 139 | 1 > 0 |
+| 5 6 2 1 torus, drilled block | 87 > 19 | 39788 > 8838 | 500 > 81 | 0 > 0 |
+| 6 2 2 0 drilled block, sphere | 43 > 39 | 25314 > 11358 | 676 > 294 | 0 > 0 |
+| 5 3 2 0 torus, cone | 37 > 24 | 17753 > 6243 | 496 > 114 | 0 > 0 |
+| 5 2 1 0 torus, sphere | 23 > 22 | 11300 > 4602 | 156 > 96 | 0 > 0 |
+| 1 2 1 0 cylinder, sphere | 12 > 11 | 7926 > 3534 | 166 > 48 | 0 > 0 |
+| 4 2 1 0 pyramid, sphere | 5.8 > 2.6 | 10920 > 2256 | 661 > 122 | 0 > 0 |
+| 3 4 1 0 cone, pyramid | 1.8 > 1.3 | 2853 > 1053 | 166 > 36 | 0 > 0 |
+| total, 15 cases | 993 > 195 | 470466 > 88812 (5.3x) | 2749 > 294 | 16 > 0 of 75 |
+
+Gate as measured on Linux: intersection 119/119 (three new tests, red on the old kernel),
+surface section 23/23, section 25/25, measure 17/17, split 38/38, classify 19/19, boolean
+70/70 in 1068 s, BRep 73/73; fuzz 147/147 in both modes; faces, edges and vertices identical
+to the baseline in all 75 rows; the 59 volumes the baseline computed unchanged (largest
+difference 2.8e-10 at 13 digits on 30 of them); the 16 former overruns now computed and
+consistent with the volume identities.
+
+Bounds changed, for the owner to know:
+
+- Pullback route: the measured gap accepted was `tight` (1e-11 below reach 714); it is now
+  `fit_gap = min(tol, max(0.02 tol / max(1, reach), 64 eps reach))`: 2e-9 at unit size, the
+  share the marched route already used, equal to the old bound from reach 200 up. It
+  depends on the unit through `max(1, reach)`.
+- Plane tracer: was split while off by more than 0.5 tol (5e-8 measured); now `traced_gap`,
+  2e-9 at unit size, tighter than before at every size.
+- Marched route above reach 2200: 9.1e-13 x reach instead of 2e-9, looser there; no test or
+  bench case is that large.
+- The same-parameter certificate at the model tolerance, the volume budget and every test
+  tolerance are unchanged.
+
+Not reached: the 5x holds for the list total, not for every case (2.2x to 2.8x where marched
+pieces or sphere pullbacks dominate). At millimetre sizes the gain is 1.2x to 3.3x. No
+reached tolerance is recorded on edges yet (WP4b).
+
 ### WP3 - Work done more than once (code)
 
 Findings: every face split re-certifies every pcurve of the whole BRep (`split.cpp` validate);
