@@ -323,3 +323,42 @@ ours to four to six digits, so the cases are the same.
 
 Before WP2 the total was 993 s, 147 times OCCT. OCCT's exclusive-or is timed as two cuts and a
 fuse. The timing ran while a kernel build was running, so it is good to a few tenths.
+
+## Speed packages after WP3 (2026-11-13)
+
+Box against box has no curved geometry and still takes 0.1 s per boolean against OCCT's
+0.014 s. Its callgrind profile: 56 % in `curve_intersection::intersect` on straight segments
+(`endpoint_matches` -> `closest_parameter` -> `Closest::curve_point` -> `point_at`), 17 % in
+`brep_classify::ray` -> `surface_ray::intersect` against planes, 16 % in
+`brep_assemble nest_shells` / `outward` (rays again), about 15 % building and destroying
+`Point`, `Vector`, `Color` and their strings.
+
+Measured: `sizeof(Point)` 184, `sizeof(Vector)` 104, a plain three-double struct 24; one
+`Point - Point` 31.7 ns, the same on the plain struct 1.28 ns.
+
+### WP7 - A plain coordinate triple (owner's request)
+
+- `Xyz`: three doubles, 24 bytes, trivially copyable, no name, guid or colour, every operation
+  inline. `Xyzf` (three floats) and `Ijk` (three 32-bit integers) for buffers only. A
+  `std::vector<Xyz>` is 3N doubles in a row: a display buffer, a numpy `(N, 3)` array, a Rust
+  `&[[f64; 3]]` or a packed protobuf field without a loop.
+- One type for points and directions inside the kernel, as OCCT's `gp_XYZ`; `Point` and
+  `Vector` stay the public, named objects and hold an `Xyz`. Their API and the file formats
+  do not change.
+- Order: the type and its tests; then the closed forms of WP8 written on it; then the
+  evaluators (`NurbsCurve` / `NurbsSurface` point and derivatives without heap), `Closest`,
+  intersection, classification; then the containers (`Polyline`, `Mesh`, `Line`, ...).
+- Gate after each step: every test identical, bench and boolean test file timed.
+- Python and Rust: same type, written up as follow-up (repositories not pushable from here).
+
+### WP8 - Closed forms for lines and planes
+
+Segment against segment, point against segment, ray against plane, each exact, in front of the
+general routines. Gate: on every call of the test suite the closed form and the general
+routine agree (checked by a temporary harness), all tests identical.
+
+### WP9 - Quadric sections without search (needs WP4d decision)
+
+Cylinder, cone and sphere against each other in closed form, and against any surface as a zero
+set in two parameters, as OCCT's `IntPatch_ImpImpIntersection` and
+`IntPatch_ImpPrmIntersection`. This is the 46 to 72 times group of the OCCT comparison.
