@@ -168,6 +168,44 @@ Gate: identical results (face, edge, vertex counts and volumes of the WP1 list a
 boolean tests) and the drilled block against torus pair under 60 s for five operations; the
 whole boolean test file at least a third faster.
 
+Done, `814af47f`. Bench in `docs/validation/2026-11-13-boolean-bench-wp3.txt`: all 75 rows
+identical to WP2's in status, counts, control points and printed volume.
+
+| | before | after |
+| --- | --- | --- |
+| bench, 15 pairs | 194.6 s | 108.2 s |
+| `brep_boolean_test`, 70 tests | 1068 s | 514 s |
+| `brep_test`, 73 tests | 409 s | 154 s |
+| drilled block against torus, five operations | 22.7 s | 8.5 s |
+| chairs test | 277 s | 91 s |
+
+What is reused, each for one boolean or less, so nothing can go stale:
+
+- `brep_section boundary_nodes` (`MetCurves`): the intersection of an event's edge with a
+  section curve or another event's edge, once per pair of curves instead of once per event.
+  428 s of the test file.
+- `nurbs_memo::Scope`, alive for one `brep_boolean::apply`: `curve_intersection::intersect`
+  and matched `same_parameter` certificates, keyed by the bytes of the whole input. Failures
+  are never stored. This answers `split::validate` after each face split and the assembly.
+- `brep_classify` (`SurfaceRoots`): one classification ray against one surface once, not once
+  per face split from it.
+- `nurbs_interval::blossom`: step weights once per span (bit for bit the same, checked on
+  400 000 random blossoms); `seed_cell_covered`: the root enclosure once per call.
+
+Gate on Linux: intersection 119/119, surface section 23/23, section 25/25, measure 17/17,
+split 38/38, classify 19/19, assemble 18/18, boolean 70/70, BRep 73/73, hollow 11/11, thicken
+15/15, offset 14/14.
+
+Left, with the seconds measured before the changes (test file, bench): repeats across the five
+operations of one pair, which need a store that outlives a boolean (surface sections 79 s,
+52 s; curve pairs 109 s, 19 s); the same curve pair intersected in several stages from
+different copies (`trim_parameters` 69 s, 3 s; `covers` 34 s, 8 s; `compute_spans` 30 s, 1 s;
+`synchronize` 19 s, 9 s). What remains is mostly not repeated work: the seed search of the
+marched route is half of the bench, and tangent curve pairs are the largest test.
+
+Against OCCT after WP3 (`docs/validation/occt_bench/compare.py`): total 108.2 s against
+6.6 s, 16 times; box against box 6, torus against box 8, drilled block against sphere 48.
+
 ### WP4 - Structure taken from OCCT (code, one package per accepted row)
 
 Each row of the difference table marked "adopt" becomes a package of its own with its files and
