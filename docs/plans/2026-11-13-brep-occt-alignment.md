@@ -54,6 +54,29 @@ drilled block, pyramid against sphere) and five ordinary ones.
 
 Gate: runs to the end; its table for the current head is recorded here as the baseline.
 
+Done, `76690d7b`. Baseline at `b1630523`, full table in
+`docs/validation/2026-11-13-boolean-bench-baseline.txt` (times taken while other builds ran,
+so good to about a fifth):
+
+| Case (a b seed mode) | boolean s, five ops | largest pcurve, control points | volumes over budget |
+| --- | --- | --- | --- |
+| 6 5 3 0 drilled block, torus | 240 | 1173 | 5 |
+| 6 5 3 1 drilled block, torus | 216 | 1139 | 5 |
+| 5 0 1 0 torus, box | 133 | 596 | 5 |
+| 5 4 1 0 torus, pyramid | 93 | 2749 | 0 |
+| 5 0 1 1 torus, box | 99 | 765 | 1 |
+| 5 6 2 1 torus, drilled block | 87 | 500 | 0 |
+| 6 2 2 0 drilled block, sphere | 43 | 676 | 0 |
+| 5 3 2 0 torus, cone | 37 | 496 | 0 |
+| 5 2 1 0 torus, sphere | 23 | 156 | 0 |
+| 1 2 1 0 cylinder, sphere | 12 | 166 | 0 |
+| 4 2 1 0 pyramid, sphere | 5.8 | 661 | 0 |
+| 3 4 1 0 cone, pyramid | 1.8 | 166 | 0 |
+| 0 1 1 0 box, cylinder | 1.3 | 9 | 0 |
+| 0 0 1 0 box, box | 0.7 | 2 | 0 |
+| 2 2 1 0 sphere, sphere | 0.1 | 2 | 0 |
+| total | 993 | 2749 | 16 of 75 |
+
 ### WP2 - Section pcurve fit at the model tolerance (code)
 
 Finding: fitted pcurves carry 300 to 1200 control points because `certified_run_curve` accepts
