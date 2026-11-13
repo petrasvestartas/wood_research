@@ -143,6 +143,13 @@ Bounds changed, for the owner to know:
   bench case is that large.
 - The same-parameter certificate at the model tolerance, the volume budget and every test
   tolerance are unchanged.
+- Corrected the same day, `463ee549`: Windows CI failed `Vault Strip Drilled And Mortised`,
+  the drill through a wall of radius 2000 removing more than 2e-6 too little. The floor of
+  `traced_gap` was 64 times the sampling error; measured on Linux the drill's volume error
+  follows it: -1.8e-6 at 64, -5.6e-7 at 16, -2.5e-7 at 4, -3.1e-8 at 1. It is 16 now. The
+  floor acts only above a reach of about 12, so the unit-size bench is not expected to move
+  (not re-run). After it: boolean 70/70 in 1086 s, BRep 73/73, measure 17/17, intersection
+  119/119. The test's note that the drill "measures 1.4e-6 low" was fit error as well.
 
 Not reached: the 5x holds for the list total, not for every case (2.2x to 2.8x where marched
 pieces or sphere pullbacks dominate). At millimetre sizes the gain is 1.2x to 3.3x. No
