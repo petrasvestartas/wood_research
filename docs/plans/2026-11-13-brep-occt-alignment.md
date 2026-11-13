@@ -112,6 +112,37 @@ curve instead of trimmed copies; tolerances that grow on vertices and edges wher
 to merge; analytic curve types kept through the boolean. Rows that would change the public
 data model or the file formats are listed for the owner, not started.
 
+Owner's decisions, 2026-11-13: growing tolerances yes, edge ranges yes, frustum yes (done).
+
+#### WP4a - Classification per connected block
+Files: `src/brep_boolean.cpp` (select), `src/brep_classify.cpp` (validity checked once per
+solid, not per query). Split faces of one operand joined across edges that are not section
+edges lie on one side of the other solid: one witness decides the block.
+Gate: identical results on the WP1 list and the boolean tests; select time down on the list.
+
+#### WP4b - Tolerances that grow
+Files: `src/brep.h`/`.cpp` (rule vertex >= edge >= face, `update_tolerances` used), the fit
+in `src/intersection.cpp` (the deviation reached is returned), `src/brep_section.cpp`,
+`src/brep_assemble.cpp` (edge and vertex tolerances raised to what a fit or a merge reached,
+never lowered), `src/brep_classify.cpp` and `src/split.cpp` (read the tolerance of the item,
+not only the global one). The fields already exist and already serialize, so file formats
+do not change; what changes is that their values mean something.
+Gate: every edge of a boolean result has tolerance >= its measured 3D-to-pcurve deviation;
+`is_valid` checks the ordering rule; no result of the WP1 list or the tests reports a
+tolerance above the requested one unless a test names why; the flush-cap cases are retried.
+
+#### WP4c - Edges as ranges on shared curves
+C++ first. Files: `src/brep.h`/`.cpp` (range on the edge and on each curve-on-surface use,
+accessors that return the restricted curve), then each consumer in its own step with its
+tests: boundary extraction and classification, section, split, assembly, measure,
+tessellation, STEP; JSON and protobuf last, versioned, old files still readable.
+The 6 November packets on `codex/native-brep-recovery-20261112` are read first for their
+design and their counterexample tests, not applied as patches.
+Python, Rust and `session_proto` are separate repositories that this session can not push;
+their ports are written up as a follow-up, not done here.
+Gate: every existing test green after each consumer; a split produces no trimmed copy of a
+curve; the tiny-interval witness `[0, 2.949e-17]` of the handoff is a passing test.
+
 ### WP5 - Benchmark cases (code, after WP2 and WP3)
 
 Files: `src/brep_boolean_benchmark_test.cpp`, `tests/fixtures/boolean_benchmarks/*.json`,
@@ -137,8 +168,8 @@ OCCT paths are under `src/ModelingAlgorithms` at `d3056ef8`; ours under `session
 | Where intersections happen | all of them first, in `BOPAlgo_PaveFiller::PerformInternal` (VV, VE, EE, VF, EF, FF), into `BOPDS_DS` as pave blocks and common blocks; edges split once (`MakeSplitEdges`) | sections first (`brep_section::interferences`), then curve/curve work again per face in the arrangement (`split.cpp compute_spans`), in `append_cut` and in the assembly (`brep_assemble synchronize`) | the same pair intersected up to four times | **WP3 adopt in part**: reuse results, no restructure |
 | Face building | `BOPAlgo_BuilderFace` / `BOPAlgo_WireSplitter`: loops by angle order at vertices over edges already split; no curve/curve intersection here | `split::arrange`: a full arrangement in uv with curve/curve and self-intersection per cut, then the whole BRep re-certified after every face (`validate`) | most of the boolean's time on fitted curves | **WP3 adopt in part**: certify only what a split touched |
 | Classification | one face per connected block of split faces (`BOPAlgo_Tools::ClassifyFaces`), by the angle at a shared edge (`BOPTools_AlgoTools::IsInternalFace`, `GetFaceOff`) before any solid classifier | every split face by a ray-cast witness (`brep_boolean select`, `brep_classify::point`), each query re-validating the solid | time; grazing rays | **WP4a adopt**: classify per connected block, validity checked once |
-| Tolerances | per vertex, edge and face, only ever raised (`BRep_TEdge.lxx:33`, `BOPAlgo_PaveFiller_10.cxx`), vertex >= edge >= face; a fuzzy value widens every test | one global tolerance; the fields exist on vertex, edge and face but are stamped, never grown or read | near-coincident ends must be joined exactly; no way to record that a fit reached 3e-8 | **WP4b, owner decides**: changes what a tolerance means in files |
-| Edge on its curve | a range on a shared curve (`BRep_GCurve` first/last), SameParameter and SameRange flags | a trimmed copy of the curve per edge piece, the curve domain is the range | trims that lose a knot by a rounding; the 6 November range work was about this | **WP4c, owner decides**: data model and file formats |
+| Tolerances | per vertex, edge and face, only ever raised (`BRep_TEdge.lxx:33`, `BOPAlgo_PaveFiller_10.cxx`), vertex >= edge >= face; a fuzzy value widens every test | one global tolerance; the fields exist on vertex, edge and face but are stamped, never grown or read | near-coincident ends must be joined exactly; no way to record that a fit reached 3e-8 | **WP4b adopt** (owner, 2026-11-13) |
+| Edge on its curve | a range on a shared curve (`BRep_GCurve` first/last), SameParameter and SameRange flags | a trimmed copy of the curve per edge piece, the curve domain is the range | trims that lose a knot by a rounding; the 6 November range work was about this | **WP4c adopt** (owner, 2026-11-13), C++ first |
 | Curve types | lines and conics stay `Geom_Line`, `Geom_Circle`, ... with projected pcurves; only walked lines are approximated | everything is NURBS; conics are exact rational NURBS, their pcurves on curved faces are fitted | fits where a closed form exists | **WP4d, owner decides**: data model |
 | Volume | `BRepGProp_Gauss`: fixed Gauss orders per edge and face, at most 61 points, not adaptive by default; tests accept 1 % | `brep_measure`: adaptive, certified to the tolerance, one panel per pcurve span, fixed budget 200000 | budget overrun when pcurves have hundreds of spans | keep ours; WP2 removes the spans |
 | Seams | walked lines cut at period boundaries (`IntTools_WLineTool::DecompositionOfWLine`), pcurves shifted by periods (`AdjustPCurveOnSurf`) | the same idea in three routes | fixed this week | none |
