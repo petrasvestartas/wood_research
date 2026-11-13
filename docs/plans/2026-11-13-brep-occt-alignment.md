@@ -493,3 +493,19 @@ rows as before; all tests; fuzz 147 of 147 in both modes.
 Cylinder, cone and sphere against each other in closed form, and against any surface as a zero
 set in two parameters, as OCCT's `IntPatch_ImpImpIntersection` and
 `IntPatch_ImpPrmIntersection`. This is the 46 to 72 times group of the OCCT comparison.
+
+## WP7 and WP8 results (session_cpp 29c96fd5, 54780946)
+
+- WP7: `xyz`, `xyzf`, `ijk` (`src/xyz.h`); `NurbsCurve`/`NurbsSurface` `point` and `jet` without heap, `point_at` and
+  `evaluate` wrap them; `nurbs_interval` without allocation, inline outward rounding. Bit-identical on the 75 bench
+  booleans. Bench 108 s to 53 s, volume column 54 s to 6 s, `brep_boolean_test` 514 s to 232 s.
+- WP8: closed forms for straight pairs, feet on straight spans and flat patches, rays on flat patches, same parameter of
+  a straight edge on a flat face, each falling back to the general routine near a threshold. Differential against the
+  general routines over the gate and the bench: no disagreement except `Closest::surface_point` on a 1e-4 patch, where
+  the general routine's Newton does not start (absolute determinant test) and the closed form is right.
+- Merged, quiet machine: 75 booleans 45.9 s against OCCT 6.6 s (7 times; 16 after WP3). Box against box 0.07 s against
+  0.091 s. Rows equal to WP3 in 75 of 75. Suite 1602 of 1603, the one being the bunny file not checked out here.
+  Output: `docs/validation/2026-11-13-boolean-bench-wp7-wp8.txt`.
+- Left by both for later packages: `BRep::is_valid` per classification query, `parameter_mapping` for plane pairs,
+  plane pairs in `surface_section`, `vertex_interval` in `split::arrange`, whole-model copies, `NurbsSurface::domain`
+  validating per call, segment against conic arc, per-span polynomial cache for the evaluators, `NurbsCurve::trim`.
