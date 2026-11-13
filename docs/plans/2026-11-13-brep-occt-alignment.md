@@ -283,9 +283,16 @@ arXiv and ACM were not reachable from this environment, so the papers themselves
 
 ## OCCT on the same bench (measured 2026-11-13)
 
+Measured again in C++ against OCCT built from source at `d3056ef8`, with the results compared
+row by row and the time per stage set against the source on both sides:
+`docs/validation/occt_bench/README.md`. In short: all 75 results valid on both sides, faces
+identical in 75 rows, volumes within 6.3e-9; OCCT 6.6 s, ours 195 s; per boolean the
+intersection part is 31 times OCCT's and the building part 100 times. The table below is the
+first measurement, through the Python wheel.
+
 The 15 pairs of the WP1 list, same sizes and poses (the driver's generator reimplemented),
 five operations each, run through OCCT 8.0.1 from the `cadquery-ocp` wheel on this machine
-(`docs/validation/2026-11-13-occt-bench.py`). All 75 OCCT results valid; volumes agree with
+(`docs/validation/occt_bench/occt_bench.py`). All 75 OCCT results valid; volumes agree with
 ours to four to six digits, so the cases are the same.
 
 | Case | OCCT s | ours after WP2 s | ratio |
