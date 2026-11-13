@@ -120,6 +120,38 @@ OCCT paths are under `src/ModelingAlgorithms` at `d3056ef8`; ours under `session
 | Volume | `BRepGProp_Gauss`: fixed Gauss orders per edge and face, at most 61 points, not adaptive by default; tests accept 1 % | `brep_measure`: adaptive, certified to the tolerance, one panel per pcurve span, fixed budget 200000 | budget overrun when pcurves have hundreds of spans | keep ours; WP2 removes the spans |
 | Seams | walked lines cut at period boundaries (`IntTools_WLineTool::DecompositionOfWLine`), pcurves shifted by periods (`AdjustPCurveOnSurf`) | the same idea in three routes | fixed this week | none |
 
-Reference numbers in OCCT's tests are mostly surface areas within 1 %, and nearly every cone
-there is a frustum, which `BRep::create_cone` can not build; WP5 either adds a frustum
-primitive or leaves those out, owner's choice.
+Reference numbers in OCCT's tests are mostly surface areas within 1 %. Nearly every cone there
+is a frustum: `BRep::create_frustum(radius_base, radius_top, height)` was added for them
+(owner's request, 2026-11-13).
+
+## Found while adding the frustum
+
+A round cap lying flush on a planar face of the other solid fails for a plain cylinder as well
+as for a frustum (OCCT `bop*_simple` ZF5, ZF7, ZN5, ZD2 and the like): a cylinder of radius 1
+and height 4 standing in a 4 x 4 x 4 box gives "face classification is unresolved", a frustum
+"Curve intersection exceeded its subdivision limit". The same solid moved off the face by half
+a unit passes. This is coincident planar faces where one boundary is a circle inside the
+other; it becomes its own package after WP3 and its cases go into WP5.
+
+## Exact integer kernels (Solidean, EMBER) - does it carry over to BReps
+
+Researched 2026-11-13 from abstracts and search snippets only: solidean.com, the RWTH pages,
+arXiv and ACM were not reachable from this environment, so the papers themselves were not read.
+
+- EMBER (Trettner, Nehring-Wirxel, Kobbelt, SIGGRAPH 2022) is exact because meshes are planes:
+  a vertex is the intersection of three input planes, planes are closed under booleans, so
+  every predicate is a determinant of bounded degree and fits a fixed-width integer.
+- That holds for planar BRep faces with straight edges, which is the same setting.
+- It does not hold for free-form faces: two bicubic patches meet in an algebraic curve of
+  degree 324, which is not a NURBS, so the output edge must be an approximation and a vertex
+  is an algebraic number with no fixed-size integer form. Quadrics are possible in principle
+  with algebraic numbers, not with fixed-width integers.
+- What carries over is the principle: decide topology exactly, or by a certificate that proves
+  or refuses, and confine the tolerance to one recorded place, the distance between a fitted
+  edge and the true intersection. The kernel already works this way in part (outward interval
+  bounds, Matched / Mismatched / Unresolved). It argues for the per-edge reached tolerance of
+  row WP4b.
+- Options in order of value for cost: an exact sub-kernel for planar faces (most joinery
+  solids; `exact_orientation.h` and the vendored integer Clipper2 are a start); certified
+  predicates everywhere; exact ordering inside each face's uv arrangement; a mesh boolean
+  with an exact kernel as an independent oracle for tests, not as the kernel.
