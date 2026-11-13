@@ -70,39 +70,42 @@ is red before and green after, then the full boolean file again.
 | "trim lost a required original raw event" | A section's world curve and a pcurve hold the same knot one rounding apart; the trim kept each its own. | An exact trim names the cut on all three. | `Section And Pcurve Knots A Rounding Apart` |
 | "plane section approximation exceeded its refinement budget" on a torus | A section loop seeded exactly on the tube seam was never cut at its start, so half of its pcurve lay outside the domain, where the surface evaluator extrapolates and the fit can not converge. | The trace is cut at a start on the seam; pieces between two cuts on one point are dropped. | `Surface Plane Loop Seeded On The Torus Seam` |
 | "open or inconsistently oriented edge" on a torus against planar faces | A piece end cut on the seam was polished freely afterwards and left the seam by about 1e-8: one piece ended outside the face, the next short of it. | Seam ends are polished along the seam only. | `Surface Plane Pieces End On The Torus Seam` |
+| macOS only: "Self intersection has unresolved singular geometry" | A fitted pcurve held two knots one rounding apart; the search could not halve that span. | Spans with no parameter inside are passed over. | `Knot Span One Rounding Wide` |
+| "could not certify walking continuation" on torus against cone | A seam crossing was accepted once inside the tolerance, a tolerance along the curve from where it meets the seam. | The crossing is stepped on while a step still halves the gap. | `Surface Surface Torus Cone Crossing Both Seams` |
+| "paired fit exceeded its refinement budget" beside a sphere pole | The walk's first step, a quarter of a cell, was never judged and landed across a hairpin of the section. OCCT's `IntWalk_PWalking::TestDeflection` judges every step and halves it when the tangent ahead turns back. | Every step is judged, the first from its own tangent. | `Sphere Section Turning Back Beside Its Pole` |
+| "Self intersection ..." then "constant input" on a cone cut parallel to its axis | A seam cut landed one rounding from a sample of the pcurve fit: a span with no width. | Such a sample is dropped before the fit. | `Cone Cut By Planes Parallel To Its Axis` |
+| "Curve intersection exceeded its subdivision limit", "Tangent fan ..." on cone against drilled block | An open arc from rim to rim was closed into a loop because its ends lay within the join distance, a cell and a half of a one-span cone. | An arc ending on open sides of the domain is never closed. | `Cone Arc From Rim To Rim Is No Loop` |
 
 ## Measured after the fixes
 
 | Suite | Result |
 | --- | --- |
-| `brep_boolean_test` | 62/62 |
-| `brep_test` | 72/72 |
-| `intersection_test` | 115/115 |
-| `brep_section_test`, `surface_section_test` | 25/25, 23/23 |
-| thicken, hollow, offset, tessellation | 15/15, 11/11, 14/14, 7/7 |
-| whole suite, before the last two fixes | 1570/1571; the one failure reads the bunny from `session_data`, not checked out here |
-| fuzz sweep, 49 ordered pairs, seeds 1 and 2, generic poses | 96/98 |
-| fuzz sweep, same, axis-parallel poses | 98/98 |
+| whole C++ suite, Linux | 1580/1581; the one failure reads the bunny from `session_data`, not checked out here |
+| `brep_boolean_test` | 67/67, the seven Rhino families included |
+| `brep_test` | 72/72, the five chair operations included |
+| CI at `f778d5db` | green on Linux, Windows and macOS ARM64 |
+| fuzz sweep, 49 ordered pairs, seeds 1, 2 and 3, generic poses | 147/147 valid in all five operations |
+| fuzz sweep, same, axis-parallel poses | 147/147 valid in all five operations |
+
+In each mode one pair, drilled block against torus, needs about 280 s and misses the sweep's
+240 s limit; run alone it passes.
 
 On main the first generic sweep passed 68 of 98 pairs. That run used an earlier draft of the driver with other random cases and counted an exceeded volume budget as a failure, so the two numbers are not the same measurement.
 
 ## Open, in order
 
-1. **Self intersection of a fitted pcurve** - an axis-parallel plane through a cone gives a
-   hyperbola whose cone pcurve is fitted as 60 quintic pieces; the arrangement's
-   self-intersection check gives up on it. Needs either an exact pcurve for that conic on the
-   cone chart or a fit with fewer, smoother pieces.
-2. **Torus against cone, one generic pose** - "could not certify walking continuation" with a
-   walked point at v = 7e-20, a hair off the seam: the marched route has the same seam-start
-   weakness the plane route had.
-3. **Sphere against drilled block, one pose, one operation** - "paired fit exceeded its
-   refinement budget".
-4. **Cone against drilled block, one generic pose** - "Curve intersection exceeded its
-   subdivision limit" and "Tangent fan has an unresolved common endpoint".
-5. **Exact volume of torus results** - `volume_exact` runs out of its quadrature budget on some
-   torus booleans. The solids themselves pass validity and membership probes.
-6. Viewer images of the chair results and the Windows/macOS CI run for the branch.
-7. Only after these: Rust and Python ports, then offsets.
+1. **Exact volume of torus results** - `volume_exact` runs out of its fixed work budget of
+   200000 on some torus booleans, whose fitted pcurves have hundreds of spans. The solids pass
+   validity and membership probes. The budget was held fixed on purpose in the earlier work;
+   the two honest ways on are fewer spans in fitted pcurves or a budget that scales with the
+   spans of the input, and that is a decision for the owner.
+2. **Speed** - drilled block against torus takes 280 s for five operations in one pose.
+3. **Viewer images of the chair results** - `session_viewer` is not part of this checkout.
+4. Only after these: Rust and Python ports, then offsets.
+
+OCCT at `d3056ef8` was read for two of the fixes above (`IntWalk_PWalking.cxx`, start-point and
+`TestDeflection` handling) and for one idea that turned out not to be the cause
+(`BOPAlgo_PaveFiller::IsExistingPaveBlock`); nothing was copied.
 
 ## Rules kept
 
