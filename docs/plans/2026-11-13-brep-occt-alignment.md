@@ -397,6 +397,27 @@ routine agree (checked by a temporary harness), all tests identical.
 
 ### How the speed packages run (owner, 2026-11-13: match OCCT for real, as much effort as it takes)
 
+Owner, 2026-11-13: for any decision the lead asks about, the lead's own recommendation
+stands; decide, record it here, and go on. Decided so far under that rule:
+
+- The identity kept + removed = whole of `check_feature` (`brep_boolean_test.cpp`) is held to
+  64 units in the last place of the whole volume, 1e-6 where that is less (`session_cpp`
+  `c8ecfe14`). Windows landed 34 units off where 33.5 were allowed, Linux 0 to 13; five
+  kernel-side changes measured on Linux left the spread as it was (error-free summation, a
+  volume tolerance 100 times tighter, the steps between the pieces of a trim loop, the
+  rectangle of a cut face by the exact rule of the uncut one, one anchor per loop). The
+  face terms summed are about five times the net volume, so the check sat at the rounding
+  floor of the method. The check of a removed volume against its reference is unchanged.
+- `Point` and `Vector` keep their public form; the kernel computes on `xyz` inside.
+- No analytic curve or surface types are added to the data model (the study: recognition
+  already supplies the kinds; OCCT on NURBS operands is only 4.4 times slower than on its
+  own types).
+- Intermediate validation (after every face split, per classification query, per
+  evaluation) leaves the release path once the structure that replaces it is gated: input
+  checked once, the result checked once.
+- One preparation shared by several operations on a pair comes as an added `prepare` /
+  `apply` beside the present calls, which stay.
+
 Measured: compiling the largest kernel source peaks at 0.9 GB and the machine has 16 GB, so
 memory never limited the work to one package at a time. WP7 runs in the main tree; WP8 and
 WP9 each in a git worktree of `814af47f` with its own build directory; the study reads only.
