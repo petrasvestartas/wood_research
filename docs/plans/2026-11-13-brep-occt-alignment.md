@@ -187,6 +187,20 @@ and height 4 standing in a 4 x 4 x 4 box gives "face classification is unresolve
 a unit passes. This is coincident planar faces where one boundary is a circle inside the
 other; it becomes its own package after WP3 and its cases go into WP5.
 
+Fixed 2026-11-13 (`session_cpp` `1057fa50`), two causes:
+
+- Cylinder: a witness on the flush plane is on the supporting surface of a face it is not
+  inside; every ray from it started on that surface and stayed unresolved. A ray now starts a
+  step past such a surface (`brep_classify grazing_ray`); a ray whose direction has less than
+  0.1 along the surface normal is given up for another.
+- Frustum: the cap rim cut by the box plane was computed afresh, a rounding off the frustum's
+  own rim circle. The plane route now takes the surface's own iso circle
+  (`iso_plane_sections`) before any computed section.
+
+Tests `Round Caps Flush On Box Faces` and `Frustum Standing On A Box`; classify 19/19,
+intersection 116/116, surface section 23/23, section 25/25, boolean 70/70, assemble 18/18,
+hollow 11/11, thicken 15/15, offset 14/14, BRep 73/73 on Linux.
+
 ## Exact integer kernels (Solidean, EMBER) - does it carry over to BReps
 
 Researched 2026-11-13 from abstracts and search snippets only: solidean.com, the RWTH pages,
