@@ -280,3 +280,32 @@ arXiv and ACM were not reachable from this environment, so the papers themselves
   solids; `exact_orientation.h` and the vendored integer Clipper2 are a start); certified
   predicates everywhere; exact ordering inside each face's uv arrangement; a mesh boolean
   with an exact kernel as an independent oracle for tests, not as the kernel.
+
+## OCCT on the same bench (measured 2026-11-13)
+
+The 15 pairs of the WP1 list, same sizes and poses (the driver's generator reimplemented),
+five operations each, run through OCCT 8.0.1 from the `cadquery-ocp` wheel on this machine
+(`docs/validation/2026-11-13-occt-bench.py`). All 75 OCCT results valid; volumes agree with
+ours to four to six digits, so the cases are the same.
+
+| Case | OCCT s | ours after WP2 s | ratio |
+| --- | --- | --- | --- |
+| 6 5 3 0 drilled block, torus | 1.11 | 22.7 | 20 |
+| 6 5 3 1 drilled block, torus | 0.79 | 18.7 | 24 |
+| 5 0 1 0 torus, box | 0.96 | 12.4 | 13 |
+| 5 4 1 0 torus, pyramid | 0.55 | 9.8 | 18 |
+| 5 0 1 1 torus, box | 0.74 | 10.6 | 14 |
+| 5 6 2 1 torus, drilled block | 0.65 | 18.8 | 29 |
+| 6 2 2 0 drilled block, sphere | 0.54 | 39.0 | 72 |
+| 5 3 2 0 torus, cone | 0.54 | 23.8 | 44 |
+| 5 2 1 0 torus, sphere | 0.34 | 21.5 | 64 |
+| 1 2 1 0 cylinder, sphere | 0.18 | 11.1 | 63 |
+| 4 2 1 0 pyramid, sphere | 0.14 | 2.6 | 18 |
+| 3 4 1 0 cone, pyramid | 0.08 | 1.3 | 18 |
+| 0 1 1 0 box, cylinder | 0.08 | 1.4 | 17 |
+| 0 0 1 0 box, box | 0.06 | 0.8 | 14 |
+| 2 2 1 0 sphere, sphere | 0.006 | 0.14 | 23 |
+| total | 6.8 | 195 | 29 |
+
+Before WP2 the total was 993 s, 147 times OCCT. OCCT's exclusive-or is timed as two cuts and a
+fuse. The timing ran while a kernel build was running, so it is good to a few tenths.
