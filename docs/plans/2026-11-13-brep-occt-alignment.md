@@ -434,6 +434,39 @@ Design, the structure of OCCT's `IntPatch_ImpPrmIntersection` with a proof kept:
 Gate: all tests, bench rows as before with volumes within 1e-6, a harness that runs the old
 route beside the new one and compares the curves found, fuzz 147 of 147 in both modes.
 
+### The study (done) and what follows from it
+
+`docs/plans/2026-11-13-speed-study.md`: causes with measured seconds, stage by stage against
+OCCT's source, a proof policy and targets per pair. Its ranked packages after WP7, WP8, WP9:
+one interference structure (WP10, running), certificates once with the reached tolerance
+stored (WP4b and WP4c), signs and estimates where they decide, classification at the section
+edge (WP4a extended), prepare once and apply per operation, threads, freeform seeding. Its
+estimate of the bench after each: 108 now, 60, 30, 29.5, then 20.5, 14.5, 8.3, 6.7 against
+OCCT's 6.6; 2.2 with one preparation for the five operations; about 1 to 1.5 with threads.
+Its corrections to WP8 and WP9 went to the running packages.
+
+### WP10 - One interference structure (running)
+
+Measured: 1 103 certified curve/curve intersections per box x box boolean where OCCT runs 41
+line/line and 66 edge/face closed forms, each once and none during face building; 762 per
+torus x box boolean at 5.1 M instructions, 30 % of it; a copy of the whole model per face
+split (105 per box boolean); every loop polygonised to a quarter of the uv tolerance for its
+signed area. `brep_section::FaceResult` already holds nodes and which section curves pass
+through each boundary event; the partition does not read it.
+
+- Stage A, the same results with less work: loop area in closed form, one rebuild per
+  operand, `validate` of what a split created.
+- Stage B: nodes, segments as parameter ranges on their curves, and per face the segments on
+  its boundary, inside it and coincident; filled once by the section stage (edge against
+  face once per edge; nodes located by projection plus the existing certificate), read by
+  the partition (graph from ids, duplicates by identity, the certified fan order kept) and
+  by the assembly (shared edges and vertices by id). Where the structure can not answer, the
+  present geometric path runs.
+
+Owns `split`, `brep_boolean`, `brep_assemble`, `brep_section`. Gate: a harness that runs the
+present arrangement beside the new one on every face split of the tests and the bench; bench
+rows as before; all tests; fuzz 147 of 147 in both modes.
+
 ### WP9b - Quadric pairs in closed form (after WP9, needs WP4d decision)
 
 Cylinder, cone and sphere against each other in closed form, and against any surface as a zero
