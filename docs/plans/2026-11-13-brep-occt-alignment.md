@@ -395,7 +395,46 @@ Segment against segment, point against segment, ray against plane, each exact, i
 general routines. Gate: on every call of the test suite the closed form and the general
 routine agree (checked by a temporary harness), all tests identical.
 
-### WP9 - Quadric sections without search (needs WP4d decision)
+### How the speed packages run (owner, 2026-11-13: match OCCT for real, as much effort as it takes)
+
+Measured: compiling the largest kernel source peaks at 0.9 GB and the machine has 16 GB, so
+memory never limited the work to one package at a time. WP7 runs in the main tree; WP8 and
+WP9 each in a git worktree of `814af47f` with its own build directory; the study reads only.
+The lead merges them in the order they finish and runs the whole gate on the merged tree.
+
+### WP8 - Planar solids at OCCT's speed (running)
+
+Closed forms in front of the general certified routines, each returning what the general
+routine's contract promises: segment against segment (`curve_intersection::intersect`), point
+against segment, ray against an affine plane (`surface_ray::intersect`), `same_parameter` of a
+segment on a plane, then whatever the profile of box against box shows next. A temporary
+harness runs the general routine beside every closed form over the whole test suite and
+compares. Target: box against box at or below OCCT's 0.091 s for five operations (0.54 s now).
+
+### WP9 - Section start points from the boundaries (running)
+
+Finding: the plane route (`surface_plane_seeds`) seeds from a plain sample grid with no proof,
+as OCCT does, and is 8 times OCCT; the general route (`surface_surface_seeds`) proves coverage
+by interval enclosures over cells of all four parameters and is 30 to 50 times OCCT: 54 s of
+the 108 s bench. Every curved pair of the bench has a recognised surface on one side.
+
+Design, the structure of OCCT's `IntPatch_ImpPrmIntersection` with a proof kept:
+
+- An open section arc ends on a boundary curve of one of the two parameter domains: its seeds
+  are the intersections of those boundary curves with the other surface, by the existing
+  certified `curve_surface_intersection::intersect`.
+- A closed loop is found on one surface's two parameters as the zero set of the recognised
+  surface's implicit function: a quadtree that discards a cell when an enclosure excludes
+  zero and stops where the gradient is proved not to turn by a right angle; seeds are sign
+  changes on leaf edges.
+- The seeds go to the existing tracer and fit. Where the new search can not decide, the old
+  one runs: never weaker than today.
+- Freeform against freeform keeps the old search in this package.
+
+Gate: all tests, bench rows as before with volumes within 1e-6, a harness that runs the old
+route beside the new one and compares the curves found, fuzz 147 of 147 in both modes.
+
+### WP9b - Quadric pairs in closed form (after WP9, needs WP4d decision)
 
 Cylinder, cone and sphere against each other in closed form, and against any surface as a zero
 set in two parameters, as OCCT's `IntPatch_ImpImpIntersection` and
