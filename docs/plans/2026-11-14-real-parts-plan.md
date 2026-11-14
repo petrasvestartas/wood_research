@@ -36,6 +36,11 @@ TopoDSToStep, GeomToStep) and `ShapeFix_Edge::FixSameParameter` for making a rea
 logic is mirrored natively. The writer is checked by round trip: ours written, read by OCCT valid with the same faces
 and volume, and read back by ours identical.
 
+Debugged as the booleans were, function by function against OCCT as oracle (`docs/validation/step_diff/`): entities
+per type, each surface and curve evaluated on a grid, each face's wires (order, orientation, seams, vertices), each
+pcurve against `BRep_Tool::CurveOnSurface` and the edge tolerance, face areas, volume and validity; the same stages
+on files written by ours. The first diverging stage per file is fixed first.
+
 Done when: every solid OCCT loads also loads in ours, valid and closed, with OCCT's face count, each face's area within
 1e-6 and the volume within 1e-9; every edge certified at 1e-7; a picture of the loaded operands per file. Named cases:
 NEMA-17 bracket (left plate drawn as a triangle), bellows, timber dowel `elem21_cyl`, joint `joint00`.
