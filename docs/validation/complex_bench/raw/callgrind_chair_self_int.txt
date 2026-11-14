@@ -1,0 +1,80 @@
+--------------------------------------------------------------------------------
+Profile data file 'prof/cg_chair_self_int.out' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache: 
+D1 cache: 
+LL cache: 
+Timerange: Basic block 0 - 9551809031
+Trigger: Program termination
+Profiled target:  tools/ours_cx op step=/home/user/wood_research/session/session_cpp/tests/fixtures/solidbrep.stp#0 step=/home/user/wood_research/session/session_cpp/tests/fixtures/solidbrep.stp#0|m=0.9075323547416204,0.013304542521060747,0.4197713833093376,-11.58690597104909,-0.034552139035177606,0.9984750791745695,0.043054221110491335,-1.5146360719916512,-0.4185584484695337,-0.05357709786506366,0.90660814015711,-3.136585984014964 intersection 1e-6 (PID 13449, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       99
+Include dirs:     
+User annotated:   
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+Ir                      
+--------------------------------------------------------------------------------
+38,794,912,420 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                       file:function
+--------------------------------------------------------------------------------
+38,794,912,420 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+38,792,574,758 (99.99%)  ???:(below main) [ours_cx]
+38,792,574,746 (99.99%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+38,791,712,370 (99.99%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+38,791,598,591 (99.99%)  ???:main [ours_cx]
+23,927,522,470 (61.68%)  ???:session_cpp::BRep::boolean_intersection(session_cpp::BRep const&, double) const [ours_cx]
+23,927,522,454 (61.68%)  ???:session_cpp::brep_boolean::apply(session_cpp::BRep const&, session_cpp::BRep const&, session_cpp::brep_boolean::Operation, double) [ours_cx]
+22,105,418,625 (56.98%)  ???:session_cpp::brep_section::interferences(session_cpp::BRep const&, session_cpp::BRep const&, double) [ours_cx]
+20,936,012,077 (53.97%)  ???:session_cpp::surface_section::intersect(session_cpp::NurbsSurface const&, session_cpp::NurbsSurface const&, double) [ours_cx]
+20,376,674,543 (52.52%)  ???:session_cpp::Intersection::surface_surface(session_cpp::NurbsSurface const&, session_cpp::NurbsSurface const&, double, bool) [ours_cx]
+20,226,889,021 (52.14%)  ???:session_cpp::(anonymous namespace)::marched_section_triples(session_cpp::NurbsSurface const&, session_cpp::NurbsSurface const&, double, bool, bool*) [ours_cx]
+18,367,107,047 (47.34%)  ???:session_cpp::(anonymous namespace)::surface_surface_seeds(session_cpp::(anonymous namespace)::SurfaceSurfaceField const&) [ours_cx]
+14,139,381,344 (36.45%)  ???:volume_text(session_cpp::BRep const&) [ours_cx]
+14,139,371,866 (36.45%)  ???:session_cpp::BRep::volume_exact(double) const [ours_cx]
+14,139,371,864 (36.45%)  ???:session_cpp::brep_measure::volume(session_cpp::BRep const&, double) [ours_cx]
+14,138,834,300 (36.45%)  ???:session_cpp::brep_measure::(anonymous namespace)::sum_volume(session_cpp::BRep const&, session_cpp::brep_measure::(anonymous namespace)::Frame const&, double, session_cpp::brep_measure::(anonymous namespace)::Sums&) [ours_cx]
+14,063,277,556 (36.25%)  ???:session_cpp::brep_measure::(anonymous namespace)::face_volume(session_cpp::BRep const&, int, session_cpp::brep_measure::(anonymous namespace)::Frame const&, double, session_cpp::brep_measure::(anonymous namespace)::Work&, std::map<std::tuple<int, unsigned long, unsigned long, unsigned long>, double, std::less<std::tuple<int, unsigned long, unsigned long, unsigned long> >, std::allocator<std::pair<std::tuple<int, unsigned long, unsigned long, unsigned long> const, double> > >&, session_cpp::brep_measure::(anonymous namespace)::Sums&)::{lambda(double)#1}::operator()(double) const [ours_cx]
+13,936,639,714 (35.92%)  ???:session_cpp::brep_measure::plane::Primitive::at(double, double) const [ours_cx]
+13,859,729,902 (35.73%)  ???:session_cpp::brep_measure::polynomial::evaluate(session_cpp::brep_measure::polynomial::Grid const&, session_cpp::nurbs_interval::Interval, session_cpp::nurbs_interval::Interval) [ours_cx]
+13,785,703,377 (35.53%)  ???:session_cpp::nurbs_interval::bezier_bounds(session_cpp::NurbsSurface const&, std::array<double, 4ul> const&, std::array<double, 3ul> const&, session_cpp::nurbs_interval::SurfaceBounds&, bool, bool) [ours_cx]
+12,914,120,698 (33.29%)  ???:session_cpp::(anonymous namespace)::seed_cell_covered(session_cpp::(anonymous namespace)::SurfaceSurfaceField const&, session_cpp::(anonymous namespace)::SeedCellPair const&, std::array<double, 4ul> const&, session_cpp::(anonymous namespace)::SurfaceSurfaceGraph*, nlohmann::json_abi_v3_11_3::basic_json<nlohmann::json_abi_v3_11_3::ordered_map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::json_abi_v3_11_3::adl_serializer, std::vector<unsigned char, std::allocator<unsigned char> >, void>*, int) [ours_cx]
+12,786,817,464 (32.96%)  ???:session_cpp::nurbs_interval::surface_controls(session_cpp::NurbsSurface const&, std::array<double, 4ul> const&, std::array<double, 3ul> const&, bool, std::array<session_cpp::nurbs_interval::Interval, 4ul>*) [ours_cx]
+10,684,665,209 (27.54%)  ???:session_cpp::nurbs_interval::blossom(std::array<session_cpp::nurbs_interval::Interval, 4ul> const*, session_cpp::nurbs_interval::BlossomSteps const&, std::array<session_cpp::nurbs_interval::Interval, 4ul>*, std::array<session_cpp::nurbs_interval::Interval, 4ul>*) [ours_cx]
+10,251,153,767 (26.42%)  ???:session_cpp::nurbs_interval::surface_bounds(session_cpp::NurbsSurface const&, std::array<double, 4ul> const&, std::array<double, 3ul> const&, session_cpp::nurbs_interval::SurfaceBounds&, bool, bool) [ours_cx]
+ 9,386,546,830 (24.20%)  ???:session_cpp::nurbs_interval::Interval session_cpp::brep_measure::(anonymous namespace)::enclosed_gauss<session_cpp::brep_measure::(anonymous namespace)::face_volume(session_cpp::BRep const&, int, session_cpp::brep_measure::(anonymous namespace)::Frame const&, double, session_cpp::brep_measure::(anonymous namespace)::Work&, std::map<std::tuple<int, unsigned long, unsigned long, unsigned long>, double, std::less<std::tuple<int, unsigned long, unsigned long, unsigned long> >, std::allocator<std::pair<std::tuple<int, unsigned long, unsigned long, unsigned long> const, double> > >&, session_cpp::brep_measure::(anonymous namespace)::Sums&)::{lambda(double)#1}, 8ul>(session_cpp::brep_measure::(anonymous namespace)::face_volume(session_cpp::BRep const&, int, session_cpp::brep_measure::(anonymous namespace)::Frame const&, double, session_cpp::brep_measure::(anonymous namespace)::Work&, std::map<std::tuple<int, unsigned long, unsigned long, unsigned long>, double, std::less<std::tuple<int, unsigned long, unsigned long, unsigned long> >, std::allocator<std::pair<std::tuple<int, unsigned long, unsigned long, unsigned long> const, double> > >&, session_cpp::brep_measure::(anonymous namespace)::Sums&)::{lambda(double)#1} const&, double, double, std::array<double, 8ul> const&, std::array<double, 8ul> const&) [clone .constprop.0] [ours_cx]
+ 4,780,302,807 (12.32%)  ???:session_cpp::nurbs_interval::operator*(session_cpp::nurbs_interval::Factor const&, session_cpp::nurbs_interval::Interval) [ours_cx]
+ 4,693,761,538 (12.10%)  ???:session_cpp::nurbs_interval::Interval session_cpp::brep_measure::(anonymous namespace)::enclosed_gauss<session_cpp::brep_measure::(anonymous namespace)::face_volume(session_cpp::BRep const&, int, session_cpp::brep_measure::(anonymous namespace)::Frame const&, double, session_cpp::brep_measure::(anonymous namespace)::Work&, std::map<std::tuple<int, unsigned long, unsigned long, unsigned long>, double, std::less<std::tuple<int, unsigned long, unsigned long, unsigned long> >, std::allocator<std::pair<std::tuple<int, unsigned long, unsigned long, unsigned long> const, double> > >&, session_cpp::brep_measure::(anonymous namespace)::Sums&)::{lambda(double)#1}, 4ul>(session_cpp::brep_measure::(anonymous namespace)::face_volume(session_cpp::BRep const&, int, session_cpp::brep_measure::(anonymous namespace)::Frame const&, double, session_cpp::brep_measure::(anonymous namespace)::Work&, std::map<std::tuple<int, unsigned long, unsigned long, unsigned long>, double, std::less<std::tuple<int, unsigned long, unsigned long, unsigned long> >, std::allocator<std::pair<std::tuple<int, unsigned long, unsigned long, unsigned long> const, double> > >&, session_cpp::brep_measure::(anonymous namespace)::Sums&)::{lambda(double)#1} const&, double, double, std::array<double, 4ul> const&, std::array<double, 4ul> const&) [clone .constprop.0] [ours_cx]
+ 3,603,204,465 ( 9.29%)  ???:session_cpp::nurbs_interval::surface_bounds(session_cpp::NurbsSurface const&, std::array<double, 4ul> const&, std::array<double, 3ul> const&, session_cpp::nurbs_interval::SurfaceBounds&, bool, bool) [clone .constprop.0] [ours_cx]
+ 2,416,109,812 ( 6.23%)  ???:session_cpp::nurbs_interval::surface_controls(session_cpp::NurbsSurface const&, std::array<double, 4ul> const&, std::array<double, 3ul> const&, bool) [ours_cx]
+ 1,898,742,485 ( 4.89%)  ???:session_cpp::(anonymous namespace)::bound_seed_cell(session_cpp::NurbsSurface const&, std::array<double, 12ul>) [ours_cx]
+ 1,495,709,214 ( 3.86%)  ???:session_cpp::(anonymous namespace)::continuation_arcs(session_cpp::(anonymous namespace)::SurfaceSurfaceField const&, std::vector<std::array<double, 4ul>, std::allocator<std::array<double, 4ul> > > const&, bool, std::vector<session_cpp::(anonymous namespace)::ImplicitWalk, std::allocator<session_cpp::(anonymous namespace)::ImplicitWalk> > const&) [ours_cx]
+ 1,494,549,301 ( 3.85%)  ???:session_cpp::(anonymous namespace)::continuation_arc(session_cpp::(anonymous namespace)::SurfaceSurfaceField const&, std::array<double, 4ul> const&, std::array<double, 4ul> const&, std::array<double, 4ul>&, session_cpp::(anonymous namespace)::SurfaceSurfaceArc&, nlohmann::json_abi_v3_11_3::basic_json<nlohmann::json_abi_v3_11_3::ordered_map, std::vector, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool, long, unsigned long, double, std::allocator, nlohmann::json_abi_v3_11_3::adl_serializer, std::vector<unsigned char, std::allocator<unsigned char> >, void>*, std::map<std::array<double, 4ul>, std::array<session_cpp::nurbs_interval::Interval, 3ul>, std::less<std::array<double, 4ul> >, std::allocator<std::pair<std::array<double, 4ul> const, std::array<session_cpp::nurbs_interval::Interval, 3ul> > > >*) [ours_cx]
+ 1,477,564,883 ( 3.81%)  ???:session_cpp::brep_boolean::(anonymous namespace)::partition(session_cpp::BRep const&, session_cpp::BRep const&, session_cpp::brep_section::FaceResult const&, bool, double) [ours_cx]
+ 1,366,680,538 ( 3.52%)  ???:session_cpp::NurbsSurface::jet(double, double, int, std::array<session_cpp::xyz, 6ul>&) const [ours_cx]
+ 1,201,034,956 ( 3.10%)  ???:session_cpp::curve_surface_intersection::same_parameter(session_cpp::NurbsCurve const&, session_cpp::NurbsCurve const&, session_cpp::NurbsSurface const&, double, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*, session_cpp::curve_surface_intersection::ParameterFailure*) [ours_cx]
+ 1,181,316,704 ( 3.05%)  ???:session_cpp::curve_surface_intersection::same_parameter_once(session_cpp::NurbsCurve const&, session_cpp::NurbsCurve const&, session_cpp::NurbsSurface const&, double, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*, session_cpp::curve_surface_intersection::ParameterFailure*) [ours_cx]
+ 1,181,278,888 ( 3.04%)  ???:session_cpp::curve_surface_intersection::same_parameter_impl(session_cpp::NurbsCurve const&, session_cpp::NurbsCurve const&, session_cpp::NurbsSurface const&, double, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*, bool*, session_cpp::curve_surface_intersection::ParameterFailure*) [ours_cx]
+ 1,136,503,006 ( 2.93%)  ???:session_cpp::(anonymous namespace)::hulls_separated(std::vector<std::array<session_cpp::nurbs_interval::Interval, 4ul>, std::allocator<std::array<session_cpp::nurbs_interval::Interval, 4ul> > > const&, std::vector<std::array<session_cpp::nurbs_interval::Interval, 4ul>, std::allocator<std::array<session_cpp::nurbs_interval::Interval, 4ul> > > const&, session_cpp::Vector, session_cpp::Vector, session_cpp::Vector, session_cpp::Vector, double) [ours_cx]
+ 1,118,976,948 ( 2.88%)  ???:session_cpp::(anonymous namespace)::project_seed_controls(std::vector<std::array<session_cpp::nurbs_interval::Interval, 4ul>, std::allocator<std::array<session_cpp::nurbs_interval::Interval, 4ul> > > const&, session_cpp::Vector const&) [ours_cx]
+ 1,074,309,393 ( 2.77%)  ???:session_cpp::nurbs_interval::operator/(session_cpp::nurbs_interval::Interval, session_cpp::nurbs_interval::Divisor const&) [ours_cx]
+ 1,022,426,298 ( 2.64%)  ???:session_cpp::nurbs_interval::BlossomSteps::BlossomSteps<session_cpp::nurbs_interval::PaddedKnots>(session_cpp::nurbs_interval::PaddedKnots const&, int, int, double, double) [ours_cx]
+   887,528,558 ( 2.29%)  ???:session_cpp::brep_boolean::(anonymous namespace)::split_original_events(session_cpp::brep_boolean::(anonymous namespace)::Partition&, session_cpp::brep_section::FaceResult const&, bool, double) [ours_cx]
+   885,070,013 ( 2.28%)  ???:session_cpp::split::split_brep_edges_at_events(session_cpp::BRep const&, std::vector<session_cpp::split::EdgeEvent, std::allocator<session_cpp::split::EdgeEvent> > const&, double) [ours_cx]
+   868,615,462 ( 2.24%)  ???:session_cpp::curve_surface_intersection::(anonymous namespace)::certified_composition(session_cpp::NurbsCurve const&, session_cpp::NurbsCurve const&, session_cpp::NurbsSurface const&, double, double&) [ours_cx]
+   764,435,980 ( 1.97%)  ???:session_cpp::(anonymous namespace)::SurfaceSurfaceField::correct_on_seam(std::array<double, 4ul>&, int, session_cpp::(anonymous namespace)::SurfaceSurfaceGraph const*) const [clone .constprop.0] [ours_cx]
+   722,726,680 ( 1.86%)  ???:build(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [ours_cx]
+   720,129,215 ( 1.86%)  ???:session_cpp::file_step::read_file_step_breps(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, double) [ours_cx]
+   703,694,938 ( 1.81%)  ???:session_cpp::Closest::surface_point(session_cpp::NurbsSurface const&, session_cpp::Point const&, double, double, double, double) [ours_cx]
+   672,406,835 ( 1.73%)  ???:session_cpp::file_step::BRepBuilder::build_from_shell(int) [ours_cx]
+   671,377,072 ( 1.73%)  ???:session_cpp::file_step::BRepBuilder::add_face_projected(std::vector<int, std::allocator<int> > const&, int, bool) [ours_cx]
+   664,837,690 ( 1.71%)  ???:session_cpp::nurbs_interval::Factor::Factor(session_cpp::nurbs_interval::Interval) [ours_cx]
+   640,596,376 ( 1.65%)  ???:session_cpp::file_step::BRepBuilder::projected_loops(std::vector<int, std::allocator<int> > const&, session_cpp::file_step::Proj const&, session_cpp::NurbsSurface const&, int, bool, std::vector<session_cpp::file_step::Loop, std::allocator<session_cpp::file_step::Loop> >&) [ours_cx]
+   586,362,617 ( 1.51%)  ???:session_cpp::NurbsSurface::point(double, double) const [clone .part.0] [ours_cx]
+   582,976,151 ( 1.50%)  ???:session_cpp::split::split_brep_face_in_place(session_cpp::BRep&, int, std::vector<session_cpp::split::FaceCut, std::allocator<session_cpp::split::FaceCut> > const&, double, bool) [ours_cx]
+   582,975,622 ( 1.50%)  ???:session_cpp::split::(anonymous namespace)::split_face(session_cpp::BRep&, session_cpp::BRep const*, int, std::vector<session_cpp::split::FaceCut, std::allocator<session_cpp::split::FaceCut> > const&, double, session_cpp::split::ArrangementDiagnostic*, bool) [ours_cx]

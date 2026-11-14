@@ -1,0 +1,2 @@
+LOADOCCT schoring_body_end_0.stpbak ok read_s 0.0436 roots 1 solids 2 shells 2 faces 11 kinds=6,5,0,0,0,0,0 valid 1 volume 0.03692772792 bbox -0.0875,-0.0875,-2.8900,0.0875,0.0875,0.2100
+LOADOCCT schoring_body_start_0.stepbak ok read_s 0.1242 roots 1 solids 3 shells 3 faces 73 kinds=46,27,0,0,0,0,0 valid 1 volume 0.05580602651 bbox -0.1214,-0.0889,-0.0308,0.1156,0.1315,3.2692

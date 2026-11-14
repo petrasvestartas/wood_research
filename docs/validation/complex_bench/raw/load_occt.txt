@@ -1,0 +1,13 @@
+LOADOCCT solidbrep.stp ok read_s 0.0662 roots 1 solids 2 shells 2 faces 40 kinds=0,0,0,0,0,40,0 valid 1 volume 5889.408688 bbox -33.8088,-14.9234,-0.2445,6.8035,23.7083,44.9899
+LOADOCCT InputTwisted-object-0.step ok read_s 0.0110 roots 1 solids 1 shells 1 faces 6 kinds=0,0,0,0,0,6,0 valid 1 volume 20907.00092 bbox 4.2953,324.5773,-8.0893,33.5180,374.1936,46.5390
+LOADOCCT InputTwisted-object-1.step ok read_s 0.0085 roots 1 solids 1 shells 1 faces 6 kinds=0,0,0,0,0,6,0 valid 1 volume 20907.00092 bbox 4.2953,319.8135,0.3410,33.5180,374.1449,41.0092
+LOADOCCT schoring_body_end_0.stp ok read_s 0.0237 roots 1 solids 1 shells 1 faces 15 kinds=6,6,0,0,0,3,0 valid 1 volume 0.03624548614 bbox -0.0875,-0.0875,-2.8900,0.0875,0.1539,0.2100
+LOADOCCT schoring_body_end_1.step ok read_s 0.0034 roots 1 solids 1 shells 1 faces 4 kinds=2,2,0,0,0,0,0 valid 1 volume 0.005819438125 bbox -0.0625,-0.0625,-2.8900,0.0625,0.0625,0.0000
+LOADOCCT schoring_body_start_0.step ok read_s 0.1195 roots 1 solids 3 shells 3 faces 81 kinds=46,35,0,0,0,0,0 valid 1 volume 0.05581914257 bbox -0.1214,-0.0889,-0.0308,0.1156,0.1315,3.2692
+LOADOCCT schoring_body_start_1.step ok read_s 0.2610 roots 1 solids 4 shells 4 faces 160 kinds=160,0,0,0,0,0,0 valid 1 volume 0.0926252232 bbox -0.1319,-0.1214,-0.0005,0.1073,0.1264,5.2516
+LOADOCCT schoring_body_start_2.step ok read_s 0.1619 roots 1 solids 4 shells 4 faces 99 kinds=68,31,0,0,0,0,0 valid 1 volume 0.09107437169 bbox -0.0889,-0.1156,-0.0308,0.1315,0.1214,5.2690
+LOADOCCT schoring_body_start_3.step ok read_s 0.2291 roots 1 solids 5 shells 5 faces 125 kinds=90,35,0,0,0,0,0 valid 1 volume 0.126342718 bbox -0.0889,-0.1156,-0.0308,0.1315,0.1214,7.2690
+LOADOCCT schoring_foot_0.step ok read_s 0.0487 roots 1 solids 4 shells 4 faces 38 kinds=29,9,0,0,0,0,0 valid 1 volume 0.0005629621655 bbox -0.0430,-0.0670,-0.0000,0.2670,0.0580,0.0880
+LOADOCCT schoring_foot_1.step ok read_s 0.0208 roots 1 solids 1 shells 1 faces 18 kinds=10,8,0,0,0,0,0 valid 1 volume 0.0004600305857 bbox -0.1150,-0.1150,-0.0000,0.1150,0.1150,0.0100
+LOADOCCT schoring_head_0.step ok read_s 0.0870 roots 1 solids 10 shells 10 faces 75 kinds=46,25,0,0,0,4,0 valid 1 volume 0.001667877766 bbox -0.0951,-0.0651,-0.0151,0.2671,0.0651,0.1081
+LOADOCCT schoring_head_1.step ok read_s 0.0171 roots 1 solids 1 shells 1 faces 18 kinds=10,8,0,0,0,0,0 valid 1 volume 0.0004600305857 bbox -0.1150,-0.1150,-0.0000,0.1150,0.1150,0.0100
