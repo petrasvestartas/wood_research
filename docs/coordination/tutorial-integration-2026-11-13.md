@@ -23,3 +23,10 @@ Native collision qualification is complete: the unchanged frame harness runs wit
 The interrupted storage-limited wasm attempt, failed browser preload attempt and historical external-link failures remain available. Cache recovery moved only independently approved inactive files; the qualified storage-to-Windows-Job-to-FIFO topology terminated all owned descendants. No further cache move is authorized by the current documentation plan.
 
 Next: serialize the root pointer commit and publish the tested Session commit using `push_mono.sh --prepared`. Then integrate mathematics cumulatively and continue executable consolidation and per-file teaching coverage. The safe workflow must never force-push or stage all paths. Completion is not claimed while required acceptance remains unresolved.
+
+
+## Current local state, 2026-11-14
+
+- Published Session `f4f9428f` and root `1260fdcf` passed their CI workflows. Local Session `6d1ee7a8` retains the handoff, cumulative mathematics, historical-test repair and the other agent's 127 recorded figures; publication is pending.
+- Verified: 112 tooling tests, 27 mathematics native tests, optimized wasm/Trunk, mathematics desktop/upright interactions and strict documentation/browser checks. Historical hashes remain intact; physical-device acceptance is separate. The merged site and its original-image links also pass.
+- Remaining: 97 consolidations, 4,842 ownership rewrites, 25 inventory gaps, parity 299 missing/709 extra/five changed, real-scene integration and final startup. Shared edits and foreign `17-editor-3.rs` remain preserved.
