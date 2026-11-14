@@ -545,3 +545,16 @@ set in two parameters, as OCCT's `IntPatch_ImpImpIntersection` and
   subdivision), cylinder x sphere and cone x pyramid (1.2 to 1.3 times); volume of the results 2.3 s against 1.2 s.
 - Left: `interior_uv` and `shell_solid` in assembly on `Solid`, `parameter_mapping` copies for plane pairs,
   `Mesh` construction in every `NurbsSurface` copy, ray against recognised quadrics in closed form, WP11.
+
+## WP11 result and the state after it
+
+- WP11: span-pair certificate memo in `nurbs_memo::Scope` (a piece or a moved end re-proves only the spans whose
+  polynomial changed), point residuals bounded by outward de Boor triangles before blossom enclosures,
+  `curve_intersection::trim_piece` (bit-identical to the whole trim on 1.8 M pieces), control-box rejection before
+  span interval bounds, `same_parameter` calls `surface_section::on_flat_patch`. Not built: certify-only
+  `trim_parameters` (no sound seeding from the 3D events), coincident cuts by identity.
+- Merged under load 5 to 7: 75 booleans 5.7 s against OCCT 6.6 s; quiet on its base 5.5 s. Rows unchanged; suite
+  1635 of 1636 (bunny). Slower than OCCT: sphere x sphere, pyramid x sphere, cylinder x sphere, cone x pyramid.
+- Found by pictures (`occt_bench/images`): the BRep is right (volume equal to OCCT's to 6e-9) but `face_meshes`
+  mis-trims faces with loops on spheres (missing or untrimmed regions) and `tessellate` throws on 1 2 1 0 and does not
+  return on 6 2 2 0. Fix in progress; topology (extra section vertices against OCCT) traced in parallel.
