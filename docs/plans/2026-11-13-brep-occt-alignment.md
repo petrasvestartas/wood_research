@@ -558,3 +558,33 @@ set in two parameters, as OCCT's `IntPatch_ImpImpIntersection` and
 - Found by pictures (`occt_bench/images`): the BRep is right (volume equal to OCCT's to 6e-9) but `face_meshes`
   mis-trims faces with loops on spheres (missing or untrimmed regions) and `tessellate` throws on 1 2 1 0 and does not
   return on 6 2 2 0. Fix in progress; topology (extra section vertices against OCCT) traced in parallel.
+
+## Next phase, once every bench pair is at OCCT's speed: general shapes, any pose, hard cases
+
+Owner's request (2026-11-14): when the bench reaches OCCT's speed, generalise so that speed and accuracy hold for
+other shapes, any rotation and the hard cases, not only the 15 bench pairs. Each item below is gated the same way
+as the speed packages: results against OCCT (validity, faces/edges/vertices, volume), time against OCCT, tests.
+
+1. A wider bench (`native_boolean_bench` grows a second list, the OCCT driver the same): every pair of the seven
+   primitives plus freeform NURBS solids (lofted, swept, a bicubic patch solid), a fillet-like rolling-ball blend
+   and the chair models; each pair at many seeds with uniformly random rotations (not only the two poses of today),
+   random scales over 1e-3 to 1e6 and translations up to 1e6. Report per class: failures on each side, time ratio
+   median and worst, volume difference, topology match.
+2. Hard cases as their own list, each with an OCCT reference where OCCT succeeds:
+   - tangent contact: sphere on a plane, cylinder on a plane along a line, two spheres touching, internal tangency;
+   - coincident faces: box on box sharing a face or part of one, coaxial cylinders, a cylinder in its own hole;
+   - sections through singular points: a sphere's pole, a cone's apex, a torus's inner equator, Viviani's curve
+     (self-crossing section), a cone tangent to a plane;
+   - near cases: offsets of 1e-9 to 1e-6, almost parallel faces, tiny slivers and edges shorter than tolerance;
+   - features: thin walls, small holes in large solids, many holes, a result with several shells or cavities.
+   Pole, apex and touching sections fail today on both routes (WP9); this phase fixes them, OCCT's
+   IntPatch_ImpImpIntersection and IntAna_QuadQuadGeo being the reference for the tangent and singular cases.
+3. Generalise what the speed packages built for the bench primitives:
+   - the two-parameter seed search (WP9) and the ray closed forms (WP14) to every recognised quadric in any pose,
+     and a freeform route without the four-parameter search (designed in WP9, section 7);
+   - closed forms for quadric pairs where the marched route still dominates;
+   - the edge-joining step (topology) checked on every class of the wider bench, and the same topology as OCCT
+     wherever OCCT's extra cuts are not artefacts;
+   - meshing (`tessellate`, `face_meshes`) proved watertight on every result of both benches.
+4. Robustness rules: every fast path keeps its fallback; a fuzz sweep over the wider bench in CI (a short seed set)
+   and a long sweep nightly; no tolerance relaxed to pass a case.
