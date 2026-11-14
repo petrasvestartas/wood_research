@@ -31,6 +31,11 @@ Causes, all in `src/file_step.cpp`:
 - Pcurves built as 48-point polylines over [0, 47]: the parameter does not follow the 3D edge, so the certificate fails
   on the last span (the interval [46/47, 1] in every timber failure, the bellows union).
 
+Reference: OCCT's own reader and writer, `src/DataExchange/TKDESTEP` (StepFile, StepToTopoDS, StepToGeom; writing
+TopoDSToStep, GeomToStep) and `ShapeFix_Edge::FixSameParameter` for making a read edge and its pcurves agree; the
+logic is mirrored natively. The writer is checked by round trip: ours written, read by OCCT valid with the same faces
+and volume, and read back by ours identical.
+
 Done when: every solid OCCT loads also loads in ours, valid and closed, with OCCT's face count, each face's area within
 1e-6 and the volume within 1e-9; every edge certified at 1e-7; a picture of the loaded operands per file. Named cases:
 NEMA-17 bracket (left plate drawn as a triangle), bellows, timber dowel `elem21_cyl`, joint `joint00`.
