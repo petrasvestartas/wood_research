@@ -101,3 +101,22 @@ Top row ours, bottom row OCCT, same pair and pose; red squares are vertices. Mad
 ![drilled block x sphere](images/cmp_6_2_2_0.png)
 ![torus x cone](images/cmp_5_3_2_0.png)
 ![pyramid x sphere](images/cmp_4_2_1_0.png)
+
+## Three new pairs, 2026-11-14 (session_cpp 124f36e8)
+
+Cylinder x torus `1 5 4 0`, cone x sphere `3 2 5 0`, drilled block x cylinder `6 1 7 0`, random rotation, not in
+the bench (`shots/bench_args.cpp`, `shots/occt_args.cpp` take the pairs on the command line). Faces, edges, vertices
+identical in all 15 results; volumes equal to the six digits ours prints. Outputs `new_pairs_*.txt`.
+
+| | OCCT s | ours s (load 7.8) |
+| --- | --- | --- |
+| intersection, union, a-b, b-a | 0.419 | 1.030 |
+| xor | 0.416 | 0.259 |
+
+The bench totals flatter us: OCCT's xor here is two cuts and a fuse, ours one boolean. On the main bench the four
+single booleans are OCCT 3.13 s against ours 4.35 s (ours under load 4 to 6), xor 3.46 s against 1.20 s. The target
+is parity per single boolean.
+
+![cylinder x torus](images/cmp_1_5_4_0.png)
+![cone x sphere](images/cmp_3_2_5_0.png)
+![drilled block x cylinder](images/cmp_6_1_7_0.png)
