@@ -509,3 +509,21 @@ set in two parameters, as OCCT's `IntPatch_ImpImpIntersection` and
 - Left by both for later packages: `BRep::is_valid` per classification query, `parameter_mapping` for plane pairs,
   plane pairs in `surface_section`, `vertex_interval` in `split::arrange`, whole-model copies, `NurbsSurface::domain`
   validating per call, segment against conic arc, per-span polynomial cache for the evaluators, `NurbsCurve::trim`.
+
+## WP10 and WP9 results (session_cpp 3138b5f2 and the commit after it)
+
+- WP10: `FaceCurve::nodes`, `interior`, `FaceResult::joints`, `BoundaryEvent::inside`, `EdgePiece::exact`; cuts placed by
+  node identity, assembly by section and range, loop area in closed form, face splits in place. Identical results on
+  bench, tests and fuzz. Not built: `trim_parameters` still intersects (needs a seeded certificate, or a graze within
+  tolerance would be missed). 27 % of test face splits (coincident configurations) still take the old arrangement.
+- WP9: `src/nurbs_implicit.h`, `boundary_first_seeds`; seeds in two parameters for recognised surfaces, old search as
+  fallback (freeform pairs, poles, apex, touching, tolerance near 1e-12). Seed search 66 to 73 % of curved booleans
+  to under 0.2 %. A section is now cut where it crosses a crease knot (one more vertex in symmetric drills); a loop
+  beside a pole is returned once, not twice. Pole, apex and touching sections fail on both routes as before.
+- All four merged, quiet machine: 75 booleans 11.6 s against OCCT 6.6 s (2 times; 16 after WP3, 150 at baseline).
+  75 of 75 valid, faces, edges, vertices and printed volumes as before. Suite 1622 of 1623 in 350 s (bunny file).
+  Output: `docs/validation/2026-11-14-boolean-bench-wp7-wp10.txt`.
+- Ready, not applied: `wp9_length.patch` (arc length of the quintic by Gauss on its own derivative, 6 to 10 % fewer
+  instructions, rows identical). Next by measured cost: certificates once (`paired`, `validate`), `curve_intersection`
+  with a seed for `trim_parameters`, `continuation_arcs`, classification at the section edge, prepare once, threads,
+  per-span polynomial cache, freeform seeding, plane-route seeds from the two-parameter search.
