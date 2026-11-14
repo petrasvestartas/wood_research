@@ -1,0 +1,1 @@
+OP intersection ok bool_s 212.251453535 counts 33 87 58 shells 2 solids 2 valid 1 solid 1 vol_s 119.443612809 volume 841.147787950915

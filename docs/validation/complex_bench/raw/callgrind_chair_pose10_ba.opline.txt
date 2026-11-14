@@ -1,0 +1,1 @@
+OP b-a ok bool_s 114.82210532 counts 31 90 60 shells 1 solids 1 valid 1 solid 1 vol_s 218.92090237 volume 2520.28729172385
