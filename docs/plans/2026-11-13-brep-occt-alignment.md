@@ -527,3 +527,21 @@ set in two parameters, as OCCT's `IntPatch_ImpImpIntersection` and
   instructions, rows identical). Next by measured cost: certificates once (`paired`, `validate`), `curve_intersection`
   with a seed for `trim_parameters`, `continuation_arcs`, classification at the section edge, prepare once, threads,
   per-span polynomial cache, freeform seeding, plane-route seeds from the two-parameter search.
+
+## WP12 and WP13 results (session_cpp 7fe88f85 and the commit after it)
+
+- WP12 (section stage): plane side of a section certified on controls (`surface_section::on_flat_patch`), point
+  enclosures by one blossom, arc length on the quintic's derivative, empty plane pairs by separating axes,
+  `bernstein_roots` by sign. Rows unchanged. Not built: proved seeds on the plane route (1 % of time, still no proof),
+  closed forms for quadric pairs (own package: replaces the walk certificate by algebra).
+- WP13: `brep_classify::Solid` (model checked once, passed by the caller), one witness per group of faces joined off
+  the other solid's boundary in `select` (30 917 propagated faces against per-face classification: no mismatch),
+  `curve_bounds` at a point as one blossom (enclosures bit-identical on 100 M cases), knots inserted in place, volume
+  integrand on Bezier cells (volumes move at most 1.5e-15 relative). Behaviour change: `NurbsSurface::domain(dir)`
+  checks only that direction's knots.
+- Merged, WP11 running beside the bench: 75 booleans 6.2 s against OCCT 6.6 s; 150 s at baseline. 75 of 75 valid,
+  rows unchanged, suite 1629 of 1630 (bunny file). Output: `docs/validation/2026-11-14-boolean-bench-wp12-wp13.txt`.
+- Slower than OCCT still: pyramid x sphere (2 times), sphere x sphere (3 times, rays against curved faces by certified
+  subdivision), cylinder x sphere and cone x pyramid (1.2 to 1.3 times); volume of the results 2.3 s against 1.2 s.
+- Left: `interior_uv` and `shell_solid` in assembly on `Solid`, `parameter_mapping` copies for plane pairs,
+  `Mesh` construction in every `NurbsSurface` copy, ray against recognised quadrics in closed form, WP11.
