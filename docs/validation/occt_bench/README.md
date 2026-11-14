@@ -90,3 +90,14 @@ profile of the same bench (187.6 s inside `brep_boolean::apply`).
 3. OCCT is fast partly because it proves less: start points from a mesh, the reached tolerance
    from a swarm search, volume by fixed Gauss orders. Matching its time everywhere would mean
    giving up the certificates; matching its structure (intersect once, store, look up) does not.
+
+## Pictures, 2026-11-14 (session_cpp aa84c0f5)
+
+Top row ours, bottom row OCCT, same pair and pose; red squares are vertices. Made with `shots/`:
+`ours_dump.cpp` and `occt_dump.cpp` write the operands and the five results (face meshes, edges sampled, vertices),
+`page.html` draws them with three.js, `shoot.cjs` takes the pictures with Playwright.
+
+![cylinder x sphere](images/cmp_1_2_1_0.png)
+![drilled block x sphere](images/cmp_6_2_2_0.png)
+![torus x cone](images/cmp_5_3_2_0.png)
+![pyramid x sphere](images/cmp_4_2_1_0.png)
