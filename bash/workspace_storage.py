@@ -135,8 +135,8 @@ def main(argv=None):
     for name in ("check", "run"):
         mode = modes.add_parser(name)
         mode.add_argument("--root", type=Path, default=Path(__file__).resolve().parent.parent)
-        mode.add_argument("--total-gib", type=nonnegative, default=20)
-        mode.add_argument("--generated-gib", type=nonnegative, default=8)
+        mode.add_argument("--total-gib", type=nonnegative, default=36)
+        mode.add_argument("--generated-gib", type=nonnegative, default=24)
         if name == "run":
             mode.add_argument("--reserve-gib", type=nonnegative, default=1)
             mode.add_argument("--interval", type=nonnegative, default=5)
