@@ -4,7 +4,8 @@
 # Counted only where OCCT succeeds with a valid shape and our operands match OCCT's (stepfix/operands.tsv when it
 # exists, otherwise operand volumes measured here); the rest is listed apart. Where stepfix finds OCCT's GProp the
 # outlier on an operand, a volume within the accuracy of OCCT's mesh volume of the result counts as within the bound.
-# A case whose OCCT union is empty or breaks union = ∩ + A−B + B−A by over 1e-4 is listed apart with OCCT failures.
+# A case whose OCCT union is empty or breaks union = ∩ + A−B + B−A by over 1e-4 (unless GProp is the outlier there) is
+# listed apart with OCCT failures.
 # Writes judged.tsv (and changed.tsv).
 import os, re, sys, collections
 run = sys.argv[1]
@@ -38,11 +39,6 @@ def cls(msg):
 
 family = {(w[0], w[1]): w[2] for w in tsv(D + '/cases.tsv')}
 ref = {tuple(w[:3]): w[3:] for w in tsv(D + '/ref.tsv')}
-occt_bad = set()
-for key in {k[:2] for k in ref}:
-    v = {op: num(ref[key + (op,)][5]) for op in ('intersection', 'union', 'a-b', 'b-a') if ref.get(key + (op,), ['x'])[0] == 'ok'}
-    if 'union' in v and (v['union'] == 0 or (len(v) == 4 and abs(v['union'] - v['intersection'] - v['a-b'] - v['b-a']) > 1e-4 * abs(v['union']))):
-        occt_bad.add(key)
 band = collections.defaultdict(float)
 occt_op = {}
 for w in tsv(D + '/occt_operands.tsv'):
@@ -55,6 +51,11 @@ for w in tsv(STEPFIX):
         stepfix[key].append((w[7] == 'yes', w[8]))
         if 'GProp is the outlier' in w[8]:
             outlier.add(key)
+occt_bad = set()
+for key in {k[:2] for k in ref}:
+    v = {op: num(ref[key + (op,)][5]) for op in ('intersection', 'union', 'a-b', 'b-a') if ref.get(key + (op,), ['x'])[0] == 'ok'}
+    if 'union' in v and (v['union'] == 0 or (key not in outlier and len(v) == 4 and abs(v['union'] - v['intersection'] - v['a-b'] - v['b-a']) > 1e-4 * abs(v['union']))):
+        occt_bad.add(key)
 
 
 def operands_match(run_dir, results):
@@ -119,7 +120,7 @@ for k, (cat, where, c, why, r) in now.items():
 t = tally['N']
 n = sum(t.values())
 print('equal %d / %d (%.1f %%), volume-only %d, different %d, fail %d' % (t['equal'], n, 100.0 * t['equal'] / max(n, 1), t['volume-only'], t['different'], t['fail']))
-for w, label in (('operands', 'apart, operands differ from OCCT'), ('occt', 'apart, OCCT fails or invalid')):
+for w, label in (('operands', 'apart, operands differ from OCCT'), ('occt', 'apart, OCCT fails, invalid or inconsistent')):
     print('  %s: %d (%s)' % (label, sum(tally[w].values()), ', '.join('%s %d' % (c, tally[w][c]) for c in CATS)))
 unmeasured = sum(1 for v in now.values() if v[3] == 'unmeasured')
 if unmeasured:
