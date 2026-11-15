@@ -27,17 +27,27 @@ def cap():
     resource.setrlimit(resource.RLIMIT_AS, (4 << 30, 4 << 30))
 
 
-def ours(c, n):
+def drv(args, wire=[]):
+    for nomesh in ('', '1'):
+        try:
+            return subprocess.run([DRV] + args, capture_output=True, text=True, timeout=60, preexec_fn=cap,
+                                  env=dict(os.environ, **({'SCORE_NOMESH': '1'} if nomesh else {})))
+        except subprocess.TimeoutExpired:
+            wire.append(1)
+    raise subprocess.TimeoutExpired(args, 60)
+
+
+def ours(c, n, wire):
     f = '%s/ours_ops_%s.json' % (work, n)
     try:
-        subprocess.run([DRV, 'operands', c[4], c[5], f], capture_output=True, timeout=120, preexec_fn=cap)
+        drv(['operands', c[4], c[5], f], wire)
         panels = [p or dict(EMPTY, error='operand fails to load') for p in json.load(open(f))]
     except Exception:
         panels = [dict(EMPTY, error='operands fail to load'), dict(EMPTY)]
     for op in OPS:
         f = '%s/ours_%s_%s.json' % (work, n, op)
         try:
-            p = subprocess.run([DRV, 'bool', c[4], c[5], op, c[3], f], capture_output=True, text=True, timeout=120, preexec_fn=cap)
+            p = drv(['bool', c[4], c[5], op, c[3], f], wire)
             line = next((l for l in p.stdout.splitlines() if l.startswith('BOOL')), 'BOOL %s CRASH' % op).split(None, 10)
             panels.append(json.load(open(f)) if line[2] == 'ok' else dict(EMPTY, error=' '.join([line[2]] + line[10:])))
         except Exception as e:
@@ -58,9 +68,11 @@ jobs = []
 for w in todo:
     c = cases[(w[0], w[1])]
     n = re.sub(r'[^A-Za-z0-9_.-]', '_', w[1])
-    json.dump(ours(c, n), open('%s/ours_%s.json' % (work, n), 'w'))
+    wire = []
+    json.dump(ours(c, n, wire), open('%s/ours_%s.json' % (work, n), 'w'))
     json.dump(occt(c, n), open('%s/occt_%s.json' % (work, n), 'w'))
-    jobs.append([n, html.escape('%s (%s): %s' % (w[1], c[2], w[2] if len(w) > 2 else ''))])
+    note = '  (ours drawn as edges where meshing took over 60 s)' if wire else ''
+    jobs.append([n, html.escape('%s (%s): %s%s' % (w[1], c[2], w[2] if len(w) > 2 else '', note))])
 for k in range(0, len(jobs), 8):
     batch = jobs[k:k + 8]
     subprocess.run(['timeout', '1800', 'node', work + '/shoot.cjs', work, json.dumps(batch)], cwd=work,

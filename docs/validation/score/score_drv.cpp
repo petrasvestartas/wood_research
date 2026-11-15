@@ -3,6 +3,7 @@
 //     OPS <volA> <validA> <volB> <validB>                       only with SCORE_OPS=1, before the boolean
 //     BOOL <op> <status> <bool_s> <faces> <edges> <vertices> <valid> <solid> <volume> [message]
 //   score_drv operands <specA> <specB> <dump.json>
+// Picture dumps mesh the faces coarsely; SCORE_NOMESH=1 dumps edges and vertices only.
 // A spec is step=<path> (the shell of largest volume) or step=<path>#<i>, box=sx,sy,sz (centred), cyl=r,h, cone=r,h
 // or sph=r, then |-separated moves in order: t=x,y,z, r=ax,ay,az,deg,cx,cy,cz or m=<3x4 row-major>. op: intersection
 // union a-b b-a xor.
@@ -135,7 +136,7 @@ static std::string dump(const BRep& r) {
     std::ostringstream idx;
     size_t base = 0;
     bool first = true;
-    for (const Mesh& m : r.face_meshes_q(true, 30.0, 0.01)) {
+    for (const Mesh& m : std::getenv("SCORE_NOMESH") ? std::vector<Mesh>{} : r.face_meshes_q(true, 30.0, 0.01)) {
         const auto [vs, fs] = m.to_vertices_and_faces();
         for (size_t i = 0; i < vs.size(); ++i) o << (base + i ? "," : "") << vs[i][0] << "," << vs[i][1] << "," << vs[i][2];
         for (const auto& f : fs)
