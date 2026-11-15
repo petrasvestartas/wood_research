@@ -1,5 +1,5 @@
 # pics.py <run dir> [--max 40] [--cases <file>]: pictures of the cases in <run dir>/changed.tsv (judge.py --prev),
-# ours (this run's driver) on top, OCCT below; columns operands, ∩, ∪, A−B, B−A, ⊕. Writes <run dir>/pics/<case>.png.
+# ours (this run's build and entry, driver relinked for coarse picture meshes) on top, OCCT below; columns operands, ∩, ∪, A−B, B−A, ⊕. Writes <run dir>/pics/<case>.png.
 import html, json, os, re, resource, shutil, subprocess, sys
 run = sys.argv[1]
 opt = dict(zip(sys.argv[2::2], sys.argv[3::2]))
@@ -15,6 +15,10 @@ for f in ('page.html', 'shoot.cjs'):
     shutil.copy(os.path.join(HERE, f), work)
 if not os.path.exists(work + '/node_modules'):
     os.symlink(S + '/shots/node_modules', work + '/node_modules')
+DRV = pics + '/drv'
+if not os.path.exists(DRV):
+    build, entry = open(run + '/run.info').read().split()[:2]
+    subprocess.run(['timeout', '600', 'bash', HERE + '/link.sh', build, DRV, entry], check=True)
 cases = {(w[0], w[1]): w for w in (l.rstrip('\n').split('\t') for l in open(D + '/cases.tsv') if not l.startswith('#'))}
 todo = [l.rstrip('\n').split('\t') for l in open(opt.get('--cases', run + '/changed.tsv')) if l.strip()][:int(opt.get('--max', 40))]
 
@@ -26,14 +30,14 @@ def cap():
 def ours(c, n):
     f = '%s/ours_ops_%s.json' % (work, n)
     try:
-        subprocess.run([run + '/drv', 'operands', c[4], c[5], f], capture_output=True, timeout=300, preexec_fn=cap)
+        subprocess.run([DRV, 'operands', c[4], c[5], f], capture_output=True, timeout=120, preexec_fn=cap)
         panels = [p or dict(EMPTY, error='operand fails to load') for p in json.load(open(f))]
     except Exception:
         panels = [dict(EMPTY, error='operands fail to load'), dict(EMPTY)]
     for op in OPS:
         f = '%s/ours_%s_%s.json' % (work, n, op)
         try:
-            p = subprocess.run([run + '/drv', 'bool', c[4], c[5], op, c[3], f], capture_output=True, text=True, timeout=300, preexec_fn=cap)
+            p = subprocess.run([DRV, 'bool', c[4], c[5], op, c[3], f], capture_output=True, text=True, timeout=120, preexec_fn=cap)
             line = next((l for l in p.stdout.splitlines() if l.startswith('BOOL')), 'BOOL %s CRASH' % op).split(None, 10)
             panels.append(json.load(open(f)) if line[2] == 'ok' else dict(EMPTY, error=' '.join([line[2]] + line[10:])))
         except Exception as e:

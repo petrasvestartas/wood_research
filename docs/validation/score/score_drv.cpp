@@ -135,7 +135,7 @@ static std::string dump(const BRep& r) {
     std::ostringstream idx;
     size_t base = 0;
     bool first = true;
-    for (const Mesh& m : r.face_meshes()) {
+    for (const Mesh& m : r.face_meshes_q(true, 30.0, 0.01)) {
         const auto [vs, fs] = m.to_vertices_and_faces();
         for (size_t i = 0; i < vs.size(); ++i) o << (base + i ? "," : "") << vs[i][0] << "," << vs[i][1] << "," << vs[i][2];
         for (const auto& f : fs)
