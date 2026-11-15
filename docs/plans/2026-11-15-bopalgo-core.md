@@ -12,7 +12,9 @@ corpus booleans 474 equal OCCT and 1180 fail; on the 785 timber booleans 229 fai
 Decision, 2026-11-15 (owner): `bop_*` translates OCCT's BOPDS, BOPAlgo, BOPTools and IntTools close to line by line,
 not only their structure, as the fastest route to OCCT's robustness. OCCT is LGPL 2.1 with the Open CASCADE
 exception, so these translated files are a derivative of OCCT and fall under that licence. They are listed, with
-OCCT's copyright, in `session_cpp/NOTICE-OCCT.md`; the rest of the kernel is unaffected. All work stays in
+OCCT's copyright, in `session_cpp/NOTICE-OCCT.md`; the rest of the kernel is unaffected. OCCT is a reference
+only: no OCCT source, header or library is copied, vendored, included or linked; the code is written in the kernel's
+own types and builds without OCCT. All work stays in
 petrasvestartas/wood_research#2 until it is merged.
 
 ## The one number
