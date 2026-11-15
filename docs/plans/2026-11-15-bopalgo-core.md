@@ -9,6 +9,12 @@ Why: real files are loose (OCCT's edge tolerance is above 1e-5 in 41 of 98 corpu
 refuses wherever its 1e-7 proofs fail, and fixing that one failure class at a time has not converged. On the 1850
 corpus booleans 474 equal OCCT and 1180 fail; on the 785 timber booleans 229 fail.
 
+Decision, 2026-11-15 (owner): `bop_*` translates OCCT's BOPDS, BOPAlgo, BOPTools and IntTools close to line by line,
+not only their structure, as the fastest route to OCCT's robustness. OCCT is LGPL 2.1 with the Open CASCADE
+exception, so these translated files are a derivative of OCCT and fall under that licence. They are listed, with
+OCCT's copyright, in `session_cpp/NOTICE-OCCT.md`; the rest of the kernel is unaffected. All work stays in
+petrasvestartas/wood_research#2 until it is merged.
+
 ## The one number
 
 The share of the 2635 real booleans (1850 corpus, 785 timber) that equal OCCT. Equal means: both valid; face, edge
