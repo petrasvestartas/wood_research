@@ -13,7 +13,7 @@ ManifoldSolidBrep BrepWithVoids ShellBasedSurfaceModel OrientedClosedShell Plane
 SurfaceOfRevolution BSplineSurfaceWithKnots BSplineSurfaceWithKnotsAndRationalBSplineSurface QuasiUniformSurface QuasiUniformSurfaceAndRationalBSplineSurface
 BezierSurface UniformSurface Line Circle Ellipse Hyperbola Polyline BSplineCurveWithKnots BSplineCurveWithKnotsAndRationalBSplineCurve QuasiUniformCurve
 QuasiUniformCurveAndRationalBSplineCurve BezierCurve UniformCurve TrimmedCurve SurfaceCurve SeamCurve IntersectionCurve Pcurve CartesianPoint Direction Vector
-Axis2Placement3d Axis2Placement2d Axis1Placement'''.split())
+Axis2Placement3d Axis2Placement2d Axis1Placement GeometricCurveSet GeometricSet'''.split())
 GEOM = re.compile(r'Step(Geom|Shape)_')
 def load(p, tag):
     out = collections.defaultdict(list)
