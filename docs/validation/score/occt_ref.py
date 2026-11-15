@@ -1,8 +1,12 @@
 # OCCT side of the scoreboard, through the cadquery-ocp wheel (OCCT 8.0.1). Specs as score_drv.cpp plus brep=<path>.
 #   occt_ref.py bool <specA> <specB> [dump.json]   five lines: <op> <status> <faces> <edges> <vertices> <valid> <volume> [msg]
+#   occt_ref.py ref <cases.tsv> <out.tsv> [<k>/<n>]   the reference, shard k of n (skips cases in any occt_ref_full*.tsv beside out):
+#     suite case op status faces edges vertices valid volume meshvol meshacc [msg]
 #   occt_ref.py operands <cases.tsv> <out.tsv> [regex]   per operand: suite case side volume area tolband maxtol valid
+# Volumes are GProp's adaptive ones (eps 1e-9). meshvol/meshacc (OCCT's mesh volume at 2e-5 of the diagonal and its
+# twice its change from 4e-5) only for the cases in MESH_CASES, where GProp is the outlier on an operand; '-' elsewhere.
 # tolband = sum over faces of area * face tolerance: how far the volume may move within the operand's own tolerance.
-import sys, re, math, json, time
+import glob, os, re, sys, math, json, subprocess
 from OCP.STEPControl import STEPControl_Reader
 from OCP.IFSelect import IFSelect_RetDone
 from OCP.TopoDS import TopoDS, TopoDS_Shape
@@ -43,8 +47,31 @@ def count(s, t):
 
 def volume(s):
     g = GProp_GProps()
-    BRepGProp.VolumeProperties_s(s, g)
+    BRepGProp.VolumeProperties_s(s, g, 1e-9)
     return g.Mass()
+
+
+def diagonal(s):
+    b = Bnd_Box()
+    BRepBndLib.Add_s(s, b)
+    return 1.0 if b.IsVoid() else b.CornerMin().Distance(b.CornerMax())
+
+
+def mesh_volume(s, k):
+    BRepTools.Clean_s(s)
+    BRepMesh_IncrementalMesh(s, k * diagonal(s), False, 0.5, True)
+    v = 0.0
+    for f in items(s, TopAbs_FACE):
+        face, loc = TopoDS.Face(f), TopLoc_Location()
+        t = BRep_Tool.Triangulation_s(face, loc)
+        if t is None:
+            return float('nan')
+        tr, rev = loc.Transformation(), face.Orientation() == TopAbs_REVERSED
+        for i in range(1, t.NbTriangles() + 1):
+            a, b, c = t.Triangle(i).Get()
+            p, q, r = (t.Node(j).Transformed(tr) for j in ((a, c, b) if rev else (a, b, c)))
+            v += (p.X() * (q.Y() * r.Z() - q.Z() * r.Y()) - p.Y() * (q.X() * r.Z() - q.Z() * r.X()) + p.Z() * (q.X() * r.Y() - q.Y() * r.X())) / 6
+    return v
 
 
 def area(s):
@@ -58,6 +85,13 @@ def file_unit_mm(path):
     m = re.search(r"CONVERSION_BASED_UNIT\s*\(\s*'(INCH|FOOT|IN|FT)'", t)
     if m:
         return 25.4 if m.group(1) in ('INCH', 'IN') else 304.8
+    ents = dict(re.findall(r'#(\d+)=([^;]*);', re.sub(r'\s+', '', t)))
+    for body in ents.values():
+        m = re.search(r"CONVERSION_BASED_UNIT\('[^']*',#(\d+)\)", body)
+        v = m and 'LENGTH_UNIT' in body and re.search(r'LENGTH_MEASURE\(([-+.0-9E]+)\),#(\d+)', ents.get(m.group(1), ''))
+        if v:
+            p = re.search(r'SI_UNIT\(([.A-Z$]+),\.METRE\.', ents.get(v.group(2), ''))
+            return float(v.group(1)) * {'.MILLI.': 1.0, '.CENTI.': 10.0, '.DECI.': 100.0, '$': 1000.0, '.KILO.': 1e6, '.MICRO.': 1e-3}.get(p.group(1) if p else '.MILLI.', 1.0)
     m = re.search(r"LENGTH_UNIT\s*\(\s*\)\s*NAMED_UNIT\s*\(\s*\*\s*\)\s*SI_UNIT\s*\(\s*([.A-Z$]+)\s*,\s*\.METRE\.", t) or \
         re.search(r"SI_UNIT\s*\(\s*([.A-Z$]+)\s*,\s*\.METRE\.", t)
     if m:
@@ -169,7 +203,7 @@ def booleans(sa, sb, out):
         a, b = build(sa), build(sb)
     except Exception as e:
         for op in OPS:
-            print(op, 'LOADFAIL 0 0 0 0 nan', str(e)[:200], flush=True)
+            print(op, 'LOADFAIL 0 0 0 0 nan - -', str(e)[:200], flush=True)
         return
     panels = [dump(a), dump(b)] if out else None
     for op in OPS:
@@ -183,13 +217,18 @@ def booleans(sa, sb, out):
             if not algo.IsDone():
                 raise RuntimeError('NotDone')
         except Exception as e:
-            print(op, 'FAIL 0 0 0 0 nan', str(e)[:200], flush=True)
+            print(op, 'FAIL 0 0 0 0 nan - -', str(e)[:200], flush=True)
             if panels is not None:
                 panels.append(dict(EMPTY, error='OCCT FAIL'))
             continue
         nf = count(r, TopAbs_FACE)
         valid = int(nf == 0 or BRepCheck_Analyzer(r).IsValid())
-        print(op, 'ok', nf, count(r, TopAbs_EDGE), count(r, TopAbs_VERTEX), valid, '%.15g' % volume(r), flush=True)
+        mesh = '- -'
+        if os.environ.get('MESH') and nf:
+            coarse = mesh_volume(r, 4e-5)
+            fine = mesh_volume(r, 2e-5)
+            mesh = '%.15g %.3g' % (fine, 2 * abs(fine - coarse))
+        print(op, 'ok', nf, count(r, TopAbs_EDGE), count(r, TopAbs_VERTEX), valid, '%.15g' % volume(r), mesh, flush=True)
         if panels is not None:
             panels.append(dump(r))
     if out:
@@ -220,8 +259,32 @@ def operands(cases, out, rx):
             f.flush()
 
 
+def reference(cases, out, shard):
+    k, n = map(int, shard.split('/'))
+    mesh = set(os.environ.get('MESH_CASES', '').split(','))
+    done = {tuple(l.split('\t')[:2]) for f in glob.glob(os.path.join(os.path.dirname(out) or '.', 'occt_ref_full*.tsv')) for l in open(f)}
+    rows = [l.rstrip('\n').split('\t') for l in open(cases) if not l.startswith('#')]
+    with open(out, 'a') as f:
+        for i, w in enumerate(rows):
+            if i % n != k or (w[0], w[1]) in done:
+                continue
+            env = dict(os.environ, MESH='1' if w[1] in mesh else '')
+            try:
+                lines = subprocess.run([sys.executable, '-I', os.path.abspath(__file__), 'bool', w[6], w[7]], capture_output=True,
+                                       text=True, timeout=1800, env=env).stdout.splitlines()
+            except subprocess.TimeoutExpired:
+                lines = []
+            got = {l.split()[0]: l.split(None, 9) for l in lines if l.split() and l.split()[0] in OPS}
+            for op in OPS:
+                g = got.get(op, [op, 'TIMEOUT' if not lines else 'CRASH', '0', '0', '0', '0', 'nan', '-', '-'])
+                f.write('\t'.join([w[0], w[1]] + g[:9] + [g[9] if len(g) > 9 else '']) + '\n')
+            f.flush()
+
+
 if __name__ == '__main__':
     if sys.argv[1] == 'bool':
         booleans(sys.argv[2], sys.argv[3], sys.argv[4] if len(sys.argv) > 4 else None)
+    elif sys.argv[1] == 'ref':
+        reference(sys.argv[2], sys.argv[3], sys.argv[4] if len(sys.argv) > 4 else '0/1')
     else:
         operands(sys.argv[2], sys.argv[3], sys.argv[4] if len(sys.argv) > 4 else None)

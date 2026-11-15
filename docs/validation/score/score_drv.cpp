@@ -52,6 +52,7 @@ static std::string clean(std::string m) {
 
 static BRep largest(const std::vector<BRep>& breps) {
     if (breps.empty()) throw std::runtime_error("STEP file holds no BRep");
+    if (breps.size() == 1) return breps[0];
     size_t best = 0;
     double best_volume = -1.0;
     for (size_t i = 0; i < breps.size(); ++i) {

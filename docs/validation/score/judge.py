@@ -2,7 +2,9 @@
 # equal: both valid, face/edge/vertex counts equal, volume within 1e-6 relative or within the operands' tolerance band;
 # volume-only: volume within that bound, counts or validity differ; different: volume outside it; fail: no result.
 # Counted only where OCCT succeeds with a valid shape and our operands match OCCT's (stepfix/operands.tsv when it
-# exists, otherwise operand volumes measured here); the rest is listed apart. Writes judged.tsv (and changed.tsv).
+# exists, otherwise operand volumes measured here); the rest is listed apart. Where stepfix finds OCCT's GProp the
+# outlier on an operand, a volume within the accuracy of OCCT's mesh volume of the result counts as within the bound.
+# Writes judged.tsv (and changed.tsv).
 import os, re, sys, collections
 run = sys.argv[1]
 opt = dict(zip(sys.argv[2::2], sys.argv[3::2]))
@@ -40,11 +42,13 @@ occt_op = {}
 for w in tsv(D + '/occt_operands.tsv'):
     occt_op[(w[0], w[1], w[2])] = (num(w[3]), num(w[5]) if w[5] != 'nan' else 0.0)
     band[(w[0], w[1])] += occt_op[(w[0], w[1], w[2])][1]
-stepfix = collections.defaultdict(list)
+stepfix, outlier = collections.defaultdict(list), set()
 for w in tsv(STEPFIX):
-    yes = [x.strip().lower() for x in w if x.strip().lower() in ('yes', 'no')]
-    if yes:
-        stepfix[w[0]].append((yes[-1] == 'yes', w[-1] if yes[-1] == 'no' else ''))
+    if w[0] != 'bench':
+        key = ('cx' if w[0] == 'timber' else w[0], w[1])
+        stepfix[key].append((w[7] == 'yes', w[8]))
+        if 'GProp is the outlier' in w[8]:
+            outlier.add(key)
 
 
 def operands_match(run_dir, results):
@@ -52,11 +56,11 @@ def operands_match(run_dir, results):
     loadfail = {k[:2]: r[-1] for k, r in results.items() if r[0] == 'LOADFAIL'}
     out = {}
     for key in {k[:2] for k in results}:
-        if key[1] in stepfix:
-            bad = [why for ok, why in stepfix[key[1]] if not ok]
-            out[key] = (not bad, 'stepfix: ' + (bad[0] if bad else ''))
-        elif key in loadfail:
+        if key in loadfail:
             out[key] = (False, 'ours fails to load: ' + cls(loadfail[key]))
+        elif key in stepfix:
+            bad = [why for ok, why in stepfix[key] if not ok]
+            out[key] = (not bad, 'stepfix: ' + (bad[0] if bad else 'equal'))
         elif key not in ours:
             out[key] = (True, 'unmeasured')
         else:
@@ -81,7 +85,7 @@ def judge(run_dir):
         status, faces, valid, solid, vol, msg = r[0], r[3], r[6], r[7], num(r[8]), r[9] if len(r) > 9 else ''
         if r[0] == 'ok':
             bound = max(1e-6 * abs(num(o[5])), band[k[:2]]) if o else 0
-            same_v = o is not None and abs(vol - num(o[5])) <= bound
+            same_v = o is not None and (abs(vol - num(o[5])) <= bound or (k[:2] in outlier and abs(vol - num(o[6])) <= num(o[7])))
             good = faces == '0' or (valid == '1' and solid == '1')
             cat = 'equal' if same_v and good and r[3:6] == o[1:4] else 'volume-only' if same_v else 'different'
         else:
