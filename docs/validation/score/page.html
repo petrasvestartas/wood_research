@@ -1,0 +1,59 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+body{margin:0;background:#fff;font:13px/1.3 -apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:#222}
+#t{position:absolute;left:0;top:0;width:100%;pointer-events:none}
+.lab{position:absolute;text-align:center;font-weight:600;font-size:12px}
+.cnt{font-weight:400;color:#555}
+.bad{color:#c0392b}
+.row{position:absolute;left:6px;writing-mode:vertical-rl;transform:rotate(180deg);font-weight:700;font-size:14px}
+h1{position:absolute;left:40px;top:6px;margin:0;font-size:16px}
+</style></head><body><canvas id="c"></canvas><div id="t"></div>
+<script src="node_modules/three/build/three.min.js"></script>
+<script>
+async function run(name, title){
+  const ours = await (await fetch('ours_'+name+'.json')).json();
+  const occt = await (await fetch('occt_'+name+'.json')).json();
+  const cols = 6, cw = 330, ch = 300, top = 34, left = 30;
+  const W = left + cols*cw, H = top + 2*ch + 10;
+  const canvas = document.getElementById('c'); canvas.width = W*2; canvas.height = H*2; canvas.style.width=W+'px'; canvas.style.height=H+'px';
+  const r = new THREE.WebGLRenderer({canvas, antialias:true}); r.setPixelRatio(2); r.setSize(W,H); r.setClearColor(0xffffff); r.setScissorTest(true);
+  const all = [...ours, ...occt]; let lo=[1e9,1e9,1e9], hi=[-1e9,-1e9,-1e9];
+  for (const s of all) for (let i=0;i<s.pos.length;i+=3) for (let k=0;k<3;k++){lo[k]=Math.min(lo[k],s.pos[i+k]);hi[k]=Math.max(hi[k],s.pos[i+k]);}
+  const c = new THREE.Vector3((lo[0]+hi[0])/2,(lo[1]+hi[1])/2,(lo[2]+hi[2])/2), rad = Math.hypot(hi[0]-lo[0],hi[1]-lo[1],hi[2]-lo[2])/2;
+  const cam = new THREE.PerspectiveCamera(30, cw/ch, rad*0.01, rad*100);
+  const dir = new THREE.Vector3(1.0,-1.25,0.9).normalize(); cam.up.set(0,0,1);
+  cam.position.copy(c).addScaledVector(dir, rad/Math.sin(15*Math.PI/180)*1.05); cam.lookAt(c);
+  const labels = document.getElementById('t'); labels.innerHTML = '<h1>'+title+'</h1>';
+  const names = ['operands A, B','A ∩ B','A ∪ B','A − B','B − A','A ⊕ B'];
+  function scene(s, extra, vcol){
+    const sc = new THREE.Scene();
+    sc.add(new THREE.HemisphereLight(0xffffff,0x8090a0,1.6)); const d=new THREE.DirectionalLight(0xffffff,1.4); d.position.copy(cam.position); sc.add(d);
+    const add = (s, color, opacity) => {
+      const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(s.pos,3)); g.setIndex(s.idx); g.computeVertexNormals();
+      sc.add(new THREE.Mesh(g, new THREE.MeshStandardMaterial({color, roughness:0.75, metalness:0, side:THREE.DoubleSide, transparent:opacity<1, opacity, polygonOffset:true, polygonOffsetFactor:1, polygonOffsetUnits:1, depthWrite:opacity>=1})));
+      for (const e of s.edges){ const lg=new THREE.BufferGeometry(); lg.setAttribute('position', new THREE.Float32BufferAttribute(e,3)); sc.add(new THREE.Line(lg,new THREE.LineBasicMaterial({color:0x111111}))); }
+      const pts = new THREE.BufferGeometry(); pts.setAttribute('position', new THREE.Float32BufferAttribute(s.verts,3));
+      sc.add(new THREE.Points(pts, new THREE.PointsMaterial({color:vcol, size:9, sizeAttenuation:false, depthTest:false})));
+    };
+    add(s, 0xc9d3de, 1); if (extra) add(extra, 0xe8c9a8, 1);
+    return sc;
+  }
+  for (let row=0; row<2; row++){
+    const set = row ? occt : ours, other = row ? ours : occt;
+    const rl = document.createElement('div'); rl.className='row'; rl.style.top=(top+row*ch+ch/2-30)+'px'; rl.textContent = row ? 'OCCT' : 'session_cpp'; labels.appendChild(rl);
+    for (let col=0; col<cols; col++){
+      const x = left + col*cw, y = top + row*ch;
+      r.setViewport(x, H-y-ch, cw, ch); r.setScissor(x, H-y-ch, cw, ch);
+      const s = col ? set[col+1] : set[0], ex = col ? null : set[1];
+      r.render(scene(s, ex, 0xd0021b), cam);
+      const l = document.createElement('div'); l.className='lab'; l.style.left=x+'px'; l.style.width=cw+'px'; l.style.top=(y+ch-34)+'px';
+      let cnt = '';
+      const esc = t => String(t).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+      if (s.error){ cnt = '<br><span class="bad">'+esc(s.error).slice(0,90)+'</span>'; }
+      else if (col){ const a=s.counts, b=other[col+1].counts; cnt = '<br><span class="cnt">faces <span class="'+(a[0]!=b[0]?'bad':'')+'">'+a[0]+'</span> · edges <span class="'+(a[1]!=b[1]?'bad':'')+'">'+a[1]+'</span> · vertices <span class="'+(a[2]!=b[2]?'bad':'')+'">'+a[2]+'</span></span>'; }
+      else { const ea=set[0].error||'', eb=set[1].error||''; if (ea||eb) cnt='<br><span class="bad">'+esc(ea||eb).slice(0,90)+'</span>'; }
+      l.innerHTML = names[col] + cnt; labels.appendChild(l);
+    }
+  }
+  return 'ok';
+}
+</script></body></html>

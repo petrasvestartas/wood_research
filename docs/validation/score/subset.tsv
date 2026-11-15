@@ -1,0 +1,151 @@
+#suite	case	op	family	old outcome	old class	why
+corpus	forum123416#mesh_cone	b-a	forum	equal		fill
+corpus	forum163125#box_cone_base	intersection	forum	equal		fill
+corpus	forum163125#box_cyl_inside	xor	forum	equal		family
+corpus	forum213347#lining_brace	b-a	forum	equal		fill
+corpus	forum213347#lining_brace	intersection	forum	equal		fill
+corpus	forum216730#rod_thread	a-b	forum	fail	Cutter midpoint is on the boundary without established overlap ownership	family
+corpus	github_misc__as1-ac-214#box	xor	github	different		family
+corpus	github_misc__as1-ac-214#cyl	a-b	github	different		fill
+corpus	github_misc__as1-ac-214#sph	xor	github	fail	Curve intersection has a constant input or tolerance below coordinate resolution	class
+corpus	github_misc__nema-17-bracket#rot30x	b-a	github	fail	Native SSI could not resolve an overlapping rational hull pair	fill
+corpus	github_misc__nema-17-bracket#rot30x	xor	github	fail	Native SSI could not resolve an overlapping rational hull pair	fill
+corpus	github_misc__nema-17-bracket#rot5z	b-a	github	fail	Native SSI could not resolve an overlapping rational hull pair	fill
+corpus	github_misc__nema-17-bracket#sph	union	github	equal		family
+corpus	hf_brepground__00019536_chamfer_10#rot30x	b-a	BRepGround	fail	Native SSI could not resolve an overlapping rational hull pair	fill
+corpus	hf_brepground__00019536_chamfer_10#rot5z	union	BRepGround	fail	On-surface overlap needs a certified parameter mapping	class
+corpus	hf_brepground__00042148_fillet_11#cyl	union	BRepGround	volume-only		family
+corpus	hf_brepground__00042148_fillet_11#rot5z	a-b	BRepGround	fail	Native SSI could not resolve an overlapping rational hull pair	fill
+corpus	hf_brepground__00071814_fillet_15#cyl	b-a	BRepGround	fail	Split curve/trim correspondence is unresolved: Composition bound unresolved	fill
+corpus	hf_brepground__00071814_fillet_15#cyl	union	BRepGround	fail	Split curve/trim correspondence is unresolved: Composition bound unresolved	class
+corpus	hf_brepground__00071814_fillet_15#rot30x	a-b	BRepGround	fail	Native SSI could not resolve an overlapping rational hull pair	fill
+corpus	hf_brepground__00071814_fillet_15#sph	a-b	BRepGround	fail	pcurve same-parameter certification is unresolved	class
+corpus	hf_brepground__00071814_fillet_15#sph	intersection	BRepGround	equal		family
+corpus	hf_brepground__00170968_fillet_10#sph	xor	BRepGround	different		family
+corpus	hf_brepground__00171214_fillet_11#box	a-b	BRepGround	fail	BRep assembly: reconstructed face topology is invalid	class
+corpus	hf_brepground__00171214_fillet_11#cyl	union	BRepGround	fail	BRep assembly: reconstructed face topology is invalid	fill
+corpus	hf_brepground__00171214_fillet_11#rot5z	intersection	BRepGround	fail	Native SSI could not resolve an overlapping rational hull pair	class
+corpus	hf_brepground__00275424_fillet_17#sph	union	BRepGround	fail	Split produced invalid BRep references	class
+corpus	hf_brepmfr__0m-3623639#rot5z	union	BRepMFR	fail	Native SSI could not resolve an overlapping rational hull pair	fill
+corpus	hf_brepmfr__107050503-m8u-8700-a267#rot30x	union	BRepMFR	fail	Native SSI could not resolve an overlapping rational hull pair	fill
+corpus	hf_brepmfr__sample_round#box	b-a	BRepMFR	fail	Required edge event lacks an original raw curve/trim law: Certified common-interval point residual exceeds tolerance	class
+corpus	hf_brepmfr__sample_round#sph	b-a	BRepMFR	fail	Self intersection failed original-curve correspondence	class
+corpus	hf_brepmfr__sample_round_1#box	intersection	BRepMFR	fail	Required edge event lacks an original raw curve/trim law: Composition bound unresolved	fill
+corpus	hf_brepmfr__zip_chainlinkouter00#box	b-a	BRepMFR	equal		family
+corpus	hf_brepmfr__zip_chainlinkouter00#cyl	xor	BRepMFR	volume-only		family
+corpus	hf_brepmfr__zip_cylinder400bore000#rot30x	union	BRepMFR	fail	Native SSI could not resolve an overlapping rational hull pair	fill
+corpus	hf_brepmfr__zip_cylinder400bore000#sph	xor	BRepMFR	fail	Split would open a joined shell	class
+corpus	hf_brepmfr__zip_cylinder600bore000#rot30x	union	BRepMFR	fail	Curve intersection exceeded its subdivision or floating-point resolution limit	class
+corpus	hf_brepmfr__zip_defaultamacchina000#box	intersection	BRepMFR	fail	Unowned interior trim loop	fill
+corpus	hf_brepmfr__zip_doorlatchvonduprin0001#cyl	intersection	BRepMFR	different		family
+corpus	hf_brepmfr__zip_doorlatchvonduprin0001#sph	a-b	BRepMFR	fail	BRep assembly: reconstructed face topology is invalid	fill
+corpus	hf_brepmfr__zip_dripmanifold0#rot5z	intersection	BRepMFR	fail	Curve/surface subdivision work limit exceeded	class
+corpus	hf_brepmfr__zip_dripmanifold0#sph	xor	BRepMFR	fail	BRep assembly: reconstructed face topology is invalid	fill
+corpus	hf_brepmfr__zip_ea0000006992revit#rot30x	xor	BRepMFR	fail	Native SSI fitted section does not cover its certified starting seed	fill
+corpus	hf_brepmfr__zip_ea0000006992revit#rot5z	b-a	BRepMFR	fail	Native SSI fitted section does not cover its certified starting seed	class
+corpus	hf_brepmfr__zip_ea0000007008revit#sph	intersection	BRepMFR	fail	Required edge event lacks an original raw curve/trim law: Composition bound unresolved	class
+corpus	hf_zero_to_cad__13e02b4d-d613-422b-6a17-390f6402693a#box	xor	Zero-To-CAD	equal		fill
+corpus	hf_zero_to_cad__3692c35e-1985-41b6-b45d-edc922a59854#box	xor	Zero-To-CAD	fail	Native Boolean has no resolved interior witness or has unsupported coincidence	class
+corpus	hf_zero_to_cad__3692c35e-1985-41b6-b45d-edc922a59854#sph	intersection	Zero-To-CAD	different		family
+corpus	hf_zero_to_cad__3bbf8b2b-5a16-b6b4-0c60-4df743e5e0bc#sph	b-a	Zero-To-CAD	equal		fill
+corpus	hf_zero_to_cad__45278456-3334-0c11-81a7-458fce65d6d7#cyl	a-b	Zero-To-CAD	fail	Split curve/trim correspondence is unresolved: Composition bound unresolved	class
+corpus	hf_zero_to_cad__45278456-3334-0c11-81a7-458fce65d6d7#rot5z	union	Zero-To-CAD	fail	Native SSI could not resolve an overlapping rational hull pair	fill
+corpus	hf_zero_to_cad__4b3aaa7b-f278-fc6a-8f9f-28fd4893be76#rot30x	xor	Zero-To-CAD	fail	Native SSI could not resolve an overlapping rational hull pair	fill
+corpus	hf_zero_to_cad__4b3aaa7b-f278-fc6a-8f9f-28fd4893be76#rot5z	b-a	Zero-To-CAD	fail	A required interval changed its original raw boundary	class
+corpus	hf_zero_to_cad__56155734-8313-cde8-e96a-dbb3bbe3ba2f#rot5z	xor	Zero-To-CAD	fail	Native SSI fitted section does not cover its certified starting seed	class
+corpus	hf_zero_to_cad__5c6512ae-9182-fc5e-05b1-b23c3735d060#rot30x	union	Zero-To-CAD	fail	Native SSI fitted section does not cover its certified starting seed	fill
+corpus	hf_zero_to_cad__89ded05a-e2be-350b-db33-e42eb475ce39#rot30x	a-b	Zero-To-CAD	fail	Native SSI fitted section does not cover its certified starting seed	fill
+corpus	hf_zero_to_cad__89ded05a-e2be-350b-db33-e42eb475ce39#rot5z	b-a	Zero-To-CAD	fail	Native SSI could not resolve an overlapping rational hull pair	fill
+corpus	hf_zero_to_cad__89ded05a-e2be-350b-db33-e42eb475ce39#sph	union	Zero-To-CAD	equal		family
+corpus	hf_zero_to_cad__8bccb9ee-085e-5ce4-75ab-15c7ee2cab24#rot5z	union	Zero-To-CAD	fail	Native SSI could not resolve an overlapping rational hull pair	fill
+corpus	hf_zero_to_cad__8bccb9ee-085e-5ce4-75ab-15c7ee2cab24#sph	b-a	Zero-To-CAD	fail	Required edge events need regular original and result solid edge uses and vertex links	class
+corpus	mcneel_rebuilt__mesh_blob_80#box	union	McNeel	equal		fill
+corpus	mcneel_rebuilt__mesh_blob_80#sph	b-a	McNeel	equal		family
+corpus	mcneel_rebuilt__threaded_rod_cutter#box	intersection	McNeel	equal		fill
+corpus	mcneel_rebuilt__threaded_rod_cutter#cyl	union	McNeel	equal		fill
+corpus	mcneel_rebuilt__threaded_rod_cutter#rot5z	union	McNeel	fail	Native SSI could not resolve an overlapping rational hull pair	family
+corpus	mcneel_rebuilt__threaded_rod_cutter#sph	a-b	McNeel	different		family
+corpus	mcneel_rebuilt__threaded_rod_cutter#sph	intersection	McNeel	different		fill
+corpus	nist_edm__KnurledKnob10#sph	b-a	NIST	fail	Native plane section point did not converge	class
+corpus	nist_edm__NC_DRIVE#sph	intersection	NIST	volume-only		family
+corpus	nist_edm__RestButton1#cyl	union	NIST	different		fill
+corpus	nist_edm__bellow#box	a-b	NIST	equal		family
+corpus	nist_edm__bolt#sph	intersection	NIST	different		fill
+corpus	nist_edm__chamber#box	a-b	NIST	fail	Native plane section approximation exceeded its refinement b	class
+corpus	nist_edm__chamber#cyl	a-b	NIST	fail	Tangent fan has an unresolved common endpoint	class
+corpus	nist_edm__clevis21#rot30x	intersection	NIST	fail	Cutter midpoint is on the boundary without established overlap ownership	class
+corpus	nist_edm__flange#cyl	a-b	NIST	equal		fill
+corpus	nist_edm__flange#rot30x	union	NIST	fail	timeout	class
+corpus	nist_edm__flange#sph	intersection	NIST	fail	Curve intersection has a constant input or tolerance below coordinate resolution	fill
+corpus	nist_edm__fork#cyl	xor	NIST	fail	BRep assembly: reconstructed face topology is invalid	fill
+corpus	nist_edm__fork#sph	b-a	NIST	different		family
+corpus	nist_edm__fork#sph	union	NIST	fail	BRep assembly: reconstructed face topology is invalid	class
+corpus	nist_edm__gear_40#sph	xor	NIST	equal		fill
+corpus	nist_edm__main_block#sph	a-b	NIST	fail	Required edge event lacks an original raw curve/trim law: Composition bound unresolved	class
+corpus	nist_edm__moon_buggy#rot30x	xor	NIST	fail	Native SSI fitted section does not cover its certified starting seed	class
+corpus	nist_edm__mt_jaw_half_finish-mach-bup#cyl	intersection	NIST	fail	Split produced invalid BRep references	class
+corpus	nist_edm__needle-nose-inch#rot5z	union	NIST	fail	Native SSI could not resolve an overlapping rational hull pair	class
+corpus	nist_edm__screw_driver1#cyl	a-b	NIST	fail	Required edge event lacks an actual canonical vertex ball certificate	class
+corpus	nist_edm__sh-r44363-000-u-compressed#box	intersection	NIST	fail	BRep assembly	class
+corpus	occt_booltest__bottle#sph	a-b	OCCT data	different		family
+corpus	occt_data__CrankArm_from_brep#box	xor	OCCT data	fail	Unowned interior trim loop	class
+corpus	occt_data__CrankArm_from_brep#rot30x	xor	OCCT data	fail	Native SSI could not resolve an overlapping rational hull pair	fill
+corpus	occt_data__MODERN_MVCooker_1_from_brep#rot5z	b-a	OCCT data	fail	Cutter midpoint is on the boundary without established overlap ownership	fill
+corpus	occt_data__MODERN_Table_1_from_brep#sph	union	OCCT data	equal		family
+corpus	occt_data__Pump_Nut_from_brep#cyl	a-b	OCCT data	equal		fill
+corpus	occt_data__Pump_Nut_from_brep#cyl	intersection	OCCT data	equal		fill
+corpus	occt_data__Pump_Nut_from_brep#rot5z	a-b	OCCT data	fail	Native plane section refinement did not converge	class
+corpus	occt_data__Pump_Nut_from_brep#sph	xor	OCCT data	volume-only		family
+corpus	occt_data__Pump_TopCover_from_brep#rot5z	b-a	OCCT data	fail	Unresolved curve/surface root enclosure	class
+corpus	occt_data__linkrods#box	b-a	OCCT data	fail	Curve intersection has a constant input or tolerance below coordinate resolution	class
+corpus	occt_data__linkrods#rot30x	a-b	OCCT data	fail	Native SSI could not resolve an overlapping rational hull pair	class
+corpus	occt_data__screw#cyl	intersection	OCCT data	fail	Native SSI could not certify walking continuation	class
+corpus	occt_data__screw#rot5z	xor	OCCT data	fail	Native surface intersection could not interpolate a section	class
+corpus	pair#bolt_vs_clevis21	union	pair	fail	Cutter midpoint is on the boundary without established overlap ownership	fill
+corpus	pair#sample_round_vs_1	a-b	pair	fail	Unresolved curve/surface coincidence or excessive root count	fill
+corpus	pair#sample_round_vs_2	b-a	pair	fail	On-surface overlap needs a certified parameter mapping	fill
+corpus	pair#sample_round_vs_2	union	pair	fail	Unresolved curve/surface coincidence or excessive root count	class
+cx	chair_pose10	a-b	chair	equal		fill
+cx	chair_pose2	xor	chair	equal		fill
+cx	chair_pose3	xor	chair	equal		fill
+cx	chair_pose5	xor	chair	equal		fill
+cx	chair_pose6	intersection	chair	equal		fill
+cx	chair_pose7	b-a	chair	equal		family
+cx	chair_self	b-a	chair	equal		fill
+cx	elem00_cyl	b-a	timber element	volume-only		family
+cx	elem00_self	union	timber element	fail	Native SSI paired fit exceeded its refinement budget with N	class
+cx	elem01_box	b-a	timber element	different		family
+cx	elem01_cyl	union	timber element	volume-only		fill
+cx	elem02_self	union	timber element	fail	Unresolved curve/surface root enclosure	class
+cx	elem04_box	intersection	timber element	fail	Required edge event lacks an original raw curve/trim law: Certified endpoint residual exceeds tolerance	class
+cx	elem04_cyl	b-a	timber element	fail	Split curve/trim correspondence is mismatched: Certified common-interval point residual exceeds tolerance	class
+cx	elem04_self	a-b	timber element	fail	Required edge event lacks an original raw curve/trim law: Certified common-interval point residual exceeds tolerance	class
+cx	elem05_cyl	union	timber element	volume-only		fill
+cx	elem06_box	xor	timber element	equal		fill
+cx	elem08_self	intersection	timber element	fail	Interference lacks whole original paired agreement	class
+cx	elem11_self	xor	timber element	fail	Native SSI could not resolve an overlapping rational hull pair	fill
+cx	elem13_cyl	xor	timber element	fail	Support inventory curve lacks original paired agreement	class
+cx	elem13_self	xor	timber element	fail	Required edge event lacks an original raw curve/trim law: Certified endpoint residual exceeds tolerance	class
+cx	elem16_self	a-b	timber element	fail	BRep assembly: open or inconsistently oriented edge N	class
+cx	elem18_self	xor	timber element	fail	BRep assembly: nonregular material boundary is not a shell contact grouping	class
+cx	elem22_box	b-a	timber element	equal		fill
+cx	elem22_box	intersection	timber element	equal		family
+cx	joint03	intersection	timber joint	equal		fill
+cx	joint12	a-b	timber joint	equal		fill
+cx	joint13_rot	b-a	timber joint	different		fill
+cx	joint13_rot	union	timber joint	different		family
+cx	joint18	intersection	timber joint	different		fill
+cx	joint20	b-a	timber joint	fail	Cutter midpoint is on the boundary without established overlap ownership	class
+cx	joint20_rot	intersection	timber joint	different		fill
+cx	joint22	xor	timber joint	volume-only		fill
+cx	joint25	intersection	timber joint	equal		fill
+cx	joint29	a-b	timber joint	equal		fill
+cx	joint29	xor	timber joint	different		fill
+cx	joint30	union	timber joint	fail	BRep assembly	fill
+cx	joint30_rot	a-b	timber joint	equal		fill
+cx	joint30_rot	intersection	timber joint	equal		family
+cx	joint31	intersection	timber joint	fail	Tangent fan has unresolved prefix order or endpoint identity	class
+cx	joint31_rot	a-b	timber joint	volume-only		family
+cx	joint33	a-b	timber joint	volume-only		fill
+cx	joint33_rot	a-b	timber joint	fail	Required edge event lacks an original raw curve/trim law: Certified endpoint residual exceeds tolerance	fill
+cx	twisted_pose0	b-a	chair	equal		fill
