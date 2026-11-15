@@ -4,6 +4,7 @@
 # Counted only where OCCT succeeds with a valid shape and our operands match OCCT's (stepfix/operands.tsv when it
 # exists, otherwise operand volumes measured here); the rest is listed apart. Where stepfix finds OCCT's GProp the
 # outlier on an operand, a volume within the accuracy of OCCT's mesh volume of the result counts as within the bound.
+# A case whose OCCT union is empty or breaks union = ∩ + A−B + B−A by over 1e-4 is listed apart with OCCT failures.
 # Writes judged.tsv (and changed.tsv).
 import os, re, sys, collections
 run = sys.argv[1]
@@ -37,6 +38,11 @@ def cls(msg):
 
 family = {(w[0], w[1]): w[2] for w in tsv(D + '/cases.tsv')}
 ref = {tuple(w[:3]): w[3:] for w in tsv(D + '/ref.tsv')}
+occt_bad = set()
+for key in {k[:2] for k in ref}:
+    v = {op: num(ref[key + (op,)][5]) for op in ('intersection', 'union', 'a-b', 'b-a') if ref.get(key + (op,), ['x'])[0] == 'ok'}
+    if 'union' in v and (v['union'] == 0 or (len(v) == 4 and abs(v['union'] - v['intersection'] - v['a-b'] - v['b-a']) > 1e-4 * abs(v['union']))):
+        occt_bad.add(key)
 band = collections.defaultdict(float)
 occt_op = {}
 for w in tsv(D + '/occt_operands.tsv'):
@@ -90,7 +96,7 @@ def judge(run_dir):
             cat = 'equal' if same_v and good and r[3:6] == o[1:4] else 'volume-only' if same_v else 'different'
         else:
             cat = 'fail'
-        if not o or o[0] != 'ok' or (o[4] != '1' and o[1] != '0'):
+        if not o or o[0] != 'ok' or (o[4] != '1' and o[1] != '0') or k[:2] in occt_bad:
             where = 'occt'
         elif not match[k[:2]][0]:
             where = 'operands'
