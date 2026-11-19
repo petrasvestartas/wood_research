@@ -1,1 +1,0 @@
-tutorial-mode-probe 9308 01:16 node --import ./scripts/typescript.mjs ../session_viewer/target/mode-compile.mjs probe
