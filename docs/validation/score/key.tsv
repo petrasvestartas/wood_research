@@ -1,0 +1,31 @@
+#suite	case	op	family	old outcome	old class	why
+corpus	forum123416#mesh_cone	xor	forum	equal		cone and faceted part
+corpus	forum163125#box_cyl_side	union	forum	equal		box and cylinder at its side
+corpus	forum213347#lining_frame	a-b	forum	equal		clean planar part
+corpus	github_misc__as1-ac-214#box	b-a	github	equal		assembly part, planar
+corpus	github_misc__nema-17-bracket#box	intersection	github	equal		NEMA bracket and box
+corpus	github_misc__nema-17-bracket#rot5z	union	github	fail	Native SSI could not resolve an overlapping rational hull pair	rotated copy, coincident and near-coincident faces
+corpus	hf_brepground__00015160_chamfer_12#box	union	BRepGround	fail	Split would open a joined shell	class
+corpus	hf_brepground__00042148_fillet_11#sph	a-b	BRepGround	equal		sphere cutter on a fillet part
+corpus	hf_brepground__00161395_chamfer_16#cyl	xor	BRepGround	fail	Split curve/trim correspondence is unresolved: Composition bound unresolved	class
+corpus	hf_brepmfr__0m-3623639#rot30x	intersection	BRepMFR	fail	Cutter midpoint is on the boundary without established overlap ownership	class
+corpus	hf_brepmfr__zip_defaultamacchina000#box	xor	BRepMFR	fail	Unowned interior trim loop	class
+corpus	hf_zero_to_cad__5c6512ae-9182-fc5e-05b1-b23c3735d060#rot5z	b-a	Zero-To-CAD	fail	Native SSI fitted section does not cover its certified starting seed	class
+corpus	mcneel_rebuilt__threaded_rod_cutter#cyl	a-b	McNeel	equal		threaded rod
+corpus	nist_edm__DoubleCam1#box	b-a	NIST	fail	Required edge events need regular original and result solid edge uses and vertex links	class
+corpus	nist_edm__NC_DRIVE#sph	union	NIST	fail	BRep assembly: reconstructed face topology is invalid	class
+corpus	nist_edm__bellow#box	a-b	NIST	equal		bellows
+corpus	nist_edm__flange#box	xor	NIST	fail	Curve intersection has a constant input or tolerance below coordinate resolution	class
+corpus	nist_edm__needle-nose-inch#box	union	NIST	fail	Native plane section refinement did not converge	class
+corpus	pair#sample_round_vs_1	intersection	pair	fail	Unresolved curve/surface coincidence or excessive root count	round part against round part
+cx	chair_pose3	union	chair	equal		chair pose
+cx	chair_self	xor	chair	equal		chair with itself
+cx	elem04_box	intersection	timber element	fail	Required edge event lacks an original raw curve/trim law: Certified endpoint residual exceeds tolerance	class
+cx	elem08_box	xor	timber element	fail	Split produced invalid BRep references	class
+cx	elem12_box	b-a	timber element	fail	Required edge event lacks an original raw curve/trim law: Certified common-interval point residual exceeds tolerance	class
+cx	elem21_cyl	a-b	timber element	volume-only	counts differ	timber element, cylinder cutter
+cx	elem25_self	b-a	timber element	fail	Unresolved curve/surface root enclosure	class
+cx	joint00	intersection	timber joint	equal		loose-tolerance timber joint
+cx	joint00_rot	a-b	timber joint	equal		timber joint, rotated
+cx	joint08_rot	b-a	timber joint	fail	Required edge event lacks an original raw curve/trim law: Composition bound unresolved	class
+cx	joint34_rot	intersection	timber joint	fail	Split curve/trim correspondence is mismatched: Certified common-interval point residual exceeds tolerance	class

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# score.sh <session_cpp build dir> <out dir> [subset|full] [old|bop] [--jobs 2] [--timeout s] [--prev <run dir>] [--pics n]
-# Links score_drv against the build, runs the real booleans (one process each, per-boolean timeout, results appended
+# score.sh <session_cpp build dir> <out dir> [key|subset|full] [old|bop] [--jobs 2] [--timeout s] [--prev <run dir>] [--pics n]
+# Tiers: key (key.tsv, about 30 booleans, 20 s each) per edit, subset (subset.tsv, 150, 60 s each) per change, full (all
+# 2705, 180 s each) at milestones. Links score_drv against the build, runs the real booleans (one process each, per-boolean timeout, results appended
 # as they finish so a partial or resumed run is usable) and judges them against OCCT. Data: $SCORE_DATA (cases.tsv,
 # ref.tsv, occt_operands.tsv; made by prep.py and occt_ref.py when missing; smlib_ref.tsv, the second oracle, by
 # smlib_ref.py). --prev prints the change against that run; --pics n also draws the first n changed cases (pics.py).
@@ -14,7 +15,7 @@ BUILD=$1; OUT=$2; shift 2
 MODE=subset; ENTRY=old; JOBS=2; LIMIT=; PREV=; PICS=
 while [ $# -gt 0 ]; do
   case $1 in
-    subset|full) MODE=$1; shift; continue ;;
+    key|subset|full) MODE=$1; shift; continue ;;
     old|bop) ENTRY=$1; shift; continue ;;
     --entry) ENTRY=$2 ;; --jobs) JOBS=$2 ;; --timeout) LIMIT=$2 ;; --prev) PREV=$2 ;; --pics) PICS=$2 ;;
     *) echo "unknown option $1" >&2; exit 2 ;;
@@ -23,9 +24,10 @@ while [ $# -gt 0 ]; do
 done
 [ "$JOBS" -le 2 ] || { echo "at most --jobs 2 on this machine" >&2; exit 2; }
 case $MODE in
+  key) LIMIT=${LIMIT:-20}; SUB=(--subset "$HERE/key.tsv"); WALL=10m ;;
   subset) LIMIT=${LIMIT:-60}; SUB=(--subset "$HERE/subset.tsv"); WALL=30m ;;
   full) LIMIT=${LIMIT:-180}; SUB=(); WALL=16h ;;
-  *) echo "mode must be subset or full" >&2; exit 2 ;;
+  *) echo "mode must be key, subset or full" >&2; exit 2 ;;
 esac
 mkdir -p "$OUT" "$D"
 [ -s "$D/ref.tsv" ] || python3 -I "$HERE/prep.py" "$D"
