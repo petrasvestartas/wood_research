@@ -1,0 +1,17 @@
+#picture	case	op	ours faces/edges/vertices volume	OCCT faces/edges/vertices volume	what differs
+wrong_github_misc__as1-ac-214_box.png	github_misc__as1-ac-214#box	b-a	ours 13/33/22 volume 75607.8808838	OCCT 13/33/22 volume 75664.0374101	differs: volume (-0.000742 relative)
+wrong_hf_brepground__00161395_chamfer_16_cyl.png	hf_brepground__00161395_chamfer_16#cyl	xor	ours 58/129/74 volume 15307643.8642	OCCT 58/133/74 volume 15308077.737	differs: edges, volume (-2.83e-05 relative)
+wrong_hf_brepmfr__zip_defaultamacchina000_box.png	hf_brepmfr__zip_defaultamacchina000#box	xor	ours 12/22/14 volume -100066085.58	OCCT 16/26/16 volume 94509752.0654	differs: faces, edges, vertices, volume (-2.06 relative)
+wrong_hf_zero_to_cad__5c6512ae-9182-fc5e-05b1-b23c3735d060_rot5z.png	hf_zero_to_cad__5c6512ae-9182-fc5e-05b1-b23c3735d060#rot5z	b-a	ours 91/179/98 volume 14973.3733327	OCCT 90/172/94 volume 1658.20139485	differs: faces, edges, vertices, volume (+8.03 relative)
+wrong_nist_edm__flange_box.png	nist_edm__flange#box	xor	ours 115/261/148 volume 159540630990	OCCT 117/262/148 volume 189794456901	differs: faces, edges, volume (-0.159 relative)
+wrong_nist_edm__needle-nose-inch_box.png	nist_edm__needle-nose-inch#box	union	ours 29/78/52 volume 2.23971984402	OCCT 31/84/56 volume 2.42573835866	differs: faces, edges, vertices, volume (-0.0767 relative)
+wrong_elem04_box.png	elem04_box	intersection	ours 30/81/53 volume 0.00171477000557	OCCT 16/43/29 volume 0.00100765585006	differs: faces, edges, vertices, volume (+0.702 relative)
+wrong_elem08_box.png	elem08_box	xor	ours 87/229/146 volume 0.00212190157917	OCCT 92/231/145 volume 0.00510151394452	differs: faces, edges, vertices, volume (-0.584 relative)
+wrong_elem12_box.png	elem12_box	b-a	ours 30/78/51 volume 0.00181637967728	OCCT 18/48/32 volume 0.00214517291732	differs: faces, edges, vertices, volume (-0.153 relative)
+wrong_joint08_rot.png	joint08_rot	b-a	ours 38/92/54 volume 0.000821086789386	OCCT 30/81/50 volume 0.000658865664828	differs: faces, edges, vertices, volume (+0.246 relative)
+good_joint00.png	joint00	intersection	ours 6/12/8 volume 0.00013112968424	OCCT 6/12/8 volume 0.00013112968424	differs: nothing
+good_chair_self.png	chair_self	xor	ours 94/214/125 volume 4207.11311256	OCCT 94/214/125 volume 4207.11311578	differs: nothing
+good_nist_edm__bellow_box.png	nist_edm__bellow#box	a-b	ours 140/346/210 volume 138560.917595	OCCT 140/346/210 volume 138560.917594	differs: nothing
+good_github_misc__nema-17-bracket_box.png	github_misc__nema-17-bracket#box	intersection	ours 13/27/18 volume 475.993034363	OCCT 13/27/18 volume 475.993034363	differs: nothing
+good_hf_brepground__00042148_fillet_11_sph.png	hf_brepground__00042148_fillet_11#sph	a-b	ours 117/276/140 volume 13333.2862824	OCCT 117/276/140 volume 13333.2864708	differs: nothing
+good_mcneel_rebuilt__threaded_rod_cutter_cyl.png	mcneel_rebuilt__threaded_rod_cutter#cyl	a-b	ours 18/42/28 volume 163.256758713	OCCT 18/42/28 volume 163.256757983	differs: nothing
