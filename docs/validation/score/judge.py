@@ -6,7 +6,14 @@
 # outlier on an operand, a volume within the accuracy of OCCT's mesh volume of the result counts as within the bound.
 # A case whose OCCT union is empty or breaks union = ∩ + A−B + B−A by over 1e-4 (unless GProp is the outlier there) is
 # listed apart with OCCT failures.
-# Writes judged.tsv (and changed.tsv).
+# Failure classes are the messages with numbers and names stripped; results that are not equal are ranked by what is
+# wrong (validity, closedness, volume, counts) and, for bop, the first note of its report.
+# Second oracle, when <data>/smlib_ref.tsv exists (smlib_ref.py): SMLib's result on the operands OCCT built. It counts
+# where SMLib's operand volumes equal OCCT's (1e-6 or the band) and its own results add up (∩ + A−B = A, ∩ + B−A = B,
+# ∪ = ∩ + A−B + B−A within 1e-5); the oracles agree when their volumes are within 1e-5 relative or the band (SMLib
+# works on the NURBS form at its tolerance of 1e-5). Booleans where they disagree are listed with the side ours is on
+# (oracles.tsv); the one number stays against OCCT.
+# Writes judged.tsv (and changed.tsv, oracles.tsv).
 import os, re, sys, collections
 run = sys.argv[1]
 opt = dict(zip(sys.argv[2::2], sys.argv[3::2]))
@@ -58,6 +65,42 @@ for key in {k[:2] for k in ref}:
         occt_bad.add(key)
 
 
+sm = {tuple(w[:3]): w[3:] for w in tsv(D + '/smlib_ref.tsv')}
+sm_case = {}
+for key in {k[:2] for k in sm}:
+    r = {op: sm[key + (op,)] for op in ('intersection', 'union', 'a-b', 'b-a', 'xor') if key + (op,) in sm}
+    first = next(iter(r.values()))
+    va, vb = num(first[6]), num(first[7])
+    why = ''
+    for side, v in (('A', va), ('B', vb)):
+        vc, bc = occt_op.get(key + (side,), (float('nan'), 0.0))
+        if first[0] == 'LOADFAIL' or not abs(v - vc) <= max(1e-6 * abs(vc), bc):
+            why = why or 'operand %s not converted' % side
+    v = {op: num(x[5]) for op, x in r.items() if x[0] == 'ok'}
+    sums = [('intersection', 'a-b', None, va), ('intersection', 'b-a', None, vb), ('intersection', 'a-b', 'b-a', v.get('union')), ('a-b', 'b-a', None, v.get('xor'))]
+    if not why and any(a in v and b in v and (c is None or c in v) and t is not None and abs(v[a] + v[b] + (v[c] if c else 0) - t) > 1e-5 * abs(t) for a, b, c, t in sums):
+        why = 'results do not add up'
+    sm_case[key] = why
+
+
+def oracle(k, o, vol, counts, good):
+    # SMLib against OCCT, and ours against SMLib, for one boolean
+    r = sm.get(k)
+    if r is None:
+        return '-', '-'
+    if sm_case[k[:2]]:
+        return sm_case[k[:2]], '-'
+    if r[0] != 'ok':
+        return 'fails', '-'
+    bound = max(1e-5 * abs(num(r[5])), band[k[:2]])
+    ours = '-' if vol is None else ('equal' if good and counts == r[1:4] and r[4] == '1' else 'volume-only') if abs(vol - num(r[5])) <= bound else 'different'
+    if not o or o[0] != 'ok':
+        return 'OCCT fails', ours
+    if abs(num(o[5]) - num(r[5])) > bound:
+        return 'disagrees', ours
+    return 'agrees' if r[1:4] == o[1:4] and r[4] == '1' and (o[4] == '1' or o[1] == '0') else 'agrees in volume', ours
+
+
 def operands_match(run_dir, results):
     ours = {(w[0], w[1]): w[2:] for w in tsv(run_dir + '/operands.tsv')}
     loadfail = {k[:2]: r[-1] for k, r in results.items() if r[0] == 'LOADFAIL'}
@@ -103,20 +146,26 @@ def judge(run_dir):
             where = 'operands'
         else:
             where = 'N'
-        label = '' if cat != 'fail' else cls(msg) if status == 'FAIL' else 'timeout' if status == 'TIMEOUT' else status.lower() + ': ' + cls(msg)
-        out[k] = (cat, where, label, match[k[:2]][1], r)
+        if cat == 'fail':
+            label = cls(msg) if status == 'FAIL' else 'timeout' if status == 'TIMEOUT' else status.lower() + ': ' + cls(msg)
+        elif cat == 'equal':
+            label = ''
+        else:
+            label = ('result not valid' if valid != '1' else 'result not a closed solid' if solid != '1' else 'volume differs' if cat == 'different'
+                     else 'counts differ') + (', noted: ' + cls(msg.split('; ')[0]) if msg else '')
+        out[k] = (cat, where, label, match[k[:2]][1], r) + oracle(k, o, vol if status == 'ok' else None, r[3:6], status == 'ok' and good)
     return out
 
 
 now = judge(run)
 tally = {w: collections.Counter() for w in ('N', 'operands', 'occt')}
-classes, fam = collections.Counter(), collections.defaultdict(collections.Counter)
-for k, (cat, where, c, why, r) in now.items():
+classes, reasons, fam = collections.Counter(), collections.Counter(), collections.defaultdict(collections.Counter)
+for k, (cat, where, c, why, r, _, _) in now.items():
     tally[where][cat] += 1
     if where == 'N':
         fam[family.get(k[:2], '?')][cat] += 1
         if c:
-            classes[c] += 1
+            (classes if cat == 'fail' else reasons)[c] += 1
 t = tally['N']
 n = sum(t.values())
 print('equal %d / %d (%.1f %%), volume-only %d, different %d, fail %d' % (t['equal'], n, 100.0 * t['equal'] / max(n, 1), t['volume-only'], t['different'], t['fail']))
@@ -131,9 +180,27 @@ for c, k in classes.most_common(15):
     print('  %4d  %s' % (k, c.strip()))
 if len(classes) > 15:
     print('  %4d  (%d more classes)' % (sum(classes.values()) - sum(k for _, k in classes.most_common(15)), len(classes) - 15))
+print('volume-only and different, by what is wrong:')
+for c, k in reasons.most_common(10):
+    print('  %4d  %s' % (k, c))
 with open(run + '/judged.tsv', 'w') as f:
-    for k, (cat, where, c, why, r) in sorted(now.items()):
-        f.write('\t'.join(list(k) + [family.get(k[:2], '?'), cat, where, c, why]) + '\n')
+    for k, (cat, where, c, why, r, smv, smo) in sorted(now.items()):
+        f.write('\t'.join(list(k) + [family.get(k[:2], '?'), cat, where, c, why, smv, smo]) + '\n')
+if sm:
+    with_sm = {k: v for k, v in now.items() if v[5] != '-'}
+    t = collections.Counter(v[5] for v in with_sm.values())
+    print('SMLib as second oracle on %d of these booleans: %s' % (len(with_sm), ', '.join('%s %d' % x for x in t.most_common())))
+    split = [k for k, v in sorted(with_sm.items()) if v[5] in ('disagrees', 'OCCT fails')]
+    side = collections.Counter(('OCCT' if now[k][0] in ('equal', 'volume-only') and now[k][1] != 'occt' else 'SMLib' if now[k][6] in ('equal', 'volume-only') else
+                                'neither' if now[k][0] != 'fail' else 'no result') for k in split)
+    print('  where OCCT and SMLib disagree or OCCT has no result (%d): ours with %s' % (len(split), ', '.join('%s %d' % x for x in side.most_common()) or '-'))
+    both = [v for v in with_sm.values() if v[5] in ('agrees', 'agrees in volume') and v[1] == 'N']
+    print('  where both oracles agree (%d counted): %s' % (len(both), ', '.join('%s %d' % (c, sum(1 for v in both if v[0] == c)) for c in CATS)))
+    with open(run + '/oracles.tsv', 'w') as f:
+        f.write('#suite\tcase\top\tours\tours against SMLib\tOCCT faces edges vertices valid volume\tSMLib faces edges vertices valid volume\tours faces edges vertices volume\n')
+        for k in split:
+            o, r = ref.get(k, ['-'] * 6), now[k][4]
+            f.write('\t'.join(list(k) + [now[k][0], now[k][6], ' '.join(o[1:6]), ' '.join(sm[k][1:6]), ' '.join(r[3:6] + [r[8]])]) + '\n')
 if '--prev' in opt:
     before = judge(opt['--prev'])
     common = [k for k in now if k in before]

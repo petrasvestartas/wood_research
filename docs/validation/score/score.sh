@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# score.sh <session_cpp build dir> <out dir> [subset|full] [--entry old|bop] [--jobs 2] [--timeout s] [--prev <run dir>]
+# score.sh <session_cpp build dir> <out dir> [subset|full] [old|bop] [--jobs 2] [--timeout s] [--prev <run dir>] [--pics n]
 # Links score_drv against the build, runs the real booleans (one process each, per-boolean timeout, results appended
 # as they finish so a partial or resumed run is usable) and judges them against OCCT. Data: $SCORE_DATA (cases.tsv,
-# ref.tsv, occt_operands.tsv; made by prep.py and occt_ref.py when missing).
+# ref.tsv, occt_operands.tsv; made by prep.py and occt_ref.py when missing; smlib_ref.tsv, the second oracle, by
+# smlib_ref.py). --prev prints the change against that run; --pics n also draws the first n changed cases (pics.py).
 set -euo pipefail
 HERE=$(cd "$(dirname "$0")" && pwd)
 S=/tmp/claude-0/-home-user-wood-research/8b288b7c-72c4-56e2-9565-a39939e050f9/scratchpad
@@ -10,11 +11,12 @@ PY=/tmp/claude-0/-home-user/8b288b7c-72c4-56e2-9565-a39939e050f9/scratchpad/ocp/
 D=${SCORE_DATA:-$S/score}
 [ $# -ge 2 ] || { sed -n 2p "$0"; exit 2; }
 BUILD=$1; OUT=$2; shift 2
-MODE=subset; [ $# -gt 0 ] && [[ $1 != --* ]] && { MODE=$1; shift; }
-ENTRY=old; JOBS=2; LIMIT=; PREV=
+MODE=subset; ENTRY=old; JOBS=2; LIMIT=; PREV=; PICS=
 while [ $# -gt 0 ]; do
   case $1 in
-    --entry) ENTRY=$2 ;; --jobs) JOBS=$2 ;; --timeout) LIMIT=$2 ;; --prev) PREV=$2 ;;
+    subset|full) MODE=$1; shift; continue ;;
+    old|bop) ENTRY=$1; shift; continue ;;
+    --entry) ENTRY=$2 ;; --jobs) JOBS=$2 ;; --timeout) LIMIT=$2 ;; --prev) PREV=$2 ;; --pics) PICS=$2 ;;
     *) echo "unknown option $1" >&2; exit 2 ;;
   esac
   shift 2
@@ -39,3 +41,4 @@ T0=$(date +%s)
 timeout "$WALL" python3 -I "$HERE/run.py" "$OUT/drv" "$D/cases.tsv" "$OUT" "${SUB[@]}" --jobs "$JOBS" --timeout "$LIMIT" || echo "run stopped early (status $?); judging what finished"
 echo "$MODE run, entry $ENTRY, $(wc -l < "$OUT/results.tsv") booleans, wall $(( $(date +%s) - T0 )) s at --jobs $JOBS"
 python3 -I "$HERE/judge.py" "$OUT" --data "$D" ${PREV:+--prev "$PREV"} | tee "$OUT/summary.txt"
+[ -z "$PICS" ] || [ -z "$PREV" ] || timeout 3h python3 -I "$HERE/pics.py" "$OUT" --max "$PICS"

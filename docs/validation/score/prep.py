@@ -3,6 +3,8 @@
 #   ref.tsv    suite case op status faces edges vertices valid volume meshvol meshacc   (OCCT results)
 # OCCT results come from occt_ref_full*.tsv (occt_ref.py ref shards: adaptive volumes, current units) where it has them, else
 # from the stored bench results. Timber *_rot cases whose second operand lacks the rotation of their OCCT spec get it.
+# The nist_edm__fork cutters and rotation centres were placed when OCCT read that inch file 25.4 times too large: they
+# are scaled by 1/25.4 here, otherwise four of the five cases are disjoint.
 # Our corpus STEP operands are pinned to the shell stepfix/operands.tsv pairs with OCCT's (step=<path>#<i>), so the
 # driver does not mesh every shell to find the largest.
 import glob, os, re, sys
@@ -39,9 +41,22 @@ def pinned(case, side, spec):
     return s
 
 
+def scaled(spec, k):
+    # a primitive and the lengths of its moves times k (step= operands keep their own size, only their moves scale)
+    out = []
+    for i, part in enumerate(spec.split('|')):
+        kind, arg = part.split('=', 1)
+        v = arg.split(',')
+        which = {'t': range(3), 'r': range(4, 7), 'm': (3, 7, 11)}[kind] if i else range(0 if kind == 'step' else len(v))
+        out.append(kind + '=' + ','.join('%.12g' % (float(x) * k) if j in which else x for j, x in enumerate(v)))
+    return '|'.join(out)
+
+
 rows, fixed = [], []
 for l in open(BENCH + '/results/cases.tsv'):
     w = l.rstrip('\n').split('\t')
+    if w[0].startswith('nist_edm__fork#'):
+        w[2] = scaled(w[2], 1 / 25.4)
     rows.append(['corpus', w[0], family(w[0]), '1e-7', pinned(w[0], 'A', w[1]), pinned(w[0], 'B', w[2]), absolute(w[1]), absolute(w[2])])
 for l in open(CX):
     name, title, tol, a, b, ca, cb = l.rstrip('\n').split('\t')

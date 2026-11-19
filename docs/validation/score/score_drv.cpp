@@ -2,6 +2,7 @@
 //   score_drv bool <specA> <specB> <op> <tol> [dump.json]
 //     OPS <volA> <validA> <volB> <validB>                       only with SCORE_OPS=1, before the boolean
 //     BOOL <op> <status> <bool_s> <faces> <edges> <vertices> <valid> <solid> <volume> [message]
+//       message: the exception of a FAIL; for an ok bop result, what bop::Report noted (distinct notes, "; "-joined)
 //   score_drv operands <specA> <specB> <dump.json>
 // Picture dumps mesh the faces coarsely; SCORE_NOMESH=1 dumps edges and vertices only.
 // A spec is step=<path> (the shell of largest volume) or step=<path>#<i>, box=sx,sy,sz (centred), cyl=r,h, cone=r,h
@@ -11,6 +12,7 @@
 #include "brep_boolean.h"
 #include "file_step.h"
 #include "xform.h"
+#include <algorithm>
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
@@ -160,13 +162,18 @@ static std::string dump(const BRep& r) {
     return o.str();
 }
 
-static BRep apply(const BRep& a, const BRep& b, const std::string& op, double tol) {
+static BRep apply(const BRep& a, const BRep& b, const std::string& op, double tol, std::string& notes) {
     using O = SCORE_OP;
     const O o = op == "intersection" ? O::Intersection : op == "union" ? O::Union : op == "xor" ? O::Xor : O::Difference;
     const BRep& first = op == "b-a" ? b : a;
     const BRep& second = op == "b-a" ? a : b;
 #ifdef SCORE_BOP
-    return bop::apply(first, second, o, tol);
+    bop::Report report;
+    const BRep r = bop::apply(first, second, o, tol, &report);
+    std::vector<std::string> seen;
+    for (const std::string& note : report.log)
+        if (std::find(seen.begin(), seen.end(), note) == seen.end()) { seen.push_back(note); notes += (notes.empty() ? "" : "; ") + note; }
+    return r;
 #else
     return brep_boolean::apply(first, second, o, tol);
 #endif
@@ -198,9 +205,10 @@ int main(int argc, char** argv) {
     if (std::getenv("SCORE_OPS"))
         std::cout << "OPS " << volume_text(a) << " " << valid_solid(a) << " " << volume_text(b) << " " << valid_solid(b) << "\n" << std::flush;
     BRep r;
+    std::string notes;
     const auto t0 = std::chrono::steady_clock::now();
     try {
-        r = apply(a, b, op, tol);
+        r = apply(a, b, op, tol, notes);
     } catch (const std::exception& e) {
         std::cout << "BOOL " << op << " FAIL " << since(t0) << " 0 0 0 0 0 nan " << clean(e.what()) << "\n";
         return 0;
@@ -210,7 +218,7 @@ int main(int argc, char** argv) {
     try { valid = r.is_valid(); } catch (...) {}
     try { solid = r.is_solid(); } catch (...) {}
     std::cout << "BOOL " << op << " ok " << seconds << " " << r.face_count() << " " << r.edge_count() << " " << r.vertex_count() << " "
-              << valid << " " << solid << " " << std::flush << volume_text(r) << "\n" << std::flush;
+              << valid << " " << solid << " " << std::flush << volume_text(r) << " " << clean(notes) << "\n" << std::flush;
     if (argc > 6) {
         std::ofstream out(argv[6]);
         out << dump(r);
