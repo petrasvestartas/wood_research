@@ -17,6 +17,26 @@ and pcurve disagree" classes, several hundred failures); every split refits curv
 cut faces and edges where OCCT has none (count differences against OCCT); STEP says CYLINDRICAL_SURFACE and we
 throw that away at read time.
 
+Decision, 2026-11-19 (owner): this rewrite comes first. Boolean tuning stops until the kernel stands on these
+types; the scoreboard then measures the booleans on an equal base with OCCT and SMLib.
+
+## Types
+
+- `Surface`: plane, cylinder, cone, sphere, torus (frame, radii, semi-angle; true parameters: angle and length;
+  periodic in the angle), or NURBS for freeform. One interface: point, derivatives, normal, closest parameter,
+  domain, periods, bounds; `nurbs()` on demand.
+- `Curve`: line, circle, ellipse (frame, radii; parameter is length or angle), or NURBS; same interface.
+- `Curve2d` (pcurve): 2D line, 2D circle or ellipse arc, or NURBS, in the surface's true parameters. On a periodic
+  surface a pcurve may lie anywhere modulo the period and cross the seam; no seam edge is forced.
+- `BRep`: pools of `Surface`, `Curve`, `Curve2d`. An edge is a curve index and a range `[t0, t1]`; each pcurve use has
+  its own range. Split edges share the curve and differ in range only.
+- Analytic intersections by closed form: line and conic against plane and quadric, plane against quadric, quadric
+  pairs with conic sections, as OCCT's IntAna and SMLib's analytic cases; everything else by the NURBS routes.
+
+Order: types and their tests (standalone); BRep pools, reader, writer, primitives, tessellation, volume on the new
+types with old consumers reading `nurbs()`; analytic intersections; `bop` and `bop_ff` on types and ranges; old
+pipeline removed when `bop` passes it everywhere. The four steps below are the same work in more detail.
+
 ## Change, in steps that each keep the suite green
 
 1. Forms carried, never guessed. Each surface and 3D curve of a `BRep` carries its analytic form when it has one
