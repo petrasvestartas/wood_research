@@ -150,9 +150,10 @@ static std::string dump(const BRep& r) {
     }
     o << "],\"idx\":[" << idx.str() << "],\"edges\":[";
     first = true;
-    for (const BRepEdge& e : r.m_edges) {
+    for (size_t ei = 0; ei < r.m_edges.size(); ++ei) {
+        const BRepEdge& e = r.m_edges[ei];
         if (e.degenerated || e.curve_3d_index < 0) continue;
-        const NurbsCurve& c = r.m_curves_3d[e.curve_3d_index].nurbs();
+        const NurbsCurve c = r.edge_nurbs(int(ei));
         const auto [t0, t1] = c.domain();
         o << (first ? "" : ",") << "[";
         first = false;
