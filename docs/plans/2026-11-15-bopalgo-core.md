@@ -17,6 +17,14 @@ only: no OCCT source, header or library is copied, vendored, included or linked;
 own types and builds without OCCT. All work stays in
 petrasvestartas/wood_research#2 until it is merged.
 
+Second reference, 2026-11-19 (owner): SMLib, the kernel in NVIDIA's usd-brep
+(https://github.com/NVIDIA-Omniverse/usd-brep, Apache 2.0). Its boolean is `SmMerge` over
+`SmTopologyIntersector::IntersectInsertRelate()` (`source/SMLib/src`), with `SmSurfaceIntersector` and
+`SmAdvSurfaceIntersector` for sections. It is read beside OCCT for how to treat coincident, tangent and sliver
+cases, and, where it builds here, run as a second oracle on the same cases; a case where OCCT and SMLib disagree is
+judged by volume identities and pictures, not by either alone. Like OCCT it is a reference only: none of its code
+is copied or linked. Anything translated from it is listed in `session_cpp/NOTICE-SMLIB.md` with NVIDIA's copyright.
+
 ## The one number
 
 The share of the 2635 real booleans (1850 corpus, 785 timber) that equal OCCT. Equal means: both valid; face, edge
