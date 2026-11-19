@@ -1,0 +1,58 @@
+{
+  "plan": "C:\\pc\\3_code\\code_rust\\wood_research\\.codex\\viewer-quality-20261028\\published-source31-59-merge-reuse-plan-01.json",
+  "planSha256": "d3cf3cb9aeb9cb415e3cd67cffd8109c2ad5e2b2adfaac225a41a9845cbff74b",
+  "reviewedDifferences": [
+    {
+      "id": "38b-source",
+      "actual": "2dd300b8d1260888f6b0e8bda31d27b1a976518f534f16e2360da90ffed81d20",
+      "planned": "c5d6991225f47051c282331ccc2ba322f598bd2e37167fecc6a91d72cc709a70",
+      "difference": "CRLF versus LF only; original local bytes retained"
+    }
+  ],
+  "changes": [
+    {
+      "id": "47a-actions",
+      "previousParent": null,
+      "proposedParent": "45c-input",
+      "sha256": "77791d4fa1dfc00e3a6d285bb084b95b6403d7ff787aaa4a7ffdc975b24fae5e"
+    },
+    {
+      "id": "47b-parse",
+      "previousParent": "47a-actions",
+      "proposedParent": "45c-input",
+      "sha256": "77791d4fa1dfc00e3a6d285bb084b95b6403d7ff787aaa4a7ffdc975b24fae5e"
+    },
+    {
+      "id": "47c-route",
+      "previousParent": "47a-actions",
+      "proposedParent": "45c-input",
+      "sha256": "77791d4fa1dfc00e3a6d285bb084b95b6403d7ff787aaa4a7ffdc975b24fae5e"
+    },
+    {
+      "id": "48-coordinates",
+      "previousParent": "47a-actions",
+      "proposedParent": "45c-input",
+      "sha256": "77791d4fa1dfc00e3a6d285bb084b95b6403d7ff787aaa4a7ffdc975b24fae5e"
+    },
+    {
+      "id": "48a-draft",
+      "previousParent": "47a-actions",
+      "proposedParent": "45c-input",
+      "sha256": "77791d4fa1dfc00e3a6d285bb084b95b6403d7ff787aaa4a7ffdc975b24fae5e"
+    },
+    {
+      "id": "48b-preview",
+      "previousParent": "47a-actions",
+      "proposedParent": "45c-input",
+      "sha256": "77791d4fa1dfc00e3a6d285bb084b95b6403d7ff787aaa4a7ffdc975b24fae5e"
+    },
+    {
+      "id": "48c-commit",
+      "previousParent": "47a-actions",
+      "proposedParent": null,
+      "sha256": "11fbd61fc635725e5f20262c2677a291e900f8fbeae4c02f0f4bad92c998b5dc"
+    }
+  ],
+  "currentCourse": "dfc7eb1f041279eace9f8ee45a8d1b84d82bb1e08370f1f491cd88ec39ca1ce8",
+  "runtimeAcceptance": false
+}

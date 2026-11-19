@@ -1,0 +1,358 @@
+{
+  "status": "READ_ONLY_PLAN_NO_MUTATION",
+  "scope": "Inactive artifacts created during accepted selection-native13tests and WARP frame, outside baseline/current Viewer protection. Mode probe artifacts retained.",
+  "cacheRoot": "C:\\pc\\3_code\\code_rust\\wood_research\\session\\session_viewer\\target\\course-cargo",
+  "archiveRoot": "C:/pc/tmp/tutorial-selection-native-cache-20261114",
+  "protectedManifest": "C:\\pc\\3_code\\code_rust\\wood_research\\.codex\\viewer-quality-20261028\\current-viewer-protected-cache-20261114-01.json",
+  "protectedSha256": "29559f235d07f31120188d33e898664aa32fe3cffd00ebd31c6a38c957e34803",
+  "startedUtc": "2026-11-13T23:30:05.8382456Z",
+  "endUtc": "2026-11-13T23:30:46.186483+00:00",
+  "files": [
+    {
+      "path": "debug/build/session_rust-03158591ccb6fe11/build-script-build.exe",
+      "bytes": 4336128,
+      "mtimeNs": 1794612606565231100,
+      "sha256": "521044c60d4ce22104cf7e38a176b39c20f42409c4474f47028341b43f8eca31"
+    },
+    {
+      "path": "debug/build/session_rust-03158591ccb6fe11/build_script_build-03158591ccb6fe11.d",
+      "bytes": 604,
+      "mtimeNs": 1794612606235431700,
+      "sha256": "ef6c3f154aa49a2a960db266539ab2067e297a07190cafaec73498addb7da7a8"
+    },
+    {
+      "path": "debug/build/session_rust-03158591ccb6fe11/build_script_build-03158591ccb6fe11.exe",
+      "bytes": 4336128,
+      "mtimeNs": 1794612606565231100,
+      "sha256": "521044c60d4ce22104cf7e38a176b39c20f42409c4474f47028341b43f8eca31"
+    },
+    {
+      "path": "debug/build/session_rust-03158591ccb6fe11/build_script_build-03158591ccb6fe11.pdb",
+      "bytes": 4976640,
+      "mtimeNs": 1794612606565231100,
+      "sha256": "21a1f2f93d0b22a45fcc46344eb840d854a31f9c252fc745f8141514b4b529a3"
+    },
+    {
+      "path": "debug/build/session_rust-03158591ccb6fe11/build_script_build.pdb",
+      "bytes": 4976640,
+      "mtimeNs": 1794612606565231100,
+      "sha256": "21a1f2f93d0b22a45fcc46344eb840d854a31f9c252fc745f8141514b4b529a3"
+    },
+    {
+      "path": "debug/.fingerprint/session_rust-03158591ccb6fe11/build-script-build-script-build",
+      "bytes": 16,
+      "mtimeNs": 1794612606876115200,
+      "sha256": "e6ef6739509e460cc0706f18c32e66a560cacbe88bbfffd228b35e8dafb0b1a0"
+    },
+    {
+      "path": "debug/.fingerprint/session_rust-03158591ccb6fe11/build-script-build-script-build.json",
+      "bytes": 563,
+      "mtimeNs": 1794612606876115200,
+      "sha256": "8963db3b71b82470184f1e47adf767ac2f8c37a53f8b6dcc383b4f8cc2a8d30a"
+    },
+    {
+      "path": "debug/.fingerprint/session_rust-03158591ccb6fe11/dep-build-script-build-script-build",
+      "bytes": 28,
+      "mtimeNs": 1794612606212440700,
+      "sha256": "a71f952e7f3252ef5608298951fd55b25f3590c98bc0765ae4145e623604ee7d"
+    },
+    {
+      "path": "debug/.fingerprint/session_rust-03158591ccb6fe11/invoked.timestamp",
+      "bytes": 48,
+      "mtimeNs": 1794612606212440700,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/js_sys-f6b456b91b830432.d",
+      "bytes": 2540,
+      "mtimeNs": 1794612608082858800,
+      "sha256": "8ccf7da78f58b5617d27d212ac7b9bbc1548c39d424fac9bc3e81716d2292ad8"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libjs_sys-f6b456b91b830432.rlib",
+      "bytes": 10364264,
+      "mtimeNs": 1794612610460701000,
+      "sha256": "c84941e801a4e4838baba1a1cc48bda429c2f48c147b8a49c51f651e544c26d1"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libjs_sys-f6b456b91b830432.rmeta",
+      "bytes": 7248974,
+      "mtimeNs": 1794612609927371600,
+      "sha256": "583c00a70ada0a0d22b20e1405f2bb3783969634b92b5cfdcb47461c7098b693"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libsession_rust-d488761cb101525c.rlib",
+      "bytes": 72572936,
+      "mtimeNs": 1794612629687074700,
+      "sha256": "1fd7e1adf05d4fc14f8012863f0de3c9b13c38627163abfe36deb4354f3e3aaa"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libsession_rust-d488761cb101525c.rmeta",
+      "bytes": 9517361,
+      "mtimeNs": 1794612619978455100,
+      "sha256": "eb5600dcbae3c0178d3b66dfdaaa11c83c50f383dff95d6dfd10927fbc6d2066"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libwasm_bindgen_futures-a467e6691112ee72.rlib",
+      "bytes": 4606,
+      "mtimeNs": 1794612629788553100,
+      "sha256": "484487de83be4c2a815dff11bad1b57fc795a4df26a42b1230462d1435016edb"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libwasm_bindgen_futures-a467e6691112ee72.rmeta",
+      "bytes": 3763,
+      "mtimeNs": 1794612629757578500,
+      "sha256": "e1ff58878b1f9c937ec7a80b8762a238905e30e1a2f17a863e468f5ebd95cfa8"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libweb_sys-c73514724b00438d.rlib",
+      "bytes": 5005160,
+      "mtimeNs": 1794612632388846900,
+      "sha256": "ee79042a26bed2c596bc1cdf940f9a73bc232002d823cdc26ce0830c8751ce28"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libweb_sys-c73514724b00438d.rmeta",
+      "bytes": 3048610,
+      "mtimeNs": 1794612631990303300,
+      "sha256": "3f99bb17bf1f13a2af7bd230bbe8f659fe07e7d2bac1015a7926b0af2f965086"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/session_rust-d488761cb101525c.d",
+      "bytes": 31112,
+      "mtimeNs": 1794612612005632000,
+      "sha256": "1367d043347a61af763c7efa993f79adc501d481d9c14fa264a7878690ccfda9"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/viewer_journey-7ed8089e43b379d5.d",
+      "bytes": 1796,
+      "mtimeNs": 1794612632517989300,
+      "sha256": "8732ed039120960c77c965901a8dc77b46f2f23640f4d54bf8eb6fd4bbd1859b"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/viewer_journey-7ed8089e43b379d5.exe",
+      "bytes": 19303936,
+      "mtimeNs": 1794612633384139000,
+      "sha256": "0c24f8865ff83f24cd31b5521cb082b73ec8dc173284331f42356f5c163565ef"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/viewer_journey-7ed8089e43b379d5.pdb",
+      "bytes": 8867840,
+      "mtimeNs": 1794612633399862600,
+      "sha256": "528108c08c70337cc46ec474e853e15c35576c1301a3f85eac4103d7c58dff2c"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/wasm_bindgen_futures-a467e6691112ee72.d",
+      "bytes": 914,
+      "mtimeNs": 1794612629755577100,
+      "sha256": "a9eb4a326ff19da3a05e280c6e386b3dfef805528541f472a75b67e914a99147"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/web_sys-c73514724b00438d.d",
+      "bytes": 9185,
+      "mtimeNs": 1794612630912936000,
+      "sha256": "025c7408c56c573d52bbbd76efc6ede5e2917caa16b9a0aecc65b90e4c7f7cf8"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/examples/frame.d",
+      "bytes": 313,
+      "mtimeNs": 1794612636600169900,
+      "sha256": "59ab88513666bcd9167069d2a35aef4c46e68c15d2eb3df2c85e178487ddde19"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/examples/frame.exe",
+      "bytes": 13659648,
+      "mtimeNs": 1794612637259020100,
+      "sha256": "4afad502e4e0eb683887871b4cf7ba091e71f0621894bd827db4b5f8ee8e4143"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/examples/frame.pdb",
+      "bytes": 12546048,
+      "mtimeNs": 1794612637264840300,
+      "sha256": "f73615abd7f49bca5264838f443943d52769e7552ab91b2b300bed17eae309cf"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/build/session_rust-72b1686b46037c81/invoked.timestamp",
+      "bytes": 48,
+      "mtimeNs": 1794612610484100700,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/build/session_rust-72b1686b46037c81/output",
+      "bytes": 105,
+      "mtimeNs": 1794612610484100700,
+      "sha256": "c66f54ae5d1f9db8c685fb126f8c51b01229dd6586de46a627895310c57c5b68"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/build/session_rust-72b1686b46037c81/root-output",
+      "bytes": 148,
+      "mtimeNs": 1794612610956070800,
+      "sha256": "10b6f44d601b409c0ba7b8804b5a2d33e14f126b530da21a4c6e1ef13bc83a5f"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/build/session_rust-72b1686b46037c81/stderr",
+      "bytes": 0,
+      "mtimeNs": 1794612610956070800,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/js-sys-f6b456b91b830432/dep-lib-js_sys",
+      "bytes": 14,
+      "mtimeNs": 1794612606876115200,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/js-sys-f6b456b91b830432/invoked.timestamp",
+      "bytes": 48,
+      "mtimeNs": 1794612606876115200,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/js-sys-f6b456b91b830432/lib-js_sys",
+      "bytes": 16,
+      "mtimeNs": 1794612610481742500,
+      "sha256": "1898f1786d9e0ded0910ab41dfa5e98f04520a698745954ebadfd0065803d8aa"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/js-sys-f6b456b91b830432/lib-js_sys.json",
+      "bytes": 648,
+      "mtimeNs": 1794612610481742500,
+      "sha256": "0628e9508a485f9d69c19d03c1e81f1f791acb3282bfb7f88177d5c6a90c298f"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/session_rust-72b1686b46037c81/run-build-script-build-script-build",
+      "bytes": 16,
+      "mtimeNs": 1794612610956070800,
+      "sha256": "e9197571f71685ef98c65c47d609487ae006ced1aa1daef42bdb48b490a526e4"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/session_rust-72b1686b46037c81/run-build-script-build-script-build.json",
+      "bytes": 464,
+      "mtimeNs": 1794612610956070800,
+      "sha256": "11df2303b390bf0c675feba903082fe726c738092e69f3cd81754f20371671b5"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/session_rust-d488761cb101525c/dep-lib-session_rust",
+      "bytes": 2583,
+      "mtimeNs": 1794612610962051000,
+      "sha256": "e3bdf55b64bd04b684ade8daa631382b988dd945b4a7d19b922b3e7497682401"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/session_rust-d488761cb101525c/invoked.timestamp",
+      "bytes": 48,
+      "mtimeNs": 1794612610962051000,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/session_rust-d488761cb101525c/lib-session_rust",
+      "bytes": 16,
+      "mtimeNs": 1794612629728317300,
+      "sha256": "bfb3e396634b924ac2628f0f16399d0ca6fc2d7b1f6da2cfe107c28642cd198e"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/session_rust-d488761cb101525c/lib-session_rust.json",
+      "bytes": 1231,
+      "mtimeNs": 1794612629730318400,
+      "sha256": "3366e79bd4602dc9c6ea63214bcbe2d2a52148de1d80615d6a4519c570ba3f9b"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/viewer_journey-1a84aea8efc2195b/dep-example-frame",
+      "bytes": 37,
+      "mtimeNs": 1794612636479762200,
+      "sha256": "496729619f69d08cdda9d9135d438fa78c7d8aa4c464dc297e0dfa68b384dea7"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/viewer_journey-1a84aea8efc2195b/example-frame",
+      "bytes": 16,
+      "mtimeNs": 1794612637315382800,
+      "sha256": "6d19c6763ee7edae06f7e5aecad25b0c5273a70e131e3692ddf0e5059f9431fd"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/viewer_journey-1a84aea8efc2195b/example-frame.json",
+      "bytes": 1267,
+      "mtimeNs": 1794612637315382800,
+      "sha256": "d4c49fc40e368f8151e94518cc43bf0ff0a95654df92feb56c99e3fd46a8961b"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/viewer_journey-7ed8089e43b379d5/dep-test-lib-viewer_journey",
+      "bytes": 527,
+      "mtimeNs": 1794612632410905600,
+      "sha256": "3fb0d0628f0987a773a8f74ed615ab0a481b162212253152c93e1ee5804fce9b"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/viewer_journey-7ed8089e43b379d5/invoked.timestamp",
+      "bytes": 48,
+      "mtimeNs": 1794612632410905600,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/viewer_journey-7ed8089e43b379d5/output-test-lib-viewer_journey",
+      "bytes": 4000,
+      "mtimeNs": 1794612633447535200,
+      "sha256": "0169250d5dd327ef36e413afc0be82082453a93179e65604c0a5729322e06eec"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/viewer_journey-7ed8089e43b379d5/test-lib-viewer_journey",
+      "bytes": 16,
+      "mtimeNs": 1794612633461027300,
+      "sha256": "9d417bb281fcca1f4fae1273464498e4e55bae2dc62abb700d1a61acbce3ff9c"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/viewer_journey-7ed8089e43b379d5/test-lib-viewer_journey.json",
+      "bytes": 1212,
+      "mtimeNs": 1794612633461027300,
+      "sha256": "18218837b62f5ba99d6cf2707eaa0752523f76a6ebd6210e183adc3435bb0d34"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/wasm-bindgen-futures-a467e6691112ee72/dep-lib-wasm_bindgen_futures",
+      "bytes": 14,
+      "mtimeNs": 1794612629730318400,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/wasm-bindgen-futures-a467e6691112ee72/invoked.timestamp",
+      "bytes": 48,
+      "mtimeNs": 1794612629730318400,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/wasm-bindgen-futures-a467e6691112ee72/lib-wasm_bindgen_futures",
+      "bytes": 16,
+      "mtimeNs": 1794612629800559200,
+      "sha256": "a7bc3af614564fe51725d6051798c2f92d7aa7a13eca4e80e9157c9ef4c77c2c"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/wasm-bindgen-futures-a467e6691112ee72/lib-wasm_bindgen_futures.json",
+      "bytes": 605,
+      "mtimeNs": 1794612629800559200,
+      "sha256": "29166a2f2a6e4867aa6478e101bc6bccf631d83745e206e5830f72abcdaba0b7"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/web-sys-c73514724b00438d/dep-lib-web_sys",
+      "bytes": 14,
+      "mtimeNs": 1794612629800559200,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/web-sys-c73514724b00438d/invoked.timestamp",
+      "bytes": 48,
+      "mtimeNs": 1794612629800559200,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/web-sys-c73514724b00438d/lib-web_sys",
+      "bytes": 16,
+      "mtimeNs": 1794612632410905600,
+      "sha256": "9cb3de22b9baa224bc9d3fa6b8e0037dc78b22bb0c373eebf2943589e1f47b91"
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/.fingerprint/web-sys-c73514724b00438d/lib-web_sys.json",
+      "bytes": 42176,
+      "mtimeNs": 1794612632410905600,
+      "sha256": "5c15f4e0d5ae30371396b29da919f9926b168b6affbf070bdb23094380df2541"
+    }
+  ],
+  "bytes": 180871246,
+  "count": 57,
+  "protectedOverlap": [],
+  "excludedProtectedCandidates": 0
+}

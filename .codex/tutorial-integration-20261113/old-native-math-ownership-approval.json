@@ -1,0 +1,17 @@
+{
+  "status": "INTEGRATION_OWNS_AND_APPROVES_EXACT_INACTIVE_MATH_LIBRARIES",
+  "candidate": "C:\\pc\\3_code\\code_rust\\wood_research\\.codex\\viewer-quality-20261028\\old-native-math-libraries-retirement-candidates-01.json",
+  "sha256": "f0d8f6f42a96a9a86546d5a5beddd60289b13f1e924b169c1ce12b851b2e546f",
+  "files": 130,
+  "bytes": 538864807,
+  "guard": {
+    "startedUtc": "2026-11-13T20:23:24.2617664Z",
+    "elapsedSeconds": 107.044,
+    "peakJobCommitBytes": 1886216192,
+    "jobCommitLimitBytes": 4294967296,
+    "processors": 2,
+    "timeoutSeconds": 590,
+    "timedOut": false
+  },
+  "scope": "Exact130 native-target rlib/rmeta outputs fall within my accepted standalone mathematics native build20:23:24?20:25:11. Fresh hashes verified; no current Viewer compiler overlap. Owner may relocate only this reviewed set losslessly while idle, preserving before/after SHA and recovery receipt. No other baseline or release artifacts."
+}

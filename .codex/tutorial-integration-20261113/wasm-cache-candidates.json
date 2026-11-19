@@ -1,0 +1,4151 @@
+{
+  "status": "READ_ONLY_CANDIDATES_NOT_AUTHORIZED_FOR_RETIREMENT",
+  "baseline": ".codex/viewer-quality-20261028/source31-old-release-headroom-01/plan.json",
+  "root": "C:\\pc\\3_code\\code_rust\\wood_research\\session\\session_viewer\\target\\course-cargo",
+  "files": [
+    {
+      "path": "wasm32-unknown-unknown/release/.cargo-artifact-lock",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.cargo-build-lock",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.cargo-lock",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/libviewer_journey.d",
+      "bytes": 1860
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/libviewer_journey.rlib",
+      "bytes": 689460
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/viewer_journey.d",
+      "bytes": 1857
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/viewer_journey.wasm",
+      "bytes": 3860623
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/accesskit-3404c177675e06b8.d",
+      "bytes": 1252
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/ahash-1a68c02f165c5023.d",
+      "bytes": 3614
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/arrayvec-aef844f9becad3d2.d",
+      "bytes": 3238
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/bitflags-e10e8aac0d22a0c9.d",
+      "bytes": 3226
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/bytemuck-fe0b43835dacfc07.d",
+      "bytes": 6185
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/cfg_if-e154abf75080bbee.d",
+      "bytes": 818
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/color-485d8271183a68e1.d",
+      "bytes": 6658
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/console_error_panic_hook-3a5f557ca1c9aba8.d",
+      "bytes": 944
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/ecolor-1fe316c4b14d5790.d",
+      "bytes": 2815
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/egui-81ff3865347d7949.d",
+      "bytes": 42841
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/egui_wgpu-07261ad7bc9abe3e.d",
+      "bytes": 2050
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/emath-227ff720709e4255.d",
+      "bytes": 7075
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/epaint-6e02c1456d0f776e.d",
+      "bytes": 15201
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/fearless_simd-74b105fc451cd050.d",
+      "bytes": 5293
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/foldhash-2dc61ba610944192.d",
+      "bytes": 1999
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/font_types-041abc02b681d831.d",
+      "bytes": 6512
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/futures_core-a9559c08adadbb19.d",
+      "bytes": 3502
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/futures_task-a7e5ea4494bb5fba.d",
+      "bytes": 3386
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/futures_util-584798be4c40fadc.d",
+      "bytes": 56562
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/hashbrown-7f05a88b6715b8d9.d",
+      "bytes": 7519
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/itoa-445c69d8c878937c.d",
+      "bytes": 1197
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/js_sys-e00b3789eb292cc8.d",
+      "bytes": 2546
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/kurbo-adae6ad9ee4c307e.d",
+      "bytes": 12469
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libaccesskit-3404c177675e06b8.rlib",
+      "bytes": 1005266
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libaccesskit-3404c177675e06b8.rmeta",
+      "bytes": 902492
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libahash-1a68c02f165c5023.rlib",
+      "bytes": 264476
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libahash-1a68c02f165c5023.rmeta",
+      "bytes": 260392
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libarrayvec-aef844f9becad3d2.rlib",
+      "bytes": 347344
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libarrayvec-aef844f9becad3d2.rmeta",
+      "bytes": 346293
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libbitflags-e10e8aac0d22a0c9.rlib",
+      "bytes": 248666
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libbitflags-e10e8aac0d22a0c9.rmeta",
+      "bytes": 239478
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libbytemuck-fe0b43835dacfc07.rlib",
+      "bytes": 585328
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libbytemuck-fe0b43835dacfc07.rmeta",
+      "bytes": 581580
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libcfg_if-e154abf75080bbee.rlib",
+      "bytes": 6474
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libcfg_if-e154abf75080bbee.rmeta",
+      "bytes": 5853
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libcolor-485d8271183a68e1.rlib",
+      "bytes": 1072264
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libcolor-485d8271183a68e1.rmeta",
+      "bytes": 856319
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libconsole_error_panic_hook-3a5f557ca1c9aba8.rlib",
+      "bytes": 43476
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libconsole_error_panic_hook-3a5f557ca1c9aba8.rmeta",
+      "bytes": 35699
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libecolor-1fe316c4b14d5790.rlib",
+      "bytes": 235938
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libecolor-1fe316c4b14d5790.rmeta",
+      "bytes": 211796
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libegui-81ff3865347d7949.rlib",
+      "bytes": 8498982
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libegui-81ff3865347d7949.rmeta",
+      "bytes": 5772707
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libegui_wgpu-07261ad7bc9abe3e.rlib",
+      "bytes": 354050
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libegui_wgpu-07261ad7bc9abe3e.rmeta",
+      "bytes": 181450
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libemath-227ff720709e4255.rlib",
+      "bytes": 614418
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libemath-227ff720709e4255.rmeta",
+      "bytes": 593235
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libepaint-6e02c1456d0f776e.rlib",
+      "bytes": 2229298
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libepaint-6e02c1456d0f776e.rmeta",
+      "bytes": 1515541
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libfearless_simd-74b105fc451cd050.rlib",
+      "bytes": 4372324
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libfearless_simd-74b105fc451cd050.rmeta",
+      "bytes": 4371686
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libfoldhash-2dc61ba610944192.rlib",
+      "bytes": 104520
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libfoldhash-2dc61ba610944192.rmeta",
+      "bytes": 99191
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libfont_types-041abc02b681d831.rlib",
+      "bytes": 710284
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libfont_types-041abc02b681d831.rmeta",
+      "bytes": 692591
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libfutures_core-a9559c08adadbb19.rlib",
+      "bytes": 67176
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libfutures_core-a9559c08adadbb19.rmeta",
+      "bytes": 64683
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libfutures_task-a7e5ea4494bb5fba.rlib",
+      "bytes": 124048
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libfutures_task-a7e5ea4494bb5fba.rmeta",
+      "bytes": 121082
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libfutures_util-584798be4c40fadc.rlib",
+      "bytes": 4408934
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libfutures_util-584798be4c40fadc.rmeta",
+      "bytes": 4398402
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libhashbrown-7f05a88b6715b8d9.rlib",
+      "bytes": 1687210
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libhashbrown-7f05a88b6715b8d9.rmeta",
+      "bytes": 1684381
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libitoa-445c69d8c878937c.rlib",
+      "bytes": 83384
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libitoa-445c69d8c878937c.rmeta",
+      "bytes": 77907
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libjs_sys-e00b3789eb292cc8.rlib",
+      "bytes": 11876452
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libjs_sys-e00b3789eb292cc8.rmeta",
+      "bytes": 10640625
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libkurbo-adae6ad9ee4c307e.rlib",
+      "bytes": 1781242
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libkurbo-adae6ad9ee4c307e.rmeta",
+      "bytes": 1530833
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/liblinebender_resource_handle-6c2b483b34b64b51.rlib",
+      "bytes": 32092
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/liblinebender_resource_handle-6c2b483b34b64b51.rmeta",
+      "bytes": 31168
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/liblock_api-78eaabb7411bbd60.rlib",
+      "bytes": 391200
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/liblock_api-78eaabb7411bbd60.rmeta",
+      "bytes": 389551
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/liblog-15d18cedc9b125e7.rlib",
+      "bytes": 223202
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/liblog-15d18cedc9b125e7.rmeta",
+      "bytes": 214213
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libmemchr-2ca5222adec83075.rlib",
+      "bytes": 620184
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libmemchr-2ca5222adec83075.rmeta",
+      "bytes": 601308
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libnohash_hasher-d567c7c29593c5da.rlib",
+      "bytes": 19126
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libnohash_hasher-d567c7c29593c5da.rmeta",
+      "bytes": 18489
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libonce_cell-d7f05e0a1caa2ac5.rlib",
+      "bytes": 150008
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libonce_cell-d7f05e0a1caa2ac5.rmeta",
+      "bytes": 149380
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libparking_lot-5d539bfe54f500f8.rlib",
+      "bytes": 259612
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libparking_lot-5d539bfe54f500f8.rmeta",
+      "bytes": 210048
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libparking_lot_core-5db8e7efc91331ab.rlib",
+      "bytes": 188766
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libparking_lot_core-5db8e7efc91331ab.rmeta",
+      "bytes": 180389
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libpeniko-c5e76f1cc6677bd1.rlib",
+      "bytes": 332536
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libpeniko-c5e76f1cc6677bd1.rmeta",
+      "bytes": 310356
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libpin_project_lite-8fb5169f829a17c0.rlib",
+      "bytes": 94952
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libpin_project_lite-8fb5169f829a17c0.rmeta",
+      "bytes": 94310
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libpolycool-4db6022f7b1f4bc2.rlib",
+      "bytes": 159528
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libpolycool-4db6022f7b1f4bc2.rmeta",
+      "bytes": 102133
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libprofiling-b2be7dff78c20792.rlib",
+      "bytes": 5880
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libprofiling-b2be7dff78c20792.rmeta",
+      "bytes": 5252
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libraw_window_handle-b043c03b4be4fc7b.rlib",
+      "bytes": 390020
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libraw_window_handle-b043c03b4be4fc7b.rmeta",
+      "bytes": 362554
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libread_fonts-c6ab00f569905a68.rlib",
+      "bytes": 11462056
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libread_fonts-c6ab00f569905a68.rmeta",
+      "bytes": 9202338
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/librustc_hash-88c67c104f7116cb.rlib",
+      "bytes": 41686
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/librustc_hash-88c67c104f7116cb.rmeta",
+      "bytes": 41056
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libscopeguard-05606d01b5ab39b0.rlib",
+      "bytes": 26710
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libscopeguard-05606d01b5ab39b0.rmeta",
+      "bytes": 26080
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libself_cell-1ee37e00c055f1ba.rlib",
+      "bytes": 79288
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libself_cell-1ee37e00c055f1ba.rmeta",
+      "bytes": 78098
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libserde-22658b39aa1069de.rlib",
+      "bytes": 962066
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libserde-22658b39aa1069de.rmeta",
+      "bytes": 951714
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libserde_core-5b67267dc07cb0ef.rlib",
+      "bytes": 5035932
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libserde_core-5b67267dc07cb0ef.rmeta",
+      "bytes": 4979477
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libserde_json-fd2fd778b7b7289f.rlib",
+      "bytes": 1859374
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libserde_json-fd2fd778b7b7289f.rmeta",
+      "bytes": 1685127
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libskrifa-516c01fc9ecbfd0e.rlib",
+      "bytes": 3967014
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libskrifa-516c01fc9ecbfd0e.rmeta",
+      "bytes": 2744238
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libslab-eebc164234a3ec7a.rlib",
+      "bytes": 190144
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libslab-eebc164234a3ec7a.rmeta",
+      "bytes": 188221
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libsmallvec-340a4e61b29ba166.rlib",
+      "bytes": 277878
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libsmallvec-340a4e61b29ba166.rmeta",
+      "bytes": 274286
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libstatic_assertions-28ecd75f58260d69.rlib",
+      "bytes": 53190
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libstatic_assertions-28ecd75f58260d69.rmeta",
+      "bytes": 52545
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libthiserror-1e2bd2e6023a767b.rlib",
+      "bytes": 32758
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libthiserror-1e2bd2e6023a767b.rmeta",
+      "bytes": 32129
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libtype_map-7720e496602ccb42.rlib",
+      "bytes": 141360
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libtype_map-7720e496602ccb42.rmeta",
+      "bytes": 136765
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libunicode_ident-62a8d7499a093543.rlib",
+      "bytes": 50570
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libunicode_ident-62a8d7499a093543.rmeta",
+      "bytes": 39007
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libunicode_segmentation-0e334df743d73fd3.rlib",
+      "bytes": 1264292
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libunicode_segmentation-0e334df743d73fd3.rmeta",
+      "bytes": 1168386
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libuuid-f2b9d9be899ed040.rlib",
+      "bytes": 508186
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libuuid-f2b9d9be899ed040.rmeta",
+      "bytes": 485150
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libvello_common-04906c298a5d62eb.rlib",
+      "bytes": 1423604
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libvello_common-04906c298a5d62eb.rmeta",
+      "bytes": 1271705
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libvello_cpu-c3fcb89fd87f37ca.rlib",
+      "bytes": 1872472
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libvello_cpu-c3fcb89fd87f37ca.rmeta",
+      "bytes": 1229754
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libviewer_journey.rlib",
+      "bytes": 689460
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libwasm_bindgen-020f2d0345225a2a.rlib",
+      "bytes": 3024522
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libwasm_bindgen-020f2d0345225a2a.rmeta",
+      "bytes": 2948639
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libwasm_bindgen_futures-df88319d2b5c47f0.rlib",
+      "bytes": 4508
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libwasm_bindgen_futures-df88319d2b5c47f0.rmeta",
+      "bytes": 3859
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libwasm_bindgen_shared-33ea06c623a51254.rlib",
+      "bytes": 172990
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libwasm_bindgen_shared-33ea06c623a51254.rmeta",
+      "bytes": 124145
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libweb_sys-1cd54b1ce9119189.rlib",
+      "bytes": 7434836
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libweb_sys-1cd54b1ce9119189.rmeta",
+      "bytes": 6192299
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libweb_time-cd1fb261ca101f47.rlib",
+      "bytes": 114008
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libweb_time-cd1fb261ca101f47.rmeta",
+      "bytes": 93970
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libwgpu-429b579628a85b2f.rlib",
+      "bytes": 11782284
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libwgpu-429b579628a85b2f.rmeta",
+      "bytes": 10008664
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libwgpu_types-821939a0d51cc9f2.rlib",
+      "bytes": 5454026
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libwgpu_types-821939a0d51cc9f2.rmeta",
+      "bytes": 5070639
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libzerocopy-d1d7d23a84a72565.rlib",
+      "bytes": 15164084
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libzerocopy-d1d7d23a84a72565.rmeta",
+      "bytes": 15163457
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libzmij-546f6187ffc4adf9.rlib",
+      "bytes": 162440
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/libzmij-546f6187ffc4adf9.rmeta",
+      "bytes": 140648
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/linebender_resource_handle-6c2b483b34b64b51.d",
+      "bytes": 1872
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/lock_api-78eaabb7411bbd60.d",
+      "bytes": 2027
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/log-15d18cedc9b125e7.d",
+      "bytes": 1956
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/memchr-2ca5222adec83075.d",
+      "bytes": 8300
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/nohash_hasher-d567c7c29593c5da.d",
+      "bytes": 867
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/once_cell-d7f05e0a1caa2ac5.d",
+      "bytes": 1236
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/parking_lot-5d539bfe54f500f8.d",
+      "bytes": 5841
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/parking_lot_core-5db8e7efc91331ab.d",
+      "bytes": 3590
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/peniko-c5e76f1cc6677bd1.d",
+      "bytes": 3148
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/pin_project_lite-8fb5169f829a17c0.d",
+      "bytes": 892
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/polycool-4db6022f7b1f4bc2.d",
+      "bytes": 2805
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/profiling-b2be7dff78c20792.d",
+      "bytes": 1260
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/raw_window_handle-b043c03b4be4fc7b.d",
+      "bytes": 5161
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/read_fonts-c6ab00f569905a68.d",
+      "bytes": 68136
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/rustc_hash-88c67c104f7116cb.d",
+      "bytes": 1271
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/scopeguard-05606d01b5ab39b0.d",
+      "bytes": 846
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/self_cell-1ee37e00c055f1ba.d",
+      "bytes": 1276
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/serde-22658b39aa1069de.d",
+      "bytes": 3244
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/serde_core-5b67267dc07cb0ef.d",
+      "bytes": 8921
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/serde_json-fd2fd778b7b7289f.d",
+      "bytes": 7037
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/skrifa-516c01fc9ecbfd0e.d",
+      "bytes": 36012
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/slab-eebc164234a3ec7a.d",
+      "bytes": 1193
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/smallvec-340a4e61b29ba166.d",
+      "bytes": 836
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/static_assertions-28ecd75f58260d69.d",
+      "bytes": 4992
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/thiserror-1e2bd2e6023a767b.d",
+      "bytes": 3264
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/type_map-7720e496602ccb42.d",
+      "bytes": 832
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/unicode_ident-62a8d7499a093543.d",
+      "bytes": 1288
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/unicode_segmentation-0e334df743d73fd3.d",
+      "bytes": 2708
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/uuid-f2b9d9be899ed040.d",
+      "bytes": 3868
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/vello_common-04906c298a5d62eb.d",
+      "bytes": 8354
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/vello_cpu-c3fcb89fd87f37ca.d",
+      "bytes": 12658
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/viewer_journey.d",
+      "bytes": 2043
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/viewer_journey.wasm",
+      "bytes": 3860623
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/wasm_bindgen-020f2d0345225a2a.d",
+      "bytes": 8157
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/wasm_bindgen_futures-df88319d2b5c47f0.d",
+      "bytes": 920
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/wasm_bindgen_shared-33ea06c623a51254.d",
+      "bytes": 1870
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/web_sys-1cd54b1ce9119189.d",
+      "bytes": 14434
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/web_time-cd1fb261ca101f47.d",
+      "bytes": 2861
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/wgpu-429b579628a85b2f.d",
+      "bytes": 91055
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/wgpu_types-821939a0d51cc9f2.d",
+      "bytes": 12498
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/zerocopy-d1d7d23a84a72565.d",
+      "bytes": 8278
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/deps/zmij-546f6187ffc4adf9.d",
+      "bytes": 1189
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/ahash-8f81a0aa91890305/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/ahash-8f81a0aa91890305/output",
+      "bytes": 113
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/ahash-8f81a0aa91890305/root-output",
+      "bytes": 143
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/ahash-8f81a0aa91890305/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/parking_lot_core-de3c77c7fb397e53/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/parking_lot_core-de3c77c7fb397e53/output",
+      "bytes": 72
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/parking_lot_core-de3c77c7fb397e53/root-output",
+      "bytes": 154
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/parking_lot_core-de3c77c7fb397e53/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/serde-b8b3fed64269d2bb/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/serde-b8b3fed64269d2bb/output",
+      "bytes": 582
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/serde-b8b3fed64269d2bb/root-output",
+      "bytes": 143
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/serde-b8b3fed64269d2bb/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/serde_core-56632ede11b30e94/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/serde_core-56632ede11b30e94/output",
+      "bytes": 484
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/serde_core-56632ede11b30e94/root-output",
+      "bytes": 148
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/serde_core-56632ede11b30e94/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/serde_json-1f2b8fea182f5cfc/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/serde_json-1f2b8fea182f5cfc/output",
+      "bytes": 132
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/serde_json-1f2b8fea182f5cfc/root-output",
+      "bytes": 148
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/serde_json-1f2b8fea182f5cfc/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/thiserror-7db9413ff1710442/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/thiserror-7db9413ff1710442/output",
+      "bytes": 244
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/thiserror-7db9413ff1710442/root-output",
+      "bytes": 147
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/thiserror-7db9413ff1710442/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/wasm-bindgen-b4074b4224530612/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/wasm-bindgen-b4074b4224530612/output",
+      "bytes": 188
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/wasm-bindgen-b4074b4224530612/root-output",
+      "bytes": 150
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/wasm-bindgen-b4074b4224530612/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/wasm-bindgen-shared-b526c496266f8e12/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/wasm-bindgen-shared-b526c496266f8e12/output",
+      "bytes": 315
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/wasm-bindgen-shared-b526c496266f8e12/root-output",
+      "bytes": 157
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/wasm-bindgen-shared-b526c496266f8e12/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/wgpu-8f9bbae23b657e49/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/wgpu-8f9bbae23b657e49/output",
+      "bytes": 728
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/wgpu-8f9bbae23b657e49/root-output",
+      "bytes": 142
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/wgpu-8f9bbae23b657e49/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/zerocopy-9fa4db5d60cd4054/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/zerocopy-9fa4db5d60cd4054/output",
+      "bytes": 1662
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/zerocopy-9fa4db5d60cd4054/root-output",
+      "bytes": 146
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/zerocopy-9fa4db5d60cd4054/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/zmij-654741181eba8e4d/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/zmij-654741181eba8e4d/output",
+      "bytes": 176
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/zmij-654741181eba8e4d/root-output",
+      "bytes": 142
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/zmij-654741181eba8e4d/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/thiserror-7db9413ff1710442/out/private.rs",
+      "bytes": 89
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/serde_core-56632ede11b30e94/out/private.rs",
+      "bytes": 90
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/build/serde-b8b3fed64269d2bb/out/private.rs",
+      "bytes": 142
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/accesskit-3404c177675e06b8/dep-lib-accesskit",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/accesskit-3404c177675e06b8/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/accesskit-3404c177675e06b8/lib-accesskit",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/accesskit-3404c177675e06b8/lib-accesskit.json",
+      "bytes": 537
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/ahash-1a68c02f165c5023/dep-lib-ahash",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/ahash-1a68c02f165c5023/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/ahash-1a68c02f165c5023/lib-ahash",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/ahash-1a68c02f165c5023/lib-ahash.json",
+      "bytes": 853
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/ahash-8f81a0aa91890305/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/ahash-8f81a0aa91890305/run-build-script-build-script-build.json",
+      "bytes": 391
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/arrayvec-aef844f9becad3d2/dep-lib-arrayvec",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/arrayvec-aef844f9becad3d2/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/arrayvec-aef844f9becad3d2/lib-arrayvec",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/arrayvec-aef844f9becad3d2/lib-arrayvec.json",
+      "bytes": 492
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/bitflags-e10e8aac0d22a0c9/dep-lib-bitflags",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/bitflags-e10e8aac0d22a0c9/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/bitflags-e10e8aac0d22a0c9/lib-bitflags",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/bitflags-e10e8aac0d22a0c9/lib-bitflags.json",
+      "bytes": 521
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/bytemuck-fe0b43835dacfc07/dep-lib-bytemuck",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/bytemuck-fe0b43835dacfc07/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/bytemuck-fe0b43835dacfc07/lib-bytemuck",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/bytemuck-fe0b43835dacfc07/lib-bytemuck.json",
+      "bytes": 1137
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/cfg-if-e154abf75080bbee/dep-lib-cfg_if",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/cfg-if-e154abf75080bbee/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/cfg-if-e154abf75080bbee/lib-cfg_if",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/cfg-if-e154abf75080bbee/lib-cfg_if.json",
+      "bytes": 462
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/color-485d8271183a68e1/dep-lib-color",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/color-485d8271183a68e1/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/color-485d8271183a68e1/lib-color",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/color-485d8271183a68e1/lib-color.json",
+      "bytes": 563
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/console_error_panic_hook-3a5f557ca1c9aba8/dep-lib-console_error_panic_hook",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/console_error_panic_hook-3a5f557ca1c9aba8/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/console_error_panic_hook-3a5f557ca1c9aba8/lib-console_error_panic_hook",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/console_error_panic_hook-3a5f557ca1c9aba8/lib-console_error_panic_hook.json",
+      "bytes": 589
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/ecolor-1fe316c4b14d5790/dep-lib-ecolor",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/ecolor-1fe316c4b14d5790/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/ecolor-1fe316c4b14d5790/lib-ecolor",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/ecolor-1fe316c4b14d5790/lib-ecolor.json",
+      "bytes": 646
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/egui-81ff3865347d7949/dep-lib-egui",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/egui-81ff3865347d7949/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/egui-81ff3865347d7949/lib-egui",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/egui-81ff3865347d7949/lib-egui.json",
+      "bytes": 1227
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/egui-wgpu-07261ad7bc9abe3e/dep-lib-egui_wgpu",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/egui-wgpu-07261ad7bc9abe3e/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/egui-wgpu-07261ad7bc9abe3e/lib-egui_wgpu",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/egui-wgpu-07261ad7bc9abe3e/lib-egui_wgpu.json",
+      "bytes": 1161
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/emath-227ff720709e4255/dep-lib-emath",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/emath-227ff720709e4255/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/emath-227ff720709e4255/lib-emath",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/emath-227ff720709e4255/lib-emath.json",
+      "bytes": 570
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/epaint-6e02c1456d0f776e/dep-lib-epaint",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/epaint-6e02c1456d0f776e/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/epaint-6e02c1456d0f776e/lib-epaint",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/epaint-6e02c1456d0f776e/lib-epaint.json",
+      "bytes": 1397
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/fearless_simd-74b105fc451cd050/dep-lib-fearless_simd",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/fearless_simd-74b105fc451cd050/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/fearless_simd-74b105fc451cd050/lib-fearless_simd",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/fearless_simd-74b105fc451cd050/lib-fearless_simd.json",
+      "bytes": 563
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/foldhash-2dc61ba610944192/dep-lib-foldhash",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/foldhash-2dc61ba610944192/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/foldhash-2dc61ba610944192/lib-foldhash",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/foldhash-2dc61ba610944192/lib-foldhash.json",
+      "bytes": 469
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/font-types-041abc02b681d831/dep-lib-font_types",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/font-types-041abc02b681d831/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/font-types-041abc02b681d831/lib-font_types",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/font-types-041abc02b681d831/lib-font_types.json",
+      "bytes": 553
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/futures-core-a9559c08adadbb19/dep-lib-futures_core",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/futures-core-a9559c08adadbb19/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/futures-core-a9559c08adadbb19/lib-futures_core",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/futures-core-a9559c08adadbb19/lib-futures_core.json",
+      "bytes": 555
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/futures-task-a7e5ea4494bb5fba/dep-lib-futures_task",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/futures-task-a7e5ea4494bb5fba/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/futures-task-a7e5ea4494bb5fba/lib-futures_task",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/futures-task-a7e5ea4494bb5fba/lib-futures_task.json",
+      "bytes": 536
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/futures-util-584798be4c40fadc/dep-lib-futures_util",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/futures-util-584798be4c40fadc/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/futures-util-584798be4c40fadc/lib-futures_util",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/futures-util-584798be4c40fadc/lib-futures_util.json",
+      "bytes": 1174
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/hashbrown-7f05a88b6715b8d9/dep-lib-hashbrown",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/hashbrown-7f05a88b6715b8d9/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/hashbrown-7f05a88b6715b8d9/lib-hashbrown",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/hashbrown-7f05a88b6715b8d9/lib-hashbrown.json",
+      "bytes": 748
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/itoa-445c69d8c878937c/dep-lib-itoa",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/itoa-445c69d8c878937c/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/itoa-445c69d8c878937c/lib-itoa",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/itoa-445c69d8c878937c/lib-itoa.json",
+      "bytes": 440
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/js-sys-e00b3789eb292cc8/dep-lib-js_sys",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/js-sys-e00b3789eb292cc8/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/js-sys-e00b3789eb292cc8/lib-js_sys",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/js-sys-e00b3789eb292cc8/lib-js_sys.json",
+      "bytes": 720
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/kurbo-adae6ad9ee4c307e/dep-lib-kurbo",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/kurbo-adae6ad9ee4c307e/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/kurbo-adae6ad9ee4c307e/lib-kurbo",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/kurbo-adae6ad9ee4c307e/lib-kurbo.json",
+      "bytes": 693
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/linebender_resource_handle-6c2b483b34b64b51/dep-lib-linebender_resource_handle",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/linebender_resource_handle-6c2b483b34b64b51/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/linebender_resource_handle-6c2b483b34b64b51/lib-linebender_resource_handle",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/linebender_resource_handle-6c2b483b34b64b51/lib-linebender_resource_handle.json",
+      "bytes": 511
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/lock_api-78eaabb7411bbd60/dep-lib-lock_api",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/lock_api-78eaabb7411bbd60/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/lock_api-78eaabb7411bbd60/lib-lock_api",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/lock_api-78eaabb7411bbd60/lib-lock_api.json",
+      "bytes": 610
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/log-15d18cedc9b125e7/dep-lib-log",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/log-15d18cedc9b125e7/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/log-15d18cedc9b125e7/lib-log",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/log-15d18cedc9b125e7/lib-log.json",
+      "bytes": 949
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/memchr-2ca5222adec83075/dep-lib-memchr",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/memchr-2ca5222adec83075/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/memchr-2ca5222adec83075/lib-memchr",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/memchr-2ca5222adec83075/lib-memchr.json",
+      "bytes": 550
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/nohash-hasher-d567c7c29593c5da/dep-lib-nohash_hasher",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/nohash-hasher-d567c7c29593c5da/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/nohash-hasher-d567c7c29593c5da/lib-nohash_hasher",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/nohash-hasher-d567c7c29593c5da/lib-nohash_hasher.json",
+      "bytes": 487
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/once_cell-d7f05e0a1caa2ac5/dep-lib-once_cell",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/once_cell-d7f05e0a1caa2ac5/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/once_cell-d7f05e0a1caa2ac5/lib-once_cell",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/once_cell-d7f05e0a1caa2ac5/lib-once_cell.json",
+      "bytes": 593
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/parking_lot-5d539bfe54f500f8/dep-lib-parking_lot",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/parking_lot-5d539bfe54f500f8/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/parking_lot-5d539bfe54f500f8/lib-parking_lot",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/parking_lot-5d539bfe54f500f8/lib-parking_lot.json",
+      "bytes": 710
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/parking_lot_core-5db8e7efc91331ab/dep-lib-parking_lot_core",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/parking_lot_core-5db8e7efc91331ab/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/parking_lot_core-5db8e7efc91331ab/lib-parking_lot_core",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/parking_lot_core-5db8e7efc91331ab/lib-parking_lot_core.json",
+      "bytes": 700
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/parking_lot_core-de3c77c7fb397e53/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/parking_lot_core-de3c77c7fb397e53/run-build-script-build-script-build.json",
+      "bytes": 402
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/peniko-c5e76f1cc6677bd1/dep-lib-peniko",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/peniko-c5e76f1cc6677bd1/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/peniko-c5e76f1cc6677bd1/lib-peniko",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/peniko-c5e76f1cc6677bd1/lib-peniko.json",
+      "bytes": 824
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/pin-project-lite-8fb5169f829a17c0/dep-lib-pin_project_lite",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/pin-project-lite-8fb5169f829a17c0/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/pin-project-lite-8fb5169f829a17c0/lib-pin_project_lite",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/pin-project-lite-8fb5169f829a17c0/lib-pin_project_lite.json",
+      "bytes": 451
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/polycool-4db6022f7b1f4bc2/dep-lib-polycool",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/polycool-4db6022f7b1f4bc2/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/polycool-4db6022f7b1f4bc2/lib-polycool",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/polycool-4db6022f7b1f4bc2/lib-polycool.json",
+      "bytes": 547
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/profiling-b2be7dff78c20792/dep-lib-profiling",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/profiling-b2be7dff78c20792/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/profiling-b2be7dff78c20792/lib-profiling",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/profiling-b2be7dff78c20792/lib-profiling.json",
+      "bytes": 716
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/raw-window-handle-b043c03b4be4fc7b/dep-lib-raw_window_handle",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/raw-window-handle-b043c03b4be4fc7b/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/raw-window-handle-b043c03b4be4fc7b/lib-raw_window_handle",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/raw-window-handle-b043c03b4be4fc7b/lib-raw_window_handle.json",
+      "bytes": 531
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/read-fonts-c6ab00f569905a68/dep-lib-read_fonts",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/read-fonts-c6ab00f569905a68/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/read-fonts-c6ab00f569905a68/lib-read_fonts",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/read-fonts-c6ab00f569905a68/lib-read_fonts.json",
+      "bytes": 694
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/rustc-hash-88c67c104f7116cb/dep-lib-rustc_hash",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/rustc-hash-88c67c104f7116cb/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/rustc-hash-88c67c104f7116cb/lib-rustc_hash",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/rustc-hash-88c67c104f7116cb/lib-rustc_hash.json",
+      "bytes": 501
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/scopeguard-05606d01b5ab39b0/dep-lib-scopeguard",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/scopeguard-05606d01b5ab39b0/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/scopeguard-05606d01b5ab39b0/lib-scopeguard",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/scopeguard-05606d01b5ab39b0/lib-scopeguard.json",
+      "bytes": 464
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/self_cell-1ee37e00c055f1ba/dep-lib-self_cell",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/self_cell-1ee37e00c055f1ba/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/self_cell-1ee37e00c055f1ba/lib-self_cell",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/self_cell-1ee37e00c055f1ba/lib-self_cell.json",
+      "bytes": 467
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde-22658b39aa1069de/dep-lib-serde",
+      "bytes": 94
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde-22658b39aa1069de/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde-22658b39aa1069de/lib-serde",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde-22658b39aa1069de/lib-serde.json",
+      "bytes": 759
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde-b8b3fed64269d2bb/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde-b8b3fed64269d2bb/run-build-script-build-script-build.json",
+      "bytes": 392
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde_core-56632ede11b30e94/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde_core-56632ede11b30e94/run-build-script-build-script-build.json",
+      "bytes": 398
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde_core-5b67267dc07cb0ef/dep-lib-serde_core",
+      "bytes": 99
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde_core-5b67267dc07cb0ef/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde_core-5b67267dc07cb0ef/lib-serde_core",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde_core-5b67267dc07cb0ef/lib-serde_core.json",
+      "bytes": 594
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde_json-1f2b8fea182f5cfc/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde_json-1f2b8fea182f5cfc/run-build-script-build-script-build.json",
+      "bytes": 397
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde_json-fd2fd778b7b7289f/dep-lib-serde_json",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde_json-fd2fd778b7b7289f/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde_json-fd2fd778b7b7289f/lib-serde_json",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/serde_json-fd2fd778b7b7289f/lib-serde_json.json",
+      "bytes": 909
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/skrifa-516c01fc9ecbfd0e/dep-lib-skrifa",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/skrifa-516c01fc9ecbfd0e/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/skrifa-516c01fc9ecbfd0e/lib-skrifa",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/skrifa-516c01fc9ecbfd0e/lib-skrifa.json",
+      "bytes": 662
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/slab-eebc164234a3ec7a/dep-lib-slab",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/slab-eebc164234a3ec7a/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/slab-eebc164234a3ec7a/lib-slab",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/slab-eebc164234a3ec7a/lib-slab.json",
+      "bytes": 465
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/smallvec-340a4e61b29ba166/dep-lib-smallvec",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/smallvec-340a4e61b29ba166/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/smallvec-340a4e61b29ba166/lib-smallvec",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/smallvec-340a4e61b29ba166/lib-smallvec.json",
+      "bytes": 685
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/static_assertions-28ecd75f58260d69/dep-lib-static_assertions",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/static_assertions-28ecd75f58260d69/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/static_assertions-28ecd75f58260d69/lib-static_assertions",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/static_assertions-28ecd75f58260d69/lib-static_assertions.json",
+      "bytes": 464
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/thiserror-1e2bd2e6023a767b/dep-lib-thiserror",
+      "bytes": 98
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/thiserror-1e2bd2e6023a767b/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/thiserror-1e2bd2e6023a767b/lib-thiserror",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/thiserror-1e2bd2e6023a767b/lib-thiserror.json",
+      "bytes": 610
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/thiserror-7db9413ff1710442/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/thiserror-7db9413ff1710442/run-build-script-build-script-build.json",
+      "bytes": 461
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/type-map-7720e496602ccb42/dep-lib-type_map",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/type-map-7720e496602ccb42/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/type-map-7720e496602ccb42/lib-type_map",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/type-map-7720e496602ccb42/lib-type_map.json",
+      "bytes": 494
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/unicode-ident-62a8d7499a093543/dep-lib-unicode_ident",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/unicode-ident-62a8d7499a093543/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/unicode-ident-62a8d7499a093543/lib-unicode_ident",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/unicode-ident-62a8d7499a093543/lib-unicode_ident.json",
+      "bytes": 446
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/unicode-segmentation-0e334df743d73fd3/dep-lib-unicode_segmentation",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/unicode-segmentation-0e334df743d73fd3/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/unicode-segmentation-0e334df743d73fd3/lib-unicode_segmentation",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/unicode-segmentation-0e334df743d73fd3/lib-unicode_segmentation.json",
+      "bytes": 470
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/uuid-f2b9d9be899ed040/dep-lib-uuid",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/uuid-f2b9d9be899ed040/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/uuid-f2b9d9be899ed040/lib-uuid",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/uuid-f2b9d9be899ed040/lib-uuid.json",
+      "bytes": 722
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/vello_common-04906c298a5d62eb/dep-lib-vello_common",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/vello_common-04906c298a5d62eb/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/vello_common-04906c298a5d62eb/lib-vello_common",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/vello_common-04906c298a5d62eb/lib-vello_common.json",
+      "bytes": 889
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/vello_cpu-c3fcb89fd87f37ca/dep-lib-vello_cpu",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/vello_cpu-c3fcb89fd87f37ca/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/vello_cpu-c3fcb89fd87f37ca/lib-vello_cpu",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/vello_cpu-c3fcb89fd87f37ca/lib-vello_cpu.json",
+      "bytes": 766
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/viewer_journey-1a84aea8efc2195b/dep-lib-viewer_journey",
+      "bytes": 481
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/viewer_journey-1a84aea8efc2195b/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/viewer_journey-1a84aea8efc2195b/lib-viewer_journey",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/viewer_journey-1a84aea8efc2195b/lib-viewer_journey.json",
+      "bytes": 1011
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/viewer_journey-1a84aea8efc2195b/output-lib-viewer_journey",
+      "bytes": 4014
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-020f2d0345225a2a/dep-lib-wasm_bindgen",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-020f2d0345225a2a/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-020f2d0345225a2a/lib-wasm_bindgen",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-020f2d0345225a2a/lib-wasm_bindgen.json",
+      "bytes": 991
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-b4074b4224530612/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-b4074b4224530612/run-build-script-build-script-build.json",
+      "bytes": 469
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-futures-df88319d2b5c47f0/dep-lib-wasm_bindgen_futures",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-futures-df88319d2b5c47f0/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-futures-df88319d2b5c47f0/lib-wasm_bindgen_futures",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-futures-df88319d2b5c47f0/lib-wasm_bindgen_futures.json",
+      "bytes": 647
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-shared-33ea06c623a51254/dep-lib-wasm_bindgen_shared",
+      "bytes": 30
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-shared-33ea06c623a51254/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-shared-33ea06c623a51254/lib-wasm_bindgen_shared",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-shared-33ea06c623a51254/lib-wasm_bindgen_shared.json",
+      "bytes": 591
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-shared-b526c496266f8e12/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wasm-bindgen-shared-b526c496266f8e12/run-build-script-build-script-build.json",
+      "bytes": 422
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/web-sys-1cd54b1ce9119189/dep-lib-web_sys",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/web-sys-1cd54b1ce9119189/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/web-sys-1cd54b1ce9119189/lib-web_sys",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/web-sys-1cd54b1ce9119189/lib-web_sys.json",
+      "bytes": 42424
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/web-time-cd1fb261ca101f47/dep-lib-web_time",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/web-time-cd1fb261ca101f47/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/web-time-cd1fb261ca101f47/lib-web_time",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/web-time-cd1fb261ca101f47/lib-web_time.json",
+      "bytes": 566
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wgpu-429b579628a85b2f/dep-lib-wgpu",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wgpu-429b579628a85b2f/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wgpu-429b579628a85b2f/lib-wgpu",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wgpu-429b579628a85b2f/lib-wgpu.json",
+      "bytes": 1945
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wgpu-8f9bbae23b657e49/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wgpu-8f9bbae23b657e49/run-build-script-build-script-build.json",
+      "bytes": 297
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wgpu-types-821939a0d51cc9f2/dep-lib-wgpu_types",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wgpu-types-821939a0d51cc9f2/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wgpu-types-821939a0d51cc9f2/lib-wgpu_types",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/wgpu-types-821939a0d51cc9f2/lib-wgpu_types.json",
+      "bytes": 936
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/zerocopy-9fa4db5d60cd4054/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/zerocopy-9fa4db5d60cd4054/run-build-script-build-script-build.json",
+      "bytes": 410
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/zerocopy-d1d7d23a84a72565/dep-lib-zerocopy",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/zerocopy-d1d7d23a84a72565/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/zerocopy-d1d7d23a84a72565/lib-zerocopy",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/zerocopy-d1d7d23a84a72565/lib-zerocopy.json",
+      "bytes": 665
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/zmij-546f6187ffc4adf9/dep-lib-zmij",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/zmij-546f6187ffc4adf9/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/zmij-546f6187ffc4adf9/lib-zmij",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/zmij-546f6187ffc4adf9/lib-zmij.json",
+      "bytes": 511
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/zmij-654741181eba8e4d/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/release/.fingerprint/zmij-654741181eba8e4d/run-build-script-build-script-build.json",
+      "bytes": 393
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/accesskit-bab2fa128a6daa5c.d",
+      "bytes": 1246
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/accesskit-f5c7941e5be250f7.d",
+      "bytes": 1246
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/adler2-25aaa7d8865e3564.d",
+      "bytes": 1189
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/ahash-7f1a31e96df90858.d",
+      "bytes": 3608
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/ahash-cb863e60546e8ea1.d",
+      "bytes": 3608
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/bitflags-3e8e51eee06f17ad.d",
+      "bytes": 826
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/console_error_panic_hook-20e2a59eaca589af.d",
+      "bytes": 938
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/console_error_panic_hook-a98ce863ef5e3060.d",
+      "bytes": 938
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/crc32fast-26b396cd25fc65d4.d",
+      "bytes": 2465
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/egui-587da8b307f22f22.d",
+      "bytes": 42835
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/egui-8f0fde5aba440a8e.d",
+      "bytes": 42835
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/egui_wgpu-1dcad5eaeee068e4.d",
+      "bytes": 2044
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/egui_wgpu-4eaaf3c537381a1b.d",
+      "bytes": 2044
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/epaint-10b004415e12b64a.d",
+      "bytes": 15195
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/epaint-51f8859489839aa8.d",
+      "bytes": 15195
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/equivalent-a51b9286ecc66109.d",
+      "bytes": 840
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/fdeflate-03e41a898a3f9c01.d",
+      "bytes": 2426
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/flate2-64734583a0b510a5.d",
+      "bytes": 8431
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/getrandom-01b10744a0e24db4.d",
+      "bytes": 2433
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/indexmap-bcf84dca13d91b0a.d",
+      "bytes": 7759
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/inventory-45f70ba9a2e99118.d",
+      "bytes": 837
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/itoa-c033af5804c1844c.d",
+      "bytes": 1191
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/js_sys-9fce6a87d6746eab.d",
+      "bytes": 2540
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/js_sys-df1a58f6de905a13.d",
+      "bytes": 2540
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libaccesskit-bab2fa128a6daa5c.rlib",
+      "bytes": 979490
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libaccesskit-bab2fa128a6daa5c.rmeta",
+      "bytes": 815922
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libaccesskit-f5c7941e5be250f7.rlib",
+      "bytes": 968118
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libaccesskit-f5c7941e5be250f7.rmeta",
+      "bytes": 816705
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libadler2-25aaa7d8865e3564.rlib",
+      "bytes": 39882
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libadler2-25aaa7d8865e3564.rmeta",
+      "bytes": 21638
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libahash-7f1a31e96df90858.rlib",
+      "bytes": 228426
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libahash-7f1a31e96df90858.rmeta",
+      "bytes": 217329
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libahash-cb863e60546e8ea1.rlib",
+      "bytes": 228426
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libahash-cb863e60546e8ea1.rmeta",
+      "bytes": 217329
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libbitflags-3e8e51eee06f17ad.rlib",
+      "bytes": 44440
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libbitflags-3e8e51eee06f17ad.rmeta",
+      "bytes": 43814
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libbytemuck-2d3b509fa24e764f.rlib",
+      "bytes": 525864
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libbytemuck-2d3b509fa24e764f.rmeta",
+      "bytes": 510263
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libc-74e89e6c3a9d6574.d",
+      "bytes": 1997
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libcolor-9529ca92177406f7.rlib",
+      "bytes": 1164876
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libcolor-9529ca92177406f7.rmeta",
+      "bytes": 780404
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libconsole_error_panic_hook-20e2a59eaca589af.rlib",
+      "bytes": 55478
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libconsole_error_panic_hook-20e2a59eaca589af.rmeta",
+      "bytes": 35056
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libconsole_error_panic_hook-a98ce863ef5e3060.rlib",
+      "bytes": 55478
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libconsole_error_panic_hook-a98ce863ef5e3060.rmeta",
+      "bytes": 35056
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libcrc32fast-26b396cd25fc65d4.rlib",
+      "bytes": 89704
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libcrc32fast-26b396cd25fc65d4.rmeta",
+      "bytes": 47929
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libecolor-4428860a8a6ecfde.rlib",
+      "bytes": 310278
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libecolor-4428860a8a6ecfde.rmeta",
+      "bytes": 185599
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libegui-587da8b307f22f22.rlib",
+      "bytes": 11200746
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libegui-587da8b307f22f22.rmeta",
+      "bytes": 5174746
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libegui-8f0fde5aba440a8e.rlib",
+      "bytes": 11186308
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libegui-8f0fde5aba440a8e.rmeta",
+      "bytes": 5174174
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libegui_wgpu-1dcad5eaeee068e4.rlib",
+      "bytes": 462822
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libegui_wgpu-1dcad5eaeee068e4.rmeta",
+      "bytes": 165413
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libegui_wgpu-4eaaf3c537381a1b.rlib",
+      "bytes": 459582
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libegui_wgpu-4eaaf3c537381a1b.rmeta",
+      "bytes": 165412
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libemath-01c861c7f7fe2d4e.rlib",
+      "bytes": 592774
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libemath-01c861c7f7fe2d4e.rmeta",
+      "bytes": 504920
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libepaint-10b004415e12b64a.rlib",
+      "bytes": 3336418
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libepaint-10b004415e12b64a.rmeta",
+      "bytes": 1286446
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libepaint-51f8859489839aa8.rlib",
+      "bytes": 3332416
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libepaint-51f8859489839aa8.rmeta",
+      "bytes": 1286446
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libequivalent-a51b9286ecc66109.rlib",
+      "bytes": 9090
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libequivalent-a51b9286ecc66109.rmeta",
+      "bytes": 8461
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libfdeflate-03e41a898a3f9c01.rlib",
+      "bytes": 385940
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libfdeflate-03e41a898a3f9c01.rmeta",
+      "bytes": 148004
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libfearless_simd-fb79d748b73156f1.rlib",
+      "bytes": 4414826
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libfearless_simd-fb79d748b73156f1.rmeta",
+      "bytes": 4413642
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libflate2-64734583a0b510a5.rlib",
+      "bytes": 697924
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libflate2-64734583a0b510a5.rmeta",
+      "bytes": 603008
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libfont_types-317aad5a420a9e75.rlib",
+      "bytes": 702784
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libfont_types-317aad5a420a9e75.rmeta",
+      "bytes": 627549
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libfont_types-ffad657e22d54f71.rlib",
+      "bytes": 799154
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libfont_types-ffad657e22d54f71.rmeta",
+      "bytes": 705645
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libgetrandom-01b10744a0e24db4.rlib",
+      "bytes": 232578
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libgetrandom-01b10744a0e24db4.rmeta",
+      "bytes": 177877
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libindexmap-bcf84dca13d91b0a.rlib",
+      "bytes": 1261328
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libindexmap-bcf84dca13d91b0a.rmeta",
+      "bytes": 1257681
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libinventory-45f70ba9a2e99118.rlib",
+      "bytes": 39518
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libinventory-45f70ba9a2e99118.rmeta",
+      "bytes": 34055
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libitoa-c033af5804c1844c.rlib",
+      "bytes": 102296
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libitoa-c033af5804c1844c.rmeta",
+      "bytes": 60352
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libjs_sys-9fce6a87d6746eab.rlib",
+      "bytes": 12124896
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libjs_sys-9fce6a87d6746eab.rmeta",
+      "bytes": 9963877
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libjs_sys-df1a58f6de905a13.rlib",
+      "bytes": 12112946
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libjs_sys-df1a58f6de905a13.rmeta",
+      "bytes": 9963857
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libkurbo-9ca7a3a2e1cc6224.rlib",
+      "bytes": 2134832
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libkurbo-9ca7a3a2e1cc6224.rmeta",
+      "bytes": 1267033
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/liblibc-74e89e6c3a9d6574.rlib",
+      "bytes": 74184
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/liblibc-74e89e6c3a9d6574.rmeta",
+      "bytes": 73566
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/liblog-9cc2a8bc79fbc3e8.rlib",
+      "bytes": 223652
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/liblog-9cc2a8bc79fbc3e8.rmeta",
+      "bytes": 196152
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libminiz_oxide-466231fc4c046a72.rlib",
+      "bytes": 805930
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libminiz_oxide-466231fc4c046a72.rmeta",
+      "bytes": 381215
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libminiz_oxide-d1e980c839d3ff26.rlib",
+      "bytes": 829522
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libminiz_oxide-d1e980c839d3ff26.rmeta",
+      "bytes": 398648
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libonce_cell-3401328852812b14.rlib",
+      "bytes": 120016
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libonce_cell-3401328852812b14.rmeta",
+      "bytes": 117649
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libparking_lot-3739e10f1614c39b.rlib",
+      "bytes": 402480
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libparking_lot-3739e10f1614c39b.rmeta",
+      "bytes": 199444
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libparking_lot_core-cd80b1a84240842b.rlib",
+      "bytes": 219324
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libparking_lot_core-cd80b1a84240842b.rmeta",
+      "bytes": 160284
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libpeniko-f498bd90001699ba.rlib",
+      "bytes": 371668
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libpeniko-f498bd90001699ba.rmeta",
+      "bytes": 273066
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libpng-b1b0e1d89d2ff2ff.rlib",
+      "bytes": 1492468
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libpng-b1b0e1d89d2ff2ff.rmeta",
+      "bytes": 888381
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libppv_lite86-ae889f31876aad22.rlib",
+      "bytes": 410700
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libppv_lite86-ae889f31876aad22.rmeta",
+      "bytes": 402911
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libprost-810a499866cdb46a.rlib",
+      "bytes": 571096
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libprost-810a499866cdb46a.rmeta",
+      "bytes": 506627
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/librand-fb8f90212c6e9adb.rlib",
+      "bytes": 1352818
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/librand-fb8f90212c6e9adb.rmeta",
+      "bytes": 1224632
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/librand_chacha-23a1d852cdb80b79.rlib",
+      "bytes": 433364
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/librand_chacha-23a1d852cdb80b79.rmeta",
+      "bytes": 155757
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/librand_core-5cc788044e9573ad.rlib",
+      "bytes": 163116
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/librand_core-5cc788044e9573ad.rmeta",
+      "bytes": 130517
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libread_fonts-0b39bfb361408ee6.rlib",
+      "bytes": 15090360
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libread_fonts-0b39bfb361408ee6.rmeta",
+      "bytes": 7894077
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libread_fonts-14828abffcfec2cf.rlib",
+      "bytes": 16081064
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libread_fonts-14828abffcfec2cf.rmeta",
+      "bytes": 9296412
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libread_fonts-1d2c2b000f2a3d43.rlib",
+      "bytes": 15089932
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libread_fonts-1d2c2b000f2a3d43.rmeta",
+      "bytes": 7894077
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libserde-305d35b25253109b.rlib",
+      "bytes": 853250
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libserde-305d35b25253109b.rmeta",
+      "bytes": 798492
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libserde-ed299066017f1f18.rlib",
+      "bytes": 853250
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libserde-ed299066017f1f18.rmeta",
+      "bytes": 798492
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libserde_core-71a02caff8827582.rlib",
+      "bytes": 4449038
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libserde_core-71a02caff8827582.rmeta",
+      "bytes": 4357543
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libserde_json-4cbe67d7a41d6a41.rlib",
+      "bytes": 2460414
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libserde_json-4cbe67d7a41d6a41.rmeta",
+      "bytes": 1685723
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libserde_json-e1d90587a9aec089.rlib",
+      "bytes": 1955546
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libserde_json-e1d90587a9aec089.rmeta",
+      "bytes": 1402843
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libserde_yaml_ng-363e9a664691c676.rlib",
+      "bytes": 2528252
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libserde_yaml_ng-363e9a664691c676.rmeta",
+      "bytes": 1543228
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libsession_rust-9340a96c51edb7ac.rlib",
+      "bytes": 36800846
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libsession_rust-9340a96c51edb7ac.rmeta",
+      "bytes": 9322391
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libsimd_adler32-3bcf9a8dbbe3b867.rlib",
+      "bytes": 49026
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libsimd_adler32-3bcf9a8dbbe3b867.rmeta",
+      "bytes": 36344
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libskrifa-53437618a3c661fe.rlib",
+      "bytes": 6070214
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libskrifa-53437618a3c661fe.rmeta",
+      "bytes": 2523875
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libskrifa-a2305266499ea116.rlib",
+      "bytes": 6070896
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libskrifa-a2305266499ea116.rmeta",
+      "bytes": 2523875
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libskrifa-e665400556a96454.rlib",
+      "bytes": 6744106
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libskrifa-e665400556a96454.rmeta",
+      "bytes": 2661185
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libsmallvec-6e95fdba38f51293.rlib",
+      "bytes": 219960
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libsmallvec-6e95fdba38f51293.rmeta",
+      "bytes": 212192
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libswash-68ad4a9f6d4d2d93.rlib",
+      "bytes": 8718000
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libswash-68ad4a9f6d4d2d93.rmeta",
+      "bytes": 5699182
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libthiserror-196c332174d4e27e.rlib",
+      "bytes": 30842
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libthiserror-196c332174d4e27e.rmeta",
+      "bytes": 30214
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libttf_parser-d6dd3c9f87060423.rlib",
+      "bytes": 3315672
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libttf_parser-d6dd3c9f87060423.rmeta",
+      "bytes": 2221387
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libunicode_ident-3e4a8e6231ec819d.rlib",
+      "bytes": 51570
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libunicode_ident-3e4a8e6231ec819d.rmeta",
+      "bytes": 34539
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libuuid-02f2db15fd9d7b91.rlib",
+      "bytes": 748184
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libuuid-02f2db15fd9d7b91.rmeta",
+      "bytes": 590644
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libuuid-f5c7dcf7739fdc53.rlib",
+      "bytes": 539720
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libuuid-f5c7dcf7739fdc53.rmeta",
+      "bytes": 427226
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libvello_common-444b9abbc39f31fc.rlib",
+      "bytes": 1743158
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libvello_common-444b9abbc39f31fc.rmeta",
+      "bytes": 1052321
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libvello_cpu-58662f59af2ec1ff.rlib",
+      "bytes": 6962102
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libvello_cpu-58662f59af2ec1ff.rmeta",
+      "bytes": 1084407
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libviewer_journey.rlib",
+      "bytes": 958744
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libviewer_math_lesson.rlib",
+      "bytes": 5322848
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwasm_bindgen-a3bc351f91370cd3.rlib",
+      "bytes": 2910506
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwasm_bindgen-a3bc351f91370cd3.rmeta",
+      "bytes": 2673440
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwasm_bindgen-de9782a65f7bb7ad.rlib",
+      "bytes": 2910492
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwasm_bindgen-de9782a65f7bb7ad.rmeta",
+      "bytes": 2673446
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwasm_bindgen_futures-2d1f39299ea49ebc.rlib",
+      "bytes": 4508
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwasm_bindgen_futures-2d1f39299ea49ebc.rmeta",
+      "bytes": 3859
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwasm_bindgen_futures-427d5e2988f5f538.rlib",
+      "bytes": 4508
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwasm_bindgen_futures-427d5e2988f5f538.rmeta",
+      "bytes": 3859
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwasm_bindgen_shared-8fe0a3a3abfe9482.rlib",
+      "bytes": 316110
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwasm_bindgen_shared-8fe0a3a3abfe9482.rmeta",
+      "bytes": 116303
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libweb_sys-4e3d8cca2ca81573.rlib",
+      "bytes": 7893296
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libweb_sys-4e3d8cca2ca81573.rmeta",
+      "bytes": 5998711
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libweb_sys-7730fc5363ab510a.rlib",
+      "bytes": 6831708
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libweb_sys-7730fc5363ab510a.rmeta",
+      "bytes": 5092063
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libweb_time-267b857c19506a5d.rlib",
+      "bytes": 126964
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libweb_time-267b857c19506a5d.rmeta",
+      "bytes": 91971
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libweb_time-d4d0d7bc8787553d.rlib",
+      "bytes": 126964
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libweb_time-d4d0d7bc8787553d.rmeta",
+      "bytes": 91971
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwgpu-1ce01f7d54af175e.rlib",
+      "bytes": 12750016
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwgpu-1ce01f7d54af175e.rmeta",
+      "bytes": 9523622
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwgpu-b55c04495fc48ee1.rlib",
+      "bytes": 12818200
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwgpu-b55c04495fc48ee1.rmeta",
+      "bytes": 9592066
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwgpu_types-4b7259e51bfcf729.rlib",
+      "bytes": 5385866
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwgpu_types-4b7259e51bfcf729.rmeta",
+      "bytes": 4609218
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwgpu_types-4f116fcff1c0d30b.rlib",
+      "bytes": 5384918
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libwgpu_types-4f116fcff1c0d30b.rmeta",
+      "bytes": 4609783
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libyazi-02850695d403a422.rlib",
+      "bytes": 793604
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libyazi-02850695d403a422.rmeta",
+      "bytes": 426945
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libzerocopy-3f125a8a8a7000ea.rlib",
+      "bytes": 14180362
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libzerocopy-3f125a8a8a7000ea.rmeta",
+      "bytes": 14077440
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libzerocopy-f13269b3524abcf0.rlib",
+      "bytes": 14115630
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/libzerocopy-f13269b3524abcf0.rmeta",
+      "bytes": 14012724
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/miniz_oxide-466231fc4c046a72.d",
+      "bytes": 5602
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/miniz_oxide-d1e980c839d3ff26.d",
+      "bytes": 5602
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/png-b1b0e1d89d2ff2ff.d",
+      "bytes": 7307
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/ppv_lite86-ae889f31876aad22.d",
+      "bytes": 2051
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/prost-810a499866cdb46a.d",
+      "bytes": 4442
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/rand-fb8f90212c6e9adb.d",
+      "bytes": 9968
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/rand_chacha-23a1d852cdb80b79.d",
+      "bytes": 1649
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/rand_core-5cc788044e9573ad.d",
+      "bytes": 2774
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/read_fonts-14828abffcfec2cf.d",
+      "bytes": 72490
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/serde-305d35b25253109b.d",
+      "bytes": 3220
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/serde-ed299066017f1f18.d",
+      "bytes": 3228
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/serde_core-71a02caff8827582.d",
+      "bytes": 8905
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/serde_json-4cbe67d7a41d6a41.d",
+      "bytes": 15061
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/serde_json-e1d90587a9aec089.d",
+      "bytes": 7031
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/serde_yaml_ng-363e9a664691c676.d",
+      "bytes": 10748
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/session_rust-9340a96c51edb7ac.d",
+      "bytes": 31112
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/simd_adler32-3bcf9a8dbbe3b867.d",
+      "bytes": 4647
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/skrifa-e665400556a96454.d",
+      "bytes": 36900
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/swash-68ad4a9f6d4d2d93.d",
+      "bytes": 25341
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/uuid-02f2db15fd9d7b91.d",
+      "bytes": 5041
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/uuid-f5c7dcf7739fdc53.d",
+      "bytes": 3862
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/wasm_bindgen-a3bc351f91370cd3.d",
+      "bytes": 8151
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/wasm_bindgen-de9782a65f7bb7ad.d",
+      "bytes": 8151
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/wasm_bindgen_futures-2d1f39299ea49ebc.d",
+      "bytes": 914
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/wasm_bindgen_futures-427d5e2988f5f538.d",
+      "bytes": 914
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/web_sys-4e3d8cca2ca81573.d",
+      "bytes": 14428
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/web_sys-7730fc5363ab510a.d",
+      "bytes": 11097
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/web_time-267b857c19506a5d.d",
+      "bytes": 2855
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/web_time-d4d0d7bc8787553d.d",
+      "bytes": 2855
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/wgpu-1ce01f7d54af175e.d",
+      "bytes": 91049
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/wgpu-b55c04495fc48ee1.d",
+      "bytes": 91049
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/wgpu_types-4b7259e51bfcf729.d",
+      "bytes": 12492
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/deps/wgpu_types-4f116fcff1c0d30b.d",
+      "bytes": 12492
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/crc32fast-a2c8e0ce8b6d8705/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/crc32fast-a2c8e0ce8b6d8705/output",
+      "bytes": 178
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/crc32fast-a2c8e0ce8b6d8705/root-output",
+      "bytes": 145
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/crc32fast-a2c8e0ce8b6d8705/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/libc-251713e7b4ea6b96/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/libc-251713e7b4ea6b96/output",
+      "bytes": 1444
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/libc-251713e7b4ea6b96/root-output",
+      "bytes": 140
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/libc-251713e7b4ea6b96/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde-cbc637c1f0ad418c/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde-cbc637c1f0ad418c/output",
+      "bytes": 582
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde-cbc637c1f0ad418c/root-output",
+      "bytes": 141
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde-cbc637c1f0ad418c/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde_core-273201e448b0f1eb/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde_core-273201e448b0f1eb/output",
+      "bytes": 484
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde_core-273201e448b0f1eb/root-output",
+      "bytes": 146
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde_core-273201e448b0f1eb/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde_json-31dfafbaeb5d2727/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde_json-31dfafbaeb5d2727/output",
+      "bytes": 132
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde_json-31dfafbaeb5d2727/root-output",
+      "bytes": 146
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde_json-31dfafbaeb5d2727/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde_json-dcd14f99712c934b/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde_json-dcd14f99712c934b/output",
+      "bytes": 132
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde_json-dcd14f99712c934b/root-output",
+      "bytes": 146
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde_json-dcd14f99712c934b/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/session_rust-2a5d2bca805272e1/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/session_rust-2a5d2bca805272e1/output",
+      "bytes": 105
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/session_rust-2a5d2bca805272e1/root-output",
+      "bytes": 148
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/session_rust-2a5d2bca805272e1/stderr",
+      "bytes": 0
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde_core-273201e448b0f1eb/out/private.rs",
+      "bytes": 90
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/build/serde-cbc637c1f0ad418c/out/private.rs",
+      "bytes": 142
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/accesskit-bab2fa128a6daa5c/dep-lib-accesskit",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/accesskit-bab2fa128a6daa5c/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/accesskit-bab2fa128a6daa5c/lib-accesskit",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/accesskit-bab2fa128a6daa5c/lib-accesskit.json",
+      "bytes": 535
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/accesskit-f5c7941e5be250f7/dep-lib-accesskit",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/accesskit-f5c7941e5be250f7/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/accesskit-f5c7941e5be250f7/lib-accesskit",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/accesskit-f5c7941e5be250f7/lib-accesskit.json",
+      "bytes": 535
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/adler2-25aaa7d8865e3564/dep-lib-adler2",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/adler2-25aaa7d8865e3564/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/adler2-25aaa7d8865e3564/lib-adler2",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/adler2-25aaa7d8865e3564/lib-adler2.json",
+      "bytes": 481
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/ahash-7f1a31e96df90858/dep-lib-ahash",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/ahash-7f1a31e96df90858/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/ahash-7f1a31e96df90858/lib-ahash",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/ahash-7f1a31e96df90858/lib-ahash.json",
+      "bytes": 849
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/ahash-cb863e60546e8ea1/dep-lib-ahash",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/ahash-cb863e60546e8ea1/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/ahash-cb863e60546e8ea1/lib-ahash",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/ahash-cb863e60546e8ea1/lib-ahash.json",
+      "bytes": 851
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/bitflags-3e8e51eee06f17ad/dep-lib-bitflags",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/bitflags-3e8e51eee06f17ad/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/bitflags-3e8e51eee06f17ad/lib-bitflags",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/bitflags-3e8e51eee06f17ad/lib-bitflags.json",
+      "bytes": 533
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/console_error_panic_hook-20e2a59eaca589af/dep-lib-console_error_panic_hook",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/console_error_panic_hook-20e2a59eaca589af/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/console_error_panic_hook-20e2a59eaca589af/lib-console_error_panic_hook",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/console_error_panic_hook-20e2a59eaca589af/lib-console_error_panic_hook.json",
+      "bytes": 587
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/console_error_panic_hook-a98ce863ef5e3060/dep-lib-console_error_panic_hook",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/console_error_panic_hook-a98ce863ef5e3060/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/console_error_panic_hook-a98ce863ef5e3060/lib-console_error_panic_hook",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/console_error_panic_hook-a98ce863ef5e3060/lib-console_error_panic_hook.json",
+      "bytes": 588
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/crc32fast-26b396cd25fc65d4/dep-lib-crc32fast",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/crc32fast-26b396cd25fc65d4/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/crc32fast-26b396cd25fc65d4/lib-crc32fast",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/crc32fast-26b396cd25fc65d4/lib-crc32fast.json",
+      "bytes": 614
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/crc32fast-a2c8e0ce8b6d8705/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/crc32fast-a2c8e0ce8b6d8705/run-build-script-build-script-build.json",
+      "bytes": 294
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-587da8b307f22f22/dep-lib-egui",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-587da8b307f22f22/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-587da8b307f22f22/lib-egui",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-587da8b307f22f22/lib-egui.json",
+      "bytes": 1226
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-8f0fde5aba440a8e/dep-lib-egui",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-8f0fde5aba440a8e/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-8f0fde5aba440a8e/lib-egui",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-8f0fde5aba440a8e/lib-egui.json",
+      "bytes": 1225
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-wgpu-1dcad5eaeee068e4/dep-lib-egui_wgpu",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-wgpu-1dcad5eaeee068e4/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-wgpu-1dcad5eaeee068e4/lib-egui_wgpu",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-wgpu-1dcad5eaeee068e4/lib-egui_wgpu.json",
+      "bytes": 1162
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-wgpu-4eaaf3c537381a1b/dep-lib-egui_wgpu",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-wgpu-4eaaf3c537381a1b/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-wgpu-4eaaf3c537381a1b/lib-egui_wgpu",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/egui-wgpu-4eaaf3c537381a1b/lib-egui_wgpu.json",
+      "bytes": 1157
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/epaint-10b004415e12b64a/dep-lib-epaint",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/epaint-10b004415e12b64a/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/epaint-10b004415e12b64a/lib-epaint",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/epaint-10b004415e12b64a/lib-epaint.json",
+      "bytes": 1394
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/epaint-51f8859489839aa8/dep-lib-epaint",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/epaint-51f8859489839aa8/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/epaint-51f8859489839aa8/lib-epaint",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/epaint-51f8859489839aa8/lib-epaint.json",
+      "bytes": 1394
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/equivalent-a51b9286ecc66109/dep-lib-equivalent",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/equivalent-a51b9286ecc66109/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/equivalent-a51b9286ecc66109/lib-equivalent",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/equivalent-a51b9286ecc66109/lib-equivalent.json",
+      "bytes": 437
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/fdeflate-03e41a898a3f9c01/dep-lib-fdeflate",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/fdeflate-03e41a898a3f9c01/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/fdeflate-03e41a898a3f9c01/lib-fdeflate",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/fdeflate-03e41a898a3f9c01/lib-fdeflate.json",
+      "bytes": 496
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/flate2-64734583a0b510a5/dep-lib-flate2",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/flate2-64734583a0b510a5/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/flate2-64734583a0b510a5/lib-flate2",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/flate2-64734583a0b510a5/lib-flate2.json",
+      "bytes": 914
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/getrandom-01b10744a0e24db4/dep-lib-getrandom",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/getrandom-01b10744a0e24db4/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/getrandom-01b10744a0e24db4/lib-getrandom",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/getrandom-01b10744a0e24db4/lib-getrandom.json",
+      "bytes": 832
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/indexmap-bcf84dca13d91b0a/dep-lib-indexmap",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/indexmap-bcf84dca13d91b0a/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/indexmap-bcf84dca13d91b0a/lib-indexmap",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/indexmap-bcf84dca13d91b0a/lib-indexmap.json",
+      "bytes": 686
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/inventory-45f70ba9a2e99118/dep-lib-inventory",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/inventory-45f70ba9a2e99118/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/inventory-45f70ba9a2e99118/lib-inventory",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/inventory-45f70ba9a2e99118/lib-inventory.json",
+      "bytes": 498
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/itoa-c033af5804c1844c/dep-lib-itoa",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/itoa-c033af5804c1844c/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/itoa-c033af5804c1844c/lib-itoa",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/itoa-c033af5804c1844c/lib-itoa.json",
+      "bytes": 438
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/js-sys-9fce6a87d6746eab/dep-lib-js_sys",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/js-sys-9fce6a87d6746eab/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/js-sys-9fce6a87d6746eab/lib-js_sys",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/js-sys-9fce6a87d6746eab/lib-js_sys.json",
+      "bytes": 717
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/js-sys-df1a58f6de905a13/dep-lib-js_sys",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/js-sys-df1a58f6de905a13/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/js-sys-df1a58f6de905a13/lib-js_sys",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/js-sys-df1a58f6de905a13/lib-js_sys.json",
+      "bytes": 718
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/libc-251713e7b4ea6b96/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/libc-251713e7b4ea6b96/run-build-script-build-script-build.json",
+      "bytes": 530
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/libc-74e89e6c3a9d6574/dep-lib-libc",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/libc-74e89e6c3a9d6574/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/libc-74e89e6c3a9d6574/lib-libc",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/libc-74e89e6c3a9d6574/lib-libc.json",
+      "bytes": 652
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/miniz_oxide-466231fc4c046a72/dep-lib-miniz_oxide",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/miniz_oxide-466231fc4c046a72/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/miniz_oxide-466231fc4c046a72/lib-miniz_oxide",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/miniz_oxide-466231fc4c046a72/lib-miniz_oxide.json",
+      "bytes": 752
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/miniz_oxide-d1e980c839d3ff26/dep-lib-miniz_oxide",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/miniz_oxide-d1e980c839d3ff26/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/miniz_oxide-d1e980c839d3ff26/lib-miniz_oxide",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/miniz_oxide-d1e980c839d3ff26/lib-miniz_oxide.json",
+      "bytes": 753
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/png-b1b0e1d89d2ff2ff/dep-lib-png",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/png-b1b0e1d89d2ff2ff/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/png-b1b0e1d89d2ff2ff/lib-png",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/png-b1b0e1d89d2ff2ff/lib-png.json",
+      "bytes": 755
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/ppv-lite86-ae889f31876aad22/dep-lib-ppv_lite86",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/ppv-lite86-ae889f31876aad22/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/ppv-lite86-ae889f31876aad22/lib-ppv_lite86",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/ppv-lite86-ae889f31876aad22/lib-ppv_lite86.json",
+      "bytes": 554
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/prost-810a499866cdb46a/dep-lib-prost",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/prost-810a499866cdb46a/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/prost-810a499866cdb46a/lib-prost",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/prost-810a499866cdb46a/lib-prost.json",
+      "bytes": 637
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/rand-fb8f90212c6e9adb/dep-lib-rand",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/rand-fb8f90212c6e9adb/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/rand-fb8f90212c6e9adb/lib-rand",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/rand-fb8f90212c6e9adb/lib-rand.json",
+      "bytes": 799
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/rand_chacha-23a1d852cdb80b79/dep-lib-rand_chacha",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/rand_chacha-23a1d852cdb80b79/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/rand_chacha-23a1d852cdb80b79/lib-rand_chacha",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/rand_chacha-23a1d852cdb80b79/lib-rand_chacha.json",
+      "bytes": 624
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/rand_core-5cc788044e9573ad/dep-lib-rand_core",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/rand_core-5cc788044e9573ad/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/rand_core-5cc788044e9573ad/lib-rand_core",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/rand_core-5cc788044e9573ad/lib-rand_core.json",
+      "bytes": 586
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/read-fonts-14828abffcfec2cf/dep-lib-read_fonts",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/read-fonts-14828abffcfec2cf/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/read-fonts-14828abffcfec2cf/lib-read_fonts",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/read-fonts-14828abffcfec2cf/lib-read_fonts.json",
+      "bytes": 788
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde-305d35b25253109b/dep-lib-serde",
+      "bytes": 92
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde-305d35b25253109b/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde-305d35b25253109b/lib-serde",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde-305d35b25253109b/lib-serde.json",
+      "bytes": 765
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde-cbc637c1f0ad418c/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde-cbc637c1f0ad418c/run-build-script-build-script-build.json",
+      "bytes": 390
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde-ed299066017f1f18/dep-lib-serde",
+      "bytes": 92
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde-ed299066017f1f18/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde-ed299066017f1f18/lib-serde",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde-ed299066017f1f18/lib-serde.json",
+      "bytes": 757
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_core-273201e448b0f1eb/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_core-273201e448b0f1eb/run-build-script-build-script-build.json",
+      "bytes": 396
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_core-71a02caff8827582/dep-lib-serde_core",
+      "bytes": 97
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_core-71a02caff8827582/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_core-71a02caff8827582/lib-serde_core",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_core-71a02caff8827582/lib-serde_core.json",
+      "bytes": 591
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_json-31dfafbaeb5d2727/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_json-31dfafbaeb5d2727/run-build-script-build-script-build.json",
+      "bytes": 395
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_json-4cbe67d7a41d6a41/dep-lib-serde_json",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_json-4cbe67d7a41d6a41/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_json-4cbe67d7a41d6a41/lib-serde_json",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_json-4cbe67d7a41d6a41/lib-serde_json.json",
+      "bytes": 927
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_json-dcd14f99712c934b/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_json-dcd14f99712c934b/run-build-script-build-script-build.json",
+      "bytes": 395
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_json-e1d90587a9aec089/dep-lib-serde_json",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_json-e1d90587a9aec089/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_json-e1d90587a9aec089/lib-serde_json",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_json-e1d90587a9aec089/lib-serde_json.json",
+      "bytes": 908
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_yaml_ng-363e9a664691c676/dep-lib-serde_yaml_ng",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_yaml_ng-363e9a664691c676/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_yaml_ng-363e9a664691c676/lib-serde_yaml_ng",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/serde_yaml_ng-363e9a664691c676/lib-serde_yaml_ng.json",
+      "bytes": 737
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/session_rust-2a5d2bca805272e1/run-build-script-build-script-build",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/session_rust-2a5d2bca805272e1/run-build-script-build-script-build.json",
+      "bytes": 503
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/session_rust-9340a96c51edb7ac/dep-lib-session_rust",
+      "bytes": 2583
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/session_rust-9340a96c51edb7ac/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/session_rust-9340a96c51edb7ac/lib-session_rust",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/session_rust-9340a96c51edb7ac/lib-session_rust.json",
+      "bytes": 1350
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/simd-adler32-3bcf9a8dbbe3b867/dep-lib-simd_adler32",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/simd-adler32-3bcf9a8dbbe3b867/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/simd-adler32-3bcf9a8dbbe3b867/lib-simd_adler32",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/simd-adler32-3bcf9a8dbbe3b867/lib-simd_adler32.json",
+      "bytes": 535
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/skrifa-e665400556a96454/dep-lib-skrifa",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/skrifa-e665400556a96454/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/skrifa-e665400556a96454/lib-skrifa",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/skrifa-e665400556a96454/lib-skrifa.json",
+      "bytes": 641
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/swash-68ad4a9f6d4d2d93/dep-lib-swash",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/swash-68ad4a9f6d4d2d93/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/swash-68ad4a9f6d4d2d93/lib-swash",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/swash-68ad4a9f6d4d2d93/lib-swash.json",
+      "bytes": 692
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/uuid-02f2db15fd9d7b91/dep-lib-uuid",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/uuid-02f2db15fd9d7b91/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/uuid-02f2db15fd9d7b91/lib-uuid",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/uuid-02f2db15fd9d7b91/lib-uuid.json",
+      "bytes": 917
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/uuid-f5c7dcf7739fdc53/dep-lib-uuid",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/uuid-f5c7dcf7739fdc53/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/uuid-f5c7dcf7739fdc53/lib-uuid",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/uuid-f5c7dcf7739fdc53/lib-uuid.json",
+      "bytes": 721
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/viewer_journey-1a84aea8efc2195b/dep-lib-viewer_journey",
+      "bytes": 481
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/viewer_journey-1a84aea8efc2195b/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/viewer_journey-1a84aea8efc2195b/lib-viewer_journey",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/viewer_journey-1a84aea8efc2195b/lib-viewer_journey.json",
+      "bytes": 1007
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/viewer_journey-1a84aea8efc2195b/output-lib-viewer_journey",
+      "bytes": 4014
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-a3bc351f91370cd3/dep-lib-wasm_bindgen",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-a3bc351f91370cd3/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-a3bc351f91370cd3/lib-wasm_bindgen",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-a3bc351f91370cd3/lib-wasm_bindgen.json",
+      "bytes": 989
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-de9782a65f7bb7ad/dep-lib-wasm_bindgen",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-de9782a65f7bb7ad/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-de9782a65f7bb7ad/lib-wasm_bindgen",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-de9782a65f7bb7ad/lib-wasm_bindgen.json",
+      "bytes": 991
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-futures-2d1f39299ea49ebc/dep-lib-wasm_bindgen_futures",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-futures-2d1f39299ea49ebc/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-futures-2d1f39299ea49ebc/lib-wasm_bindgen_futures",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-futures-2d1f39299ea49ebc/lib-wasm_bindgen_futures.json",
+      "bytes": 645
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-futures-427d5e2988f5f538/dep-lib-wasm_bindgen_futures",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-futures-427d5e2988f5f538/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-futures-427d5e2988f5f538/lib-wasm_bindgen_futures",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wasm-bindgen-futures-427d5e2988f5f538/lib-wasm_bindgen_futures.json",
+      "bytes": 647
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-sys-4e3d8cca2ca81573/dep-lib-web_sys",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-sys-4e3d8cca2ca81573/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-sys-4e3d8cca2ca81573/lib-web_sys",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-sys-4e3d8cca2ca81573/lib-web_sys.json",
+      "bytes": 42426
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-sys-7730fc5363ab510a/dep-lib-web_sys",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-sys-7730fc5363ab510a/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-sys-7730fc5363ab510a/lib-web_sys",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-sys-7730fc5363ab510a/lib-web_sys.json",
+      "bytes": 42293
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-time-267b857c19506a5d/dep-lib-web_time",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-time-267b857c19506a5d/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-time-267b857c19506a5d/lib-web_time",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-time-267b857c19506a5d/lib-web_time.json",
+      "bytes": 566
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-time-d4d0d7bc8787553d/dep-lib-web_time",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-time-d4d0d7bc8787553d/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-time-d4d0d7bc8787553d/lib-web_time",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/web-time-d4d0d7bc8787553d/lib-web_time.json",
+      "bytes": 564
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-1ce01f7d54af175e/dep-lib-wgpu",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-1ce01f7d54af175e/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-1ce01f7d54af175e/lib-wgpu",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-1ce01f7d54af175e/lib-wgpu.json",
+      "bytes": 1945
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-b55c04495fc48ee1/dep-lib-wgpu",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-b55c04495fc48ee1/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-b55c04495fc48ee1/lib-wgpu",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-b55c04495fc48ee1/lib-wgpu.json",
+      "bytes": 1984
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-types-4b7259e51bfcf729/dep-lib-wgpu_types",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-types-4b7259e51bfcf729/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-types-4b7259e51bfcf729/lib-wgpu_types",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-types-4b7259e51bfcf729/lib-wgpu_types.json",
+      "bytes": 940
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-types-4f116fcff1c0d30b/dep-lib-wgpu_types",
+      "bytes": 14
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-types-4f116fcff1c0d30b/invoked.timestamp",
+      "bytes": 48
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-types-4f116fcff1c0d30b/lib-wgpu_types",
+      "bytes": 16
+    },
+    {
+      "path": "wasm32-unknown-unknown/debug/.fingerprint/wgpu-types-4f116fcff1c0d30b/lib-wgpu_types.json",
+      "bytes": 976
+    }
+  ]
+}

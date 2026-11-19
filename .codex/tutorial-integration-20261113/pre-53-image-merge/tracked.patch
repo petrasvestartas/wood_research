@@ -1,0 +1,3516 @@
+diff --git a/session_tests/scripts/course/subjects.test.ts b/session_tests/scripts/course/subjects.test.ts
+index 8d415e6fa..d936c1064 100644
+--- a/session_tests/scripts/course/subjects.test.ts
++++ b/session_tests/scripts/course/subjects.test.ts
+@@ -3,7 +3,7 @@ import test from 'node:test';
+ import fs from 'node:fs';
+ import path from 'node:path';
+ import {collapseSubject} from './subjects.ts';
+-import {course, docs, expected, snippetSource} from './model.ts';
++import {course, docs, expected, fingerprint, hash, snippetSource} from './model.ts';
+ 
+ const edit = (path: string, before: string | null, snippet: string) => ({path, before, snippet, why: ''});
+ const load = (source: string) => source;
+@@ -62,7 +62,7 @@ test('the first GPU subject replaces three checkpoints with five final files', (
+     assert.deepEqual(result.files, archived.endpoint);
+     assert.deepEqual(result.files, expected('01-canvas'));
+     assert(!course().steps.some(step => ['01a-gpu', '02-clear'].includes(step.id)));
+-    assert.equal(course().steps.length, 1321);
++    assert.equal(course().steps.length, 1317);
+     assert.equal(result.edits.length, 5);
+     assert(result.edits.every(edit => edit.before === null));
+     assert.deepEqual(new Set(result.edits.map(edit => edit.path)), new Set(Object.keys(result.files)));
+@@ -87,6 +87,27 @@ test('selection, history and perspective navigation share the exact completed ra
+     assert.equal(course().steps.filter(step => archived.steps.some((old: {id: string}) => old.id === step.id)).length, 1);
+ });
+ 
++test('kernel geometry and editor actions preserve all five endpoints in one subject', () => {
++    const archived = JSON.parse(fs.readFileSync(path.join(docs, 'archived/kernel-editor/checkpoints.json'), 'utf8'));
++    const preservation = JSON.parse(fs.readFileSync(path.join(docs, 'archived/kernel-editor/preservation.json'), 'utf8'));
++    assert.deepEqual(archived.steps.map(step => step.id), ['17-solid', '18-light', '18a-editor', '18b-actions', '19-actions']);
++    assert.deepEqual(archived.before, expected('12-identity'));
++    const result = collapseSubject(archived.before, archived.steps, snippetSource);
++    assert.deepEqual(result.files, archived.endpoint);
++    assert.equal(fingerprint(result.files), preservation.endpoint);
++    for (const step of archived.steps) assert.deepEqual(expected(step.id), archived.endpoint, step.id);
++    const subject = course().steps.find(step => step.id === '17-solid')!;
++    assert.equal(subject.edits.length, 7);
++    assert.equal(new Set(subject.edits.map(edit => edit.path)).size, 7);
++    assert.equal(course().steps.filter(step => preservation.originalIds.includes(step.id)).length, 1);
++    assert.equal(fingerprint(expected(course().steps.at(-1)!.id)), preservation.destination);
++    assert.equal(preservation.pages.length, 6);
++    for (const page of preservation.pages) {
++        const source = fs.readFileSync(path.join(docs, page.archive), 'utf8').replaceAll('\r\n', '\n');
++        assert.equal(hash(source), page.sha256, page.page);
++    }
++});
++
+ test('shader, font preparation and painting collapse to the exact runnable endpoint', () => {
+     const archived = JSON.parse(fs.readFileSync(path.join(docs, 'archived/painting/checkpoints.json'), 'utf8'));
+     const result = collapseSubject(expected('01-canvas'), archived.steps,
+diff --git a/session_viewer/docs/journey/17-solid.md b/session_viewer/docs/journey/17-solid.md
+index d47ee51df..d039a1ca9 100644
+--- a/session_viewer/docs/journey/17-solid.md
++++ b/session_viewer/docs/journey/17-solid.md
+@@ -1,834 +1,109 @@
+-# 3.1.1 · Bring a solid into the scene
++﻿# Kernel geometry and one editor
+ 
+-**Chapter 3 · Documents, editing and ownership · Section 3.1 · Kernel solids** · [Contents](contents.md)
++<a id="checkpoint-17-solid"></a>
++<a id="checkpoint-18-light"></a>
++<a id="checkpoint-18a-editor"></a>
++<a id="checkpoint-18b-actions"></a>
++<a id="checkpoint-19-actions"></a>
+ 
+-**Typing: 27–54 minutes.** [Estimate](typing-load.md).
++Create a kernel box, shade its faces and route commands through one editor that keeps document history separate from camera navigation.
+ 
+-Create a grey box with the geometry kernel and adapt it to our validated display mesh. `to_render` supplies float vertices and triangle indices; the adapter selects position and colour for our six-float vertex layout.
++## Prerequisites and ownership
+ 
+-## Type
++Complete [Select, navigate and undo](12-identity.md). You need stable object IDs, shared meshes, camera projection, picking, the command dock and reversible scene snapshots. This checkpoint combines kernel conversion, flat lighting and the editor's action boundary because the browser must publish the result of each completed action consistently.
+ 
+-Continue from [Walk around the model](16-orbit.md). [Save or recover your work](recovery.md).
++The complete editor is introduced once here. Adding fallible transactions revisits the preceding history implementation; the active course also contains later changes to scene, editor and browser code. Those ownership conflicts remain unresolved. Consolidating these five checkpoints does not establish the finished-subject rule across the course or production-tree parity. The [original checkpoints](../archived/kernel-editor/checkpoints.json) and [illustrated sequence](../archived/journey-consolidation-17-solid.md) are retained.
+ 
+-### 1. `src/mesh.rs`
++## Build
+ 
+-Adapt kernel triangle data to the current vertex and index layout with a checked narrowing conversion. Check the adapter using a solid with known topology.
++Keep the previous project's dependencies, GPU resource owner, camera and picking code. Type the seven complete files below in the same project.
+ 
+-<details>
+-<summary>Locate the existing block</summary>
++### Validate the kernel's display data
+ 
+ ```rust
+-pub struct Mesh {
+-    vertices: Vec<[f32; 6]>,
+-    indices: Vec<u16>,
+-}
+-
+-impl Mesh {
+-    pub fn new(vertices: Vec<[f32; 6]>, indices: Vec<u16>) -> Result<Self, &'static str> {
+-        if indices.len() % 3 != 0 || indices.len() > u32::MAX as usize {
+-            return Err("Indices must describe complete triangles within the draw limit");
+-        }
+-        if indices.iter().any(|&index| index as usize >= vertices.len()) {
+-            return Err("A triangle refers to a missing vertex");
+-        }
+-        if vertices.iter().flatten().any(|value| !value.is_finite()) {
+-            return Err("Vertex values must be finite");
+-        }
+-        Ok(Self { vertices, indices })
+-    }
+-
+-    pub fn vertices(&self) -> &[[f32; 6]] {
+-        &self.vertices
+-    }
+-
+-    pub fn indices(&self) -> &[u16] {
+-        &self.indices
+-    }
+-}
+-
+-#[cfg(test)]
+-mod tests {
+-    use super::*;
+-
+-    #[test]
+-    fn invalid_connections_and_nonfinite_vertices_are_rejected() {
+-        assert!(Mesh::new(vec![[0.0; 6]; 3], vec![0, 1, 3]).is_err());
+-        assert!(Mesh::new(vec![[0.0; 6]; 3], vec![0, 1]).is_err());
+-        assert!(Mesh::new(vec![[f32::NAN; 6]; 3], vec![0, 1, 2]).is_err());
+-        assert!(Mesh::new(vec![[0.0; 6]; 3], vec![0, 1, 2]).is_ok());
+-    }
+-}
++--8<-- "journey/code/17-editor-1.rs"
+ ```
+ 
+-</details>
++`Mesh::from_kernel` asks the kernel for its render representation. Each display vertex carries a position and colour. The adapter checks every converted index fits this checkpoint's 16-bit index format, then `Mesh::new` checks complete triangles, valid references and finite vertex values. Failure returns before any object enters the scene or any GPU buffer is uploaded.
+ 
+-Edit the existing block to match this code; keep unchanged lines:
++The kernel box in this checkpoint yields eight shared corners and twelve triangles. It does not supply one independent normal per corner face. The fragment shader below derives flat face directions from the interpolated world position.
+ 
+-```rust
+-pub struct Mesh {
+-    vertices: Vec<[f32; 6]>,
+-    indices: Vec<u16>,
+-}
+-
+-impl Mesh {
+-    pub fn new(vertices: Vec<[f32; 6]>, indices: Vec<u16>) -> Result<Self, &'static str> {
+-        if indices.len() % 3 != 0 || indices.len() > u32::MAX as usize {
+-            return Err("Indices must describe complete triangles within the draw limit");
+-        }
+-        if indices.iter().any(|&index| index as usize >= vertices.len()) {
+-            return Err("A triangle refers to a missing vertex");
+-        }
+-        if vertices.iter().flatten().any(|value| !value.is_finite()) {
+-            return Err("Vertex values must be finite");
+-        }
+-        Ok(Self { vertices, indices })
+-    }
+-
+-    pub fn from_kernel(mesh: &session_rust::Mesh) -> Result<Self, &'static str> {
+-        let render = mesh.to_render();
+-        let vertices = render.vertices.iter().map(|vertex| {
+-            let [x, y, z] = vertex.position;
+-            let [r, g, b, _] = vertex.color;
+-            [x, y, z, r, g, b]
+-        }).collect();
+-        let indices: Result<Vec<u16>, _> = render.indices.into_iter().map(u16::try_from).collect();
+-        Self::new(vertices, indices.map_err(|_| "Mesh exceeds this lesson's 16-bit index capacity")?)
+-    }
+-
+-    pub fn vertices(&self) -> &[[f32; 6]] {
+-        &self.vertices
+-    }
+-
+-    pub fn indices(&self) -> &[u16] {
+-        &self.indices
+-    }
+-}
+-
+-#[cfg(test)]
+-mod tests {
+-    use super::*;
+-
+-    #[test]
+-    fn a_kernel_box_becomes_eight_vertices_and_twelve_triangles() {
+-        let source = session_rust::Mesh::create_box(0.8, 0.8, 0.8);
+-        let mesh = Mesh::from_kernel(&source).unwrap();
+-        assert_eq!(mesh.vertices().len(), 8);
+-        assert_eq!(mesh.indices().len(), 36);
+-    }
+-
+-    #[test]
+-    fn invalid_connections_and_nonfinite_vertices_are_rejected() {
+-        assert!(Mesh::new(vec![[0.0; 6]; 3], vec![0, 1, 3]).is_err());
+-        assert!(Mesh::new(vec![[0.0; 6]; 3], vec![0, 1]).is_err());
+-        assert!(Mesh::new(vec![[f32::NAN; 6]; 3], vec![0, 1, 2]).is_err());
+-        assert!(Mesh::new(vec![[0.0; 6]; 3], vec![0, 1, 2]).is_ok());
+-    }
+-}
+-```
+-
+-<details>
+-<summary>Optional patch references</summary>
+-
+-Use these original edit fragments when comparing a saved checkpoint. Apply the complete blocks above.
+-
+-```text
+---8<-- "journey/code/17-solid-01.rs"
+-```
+-
+-```text
+---8<-- "journey/code/17-solid-02.rs"
+-```
+-
+-</details>
+-
+-### 2. `src/scene.rs`
+-
+-Construct and place a box, then insert it only after its display mesh is valid.
+-
+-<details>
+-<summary>Locate the existing block</summary>
++### Insert one placed object
+ 
+ ```rust
+-    pub fn toggle_extra(&mut self) {
++--8<-- "journey/code/17-editor-2.rs"
+ ```
+ 
+-</details>
++`Scene::add_box` creates a box with side lengths `0.8`, translates its kernel coordinates by `(0.9, 0, 0.4)`, assigns grey object colour and converts it before calling `insert`. The scene gives it one stable identity and stores the immutable display mesh behind `Rc`. Selection continues to use identities rather than vector offsets.
+ 
+-Edit the existing block to match this code; keep unchanged lines:
++### Keep failed edits out of history
+ 
+ ```rust
+---8<-- "journey/code/17-solid-03.rs"
++--8<-- "journey/code/17-editor-3.rs"
+ ```
+ 
+-### 3. `src/history.rs`
+-
+-Make transaction recording depend on success. The existing edit wrapper remains convenient for actions that cannot return an error. Prove that a partial failed change cannot destroy either document contents or the redo branch.
+-
+-Edit these blocks from bottom to top. Keep the surrounding lines unchanged.
+-
+-<details>
+-<summary>Locate this block</summary>
+-
+-```rust
+-    }
+-
+-    #[test]
+-    fn retained_history_has_a_fixed_count_limit() {
+-        let mut scene = Scene::demo();
+-        let mut history = History::default();
+-```
+-
+-</details>
+-
+-Replace it with:
+-
+-```rust
+-    }
+-
+-    #[test]
+-    fn a_failed_action_restores_the_scene_and_preserves_redo() {
+-        let mut scene = Scene::demo();
+-        let mut history = History::default();
+-        let id = scene.objects()[0].id;
+-        history.edit(&mut scene, |scene| { scene.remove(id); });
+-        history.undo(&mut scene);
+-        let result = history.try_edit(&mut scene, |scene| {
+-            scene.remove(id);
+-            Err("Creation failed after a partial change")
+-        });
+-        assert!(result.is_err());
+-        assert!(scene.contains(id));
+-        assert!(history.redo(&mut scene));
+-        assert!(!scene.contains(id));
+-    }
+-
+-    #[test]
+-    fn retained_history_has_a_fixed_count_limit() {
+-        let mut scene = Scene::demo();
+-        let mut history = History::default();
+-```
++`try_edit` clones the scene before running a fallible action. On error it restores that snapshot and returns without pushing undo or clearing redo. On success it retains the preceding scene, enforces the 64-entry bound and clears the old redo branch. `edit` delegates infallible actions through the same path.
+ 
+-<details>
+-<summary>Locate this block</summary>
++A failed action can partially mutate its scene before returning an error; rollback handles that case too. `Scene::restore` still preserves the highest issued object ID, so a failed or discarded branch cannot cause an identity to be reused. GPU allocation is outside this transaction: the browser uploads only after an action returns successfully.
+ 
+-```rust
++### Shade in world coordinates
+ 
+-impl History {
+-    pub fn edit(&mut self, scene: &mut Scene, action: impl FnOnce(&mut Scene)) {
+-        let before = scene.clone();
+-        action(scene);
+-        if self.undo.len() == LIMIT {
+-            self.undo.remove(0);
+-        }
+-        self.undo.push(before);
+-        self.redo.clear();
+-    }
+-
+-    pub fn undo(&mut self, scene: &mut Scene) -> bool {
++```wgsl
++--8<-- "journey/code/17-editor-5.wgsl"
+ ```
+ 
+-</details>
+-
+-Replace it with:
++The vertex stage sends world position to the fragment stage as well as projecting it. `dpdx` and `dpdy` describe the change in that position across neighbouring fragments. Their cross product gives a surface direction; normalization gives a unit normal.
+ 
+-```rust
+-
+-impl History {
+-    pub fn edit(&mut self, scene: &mut Scene, action: impl FnOnce(&mut Scene)) {
+-        self.try_edit(scene, |scene| { action(scene); Ok(()) }).expect("Infallible scene edit");
+-    }
+-
+-    pub fn try_edit(
+-        &mut self,
+-        scene: &mut Scene,
+-        action: impl FnOnce(&mut Scene) -> Result<(), &'static str>,
+-    ) -> Result<(), &'static str> {
+-        let before = scene.clone();
+-        if let Err(error) = action(scene) {
+-            scene.restore(before);
+-            return Err(error);
+-        }
+-        if self.undo.len() == LIMIT {
+-            self.undo.remove(0);
+-        }
+-        self.undo.push(before);
+-        self.redo.clear();
+-        Ok(())
+-    }
+-
+-    pub fn undo(&mut self, scene: &mut Scene) -> bool {
+-```
++The fixed light direction and normal both use world coordinates. Their dot product determines brightness. `abs` lights both sides of an open face, and the `0.3` base term keeps faces readable. Orbiting changes the view without rotating this light. This checkpoint teaches flat diffuse shading; the production viewer's other surface and ink lanes still require their owning subjects.
+ 
+-<details>
+-<summary>Complete updated block reference</summary>
++### Apply actions through one owner
+ 
+ ```rust
+-use crate::scene::Scene;
+-
+-const LIMIT: usize = 64;
+-
+-#[derive(Default)]
+-pub struct History {
+-    undo: Vec<Scene>,
+-    redo: Vec<Scene>,
+-}
+-
+-impl History {
+-    pub fn edit(&mut self, scene: &mut Scene, action: impl FnOnce(&mut Scene)) {
+-        self.try_edit(scene, |scene| { action(scene); Ok(()) }).expect("Infallible scene edit");
+-    }
+-
+-    pub fn try_edit(
+-        &mut self,
+-        scene: &mut Scene,
+-        action: impl FnOnce(&mut Scene) -> Result<(), &'static str>,
+-    ) -> Result<(), &'static str> {
+-        let before = scene.clone();
+-        if let Err(error) = action(scene) {
+-            scene.restore(before);
+-            return Err(error);
+-        }
+-        if self.undo.len() == LIMIT {
+-            self.undo.remove(0);
+-        }
+-        self.undo.push(before);
+-        self.redo.clear();
+-        Ok(())
+-    }
+-
+-    pub fn undo(&mut self, scene: &mut Scene) -> bool {
+-        Self::travel(&mut self.undo, &mut self.redo, scene)
+-    }
+-
+-    pub fn redo(&mut self, scene: &mut Scene) -> bool {
+-        Self::travel(&mut self.redo, &mut self.undo, scene)
+-    }
+-
+-    fn travel(from: &mut Vec<Scene>, to: &mut Vec<Scene>, scene: &mut Scene) -> bool {
+-        let Some(saved) = from.pop() else { return false; };
+-        to.push(scene.clone());
+-        scene.restore(saved);
+-        true
+-    }
+-}
+-
+-#[cfg(test)]
+-mod tests {
+-    use super::*;
+-    use std::rc::Rc;
+-
+-    #[test]
+-    fn undo_restores_identity_and_shares_the_original_mesh() {
+-        let mut scene = Scene::demo();
+-        let mut history = History::default();
+-        let id = scene.objects()[0].id;
+-        let mesh = Rc::clone(&scene.objects()[0].mesh);
+-        history.edit(&mut scene, |scene| { scene.remove(id); });
+-        assert!(!scene.contains(id));
+-        assert!(history.undo(&mut scene));
+-        assert_eq!(scene.objects()[0].id, id);
+-        assert!(Rc::ptr_eq(&mesh, &scene.objects()[0].mesh));
+-        assert!(history.redo(&mut scene));
+-        assert!(!scene.contains(id));
+-    }
+-
+-    #[test]
+-    fn a_new_branch_discards_redo_without_reusing_an_old_id() {
+-        let mut scene = Scene::demo();
+-        let mut history = History::default();
+-        history.edit(&mut scene, Scene::toggle_extra);
+-        let old_id = scene.objects()[2].id;
+-        history.undo(&mut scene);
+-        history.edit(&mut scene, Scene::toggle_extra);
+-        assert_ne!(scene.objects()[2].id, old_id);
+-        assert!(!history.redo(&mut scene));
+-    }
+-
+-    #[test]
+-    fn a_failed_action_restores_the_scene_and_preserves_redo() {
+-        let mut scene = Scene::demo();
+-        let mut history = History::default();
+-        let id = scene.objects()[0].id;
+-        history.edit(&mut scene, |scene| { scene.remove(id); });
+-        history.undo(&mut scene);
+-        let result = history.try_edit(&mut scene, |scene| {
+-            scene.remove(id);
+-            Err("Creation failed after a partial change")
+-        });
+-        assert!(result.is_err());
+-        assert!(scene.contains(id));
+-        assert!(history.redo(&mut scene));
+-        assert!(!scene.contains(id));
+-    }
+-
+-    #[test]
+-    fn retained_history_has_a_fixed_count_limit() {
+-        let mut scene = Scene::demo();
+-        let mut history = History::default();
+-        for _ in 0..LIMIT + 1 {
+-            history.edit(&mut scene, Scene::toggle_extra);
+-        }
+-        let mut count = 0;
+-        while history.undo(&mut scene) {
+-            count += 1;
+-        }
+-        assert_eq!(count, LIMIT);
+-    }
+-}
++--8<-- "journey/code/17-editor-6.rs"
+ ```
+ 
+-</details>
+-
+-<details>
+-<summary>Optional patch references</summary>
+-
+-Use these original edit fragments when comparing a saved checkpoint. Apply the complete blocks above.
+-
+-```text
+---8<-- "journey/code/17-solid-04.rs"
+-```
+-
+-```text
+---8<-- "journey/code/17-solid-05.rs"
+-```
++`Editor` owns scene, selected identity, camera, background and history. `Action` describes intent without a browser event or GPU handle. Document actions use history, selection actions change the selected identity, and view actions update the camera or background. After deletion or undo, one shared repair step drops a selected ID that no longer exists.
+ 
+-</details>
++`Change::View` requests a redraw with existing display geometry. `Change::Scene` requests a display upload. That second result does not necessarily mean the document changed: picking changes selected colours, so it also needs the scene display refreshed. The action decides whether to create a history transaction; the return value tells the renderer what to synchronize.
+ 
+-### 4. `src/browser.rs`
++Resetting the view retains its current aspect ratio. Undo and redo restore document snapshots without rewinding camera navigation or background settings.
+ 
+-Add Example Box to the vocabulary. Insert the box as one fallible history edit and report construction errors. Report the undoable kernel object.
+-
+-Edit these blocks from bottom to top. Keep the surrounding lines unchanged.
+-
+-<details>
+-<summary>Locate this block</summary>
++### Connect browser input and rendering
+ 
+ ```rust
+-    )?;
+-    // The page has one listener for its lifetime; JavaScript must retain the Rust callback.
+-    click.forget();
+-    report("Orbit moves the eye around a fixed target.");
+-    Ok(())
+-}
++--8<-- "journey/code/17-editor-4.rs"
+ ```
+ 
+-</details>
+-
+-Replace it with:
++The browser adapter translates dock commands and canvas input into actions, calls `Editor::apply`, and reports an error before attempting a display upload. On `Change::Scene` it synchronizes the renderer from the editor's scene and selection. Both change kinds then draw through the same current camera and background. The editor itself never submits GPU commands.
+ 
+ ```rust
+-    )?;
+-    // The page has one listener for its lifetime; JavaScript must retain the Rust callback.
+-    click.forget();
+-    report("Kernel geometry becomes an undoable scene object.");
+-    Ok(())
+-}
++--8<-- "journey/code/17-editor-7.rs"
+ ```
+ 
+-<details>
+-<summary>Locate this block</summary>
++The module declaration registers the editor in this crate. It does not create a second application or a second document owner.
+ 
+-```rust
+-                        .and_then(|ray| crate::picking::pick(&scene, &ray));
+-                    renderer.set_scene(&scene, selected);
+-                }
+-                "example triangle" => {
+-                    history.edit(&mut scene, Scene::toggle_extra);
+-                    selected = selected.filter(|id| scene.contains(*id));
+-```
++## Run and observe
+ 
+-</details>
++Use the course tool to continue to `17-solid` in your existing handwritten project, then build and serve through the repository's storage guard, shared build slot and shared Cargo cache. The [build instructions](../maintaining.md) explain those commands. The checkpoint retains the existing native frame fixture and browser interaction checker from `19-actions`; fresh consolidated validation remains pending.
+ 
+-Replace it with:
++Type `Example Box`, then `View Isometric`. A shaded grey solid appears behind the two triangles. Run `Select Next` three times: the box becomes yellow. `Undo` removes that box, and `Redo` restores it. Pan the view between those commands; history must leave that view in place.
+ 
+-```rust
+-                        .and_then(|ray| crate::picking::pick(&scene, &ray));
+-                    renderer.set_scene(&scene, selected);
+-                }
+-                "example box" => {
+-                    if let Err(error) =
+-                        history.try_edit(&mut scene, |scene| scene.add_box().map(|_| ()))
+-                    {
+-                        report(error);
+-                        return;
+-                    }
+-                    renderer.set_scene(&scene, selected);
+-                }
+-                "example triangle" => {
+-                    history.edit(&mut scene, Scene::toggle_extra);
+-                    selected = selected.filter(|id| scene.contains(*id));
+-```
+-
+-<details>
+-<summary>Locate this block</summary>
+-
+-```rust
+-        config.format.add_srgb_suffix(),
+-        &[
+-            "Help",
+-            "Example Triangle",
+-            "Select Next",
+-            "Delete",
+-```
++![Historical endpoint: the box is selected through the editor action route.](../screenshots/journey/19-actions-browser.png)
+ 
+-</details>
++This retained image illustrates the historical endpoint. It is not fresh acceptance of the consolidated checkpoint.
+ 
+-Replace it with:
+-
+-```rust
+-        config.format.add_srgb_suffix(),
+-        &[
+-            "Help",
+-            "Example Box",
+-            "Example Triangle",
+-            "Select Next",
+-            "Delete",
+-```
+-
+-<details>
+-<summary>Complete updated block reference</summary>
+-
+-```rust
+-use crate::background::Background;
+-use crate::camera::Camera;
+-use crate::history::History;
+-use crate::renderer::Renderer;
+-use crate::scene::Scene;
+-use wasm_bindgen::{JsCast, JsValue, closure::Closure};
+-
+-pub fn report(message: &str) {
+-    if let Some(document) = web_sys::window().and_then(|window| window.document()) {
+-        if let Some(status) = document.get_element_by_id("status") {
+-            status.set_text_content(Some(message));
+-            if message.starts_with("Cannot") { let _ = status.remove_attribute("hidden"); }
+-        }
+-    }
+-}
+-
+-pub async fn run() -> Result<(), JsValue> {
+-    let window = web_sys::window().ok_or("No browser window")?;
+-    let document = window.document().ok_or("No document")?;
+-    let canvas: web_sys::HtmlCanvasElement = document
+-        .get_element_by_id("canvas")
+-        .ok_or("Missing canvas")?
+-        .dyn_into()?;
+-    let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
+-        backends: wgpu::Backends::BROWSER_WEBGPU,
+-        flags: Default::default(),
+-        memory_budget_thresholds: Default::default(),
+-        backend_options: Default::default(),
+-        display: None,
+-    });
+-    let surface = instance
+-        .create_surface(wgpu::SurfaceTarget::Canvas(canvas.clone()))
+-        .map_err(|error| JsValue::from_str(&error.to_string()))?;
+-    let adapter = instance
+-        .request_adapter(&wgpu::RequestAdapterOptions {
+-            compatible_surface: Some(&surface),
+-            ..Default::default()
+-        })
+-        .await
+-        .map_err(|error| JsValue::from_str(&error.to_string()))?;
+-    let (device, queue) = adapter
+-        .request_device(&wgpu::DeviceDescriptor::default())
+-        .await
+-        .map_err(|error| JsValue::from_str(&error.to_string()))?;
+-    device.on_uncaptured_error(std::sync::Arc::new(|error| report(&error.to_string())));
+-    let limit = device.limits().max_texture_dimension_2d;
+-    let width = (window.inner_width()?.as_f64().ok_or("No window width")? as u32).clamp(1, limit);
+-    let height = (window.inner_height()?.as_f64().ok_or("No window height")? as u32).clamp(1, limit);
+-    canvas.set_width(width);
+-    canvas.set_height(height);
+-    let mut config = surface
+-        .get_default_config(&adapter, width, height)
+-        .ok_or("No compatible surface format")?;
+-    config.view_formats = vec![config.format.add_srgb_suffix()];
+-    surface.configure(&device, &config);
+-    let mut scene = Scene::demo();
+-    let mut renderer = Renderer::new(device, queue, config.format.add_srgb_suffix(), &scene);
+-    renderer.resize(width, height);
+-    let mut panel = crate::panel::Panel::new(
+-        &renderer,
+-        config.format.add_srgb_suffix(),
+-        &[
+-            "Help",
+-            "Example Box",
+-            "Example Triangle",
+-            "Select Next",
+-            "Delete",
+-            "Undo",
+-            "Redo",
+-            "Background",
+-            "Zoom In",
+-            "Zoom Out",
+-            "Pan Left",
+-            "Pan Right",
+-            "Orbit Right",
+-            "Orbit Up",
+-            "View Isometric",
+-            "View Reset",
+-        ],
+-    );
+-    panel.update(None, &canvas)?;
+-    let mut history = History::default();
+-    let mut selected = None;
+-    let mut background = Background::default();
+-    let mut camera = Camera { aspect: width as f64 / height as f64, ..Camera::default() };
+-    present(
+-        &surface,
+-        &renderer,
+-        &background,
+-        &camera.uniform(),
+-        &mut panel,
+-    )?;
+-    let input_canvas = canvas.clone();
+-    let click = Closure::<dyn FnMut(web_sys::Event)>::new(move |event: web_sys::Event| {
+-        let line = match panel.update(Some(&event), &input_canvas) {
+-            Ok(line) => line,
+-            Err(error) => {
+-                report(&format!("Cannot read command: {error:?}"));
+-                return;
+-            }
+-        };
+-
+-        let line = line.or_else(|| {
+-            let mouse = event.dyn_ref::<web_sys::MouseEvent>()?;
+-            (event.type_() == "click"
+-                && !panel.consumed
+-                && mouse
+-                    .target()
+-                    .and_then(|target| target.dyn_into::<web_sys::Element>().ok())
+-                    .is_some_and(|target| target.id() == "canvas"))
+-            .then(|| "canvas".into())
+-        });
+-        if let Some(line) = line {
+-            match line.as_str() {
+-                "canvas" => {
+-                    let Some(event) = event.dyn_ref::<web_sys::MouseEvent>() else {
+-                        return;
+-                    };
+-                    let rect = input_canvas.get_bounding_client_rect();
+-                    if rect.width() <= 0.0 || rect.height() <= 0.0 {
+-                        return;
+-                    }
+-                    let screen = [
+-                        (2.0 * (event.client_x() as f64 - rect.left()) / rect.width() - 1.0) as f32,
+-                        (1.0 - 2.0 * (event.client_y() as f64 - rect.top()) / rect.height()) as f32,
+-                    ];
+-                    selected = camera
+-                        .ray(screen)
+-                        .and_then(|ray| crate::picking::pick(&scene, &ray));
+-                    renderer.set_scene(&scene, selected);
+-                }
+-                "example box" => {
+-                    if let Err(error) =
+-                        history.try_edit(&mut scene, |scene| scene.add_box().map(|_| ()))
+-                    {
+-                        report(error);
+-                        return;
+-                    }
+-                    renderer.set_scene(&scene, selected);
+-                }
+-                "example triangle" => {
+-                    history.edit(&mut scene, Scene::toggle_extra);
+-                    selected = selected.filter(|id| scene.contains(*id));
+-                    renderer.set_scene(&scene, selected);
+-                }
+-                "select next" => {
+-                    selected = scene.next(selected);
+-                    renderer.set_scene(&scene, selected);
+-                }
+-                "delete" => {
+-                    if let Some(id) = selected.take() {
+-                        history.edit(&mut scene, |scene| {
+-                            scene.remove(id);
+-                        });
+-                        renderer.set_scene(&scene, selected);
+-                    }
+-                }
+-                "undo" | "redo" => {
+-                    if line == "undo" {
+-                        history.undo(&mut scene);
+-                    } else {
+-                        history.redo(&mut scene);
+-                    }
+-                    selected = selected.filter(|id| scene.contains(*id));
+-                    renderer.set_scene(&scene, selected);
+-                }
+-                "background" => background.toggle(),
+-                "zoom in" => camera.zoom(2.0),
+-                "zoom out" => camera.zoom(0.5),
+-                "pan left" => camera.pan(-0.25, 0.0),
+-                "pan right" => camera.pan(0.25, 0.0),
+-                "orbit right" => camera.rotate(std::f32::consts::FRAC_PI_4),
+-                "orbit up" => camera.orbit(0.0, std::f64::consts::FRAC_PI_6),
+-                "view isometric" => camera.isometric(),
+-                "view reset" => camera = Camera { aspect: camera.aspect, ..Camera::default() },
+-                _ => return,
+-            }
+-        }
+-        if let Err(error) = panel.update(None, &input_canvas) {
+-            report(&format!("Cannot lay out commands: {error:?}"));
+-            return;
+-        }
+-        if let Err(error) = present(
+-            &surface,
+-            &renderer,
+-            &background,
+-            &camera.uniform(),
+-            &mut panel,
+-        ) {
+-            report(&format!("Cannot redraw: {error:?}"));
+-        }
+-    });
+-    for name in [
+-        "pointerdown",
+-        "pointermove",
+-        "pointerup",
+-        "pointercancel",
+-        "lostpointercapture",
+-        "contextmenu",
+-        "keydown",
+-        "keyup",
+-        "blur",
+-        "click",
+-    ] {
+-        canvas.add_event_listener_with_callback(name, click.as_ref().unchecked_ref())?;
+-    }
+-    let options = web_sys::AddEventListenerOptions::new();
+-    options.set_passive(false);
+-    canvas.add_event_listener_with_callback_and_add_event_listener_options(
+-        "wheel",
+-        click.as_ref().unchecked_ref(),
+-        &options,
+-    )?;
+-    // The page has one listener for its lifetime; JavaScript must retain the Rust callback.
+-    click.forget();
+-    report("Kernel geometry becomes an undoable scene object.");
+-    Ok(())
+-}
+-
+-fn present(
+-    surface: &wgpu::Surface<'_>,
+-    renderer: &Renderer,
+-    background: &Background,
+-    transform: &[f32; 16],
+-    panel: &mut crate::panel::Panel,
+-) -> Result<(), JsValue> {
+-    let frame = match surface.get_current_texture() {
+-        wgpu::CurrentSurfaceTexture::Success(frame)
+-        | wgpu::CurrentSurfaceTexture::Suboptimal(frame) => frame,
+-        other => {
+-            return Err(JsValue::from_str(&format!(
+-                "Surface unavailable: {other:?}"
+-            )));
+-        }
+-    };
+-    let view = frame.texture.create_view(&wgpu::TextureViewDescriptor {
+-        format: Some(frame.texture.format().add_srgb_suffix()),
+-        ..Default::default()
+-    });
+-    renderer.draw(&view, background, transform);
+-    panel.draw(renderer, &view);
+-    frame.present();
+-    Ok(())
+-}
+-```
+-
+-</details>
+-
+-<details>
+-<summary>Optional patch references</summary>
+-
+-Use these original edit fragments when comparing a saved checkpoint. Apply the complete blocks above.
+-
+-```text
+---8<-- "journey/code/17-solid-window-1.rs"
+-```
+-
+-```text
+---8<-- "journey/code/17-solid-window-2.rs"
+-```
+-
+-```text
+---8<-- "journey/code/17-solid-window-3.rs"
+-```
+-
+-</details>
+-
+-## Run and check
+-
+-In your project:
+-
+-```sh
+-cd workspace/journey
+-REGEN_PROTO=0 cargo build --lib --locked --target wasm32-unknown-unknown -j1
+-REGEN_PROTO=0 CARGO_BUILD_JOBS=1 trunk serve --port 8780
+-```
+-
+-Open `http://127.0.0.1:8780/`. Keep an existing Trunk server running; saving rebuilds it.
+-
+-Type `Example Box`, then `View Isometric`. A solid box appears. `Undo` removes that one object; `Redo` restores it.
+-
+-### Recorded visual result
+-
+-**Previous native render — current verification pending.**
+-
+-The new object is the pale grey box behind the triangles. Its faces have the same colour because lighting is not implemented yet. The helper adds a kernel box, uploads the scene, and checks its projected position and visible area.
+-
+-![Native renderer output for bring a solid into the scene.](../screenshots/journey/17-solid.png)
+-
+-*This recorded image predates a source or checker change. Rebuild this checkpoint before using it as current evidence; browser controls require separate acceptance.*
+-
+-<details>
+-<summary>Code explanation and diagram</summary>
+-
+-The box has eight geometric corners, six quad faces and twelve triangles. This example handles its convex faces; imported concave faces need later topology work.
+-
+-Convert kernel `u32` indices with `u16::try_from`. Return an error for an index that cannot fit rather than connecting the wrong corners.
+-
+-Add `History::try_edit`: commit and clear redo only on success; restore the previous scene on error. A test deliberately mutates then fails. The box is unlit here; the next shader change reveals its face directions.
+-
+-Kernel box → triangle extraction → validated display Mesh → document transaction → GPU upload → visible solid.
+-
+-![A kernel box becomes a validated display mesh; a successful document transaction inserts it before the renderer uploads its triangles.](../illustrations/journey-17.svg)
+-
+-Why does a failed mesh conversion belong outside the GPU draw loop?
+-
+-Conversion establishes the display data contract before an object enters the scene. A failure should leave the document and history unchanged. The draw loop should read already valid GPU resources; it cannot repair an invalid index or decide whether a failed document edit should be kept.
+-
+-Study estimate, including typing and experiments: 3–5 hours.
+-
+-</details>
+-
+-<details>
+-<summary>Optional experiment</summary>
+-
+-Add a box and undo. In the rollback test, predict whether a failed new edit should erase the available redo. Run the test: it should not. Then redo the successful box addition. Separate three questions in your notes: did creation succeed, did the document change, and was the change uploaded?
+-
+-</details>
+-
+-<details>
+-<summary>Check and save your work</summary>
+-
+-Restore experimental edits, then run from `session_viewer`:
+-
+-```sh
+-npm --prefix ../session_tests run course -- check 3.1.1
+-npm --prefix ../session_tests run course -- save 3.1.1
+-```
++## Predict and try
+ 
+-Source comparison leaves your project untouched. [Save and recovery instructions](recovery.md).
++Add a box, pan the camera, then undo and redo. Predict the object count, selected identity and camera position after each action. A deleted selection is cleared; the camera remains where you moved it.
+ 
+-</details>
++In the rollback test, first create an available redo branch, then run an action that removes an object before returning an error. Predict whether redo remains available. The failed edit restores the scene and retains that branch.
+ 
+-<details>
+-<summary>Viewer coverage and verification</summary>
++Change the shader's light direction to the positive world z axis. Predict the top face becoming brighter and the vertical faces sharing the base brightness. Restore the original direction after checking; no vertex position needs to change.
+ 
+-The final viewer converts kernel geometry into renderable lanes while preserving document identity and transactional edits. This adapter is the first real kernel-to-display connection; later lessons retain face and edge provenance and share allocations across many objects.
++## Question and answer
+ 
+-Example Box inserts the grey solid behind the triangles. Its faces have one flat colour at this checkpoint.
++Why can picking return `Change::Scene` without creating an undo transaction?
+ 
+-[Full validation scope](release.md).
++Selection changes display colour, so it needs a GPU display update. It does not change the retained document geometry. The editor keeps those two decisions separate.
+ 
+-</details>
++Continue with [One drawing size and one captured gesture](consolidation/19a-viewport.md).
+diff --git a/session_viewer/docs/journey/18-light.md b/session_viewer/docs/journey/18-light.md
+index 403829331..3e2126232 100644
+--- a/session_viewer/docs/journey/18-light.md
++++ b/session_viewer/docs/journey/18-light.md
+@@ -1,149 +1,5 @@
+-# 3.2.1 · Read the shape through light
++# Kernel geometry and one editor
+ 
+-**Chapter 3 · Documents, editing and ownership · Section 3.2 · Surface lighting and editor actions** · [Contents](contents.md)
++Continue with the [single runnable subject](17-solid.md).
+ 
+-**Typing: 6–11 minutes.** [Estimate](typing-load.md).
+-
+-Shade the grey box according to surface direction. Pass world positions from the vertex shader to the fragment shader.
+-
+-## Type
+-
+-Continue from [Bring a solid into the scene](17-solid.md). [Save or recover your work](recovery.md).
+-
+-### 1. `src/triangle.wgsl`
+-
+-Pass world positions through the pipeline and turn face direction into brightness.
+-
+-<details>
+-<summary>Locate the existing block</summary>
+-
+-```wgsl
+-@group(0) @binding(0) var<uniform> transform: mat4x4<f32>;
+-
+-struct VertexOutput {
+-    @builtin(position) position: vec4<f32>,
+-    @location(0) colour: vec3<f32>,
+-}
+-
+-@vertex
+-fn vertex(@location(0) position: vec3<f32>, @location(1) colour: vec3<f32>) -> VertexOutput {
+-    var output: VertexOutput;
+-    output.position = transform * vec4<f32>(position, 1.0);
+-    output.colour = colour;
+-    return output;
+-}
+-
+-@fragment
+-fn fragment(input: VertexOutput) -> @location(0) vec4<f32> {
+-    return vec4<f32>(input.colour, 1.0);
+-}
+-```
+-
+-</details>
+-
+-Edit the existing block to match this code; keep unchanged lines:
+-
+-```wgsl
+---8<-- "journey/code/18-light-01.wgsl"
+-```
+-
+-### 2. `src/browser.rs`
+-
+-Report that lighting changes brightness without changing geometry.
+-
+-<details>
+-<summary>Locate the existing block</summary>
+-
+-```rust
+-    )?;
+-    // The page has one listener for its lifetime; JavaScript must retain the Rust callback.
+-    click.forget();
+-    report("Kernel geometry becomes an undoable scene object.");
+-    Ok(())
+-}
+-```
+-
+-</details>
+-
+-Edit the existing block to match this code; keep unchanged lines:
+-
+-```rust
+---8<-- "journey/code/18-light-window-1.rs"
+-```
+-
+-## Run and check
+-
+-In your project:
+-
+-```sh
+-cd workspace/journey
+-REGEN_PROTO=0 cargo build --lib --locked --target wasm32-unknown-unknown -j1
+-REGEN_PROTO=0 CARGO_BUILD_JOBS=1 trunk serve --port 8780
+-```
+-
+-Open `http://127.0.0.1:8780/`. Keep an existing Trunk server running; saving rebuilds it.
+-
+-Type `Example Box` and `View Isometric`. Faces pointing in different directions should have different brightness, making the box’s shape easier to read.
+-
+-### Recorded visual result
+-
+-**Previous native render — current verification pending.**
+-
+-Compare the box with lesson 17: its left face is darker than its right face, and its top is brightest. Geometry and camera are unchanged; the shader now shades each face. Three projected face samples check those brightness levels.
+-
+-![Native renderer output for read the shape through light.](../screenshots/journey/18-light.png)
+-
+-*This recorded image predates a source or checker change. Rebuild this checkpoint before using it as current evidence; browser controls require separate acceptance.*
+-
+-<details>
+-<summary>Code explanation and diagram</summary>
+-
+-`dpdx` and `dpdy` estimate horizontal and vertical position changes. Their cross product gives the triangle normal; normalisation makes it unit length. Dot it with the unit world-space light direction to measure alignment.
+-
+-Use `abs` for this display's two-sided lighting and retain a minimum brightness of 0.3. Multiply RGB before the existing sRGB output conversion.
+-
+-Only shader logic changes. Mesh still supplies positions and colours, Camera positions the view, and Renderer submits the triangles. Adjoining box faces now have visibly different brightness.
+-
+-World position → neighbouring surface directions → normal → light alignment → fragment colour.
+-
+-![Two directions along a face give its normal; comparing that normal with the light controls brightness.](../illustrations/journey-18.svg)
+-
+-Why should orbiting the camera leave the brightness of a particular box face unchanged?
+-
+-Both the normal and the light direction are expressed in world coordinates. Orbit changes where we look from, not the face direction or the light. A different face may become visible, but the same face keeps the same brightness. Mixing a camera-space normal with a world-space light would break that relationship.
+-
+-Study estimate, including typing and experiments: 1–2 hours.
+-
+-</details>
+-
+-<details>
+-<summary>Optional experiment</summary>
+-
+-Change the light to vec3<f32>(0.0, 0.0, 1.0). Predict the box first: the top should be bright and both vertical sides equally dark. Try it, then restore the original light. Explain why this changes colour without moving a single vertex.
+-
+-</details>
+-
+-<details>
+-<summary>Check and save your work</summary>
+-
+-Restore experimental edits, then run from `session_viewer`:
+-
+-```sh
+-npm --prefix ../session_tests run course -- check 3.2.1
+-npm --prefix ../session_tests run course -- save 3.2.1
+-```
+-
+-Source comparison leaves your project untouched. [Save and recovery instructions](recovery.md).
+-
+-</details>
+-
+-<details>
+-<summary>Viewer coverage and verification</summary>
+-
+-This is flat lighting: each triangle has one surface direction. The final viewer also needs smooth normals, materials, two-sided surface rules and contact shadows. Those features will extend the same distinction between geometry, view and shading.
+-
+-Compare the box with lesson 17: the same geometry now has three face brightnesses.
+-
+-[Full validation scope](release.md).
+-
+-</details>
++The [original page](../archived/journey-18-light.md) retains its diagrams, explanations and source listings.
+diff --git a/session_viewer/docs/journey/18a-editor.md b/session_viewer/docs/journey/18a-editor.md
+index 27f1cb2da..efb056fec 100644
+--- a/session_viewer/docs/journey/18a-editor.md
++++ b/session_viewer/docs/journey/18a-editor.md
+@@ -1,118 +1,5 @@
+-# 3.2.2 · Give application state one owner
++# Kernel geometry and one editor
+ 
+-**Chapter 3 · Documents, editing and ownership · Section 3.2 · Surface lighting and editor actions** · [Contents](contents.md)
++Continue with the [single runnable subject](17-solid.md).
+ 
+-**Typing: 14–27 minutes.** [Estimate](typing-load.md).
+-
+-Editor owns application state. Action names an input; Change tells drawing whether scene data or only the view changed.
+-
+-## Type
+-
+-Continue from [Read the shape through light](18-light.md). [Save or recover your work](recovery.md).
+-
+-### 1. `src/editor.rs`
+-
+-Declare the action names, change kinds and application owner. Check a camera change keeps document identity.
+-
+-Create the file and type:
+-
+-```rust
+---8<-- "journey/code/18a-editor-owner.rs"
+-```
+-
+-### 2. `src/lib.rs`
+-
+-Make the editor available to both the browser and native checks.
+-
+-<details>
+-<summary>Locate the existing block</summary>
+-
+-```rust
+-pub mod scene;
+-pub mod picking;
+-pub mod history;
+-pub mod gpu_mesh;
+-pub mod renderer;
+-#[cfg(target_arch = "wasm32")]
+-```
+-
+-</details>
+-
+-Edit the existing block to match this code; keep unchanged lines:
+-
+-```rust
+---8<-- "journey/code/19-actions-fullscreen-1.rs"
+-```
+-
+-## Run and check
+-
+-In your project:
+-
+-```sh
+-cd workspace/journey
+-REGEN_PROTO=0 cargo build --lib --locked --target wasm32-unknown-unknown -j1
+-REGEN_PROTO=0 CARGO_BUILD_JOBS=1 trunk serve --port 8780
+-```
+-
+-Open `http://127.0.0.1:8780/`. Keep an existing Trunk server running; saving rebuilds it.
+-
+-Inspect the supplied state fixtures. Zooming the owned camera preserves the document IDs and empty selection.
+-
+-### Recorded visual result
+-
+-**Previous native render — current verification pending.**
+-
+-![Native renderer output for give application state one owner.](../screenshots/journey/18-light.png)
+-
+-*This recorded image predates a source or checker change. Rebuild this checkpoint before using it as current evidence; browser controls require separate acceptance.*
+-
+-This reference image is shared with [3.2.1 · Read the shape through light](18-light.md). It does not demonstrate a new feature by itself.
+-
+-<details>
+-<summary>Code explanation and diagram</summary>
+-
+-Keep History private so document edits follow one path. Default constructs an editor with the existing demonstration scene.
+-
+-Editor owns scene and history beside camera, background and selection.
+-
+-![Editor owns document and view state.](../illustrations/journey-direct-18a-editor.svg)
+-
+-Why put these values in one struct?
+-
+-An input handler can borrow one editor rather than manage separate captured scene, camera, selection and history values.
+-
+-Study estimate, including typing and experiments: 0.5–0.75 hours.
+-
+-</details>
+-
+-<details>
+-<summary>Optional experiment</summary>
+-
+-Change the ownership test to pan the camera. Its scene IDs should still match; restore the original zoom check.
+-
+-</details>
+-
+-<details>
+-<summary>Check and save your work</summary>
+-
+-Restore experimental edits, then run from `session_viewer`:
+-
+-```sh
+-npm --prefix ../session_tests run course -- check 3.2.2
+-npm --prefix ../session_tests run course -- save 3.2.2
+-```
+-
+-Source comparison leaves your project untouched. [Save and recovery instructions](recovery.md).
+-
+-</details>
+-
+-<details>
+-<summary>Viewer coverage and verification</summary>
+-
+-The application owner keeps document and view lifetimes together while history stores document changes only.
+-
+-Native checks establish the new state owner. Chrome independently retains the preceding lighting and typed-command path; browser routing moves into Editor in the final step.
+-
+-[Full validation scope](release.md).
+-
+-</details>
++The [original page](../archived/journey-18a-editor.md) retains its diagrams, explanations and source listings.
+diff --git a/session_viewer/docs/journey/18b-actions.md b/session_viewer/docs/journey/18b-actions.md
+index 1284a6b6d..e0dbf23bd 100644
+--- a/session_viewer/docs/journey/18b-actions.md
++++ b/session_viewer/docs/journey/18b-actions.md
+@@ -1,114 +1,5 @@
+-# 3.2.3 · Apply document and view actions in Rust
++# Kernel geometry and one editor
+ 
+-**Chapter 3 · Documents, editing and ownership · Section 3.2 · Surface lighting and editor actions** · [Contents](contents.md)
++Continue with the [single runnable subject](17-solid.md).
+ 
+-**Typing: 27–53 minutes.** [Estimate](typing-load.md).
+-
+-Editor::apply handles an Action and returns the kind of drawing change. Document edits use History; camera and background changes stay outside it.
+-
+-## Type
+-
+-Continue from [Give application state one owner](18a-editor.md). [Save or recover your work](recovery.md).
+-
+-### 1. `src/editor.rs`
+-
+-Implement the action route and check history preserves the view. Keep the current aspect when resetting the camera.
+-
+-<details>
+-<summary>Locate the existing block</summary>
+-
+-```rust
+-#[cfg(test)]
+-mod tests {
+-    use super::*;
+-
+-    #[test]
+-    fn changing_the_owned_camera_keeps_document_identity() {
+-        let mut editor = Editor::default();
+-        let ids: Vec<_> = editor.scene.objects().iter().map(|object| object.id).collect();
+-        editor.camera.zoom(2.0);
+-        assert_eq!(editor.camera.distance, 1.5);
+-        assert_eq!(editor.scene.objects().iter().map(|object| object.id).collect::<Vec<_>>(), ids);
+-        assert!(editor.selected.is_none());
+-    }
+-}
+-```
+-
+-</details>
+-
+-Edit the existing block to match this code; keep unchanged lines:
+-
+-```rust
+---8<-- "journey/code/18b-actions-apply.rs"
+-```
+-
+-## Run and check
+-
+-In your project:
+-
+-```sh
+-cd workspace/journey
+-REGEN_PROTO=0 cargo build --lib --locked --target wasm32-unknown-unknown -j1
+-REGEN_PROTO=0 CARGO_BUILD_JOBS=1 trunk serve --port 8780
+-```
+-
+-Open `http://127.0.0.1:8780/`. Keep an existing Trunk server running; saving rebuilds it.
+-
+-Inspect the supplied state fixtures. Undo removes the added box while keeping zoom and background; View Reset preserves the current aspect.
+-
+-### Recorded visual result
+-
+-**Previous native render — current verification pending.**
+-
+-![Native renderer output for apply document and view actions in rust.](../screenshots/journey/18b-actions.png)
+-
+-*This recorded image predates a source or checker change. Rebuild this checkpoint before using it as current evidence; browser controls require separate acceptance.*
+-
+-<details>
+-<summary>Code explanation and diagram</summary>
+-
+-Result propagates a failed add operation. After deletion or history travel, retain selection only if its ID still exists. View Reset keeps the current window aspect.
+-
+-Action → Editor::apply → History for document edits → Change::Scene or Change::View.
+-
+-![Actions update the editor and report the drawing change.](../illustrations/journey-direct-18b-actions.svg)
+-
+-Why return Change rather than redraw here?
+-
+-The editor owns application values, not GPU objects. Its caller decides when to upload scene data and draw.
+-
+-Study estimate, including typing and experiments: 1–1.5 hours.
+-
+-</details>
+-
+-<details>
+-<summary>Optional experiment</summary>
+-
+-Set camera aspect to 2.0 in the reset test. Reset distance and orientation should change while that aspect stays 2.0.
+-
+-</details>
+-
+-<details>
+-<summary>Check and save your work</summary>
+-
+-Restore experimental edits, then run from `session_viewer`:
+-
+-```sh
+-npm --prefix ../session_tests run course -- check 3.2.3
+-npm --prefix ../session_tests run course -- save 3.2.3
+-```
+-
+-Source comparison leaves your project untouched. [Save and recovery instructions](recovery.md).
+-
+-</details>
+-
+-<details>
+-<summary>Viewer coverage and verification</summary>
+-
+-Actions preserve the document/view boundary and describe the synchronization required. This checkpoint also retains aspect during reset before browser routing is introduced.
+-
+-Native checks exercise the new action route and render its selected box. Chrome retains the earlier event handler and lighting result; the following step connects browser input to Editor.
+-
+-[Full validation scope](release.md).
+-
+-</details>
++The [original page](../archived/journey-18b-actions.md) retains its diagrams, explanations and source listings.
+diff --git a/session_viewer/docs/journey/19-actions.md b/session_viewer/docs/journey/19-actions.md
+index b5760d74e..c4a38981e 100644
+--- a/session_viewer/docs/journey/19-actions.md
++++ b/session_viewer/docs/journey/19-actions.md
+@@ -1,673 +1,5 @@
+-# 3.3.1 · Route browser input through the editor
++# Kernel geometry and one editor
+ 
+-**Chapter 3 · Documents, editing and ownership · Section 3.3 · Browser input and drawing size** · [Contents](contents.md)
++Continue with the [single runnable subject](17-solid.md).
+ 
+-**Typing: 29–57 minutes.** [Estimate](typing-load.md).
+-
+-Convert submitted commands and canvas clicks to Action values. Apply them through Editor, upload only when Change is Scene, then redraw from the editor camera and background.
+-
+-## Type
+-
+-Continue from [Apply document and view actions in Rust](18b-actions.md). [Save or recover your work](recovery.md).
+-
+-### 1. `src/editor.rs`
+-
+-Check selection repair, redo preservation and picking through the editor’s current camera.
+-
+-<details>
+-<summary>Locate the existing block</summary>
+-
+-```rust
+-        assert_eq!(editor.background.rgb(), [0.9, 0.9, 0.9]);
+-    }
+-}
+-```
+-
+-</details>
+-
+-Edit the existing block to match this code; keep unchanged lines:
+-
+-```rust
+---8<-- "journey/code/19-actions-tests.rs"
+-```
+-
+-### 2. `src/browser.rs`
+-
+-Import the editor action types. Create one editor and initialize drawing from its scene. Present the editor background and camera. Start converting submitted lines into actions. Map commands to Action, apply through Editor, and synchronize according to Change. Redraw from the editor state. Report the shared action route.
+-
+-Edit these blocks from bottom to top. Keep the surrounding lines unchanged.
+-
+-<details>
+-<summary>Locate this block</summary>
+-
+-```rust
+-    )?;
+-    // The page has one listener for its lifetime; JavaScript must retain the Rust callback.
+-    click.forget();
+-    report("Surface direction changes brightness, not geometry.");
+-    Ok(())
+-}
+-```
+-
+-</details>
+-
+-Replace it with:
+-
+-```rust
+-    )?;
+-    // The page has one listener for its lifetime; JavaScript must retain the Rust callback.
+-    click.forget();
+-    report("Every document action follows the same editor path.");
+-    Ok(())
+-}
+-```
+-
+-<details>
+-<summary>Locate this block</summary>
+-
+-```rust
+-        if let Err(error) = present(
+-            &surface,
+-            &renderer,
+-            &background,
+-            &camera.uniform(),
+-            &mut panel,
+-        ) {
+-            report(&format!("Cannot redraw: {error:?}"));
+-```
+-
+-</details>
+-
+-Replace it with:
+-
+-```rust
+-        if let Err(error) = present(
+-            &surface,
+-            &renderer,
+-            &editor.background,
+-            &editor.camera.uniform(),
+-            &mut panel,
+-        ) {
+-            report(&format!("Cannot redraw: {error:?}"));
+-```
+-
+-<details>
+-<summary>Locate this block</summary>
+-
+-```rust
+-                    if rect.width() <= 0.0 || rect.height() <= 0.0 {
+-                        return;
+-                    }
+-                    let screen = [
+-                        (2.0 * (event.client_x() as f64 - rect.left()) / rect.width() - 1.0) as f32,
+-                        (1.0 - 2.0 * (event.client_y() as f64 - rect.top()) / rect.height()) as f32,
+-                    ];
+-                    selected = camera
+-                        .ray(screen)
+-                        .and_then(|ray| crate::picking::pick(&scene, &ray));
+-                    renderer.set_scene(&scene, selected);
+-                }
+-                "example box" => {
+-                    if let Err(error) =
+-                        history.try_edit(&mut scene, |scene| scene.add_box().map(|_| ()))
+-                    {
+-                        report(error);
+-                        return;
+-                    }
+-                    renderer.set_scene(&scene, selected);
+-                }
+-                "example triangle" => {
+-                    history.edit(&mut scene, Scene::toggle_extra);
+-                    selected = selected.filter(|id| scene.contains(*id));
+-                    renderer.set_scene(&scene, selected);
+-                }
+-                "select next" => {
+-                    selected = scene.next(selected);
+-                    renderer.set_scene(&scene, selected);
+-                }
+-                "delete" => {
+-                    if let Some(id) = selected.take() {
+-                        history.edit(&mut scene, |scene| {
+-                            scene.remove(id);
+-                        });
+-                        renderer.set_scene(&scene, selected);
+-                    }
+-                }
+-                "undo" | "redo" => {
+-                    if line == "undo" {
+-                        history.undo(&mut scene);
+-                    } else {
+-                        history.redo(&mut scene);
+-                    }
+-                    selected = selected.filter(|id| scene.contains(*id));
+-                    renderer.set_scene(&scene, selected);
+-                }
+-                "background" => background.toggle(),
+-                "zoom in" => camera.zoom(2.0),
+-                "zoom out" => camera.zoom(0.5),
+-                "pan left" => camera.pan(-0.25, 0.0),
+-                "pan right" => camera.pan(0.25, 0.0),
+-                "orbit right" => camera.rotate(std::f32::consts::FRAC_PI_4),
+-                "orbit up" => camera.orbit(0.0, std::f64::consts::FRAC_PI_6),
+-                "view isometric" => camera.isometric(),
+-                "view reset" => camera = Camera { aspect: camera.aspect, ..Camera::default() },
+-                _ => return,
+-            }
+-        }
+-        if let Err(error) = panel.update(None, &input_canvas) {
+-```
+-
+-</details>
+-
+-Replace it with:
+-
+-```rust
+-                    if rect.width() <= 0.0 || rect.height() <= 0.0 {
+-                        return;
+-                    }
+-                    Action::Pick([
+-                        (2.0 * (event.client_x() as f64 - rect.left()) / rect.width() - 1.0) as f32,
+-                        (1.0 - 2.0 * (event.client_y() as f64 - rect.top()) / rect.height()) as f32,
+-                    ])
+-                }
+-                "example box" => Action::AddBox,
+-                "example triangle" => Action::ToggleExtra,
+-                "select next" => Action::SelectNext,
+-                "delete" => Action::Delete,
+-                "undo" => Action::Undo,
+-                "redo" => Action::Redo,
+-                "background" => Action::Background,
+-                "zoom in" => Action::Zoom(2.0),
+-                "zoom out" => Action::Zoom(0.5),
+-                "pan left" => Action::Pan(-0.25, 0.0),
+-                "pan right" => Action::Pan(0.25, 0.0),
+-                "orbit right" => Action::Orbit(std::f64::consts::FRAC_PI_4, 0.0),
+-                "orbit up" => Action::Orbit(0.0, std::f64::consts::FRAC_PI_6),
+-                "view isometric" => Action::Isometric,
+-                "view reset" => Action::ResetView,
+-                _ => return,
+-            };
+-            match editor.apply(action) {
+-                Ok(Change::Scene) => renderer.set_scene(&editor.scene, editor.selected),
+-                Ok(Change::View) => {}
+-                Err(error) => {
+-                    report(error);
+-                    return;
+-                }
+-            }
+-        }
+-        if let Err(error) = panel.update(None, &input_canvas) {
+-```
+-
+-<details>
+-<summary>Locate this block</summary>
+-
+-```rust
+-            .then(|| "canvas".into())
+-        });
+-        if let Some(line) = line {
+-            match line.as_str() {
+-                "canvas" => {
+-                    let Some(event) = event.dyn_ref::<web_sys::MouseEvent>() else {
+-                        return;
+-```
+-
+-</details>
+-
+-Replace it with:
+-
+-```rust
+-            .then(|| "canvas".into())
+-        });
+-        if let Some(line) = line {
+-            let action = match line.as_str() {
+-                "canvas" => {
+-                    let Some(event) = event.dyn_ref::<web_sys::MouseEvent>() else {
+-                        return;
+-```
+-
+-<details>
+-<summary>Locate this block</summary>
+-
+-```rust
+-        ],
+-    );
+-    panel.update(None, &canvas)?;
+-    let mut history = History::default();
+-    let mut selected = None;
+-    let mut background = Background::default();
+-    let mut camera = Camera { aspect: width as f64 / height as f64, ..Camera::default() };
+-    present(
+-        &surface,
+-        &renderer,
+-        &background,
+-        &camera.uniform(),
+-        &mut panel,
+-    )?;
+-    let input_canvas = canvas.clone();
+-```
+-
+-</details>
+-
+-Replace it with:
+-
+-```rust
+-        ],
+-    );
+-    panel.update(None, &canvas)?;
+-    present(
+-        &surface,
+-        &renderer,
+-        &editor.background,
+-        &editor.camera.uniform(),
+-        &mut panel,
+-    )?;
+-    let input_canvas = canvas.clone();
+-```
+-
+-<details>
+-<summary>Locate this block</summary>
+-
+-```rust
+-        .ok_or("No compatible surface format")?;
+-    config.view_formats = vec![config.format.add_srgb_suffix()];
+-    surface.configure(&device, &config);
+-    let mut scene = Scene::demo();
+-    let mut renderer = Renderer::new(device, queue, config.format.add_srgb_suffix(), &scene);
+-    renderer.resize(width, height);
+-    let mut panel = crate::panel::Panel::new(
+-        &renderer,
+-```
+-
+-</details>
+-
+-Replace it with:
+-
+-```rust
+-        .ok_or("No compatible surface format")?;
+-    config.view_formats = vec![config.format.add_srgb_suffix()];
+-    surface.configure(&device, &config);
+-    let mut editor = Editor::default();
+-    editor.camera.aspect = width as f64 / height as f64;
+-    let mut renderer = Renderer::new(
+-        device,
+-        queue,
+-        config.format.add_srgb_suffix(),
+-        &editor.scene,
+-    );
+-    renderer.resize(width, height);
+-    let mut panel = crate::panel::Panel::new(
+-        &renderer,
+-```
+-
+-<details>
+-<summary>Locate this block</summary>
+-
+-```rust
+-use crate::background::Background;
+-use crate::camera::Camera;
+-use crate::history::History;
+-use crate::renderer::Renderer;
+-use crate::scene::Scene;
+-use wasm_bindgen::{JsCast, JsValue, closure::Closure};
+-
+-pub fn report(message: &str) {
+-```
+-
+-</details>
+-
+-Replace it with:
+-
+-```rust
+-use crate::background::Background;
+-use crate::editor::{Action, Change, Editor};
+-use crate::renderer::Renderer;
+-use wasm_bindgen::{JsCast, JsValue, closure::Closure};
+-
+-pub fn report(message: &str) {
+-```
+-
+-<details>
+-<summary>Complete updated block reference</summary>
+-
+-```rust
+-use crate::background::Background;
+-use crate::editor::{Action, Change, Editor};
+-use crate::renderer::Renderer;
+-use wasm_bindgen::{JsCast, JsValue, closure::Closure};
+-
+-pub fn report(message: &str) {
+-    if let Some(document) = web_sys::window().and_then(|window| window.document()) {
+-        if let Some(status) = document.get_element_by_id("status") {
+-            status.set_text_content(Some(message));
+-            if message.starts_with("Cannot") { let _ = status.remove_attribute("hidden"); }
+-        }
+-    }
+-}
+-
+-pub async fn run() -> Result<(), JsValue> {
+-    let window = web_sys::window().ok_or("No browser window")?;
+-    let document = window.document().ok_or("No document")?;
+-    let canvas: web_sys::HtmlCanvasElement = document
+-        .get_element_by_id("canvas")
+-        .ok_or("Missing canvas")?
+-        .dyn_into()?;
+-    let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
+-        backends: wgpu::Backends::BROWSER_WEBGPU,
+-        flags: Default::default(),
+-        memory_budget_thresholds: Default::default(),
+-        backend_options: Default::default(),
+-        display: None,
+-    });
+-    let surface = instance
+-        .create_surface(wgpu::SurfaceTarget::Canvas(canvas.clone()))
+-        .map_err(|error| JsValue::from_str(&error.to_string()))?;
+-    let adapter = instance
+-        .request_adapter(&wgpu::RequestAdapterOptions {
+-            compatible_surface: Some(&surface),
+-            ..Default::default()
+-        })
+-        .await
+-        .map_err(|error| JsValue::from_str(&error.to_string()))?;
+-    let (device, queue) = adapter
+-        .request_device(&wgpu::DeviceDescriptor::default())
+-        .await
+-        .map_err(|error| JsValue::from_str(&error.to_string()))?;
+-    device.on_uncaptured_error(std::sync::Arc::new(|error| report(&error.to_string())));
+-    let limit = device.limits().max_texture_dimension_2d;
+-    let width = (window.inner_width()?.as_f64().ok_or("No window width")? as u32).clamp(1, limit);
+-    let height = (window.inner_height()?.as_f64().ok_or("No window height")? as u32).clamp(1, limit);
+-    canvas.set_width(width);
+-    canvas.set_height(height);
+-    let mut config = surface
+-        .get_default_config(&adapter, width, height)
+-        .ok_or("No compatible surface format")?;
+-    config.view_formats = vec![config.format.add_srgb_suffix()];
+-    surface.configure(&device, &config);
+-    let mut editor = Editor::default();
+-    editor.camera.aspect = width as f64 / height as f64;
+-    let mut renderer = Renderer::new(
+-        device,
+-        queue,
+-        config.format.add_srgb_suffix(),
+-        &editor.scene,
+-    );
+-    renderer.resize(width, height);
+-    let mut panel = crate::panel::Panel::new(
+-        &renderer,
+-        config.format.add_srgb_suffix(),
+-        &[
+-            "Help",
+-            "Example Box",
+-            "Example Triangle",
+-            "Select Next",
+-            "Delete",
+-            "Undo",
+-            "Redo",
+-            "Background",
+-            "Zoom In",
+-            "Zoom Out",
+-            "Pan Left",
+-            "Pan Right",
+-            "Orbit Right",
+-            "Orbit Up",
+-            "View Isometric",
+-            "View Reset",
+-        ],
+-    );
+-    panel.update(None, &canvas)?;
+-    present(
+-        &surface,
+-        &renderer,
+-        &editor.background,
+-        &editor.camera.uniform(),
+-        &mut panel,
+-    )?;
+-    let input_canvas = canvas.clone();
+-    let click = Closure::<dyn FnMut(web_sys::Event)>::new(move |event: web_sys::Event| {
+-        let line = match panel.update(Some(&event), &input_canvas) {
+-            Ok(line) => line,
+-            Err(error) => {
+-                report(&format!("Cannot read command: {error:?}"));
+-                return;
+-            }
+-        };
+-
+-        let line = line.or_else(|| {
+-            let mouse = event.dyn_ref::<web_sys::MouseEvent>()?;
+-            (event.type_() == "click"
+-                && !panel.consumed
+-                && mouse
+-                    .target()
+-                    .and_then(|target| target.dyn_into::<web_sys::Element>().ok())
+-                    .is_some_and(|target| target.id() == "canvas"))
+-            .then(|| "canvas".into())
+-        });
+-        if let Some(line) = line {
+-            let action = match line.as_str() {
+-                "canvas" => {
+-                    let Some(event) = event.dyn_ref::<web_sys::MouseEvent>() else {
+-                        return;
+-                    };
+-                    let rect = input_canvas.get_bounding_client_rect();
+-                    if rect.width() <= 0.0 || rect.height() <= 0.0 {
+-                        return;
+-                    }
+-                    Action::Pick([
+-                        (2.0 * (event.client_x() as f64 - rect.left()) / rect.width() - 1.0) as f32,
+-                        (1.0 - 2.0 * (event.client_y() as f64 - rect.top()) / rect.height()) as f32,
+-                    ])
+-                }
+-                "example box" => Action::AddBox,
+-                "example triangle" => Action::ToggleExtra,
+-                "select next" => Action::SelectNext,
+-                "delete" => Action::Delete,
+-                "undo" => Action::Undo,
+-                "redo" => Action::Redo,
+-                "background" => Action::Background,
+-                "zoom in" => Action::Zoom(2.0),
+-                "zoom out" => Action::Zoom(0.5),
+-                "pan left" => Action::Pan(-0.25, 0.0),
+-                "pan right" => Action::Pan(0.25, 0.0),
+-                "orbit right" => Action::Orbit(std::f64::consts::FRAC_PI_4, 0.0),
+-                "orbit up" => Action::Orbit(0.0, std::f64::consts::FRAC_PI_6),
+-                "view isometric" => Action::Isometric,
+-                "view reset" => Action::ResetView,
+-                _ => return,
+-            };
+-            match editor.apply(action) {
+-                Ok(Change::Scene) => renderer.set_scene(&editor.scene, editor.selected),
+-                Ok(Change::View) => {}
+-                Err(error) => {
+-                    report(error);
+-                    return;
+-                }
+-            }
+-        }
+-        if let Err(error) = panel.update(None, &input_canvas) {
+-            report(&format!("Cannot lay out commands: {error:?}"));
+-            return;
+-        }
+-        if let Err(error) = present(
+-            &surface,
+-            &renderer,
+-            &editor.background,
+-            &editor.camera.uniform(),
+-            &mut panel,
+-        ) {
+-            report(&format!("Cannot redraw: {error:?}"));
+-        }
+-    });
+-    for name in [
+-        "pointerdown",
+-        "pointermove",
+-        "pointerup",
+-        "pointercancel",
+-        "lostpointercapture",
+-        "contextmenu",
+-        "keydown",
+-        "keyup",
+-        "blur",
+-        "click",
+-    ] {
+-        canvas.add_event_listener_with_callback(name, click.as_ref().unchecked_ref())?;
+-    }
+-    let options = web_sys::AddEventListenerOptions::new();
+-    options.set_passive(false);
+-    canvas.add_event_listener_with_callback_and_add_event_listener_options(
+-        "wheel",
+-        click.as_ref().unchecked_ref(),
+-        &options,
+-    )?;
+-    // The page has one listener for its lifetime; JavaScript must retain the Rust callback.
+-    click.forget();
+-    report("Every document action follows the same editor path.");
+-    Ok(())
+-}
+-
+-fn present(
+-    surface: &wgpu::Surface<'_>,
+-    renderer: &Renderer,
+-    background: &Background,
+-    transform: &[f32; 16],
+-    panel: &mut crate::panel::Panel,
+-) -> Result<(), JsValue> {
+-    let frame = match surface.get_current_texture() {
+-        wgpu::CurrentSurfaceTexture::Success(frame)
+-        | wgpu::CurrentSurfaceTexture::Suboptimal(frame) => frame,
+-        other => {
+-            return Err(JsValue::from_str(&format!(
+-                "Surface unavailable: {other:?}"
+-            )));
+-        }
+-    };
+-    let view = frame.texture.create_view(&wgpu::TextureViewDescriptor {
+-        format: Some(frame.texture.format().add_srgb_suffix()),
+-        ..Default::default()
+-    });
+-    renderer.draw(&view, background, transform);
+-    panel.draw(renderer, &view);
+-    frame.present();
+-    Ok(())
+-}
+-```
+-
+-</details>
+-
+-<details>
+-<summary>Optional patch references</summary>
+-
+-Use these original edit fragments when comparing a saved checkpoint. Apply the complete blocks above.
+-
+-```text
+---8<-- "journey/code/19-actions-window-1.rs"
+-```
+-
+-```text
+---8<-- "journey/code/19-actions-window-2.rs"
+-```
+-
+-```text
+---8<-- "journey/code/19-actions-window-3.rs"
+-```
+-
+-```text
+---8<-- "journey/code/19-actions-window-4.rs"
+-```
+-
+-```text
+---8<-- "journey/code/19-actions-window-5.rs"
+-```
+-
+-```text
+---8<-- "journey/code/19-actions-window-6.rs"
+-```
+-
+-```text
+---8<-- "journey/code/19-actions-window-7.rs"
+-```
+-
+-</details>
+-
+-## Run and check
+-
+-In your project:
+-
+-```sh
+-cd workspace/journey
+-REGEN_PROTO=0 cargo build --lib --locked --target wasm32-unknown-unknown -j1
+-REGEN_PROTO=0 CARGO_BUILD_JOBS=1 trunk serve --port 8780
+-```
+-
+-Open `http://127.0.0.1:8780/`. Keep an existing Trunk server running; saving rebuilds it.
+-
+-Type Example Box, then Undo and Redo. The box disappears and returns through the editor route.
+-
+-### Recorded visual result
+-
+-**Previous native render — current verification pending.**
+-
+-The box is yellow because it is selected. The helper sends AddBox, Isometric and three SelectNext actions through Editor, then checks the selected pixels. This demonstrates the result of the shared action path; it does not prove that a typed browser command delivered those actions.
+-
+-![Native renderer output for route browser input through the editor.](../screenshots/journey/18b-actions.png)
+-
+-*This recorded image predates a source or checker change. Rebuild this checkpoint before using it as current evidence; browser controls require separate acceptance.*
+-
+-This reference image is shared with [3.2.3 · Apply document and view actions in Rust](18b-actions.md). It does not demonstrate a new feature by itself.
+-
+-<details>
+-<summary>Code explanation and diagram</summary>
+-
+-The closure captures one mutable editor. The GPU renderer keeps its derived representation separate from the document owner.
+-
+-Typed command or canvas click → Action → Editor::apply → Change → scene upload when required → draw.
+-
+-![Browser input uses the same editor route and drawing-change result.](../illustrations/journey-direct-19-actions.svg)
+-
+-Why does Change::View skip set_scene?
+-
+-The scene data did not change. Redrawing with the editor camera or background is sufficient.
+-
+-Study estimate, including typing and experiments: 1–1.5 hours.
+-
+-</details>
+-
+-<details>
+-<summary>Optional experiment</summary>
+-
+-Pan Right, delete a selected object and Undo. The document returns while the camera stays where you put it.
+-
+-</details>
+-
+-<details>
+-<summary>Check and save your work</summary>
+-
+-Restore experimental edits, then run from `session_viewer`:
+-
+-```sh
+-npm --prefix ../session_tests run course -- check 3.3.1
+-npm --prefix ../session_tests run course -- save 3.3.1
+-```
+-
+-Source comparison leaves your project untouched. [Save and recovery instructions](recovery.md).
+-
+-</details>
+-
+-<details>
+-<summary>Viewer coverage and verification</summary>
+-
+-The full command system will build on this boundary. commands, keyboard input and tools request document operations through the same owner, while rendering consumes the result. More commands should add behavior here or in focused command modules, not duplicate transactions in UI handlers.
+-
+-The box is yellow after Select Next reaches it. commands feed the shared Editor action path.
+-
+-[Full validation scope](release.md).
+-
+-To reproduce the scripted acceptance of the reference checkpoint, run from `session_viewer` with the [course bundle server](release.md#reproduce) running on port 8781:
+-
+-```sh
+-npm --prefix ../session_tests run course -- capture 3.3.1
+-```
+-
+-This uses the verified reference bundle; it does not check or change your typed project.
+-
+-</details>
++The [original page](../archived/journey-19-actions.md) retains its diagrams, explanations and source listings.
+diff --git a/session_viewer/docs/journey/book.json b/session_viewer/docs/journey/book.json
+index 98fe0e993..4d7880d6d 100644
+--- a/session_viewer/docs/journey/book.json
++++ b/session_viewer/docs/journey/book.json
+@@ -122,7 +122,7 @@
+       "title": "Documents, editing and ownership",
+       "sections": [
+         {
+-          "title": "Kernel solids",
++          "title": "Kernel geometry and one editor",
+           "first": "17-solid"
+         },
+         {
+@@ -189,16 +189,12 @@
+       "consolidated": [
+         {
+           "id": "17-solid",
+-          "title": "Kernel geometry and a single editor owner",
+-          "page": "journey/consolidation/17-solid.md",
++          "title": "Kernel geometry and one editor",
++          "page": "journey/17-solid.md",
+           "steps": [
+-            "17-solid",
+-            "18-light",
+-            "18a-editor",
+-            "18b-actions",
+-            "19-actions"
++            "17-solid"
+           ],
+-          "checkpoint": "19-actions"
++          "checkpoint": "17-solid"
+         },
+         {
+           "id": "19a-viewport",
+diff --git a/session_viewer/docs/journey/consolidation/17-solid.md b/session_viewer/docs/journey/consolidation/17-solid.md
+index 2238374d6..3bb3fa391 100644
+--- a/session_viewer/docs/journey/consolidation/17-solid.md
++++ b/session_viewer/docs/journey/consolidation/17-solid.md
+@@ -1,1094 +1,5 @@
+-# 3.1 · Kernel geometry and a single editor owner
++# Kernel geometry and one editor
+ 
+-**Steps:** 5 · **Source:** `src/app/decode.rs` · `src/app/loader.rs` · `src/state.rs`
++Continue with the [single runnable subject](../17-solid.md).
+ 
+-## <a id="checkpoint-17-solid"></a>1. Bring a solid into the scene
+-
+-<div class="webgpu-schematic" style="width:100%;margin:6px auto;">
+-<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="214" viewBox="0 0 1120 214" style="width:100%;max-width:100%;height:auto;display:block;margin:0 auto;" role="img">
+-  <defs>
+-    <marker id="arr-bf4ea7de" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+-      <path d="M 0 1 L 9 5 L 0 9 z" fill="#111111"/>
+-    </marker>
+-    <marker id="arr-r-bf4ea7de" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+-      <path d="M 0 1 L 9 5 L 0 9 z" fill="#dc2626"/>
+-    </marker>
+-    <marker id="arr-g-bf4ea7de" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+-      <path d="M 0 1 L 9 5 L 0 9 z" fill="#16a34a"/>
+-    </marker>
+-    <marker id="arr-b-bf4ea7de" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+-      <path d="M 0 1 L 9 5 L 0 9 z" fill="#2563eb"/>
+-    </marker>
+-    <pattern id="grid-bf4ea7de" width="20" height="20" patternUnits="userSpaceOnUse">
+-      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#f1f5f9" stroke-width="1"/>
+-    </pattern>
+-  </defs>
+-  <rect x="2" y="2" width="1116" height="210" rx="8" fill="#ffffff" stroke="#111111" stroke-width="2"/>
+-  <rect x="2" y="2" width="1116" height="28" rx="6" fill="#f8fafc" stroke="#111111" stroke-width="1.5"/>
+-  <line x1="2" y1="30" x2="1118" y2="30" stroke="#111111" stroke-width="1.5"/>
+-  <rect x="12" y="7" width="176" height="18" rx="3" fill="#111111"/>
+-  <text x="100" y="19.5" text-anchor="middle" font-family="monospace" font-size="9.5" font-weight="700" fill="#ffffff" paint-order="normal" stroke="none">17..19 · SOLID &amp; EDITOR</text>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="518" y="20" text-anchor="middle" font-family="monospace" font-size="10.5" font-weight="700" fill="#111111">24-Vertex Split-Normal Solid Box, Headlamp Lambertian Shading &amp; Unidirectional Editor State</text>
+-  <rect x="838" y="7" width="268" height="18" rx="3" fill="#ffffff" stroke="#111111" stroke-width="1.2"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="972" y="19.5" text-anchor="middle" font-family="monospace" font-size="9" font-weight="700" fill="#2563eb">I = k_a + k_d * max(dot(N, L), 0.0)</text>
+-  <rect x="14" y="38" width="344" height="164" rx="6" fill="url(#grid-bf4ea7de)" stroke="#111111" stroke-width="1.5"/>
+-  <line x1="14" y1="60" x2="358" y2="60" stroke="#cbd5e1" stroke-width="1"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="186" y="53" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#111111">1 · Split-Corner Normals + Headlamp dot(N, L)</text>
+-  <line x1="68" y1="154" x2="256" y2="154" stroke="#111111" stroke-width="2"/>
+-  <line x1="162" y1="154" x2="162" y2="76" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr-b-bf4ea7de)"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="148" y="84" font-family="monospace" font-size="10" font-weight="700" fill="#2563eb">N</text>
+-  <line x1="162" y1="154" x2="232" y2="86" stroke="#dc2626" stroke-width="2.2" marker-end="url(#arr-r-bf4ea7de)"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="242" y="88" font-family="monospace" font-size="10" font-weight="700" fill="#dc2626">L</text>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="186" y="180" text-anchor="middle" font-family="monospace" font-size="9" font-weight="700" fill="#111111">24 verts (3 distinct normals / corner)</text>
+-  <line x1="358" y1="120" x2="384" y2="120" stroke="#111111" stroke-width="2" marker-end="url(#arr-bf4ea7de)"/>
+-  <rect x="388" y="38" width="344" height="164" rx="6" fill="url(#grid-bf4ea7de)" stroke="#111111" stroke-width="1.5"/>
+-  <line x1="388" y1="60" x2="732" y2="60" stroke="#cbd5e1" stroke-width="1"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="560" y="53" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#111111">2 · Editor::apply(Action) -&gt; Change Flags</text>
+-  <rect x="414" y="76" width="292" height="46" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="560" y="96" text-anchor="middle" font-family="monospace" font-size="9.5" font-weight="700" fill="#111111">Orbit / Pan / Zoom Action</text>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="560" y="113" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#2563eb">sync_scene: false · redraw: true (64B uniform)</text>
+-  <rect x="414" y="132" width="292" height="48" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="560" y="152" text-anchor="middle" font-family="monospace" font-size="9.5" font-weight="700" fill="#111111">Document Edit / Undo / Import</text>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="560" y="170" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#16a34a">sync_scene: true · redraw: true (GPU buffers)</text>
+-  <line x1="732" y1="120" x2="758" y2="120" stroke="#111111" stroke-width="2" marker-end="url(#arr-bf4ea7de)"/>
+-  <rect x="762" y="38" width="344" height="164" rx="6" fill="url(#grid-bf4ea7de)" stroke="#111111" stroke-width="1.75"/>
+-  <line x1="762" y1="60" x2="1106" y2="60" stroke="#cbd5e1" stroke-width="1"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="934" y="53" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#111111">3 · Shaded 3D Solid in Viewport</text>
+-  <rect x="806" y="68" width="256" height="122" rx="4" fill="#ffffff" stroke="#111111" stroke-width="2"/>
+-  <polygon points="884,96 944,74 1004,96 944,118" fill="#dbeafe" stroke="#111111" stroke-width="1.5"/>
+-  <polygon points="884,96 944,118 944,176 884,154" fill="#60a5fa" stroke="#111111" stroke-width="1.5"/>
+-  <polygon points="944,118 1004,96 1004,154 944,176" fill="#1d4ed8" stroke="#111111" stroke-width="1.5"/>
+-</svg>
+-</div>
+-
+-### 1. `src/mesh.rs`
+-
+-**Locate this existing block:**
+-
+-```rust
+-    }
+-
+-    pub fn vertices(&self) -> &[[f32; 6]] {
+-        &self.vertices
+-    }
+-
+-    pub fn indices(&self) -> &[u16] {
+-        &self.indices
+-    }
+-}
+-
+-#[cfg(test)]
+-mod tests {
+-    use super::*;
+-
+-    #[test]
+-```
+-
+-Edit the existing block to match this code; keep unchanged lines:
+-
+-```rust
+-    }
+-
+-    pub fn from_kernel(mesh: &session_rust::Mesh) -> Result<Self, &'static str> {
+-        let render = mesh.to_render();
+-        let vertices = render
+-            .vertices
+-            .iter()
+-            .map(|vertex| {
+-                let [x, y, z] = vertex.position;
+-                let [r, g, b, _] = vertex.color;
+-                [x, y, z, r, g, b]
+-            })
+-            .collect();
+-        let indices: Result<Vec<u16>, _> = render
+-            .indices
+-            .into_iter()
+-            .map(u16::try_from)
+-            .collect();
+-        Self::new(
+-            vertices,
+-            indices.map_err(|_| "Mesh exceeds this lesson's 16-bit index capacity")?,
+-        )
+-    }
+-
+-    pub fn vertices(&self) -> &[[f32; 6]] {
+-        &self.vertices
+-    }
+-
+-    pub fn indices(&self) -> &[u16] {
+-        &self.indices
+-    }
+-}
+-
+-#[cfg(test)]
+-mod tests {
+-    use super::*;
+-
+-    #[test]
+-    fn a_kernel_box_becomes_eight_vertices_and_twelve_triangles() {
+-        let source = session_rust::Mesh::create_box(0.8, 0.8, 0.8);
+-        let mesh = Mesh::from_kernel(&source).unwrap();
+-        assert_eq!(mesh.vertices().len(), 8);
+-        assert_eq!(mesh.indices().len(), 36);
+-    }
+-
+-    #[test]
+-```
+-
+-### 2. `src/scene.rs`
+-
+-**Locate this existing block:**
+-
+-```rust
+-    }
+-
+-    pub fn toggle_extra(&mut self) {
+-```
+-
+-Edit the existing block to match this code; keep unchanged lines:
+-
+-```rust
+-    }
+-
+-    pub fn add_box(&mut self) -> Result<ObjectId, &'static str> {
+-        let mut source = session_rust::Mesh::create_box(0.8, 0.8, 0.8);
+-        source.transform(&session_rust::Xform::translation(
+-            0.9, 0.0, 0.4,
+-        ));
+-        source.set_objectcolor(session_rust::Color::new(
+-            0.65, 0.65, 0.65, 1.0,
+-        ));
+-        self.insert(Mesh::from_kernel(&source)?)
+-    }
+-
+-    pub fn toggle_extra(&mut self) {
+-```
+-
+-### 3. `src/history.rs`
+-
+-Edit these blocks from bottom to top. Keep the surrounding lines unchanged.
+-
+-**Locate this block:**
+-
+-```rust
+-        assert_ne!(scene.objects()[2].id, old_id);
+-        assert!(!history.redo(&mut scene));
+-    }
+-```
+-
+-Replace it with:
+-
+-```rust
+-        assert_ne!(scene.objects()[2].id, old_id);
+-        assert!(!history.redo(&mut scene));
+-    }
+-
+-    #[test]
+-    fn a_failed_action_restores_the_scene_and_preserves_redo() {
+-        let mut scene = Scene::demo();
+-        let mut history = History::default();
+-        let id = scene.objects()[0].id;
+-        history.edit(&mut scene, |scene| {
+-            scene.remove(id);
+-        });
+-        history.undo(&mut scene);
+-        let result = history.try_edit(&mut scene, |scene| {
+-            scene.remove(id);
+-            Err("Creation failed after a partial change")
+-        });
+-        assert!(result.is_err());
+-        assert!(scene.contains(id));
+-        assert!(history.redo(&mut scene));
+-        assert!(!scene.contains(id));
+-    }
+-```
+-
+-**Locate this block:**
+-
+-```rust
+-    pub fn edit(&mut self, scene: &mut Scene, action: impl FnOnce(&mut Scene)) {
+-        let before = scene.clone();
+-        action(scene);
+-        if self.undo.len() == LIMIT {
+-            self.undo.remove(0);
+-        }
+-        self.undo.push(before);
+-        self.redo.clear();
+-    }
+-
+-    pub fn undo(&mut self, scene: &mut Scene) -> bool {
+-```
+-
+-Replace it with:
+-
+-```rust
+-    pub fn edit(&mut self, scene: &mut Scene, action: impl FnOnce(&mut Scene)) {
+-        self.try_edit(scene, |scene| {
+-            action(scene);
+-            Ok(())
+-        })
+-        .expect("Infallible scene edit");
+-    }
+-
+-    pub fn try_edit(
+-        &mut self,
+-        scene: &mut Scene,
+-        action: impl FnOnce(&mut Scene) -> Result<(), &'static str>,
+-    ) -> Result<(), &'static str> {
+-        let before = scene.clone();
+-        if let Err(error) = action(scene) {
+-            scene.restore(before);
+-            return Err(error);
+-        }
+-        if self.undo.len() == LIMIT {
+-            self.undo.remove(0);
+-        }
+-        self.undo.push(before);
+-        self.redo.clear();
+-        Ok(())
+-    }
+-
+-    pub fn undo(&mut self, scene: &mut Scene) -> bool {
+-```
+-
+-### 4. `src/browser.rs`
+-
+-Edit these blocks from bottom to top. Keep the surrounding lines unchanged.
+-
+-**Locate this block:**
+-
+-```rust
+-    )?;
+-    // The page has one listener for its lifetime; JavaScript must retain the Rust callback.
+-    click.forget();
+-    report("Orbit moves the eye around a fixed target.");
+-    Ok(())
+-```
+-
+-Replace it with:
+-
+-```rust
+-    )?;
+-    // The page has one listener for its lifetime; JavaScript must retain the Rust callback.
+-    click.forget();
+-    report("Kernel geometry becomes an undoable scene object.");
+-    Ok(())
+-```
+-
+-**Locate this block:**
+-
+-```rust
+-                            .and_then(|ray| crate::picking::pick(&scene, &ray));
+-                        renderer.set_scene(&scene, selected);
+-                    }
+-                    "example triangle" => {
+-                        history.edit(&mut scene, Scene::toggle_extra);
+-                        selected = selected.filter(|id| scene.contains(*id));
+-```
+-
+-Replace it with:
+-
+-```rust
+-                            .and_then(|ray| crate::picking::pick(&scene, &ray));
+-                        renderer.set_scene(&scene, selected);
+-                    }
+-                    "example box" => {
+-                        if let Err(error) = history.try_edit(&mut scene, |scene| {
+-                            scene.add_box().map(|_| ())
+-                        }) {
+-                            report(error);
+-                            return;
+-                        }
+-                        renderer.set_scene(&scene, selected);
+-                    }
+-                    "example triangle" => {
+-                        history.edit(&mut scene, Scene::toggle_extra);
+-                        selected = selected.filter(|id| scene.contains(*id));
+-```
+-
+-**Locate this block:**
+-
+-```rust
+-            "Help",
+-            "Example Triangle",
+-            "Select Next",
+-            "Delete",
+-```
+-
+-Replace it with:
+-
+-```rust
+-            "Help",
+-            "Example Box",
+-            "Example Triangle",
+-            "Select Next",
+-            "Delete",
+-```
+-
+-## <a id="checkpoint-18-light"></a>2. Read the shape through light
+-
+-<div class="webgpu-schematic" style="width:100%;margin:6px auto;">
+-<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="188" viewBox="0 0 1120 188" style="width:100%;max-width:100%;height:auto;display:block;margin:0 auto;" role="img">
+-  <defs>
+-    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+-      <path d="M 0 1 L 9 5 L 0 9 z" fill="#111111"/>
+-    </marker>
+-    <marker id="arrR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+-      <path d="M 0 1 L 9 5 L 0 9 z" fill="#dc2626"/>
+-    </marker>
+-    <marker id="arrG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+-      <path d="M 0 1 L 9 5 L 0 9 z" fill="#16a34a"/>
+-    </marker>
+-    <marker id="arrB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+-      <path d="M 0 1 L 9 5 L 0 9 z" fill="#2563eb"/>
+-    </marker>
+-  </defs>
+-  <rect x="2" y="2" width="1116" height="184" rx="10" fill="#ffffff" stroke="#111111" stroke-width="2"/>
+-  <rect x="14" y="12" width="344" height="164" rx="8" fill="#ffffff" stroke="#111111" stroke-width="1.5"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" x="186" y="30" text-anchor="middle" font-family="monospace" font-size="10.5" font-weight="700" fill="#111111">Kernel Box + Face Normals N</text>
+-  <polygon points="186,52 256,82 186,112 116,82" fill="#f8fafc" stroke="#111111" stroke-width="1.75"/>
+-  <polygon points="116,82 186,112 186,160 116,130" fill="#e2e8f0" stroke="#111111" stroke-width="1.75"/>
+-  <polygon points="186,112 256,82 256,130 186,160" fill="#cbd5e1" stroke="#111111" stroke-width="1.75"/>
+-  <line x1="186" y1="82" x2="186" y2="38" stroke="#2563eb" stroke-width="2" marker-end="url(#arrB)"/>
+-  <line x1="222" y1="120" x2="268" y2="140" stroke="#dc2626" stroke-width="2" marker-end="url(#arrR)"/>
+-  <line x1="150" y1="120" x2="104" y2="140" stroke="#16a34a" stroke-width="2" marker-end="url(#arrG)"/>
+-  <line x1="358" y1="94" x2="384" y2="94" stroke="#111111" stroke-width="2" marker-end="url(#arr)"/>
+-  <rect x="388" y="12" width="344" height="164" rx="8" fill="#ffffff" stroke="#111111" stroke-width="1.5"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" x="560" y="30" text-anchor="middle" font-family="monospace" font-size="10.5" font-weight="700" fill="#111111">@fragment: max(dot(N, L), 0.0)</text>
+-  <line x1="470" y1="134" x2="650" y2="134" stroke="#111111" stroke-width="2"/>
+-  <line x1="560" y1="134" x2="560" y2="54" stroke="#2563eb" stroke-width="2.25" marker-end="url(#arrB)"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" x="546" y="60" font-family="monospace" font-size="10" font-weight="700" fill="#2563eb">N</text>
+-  <line x1="560" y1="134" x2="628" y2="66" stroke="#f59e0b" stroke-width="2.25" marker-end="url(#arr)"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" x="640" y="68" font-family="monospace" font-size="10" font-weight="700" fill="#d97706">L</text>
+-  <path d="M 560 98 A 36 36 0 0 1 585 109" fill="none" stroke="#111111" stroke-width="1.5"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" x="582" y="94" font-family="monospace" font-size="9.5" font-weight="700" fill="#111111">θ</text>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" x="560" y="156" text-anchor="middle" font-family="monospace" font-size="9.5" font-weight="700" fill="#111111">lit = base * (amb + diff * cos θ)</text>
+-  <line x1="732" y1="94" x2="758" y2="94" stroke="#111111" stroke-width="2" marker-end="url(#arr)"/>
+-  <rect x="762" y="12" width="344" height="164" rx="8" fill="#ffffff" stroke="#111111" stroke-width="1.75"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" x="934" y="30" text-anchor="middle" font-family="monospace" font-size="10.5" font-weight="700" fill="#111111">Shaded 3D Solid in Viewer</text>
+-  <rect x="814" y="44" width="240" height="118" rx="4" fill="#ffffff" stroke="#111111" stroke-width="2"/>
+-  <polygon points="934,54 1004,82 934,110 864,82" fill="#93c5fd" stroke="#111111" stroke-width="1.75"/>
+-  <polygon points="864,82 934,110 934,154 864,126" fill="#60a5fa" stroke="#111111" stroke-width="1.75"/>
+-  <polygon points="934,110 1004,82 1004,126 934,154" fill="#2563eb" stroke="#111111" stroke-width="1.75"/>
+-</svg>
+-</div>
+-
+-### 1. `src/triangle.wgsl`
+-
+-**Locate this existing block:**
+-
+-```wgsl
+-    @location(0) colour: vec3<f32>,
+-}
+-
+-@vertex
+-fn vertex(@location(0) position: vec3<f32>, @location(1) colour: vec3<f32>) -> VertexOutput {
+-    var output: VertexOutput;
+-    output.position = transform * vec4<f32>(position, 1.0);
+-    output.colour = colour;
+-    return output;
+-}
+-
+-@fragment
+-fn fragment(input: VertexOutput) -> @location(0) vec4<f32> {
+-    return vec4<f32>(input.colour, 1.0);
+-}
+-```
+-
+-Edit the existing block to match this code; keep unchanged lines:
+-
+-```wgsl
+-    @location(0) colour: vec3<f32>,
+-    @location(1) world: vec3<f32>,
+-}
+-
+-@vertex
+-fn vertex(@location(0) position: vec3<f32>, @location(1) colour: vec3<f32>) -> VertexOutput {
+-    var output: VertexOutput;
+-    output.position = transform * vec4<f32>(position, 1.0);
+-    output.colour = colour;
+-    output.world = position;
+-    return output;
+-}
+-
+-@fragment
+-fn fragment(input: VertexOutput) -> @location(0) vec4<f32> {
+-    // Neighbouring fragments give two directions along this triangle's surface.
+-    let normal = normalize(cross(dpdx(input.world), dpdy(input.world)));
+-    let light = normalize(vec3<f32>(0.4, -0.6, 1.0));
+-    // abs lights both sides of an open face; 0.3 keeps unlit faces readable.
+-    let brightness = 0.3 + 0.7 * abs(dot(normal, light));
+-    return vec4<f32>(input.colour * brightness, 1.0);
+-}
+-```
+-
+-### 2. `src/browser.rs`
+-
+-**Locate this existing block:**
+-
+-```rust
+-    click.forget();
+-    report("Kernel geometry becomes an undoable scene object.");
+-    Ok(())
+-```
+-
+-Edit the existing block to match this code; keep unchanged lines:
+-
+-```rust
+-    click.forget();
+-    report("Surface direction changes brightness, not geometry.");
+-    Ok(())
+-```
+-
+-## <a id="checkpoint-18a-editor"></a>3. Give application state one owner
+-
+-<div class="webgpu-schematic" style="width:100%;margin:6px auto;">
+-<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="214" viewBox="0 0 1120 214" style="width:100%;max-width:100%;height:auto;display:block;margin:0 auto;" role="img">
+-  <defs>
+-    <marker id="arr-16ee0472" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+-      <path d="M 0 1 L 9 5 L 0 9 z" fill="#111111"/>
+-    </marker>
+-    <marker id="arr-r-16ee0472" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+-      <path d="M 0 1 L 9 5 L 0 9 z" fill="#dc2626"/>
+-    </marker>
+-    <marker id="arr-g-16ee0472" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+-      <path d="M 0 1 L 9 5 L 0 9 z" fill="#16a34a"/>
+-    </marker>
+-    <marker id="arr-b-16ee0472" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+-      <path d="M 0 1 L 9 5 L 0 9 z" fill="#2563eb"/>
+-    </marker>
+-    <pattern id="grid-16ee0472" width="20" height="20" patternUnits="userSpaceOnUse">
+-      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#f1f5f9" stroke-width="1"/>
+-    </pattern>
+-  </defs>
+-  <rect x="2" y="2" width="1116" height="210" rx="8" fill="#ffffff" stroke="#111111" stroke-width="2"/>
+-  <rect x="2" y="2" width="1116" height="28" rx="6" fill="#f8fafc" stroke="#111111" stroke-width="1.5"/>
+-  <line x1="2" y1="30" x2="1118" y2="30" stroke="#111111" stroke-width="1.5"/>
+-  <rect x="12" y="7" width="176" height="18" rx="3" fill="#111111"/>
+-  <text x="100" y="19.5" text-anchor="middle" font-family="monospace" font-size="9.5" font-weight="700" fill="#ffffff" paint-order="normal" stroke="none">18A..19 · ACTION -&gt; CHANGE</text>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="518" y="20" text-anchor="middle" font-family="monospace" font-size="10.5" font-weight="700" fill="#111111">Unidirectional Editor State Machine &amp; Split GPU Sync Flags (sync_scene vs redraw)</text>
+-  <rect x="838" y="7" width="268" height="18" rx="3" fill="#ffffff" stroke="#111111" stroke-width="1.2"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="972" y="19.5" text-anchor="middle" font-family="monospace" font-size="9" font-weight="700" fill="#2563eb">apply(Action) -&gt; Change { sync_scene, redraw }</text>
+-  <rect x="14" y="38" width="344" height="164" rx="6" fill="url(#grid-16ee0472)" stroke="#111111" stroke-width="1.5"/>
+-  <line x1="14" y1="60" x2="358" y2="60" stroke="#cbd5e1" stroke-width="1"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="186" y="53" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#111111">1 · Typed Action Enum (UI + Shortcuts)</text>
+-  <rect x="44" y="76" width="284" height="104" rx="4" fill="#ffffff" stroke="#111111" stroke-width="1.5"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="186" y="98" text-anchor="middle" font-family="monospace" font-size="9.5" font-weight="700" fill="#111111">enum Action {</text>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="186" y="118" text-anchor="middle" font-family="monospace" font-size="9" fill="#2563eb">  Orbit(dx, dy), Pan(dx, dy), Zoom(d),</text>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="186" y="138" text-anchor="middle" font-family="monospace" font-size="9" fill="#16a34a">  Pick(px, py), DeleteSelected,</text>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="186" y="158" text-anchor="middle" font-family="monospace" font-size="9" fill="#dc2626">  Undo, Redo, ToggleBackground }</text>
+-  <line x1="358" y1="120" x2="384" y2="120" stroke="#111111" stroke-width="2" marker-end="url(#arr-16ee0472)"/>
+-  <rect x="388" y="38" width="344" height="164" rx="6" fill="url(#grid-16ee0472)" stroke="#111111" stroke-width="1.5"/>
+-  <line x1="388" y1="60" x2="732" y2="60" stroke="#cbd5e1" stroke-width="1"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="560" y="53" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#111111">2 · Two-Tier GPU Update Contract</text>
+-  <rect x="414" y="76" width="292" height="48" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="560" y="96" text-anchor="middle" font-family="monospace" font-size="9.5" font-weight="700" fill="#111111">Camera / Selection / Backdrop</text>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="560" y="114" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#2563eb">sync_scene: false · redraw: true (64B write)</text>
+-  <rect x="414" y="132" width="292" height="48" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="560" y="152" text-anchor="middle" font-family="monospace" font-size="9.5" font-weight="700" fill="#111111">Delete / Undo / Redo / Import</text>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="560" y="170" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#16a34a">sync_scene: true · redraw: true (Mesh upload)</text>
+-  <line x1="732" y1="120" x2="758" y2="120" stroke="#111111" stroke-width="2" marker-end="url(#arr-16ee0472)"/>
+-  <rect x="762" y="38" width="344" height="164" rx="6" fill="url(#grid-16ee0472)" stroke="#111111" stroke-width="1.75"/>
+-  <line x1="762" y1="60" x2="1106" y2="60" stroke="#cbd5e1" stroke-width="1"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="934" y="53" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#111111">3 · Zero Redundant GPU Uploads</text>
+-  <rect x="806" y="68" width="256" height="122" rx="4" fill="#ffffff" stroke="#111111" stroke-width="2"/>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="934" y="108" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#16a34a">60 FPS Orbit = 64 B / frame</text>
+-  <text paint-order="stroke fill" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" x="934" y="138" text-anchor="middle" font-family="monospace" font-size="9" fill="#111111">Vertex buffers untouched ✓</text>
+-</svg>
+-</div>
+-
+-### 1. `src/editor.rs`
+-
+-Create the file and type:
+-
+-```rust
+-use crate::{
+-    background::Background,
+-    camera::Camera,
+-    history::History,
+-    scene::{ObjectId, Scene},
+-};
+-
+-pub enum Action {
+-    Pick([f32; 2]),
+-    AddBox,
+-    ToggleExtra,
+-    SelectNext,
+-    Delete,
+-    Undo,
+-    Redo,
+-    Background,
+-    Zoom(f32),
+-    Pan(f32, f32),
+-    Orbit(f64, f64),
+-    Isometric,
+-    ResetView,
+-}
+-
+-#[derive(Debug, PartialEq, Eq)]
+-pub enum Change {
+-    View,
+-    Scene,
+-}
+-
+-pub struct Editor {
+-    pub scene: Scene,
+-    pub selected: Option<ObjectId>,
+-    pub camera: Camera,
+-    pub background: Background,
+-    history: History,
+-}
+-
+-impl Default for Editor {
+-    fn default() -> Self {
+-        Self {
+-            scene: Scene::demo(),
+-            selected: None,
+-            camera: Camera::default(),
+-            background: Background::default(),
+-            history: History::default(),
+-        }
+-    }
+-}
+-
+-#[cfg(test)]
+-mod tests {
+-    use super::*;
+-
+-    #[test]
+-    fn changing_the_owned_camera_keeps_document_identity() {
+-        let mut editor = Editor::default();
+-        let ids: Vec<_> = editor
+-            .scene
+-            .objects()
+-            .iter()
+-            .map(|object| object.id)
+-            .collect();
+-        editor.camera.zoom(2.0);
+-        assert_eq!(editor.camera.distance, 1.5);
+-        assert_eq!(
+-            editor
+-                .scene
+-                .objects()
+-                .iter()
+-                .map(|object| object.id)
+-                .collect::<Vec<_>>(),
+-            ids
+-        );
+-        assert!(editor.selected.is_none());
+-    }
+-}
+-```
+-
+-### 2. `src/lib.rs`
+-
+-**Locate this existing block:**
+-
+-```rust
+-pub mod camera;
+-pub mod gpu_mesh;
+-```
+-
+-Edit the existing block to match this code; keep unchanged lines:
+-
+-```rust
+-pub mod camera;
+-pub mod editor;
+-pub mod gpu_mesh;
+-```
+-
+-## <a id="checkpoint-18b-actions"></a>4. Apply document and view actions in Rust
+-
+-### 1. `src/editor.rs`
+-
+-**Locate this existing block:**
+-
+-```rust
+-}
+-
+-#[cfg(test)]
+-mod tests {
+-    use super::*;
+-
+-    #[test]
+-    fn changing_the_owned_camera_keeps_document_identity() {
+-        let mut editor = Editor::default();
+-        let ids: Vec<_> = editor
+-            .scene
+-            .objects()
+-            .iter()
+-            .map(|object| object.id)
+-            .collect();
+-        editor.camera.zoom(2.0);
+-        assert_eq!(editor.camera.distance, 1.5);
+-        assert_eq!(
+-            editor
+-                .scene
+-                .objects()
+-                .iter()
+-                .map(|object| object.id)
+-                .collect::<Vec<_>>(),
+-            ids
+-        );
+-        assert!(editor.selected.is_none());
+-    }
+-```
+-
+-Edit the existing block to match this code; keep unchanged lines:
+-
+-```rust
+-}
+-
+-impl Editor {
+-    pub fn apply(&mut self, action: Action) -> Result<Change, &'static str> {
+-        match action {
+-            Action::Pick(screen) => {
+-                self.selected = self
+-                    .camera
+-                    .ray(screen)
+-                    .and_then(|ray| crate::picking::pick(&self.scene, &ray));
+-            }
+-            Action::AddBox => {
+-                self.history
+-                    .try_edit(&mut self.scene, |scene| {
+-                        scene.add_box().map(|_| ())
+-                    })?;
+-            }
+-            Action::ToggleExtra => self
+-                .history
+-                .edit(&mut self.scene, Scene::toggle_extra),
+-            Action::SelectNext => self.selected = self.scene.next(self.selected),
+-            Action::Delete => {
+-                if let Some(id) = self.selected.take() {
+-                    self.history.edit(&mut self.scene, |scene| {
+-                        scene.remove(id);
+-                    });
+-                }
+-            }
+-            Action::Undo => {
+-                self.history.undo(&mut self.scene);
+-            }
+-            Action::Redo => {
+-                self.history.redo(&mut self.scene);
+-            }
+-            view => {
+-                match view {
+-                    Action::Background => self.background.toggle(),
+-                    Action::Zoom(factor) => self.camera.zoom(factor),
+-                    Action::Pan(dx, dy) => self.camera.pan(dx, dy),
+-                    Action::Orbit(yaw, pitch) => self.camera.orbit(yaw, pitch),
+-                    Action::Isometric => self.camera.isometric(),
+-                    Action::ResetView => {
+-                        let aspect = self.camera.aspect;
+-                        self.camera = Camera {
+-                            aspect,
+-                            ..Camera::default()
+-                        };
+-                    }
+-                    _ => unreachable!("Document actions were handled above"),
+-                }
+-                return Ok(Change::View);
+-            }
+-        }
+-        // Deletion and history travel can invalidate selection; repair it in one place.
+-        self.selected = self
+-            .selected
+-            .filter(|id| self.scene.contains(*id));
+-        Ok(Change::Scene)
+-    }
+-}
+-
+-#[cfg(test)]
+-mod tests {
+-    use super::*;
+-
+-    #[test]
+-    fn resetting_the_view_preserves_its_current_aspect() {
+-        let mut editor = Editor::default();
+-        editor.camera.aspect = 2.0;
+-        editor.apply(Action::Zoom(2.0)).unwrap();
+-        editor.apply(Action::ResetView).unwrap();
+-        assert_eq!(editor.camera.aspect, 2.0);
+-        assert_eq!(editor.camera.distance, 3.0);
+-    }
+-
+-    #[test]
+-    fn undo_changes_the_document_without_rewinding_the_view() {
+-        let mut editor = Editor::default();
+-        editor.apply(Action::AddBox).unwrap();
+-        editor.apply(Action::Zoom(2.0)).unwrap();
+-        editor.apply(Action::Background).unwrap();
+-        editor.apply(Action::Undo).unwrap();
+-        assert_eq!(editor.scene.objects().len(), 2);
+-        assert_eq!(editor.camera.distance, 1.5);
+-        assert_eq!(editor.background.rgb(), [0.9, 0.9, 0.9]);
+-    }
+-```
+-
+-## <a id="checkpoint-19-actions"></a>5. Route browser input through the editor
+-
+-### 1. `src/editor.rs`
+-
+-**Locate this existing block:**
+-
+-```rust
+-        assert_eq!(editor.background.rgb(), [0.9, 0.9, 0.9]);
+-    }
+-}
+-```
+-
+-Edit the existing block to match this code; keep unchanged lines:
+-
+-```rust
+-        assert_eq!(editor.background.rgb(), [0.9, 0.9, 0.9]);
+-    }
+-
+-    #[test]
+-    fn undo_repairs_selection_and_empty_delete_preserves_redo() {
+-        let mut editor = Editor::default();
+-        editor.apply(Action::AddBox).unwrap();
+-        for _ in 0..3 {
+-            editor.apply(Action::SelectNext).unwrap();
+-        }
+-        let box_id = editor.selected.unwrap();
+-        editor.apply(Action::Undo).unwrap();
+-        assert!(editor.selected.is_none());
+-        editor.apply(Action::Delete).unwrap();
+-        editor.apply(Action::Redo).unwrap();
+-        assert!(editor.scene.contains(box_id));
+-    }
+-
+-    #[test]
+-    fn picking_a_moved_view_uses_the_editors_current_camera() {
+-        let mut editor = Editor::default();
+-        editor.apply(Action::Pan(0.2, 0.1)).unwrap();
+-        let point = session_rust::Point::new(0.2, 0.3, 0.75);
+-        let screen = editor
+-            .camera
+-            .view_projection()
+-            .transform_point(&point);
+-        assert_eq!(
+-            editor
+-                .apply(Action::Pick([
+-                    screen[0] as f32,
+-                    screen[1] as f32
+-                ]))
+-                .unwrap(),
+-            Change::Scene
+-        );
+-        assert_eq!(
+-            editor.selected,
+-            Some(editor.scene.objects()[1].id)
+-        );
+-        assert_eq!(
+-            editor.apply(Action::Zoom(2.0)).unwrap(),
+-            Change::View
+-        );
+-    }
+-}
+-```
+-
+-### 2. `src/browser.rs`
+-
+-Edit these blocks from bottom to top. Keep the surrounding lines unchanged.
+-
+-**Locate this block:**
+-
+-```rust
+-    )?;
+-    // The page has one listener for its lifetime; JavaScript must retain the Rust callback.
+-    click.forget();
+-    report("Surface direction changes brightness, not geometry.");
+-    Ok(())
+-```
+-
+-Replace it with:
+-
+-```rust
+-    )?;
+-    // The page has one listener for its lifetime; JavaScript must retain the Rust callback.
+-    click.forget();
+-    report("Every document action follows the same editor path.");
+-    Ok(())
+-```
+-
+-**Locate this block:**
+-
+-```rust
+-            if let Err(error) = present(
+-                &surface,
+-                &renderer,
+-                &background,
+-                &camera.uniform(),
+-                &mut panel,
+-            ) {
+-                report(&format!("Cannot redraw: {error:?}"));
+-```
+-
+-Replace it with:
+-
+-```rust
+-            if let Err(error) = present(
+-                &surface,
+-                &renderer,
+-                &editor.background,
+-                &editor.camera.uniform(),
+-                &mut panel,
+-            ) {
+-                report(&format!("Cannot redraw: {error:?}"));
+-```
+-
+-**Locate this block:**
+-
+-```rust
+-                        if rect.width() <= 0.0 || rect.height() <= 0.0 {
+-                            return;
+-                        }
+-                        let screen = [
+-                            (2.0 * (event.client_x() as f64 - rect.left())
+-                                / rect.width()
+-                                - 1.0) as f32,
+-                            (1.0 - 2.0 * (event.client_y() as f64 - rect.top())
+-                                / rect.height()) as f32,
+-                        ];
+-                        selected = camera
+-                            .ray(screen)
+-                            .and_then(|ray| crate::picking::pick(&scene, &ray));
+-                        renderer.set_scene(&scene, selected);
+-                    }
+-                    "example box" => {
+-                        if let Err(error) = history.try_edit(&mut scene, |scene| {
+-                            scene.add_box().map(|_| ())
+-                        }) {
+-                            report(error);
+-                            return;
+-                        }
+-                        renderer.set_scene(&scene, selected);
+-                    }
+-                    "example triangle" => {
+-                        history.edit(&mut scene, Scene::toggle_extra);
+-                        selected = selected.filter(|id| scene.contains(*id));
+-                        renderer.set_scene(&scene, selected);
+-                    }
+-                    "select next" => {
+-                        selected = scene.next(selected);
+-                        renderer.set_scene(&scene, selected);
+-                    }
+-                    "delete" => {
+-                        if let Some(id) = selected.take() {
+-                            history.edit(&mut scene, |scene| {
+-                                scene.remove(id);
+-                            });
+-                            renderer.set_scene(&scene, selected);
+-                        }
+-                    }
+-                    "undo" | "redo" => {
+-                        if line == "undo" {
+-                            history.undo(&mut scene);
+-                        } else {
+-                            history.redo(&mut scene);
+-                        }
+-                        selected = selected.filter(|id| scene.contains(*id));
+-                        renderer.set_scene(&scene, selected);
+-                    }
+-                    "background" => background.toggle(),
+-                    "zoom in" => camera.zoom(2.0),
+-                    "zoom out" => camera.zoom(0.5),
+-                    "pan left" => camera.pan(-0.25, 0.0),
+-                    "pan right" => camera.pan(0.25, 0.0),
+-                    "orbit right" => camera.rotate(std::f32::consts::FRAC_PI_4),
+-                    "orbit up" => camera.orbit(0.0, std::f64::consts::FRAC_PI_6),
+-                    "view isometric" => camera.isometric(),
+-                    "view reset" => {
+-                        camera = Camera {
+-                            aspect: camera.aspect,
+-                            ..Camera::default()
+-                        }
+-                    }
+-                    _ => return,
+-                }
+-            }
+-            if let Err(error) = panel.update(None, &input_canvas) {
+-```
+-
+-Replace it with:
+-
+-```rust
+-                        if rect.width() <= 0.0 || rect.height() <= 0.0 {
+-                            return;
+-                        }
+-                        Action::Pick([
+-                            (2.0 * (event.client_x() as f64 - rect.left())
+-                                / rect.width()
+-                                - 1.0) as f32,
+-                            (1.0 - 2.0 * (event.client_y() as f64 - rect.top())
+-                                / rect.height()) as f32,
+-                        ])
+-                    }
+-                    "example box" => Action::AddBox,
+-                    "example triangle" => Action::ToggleExtra,
+-                    "select next" => Action::SelectNext,
+-                    "delete" => Action::Delete,
+-                    "undo" => Action::Undo,
+-                    "redo" => Action::Redo,
+-                    "background" => Action::Background,
+-                    "zoom in" => Action::Zoom(2.0),
+-                    "zoom out" => Action::Zoom(0.5),
+-                    "pan left" => Action::Pan(-0.25, 0.0),
+-                    "pan right" => Action::Pan(0.25, 0.0),
+-                    "orbit right" => Action::Orbit(std::f64::consts::FRAC_PI_4, 0.0),
+-                    "orbit up" => Action::Orbit(0.0, std::f64::consts::FRAC_PI_6),
+-                    "view isometric" => Action::Isometric,
+-                    "view reset" => Action::ResetView,
+-                    _ => return,
+-                };
+-                match editor.apply(action) {
+-                    Ok(Change::Scene) => {
+-                        renderer.set_scene(&editor.scene, editor.selected)
+-                    }
+-                    Ok(Change::View) => {}
+-                    Err(error) => {
+-                        report(error);
+-                        return;
+-                    }
+-                }
+-            }
+-            if let Err(error) = panel.update(None, &input_canvas) {
+-```
+-
+-**Locate this block:**
+-
+-```rust
+-                .then(|| "canvas".into())
+-            });
+-            if let Some(line) = line {
+-                match line.as_str() {
+-                    "canvas" => {
+-                        let Some(event) = event.dyn_ref::<web_sys::MouseEvent>() else {
+-                            return;
+-```
+-
+-Replace it with:
+-
+-```rust
+-                .then(|| "canvas".into())
+-            });
+-            if let Some(line) = line {
+-                let action = match line.as_str() {
+-                    "canvas" => {
+-                        let Some(event) = event.dyn_ref::<web_sys::MouseEvent>() else {
+-                            return;
+-```
+-
+-**Locate this block:**
+-
+-```rust
+-        ],
+-    );
+-    panel.update(None, &canvas)?;
+-    let mut history = History::default();
+-    let mut selected = None;
+-    let mut background = Background::default();
+-    let mut camera = Camera {
+-        aspect: width as f64 / height as f64,
+-        ..Camera::default()
+-    };
+-    present(
+-        &surface,
+-        &renderer,
+-        &background,
+-        &camera.uniform(),
+-        &mut panel,
+-    )?;
+-    let input_canvas = canvas.clone();
+-```
+-
+-Replace it with:
+-
+-```rust
+-        ],
+-    );
+-    panel.update(None, &canvas)?;
+-    present(
+-        &surface,
+-        &renderer,
+-        &editor.background,
+-        &editor.camera.uniform(),
+-        &mut panel,
+-    )?;
+-    let input_canvas = canvas.clone();
+-```
+-
+-**Locate this block:**
+-
+-```rust
+-        .ok_or("No compatible surface format")?;
+-    config.view_formats = vec![config.format.add_srgb_suffix()];
+-    surface.configure(&device, &config);
+-    let mut scene = Scene::demo();
+-    let mut renderer = Renderer::new(
+-        device,
+-        queue,
+-        config.format.add_srgb_suffix(),
+-        &scene,
+-    );
+-    renderer.resize(width, height);
+-    let mut panel = crate::panel::Panel::new(
+-```
+-
+-Replace it with:
+-
+-```rust
+-        .ok_or("No compatible surface format")?;
+-    config.view_formats = vec![config.format.add_srgb_suffix()];
+-    surface.configure(&device, &config);
+-    let mut editor = Editor::default();
+-    editor.camera.aspect = width as f64 / height as f64;
+-    let mut renderer = Renderer::new(
+-        device,
+-        queue,
+-        config.format.add_srgb_suffix(),
+-        &editor.scene,
+-    );
+-    renderer.resize(width, height);
+-    let mut panel = crate::panel::Panel::new(
+-```
+-
+-**Locate this block:**
+-
+-```rust
+-use crate::background::Background;
+-use crate::camera::Camera;
+-use crate::history::History;
+-use crate::renderer::Renderer;
+-use crate::scene::Scene;
+-use wasm_bindgen::{JsCast, JsValue, closure::Closure};
+-
+-pub fn report(message: &str) {
+-```
+-
+-Replace it with:
+-
+-```rust
+-use crate::background::Background;
+-use crate::editor::{Action, Change, Editor};
+-use crate::renderer::Renderer;
+-use wasm_bindgen::{JsCast, JsValue, closure::Closure};
+-
+-pub fn report(message: &str) {
+-```
+-
+-## Build & Run
+-
+-![Recorded visual output for Lesson 3.1 (19-actions)](../../screenshots/journey/19-actions-browser.png)
+-
+-```sh
+-cd workspace/journey
+-REGEN_PROTO=0 cargo build --lib --locked --target wasm32-unknown-unknown -j1
+-REGEN_PROTO=0 CARGO_BUILD_JOBS=1 trunk serve --port 8780
+-cd ../..
+-npm --prefix ../session_tests run course -- check 3.1
+-npm --prefix ../session_tests run course -- save 3.1
+-```
+-
+-Continue with [3.2 · One drawing size and one captured gesture](19a-viewport.md).
++The [original page](../../archived/journey-consolidation-17-solid.md) retains its diagrams, explanations and source listings.
+diff --git a/session_viewer/docs/journey/course.json b/session_viewer/docs/journey/course.json
+index 8609bc544..fc7732850 100644
+--- a/session_viewer/docs/journey/course.json
++++ b/session_viewer/docs/journey/course.json
+@@ -541,230 +541,21 @@
+     },
+     {
+       "id": "17-solid",
+-      "title": "Bring a solid into the scene",
++      "title": "Kernel geometry and one editor",
+       "page": "journey/17-solid.md",
+       "hours": [
+         3,
+         5
+       ],
+-      "goal": "Create a kernel box, convert it to display data, and add it as one undoable scene object.",
+-      "trace": "Kernel box → triangle extraction → validated display Mesh → document transaction → GPU upload → visible solid",
+-      "question": "Why does a failed mesh conversion belong outside the GPU draw loop?",
+-      "answer": "Conversion establishes the display data contract before an object enters the scene. A failure should leave the document and history unchanged. The draw loop should read already valid GPU resources; it cannot repair an invalid index or decide whether a failed document edit should be kept.",
+-      "story": "Create a grey box with the geometry kernel and adapt it to our validated display mesh. `to_render` supplies float vertices and triangle indices; the adapter selects position and colour for our six-float vertex layout.\n\nThe box has eight geometric corners, six quad faces and twelve triangles. This example handles its convex faces; imported concave faces need later topology work.\n\nConvert kernel `u32` indices with `u16::try_from`. Return an error for an index that cannot fit rather than connecting the wrong corners.\n\nAdd `History::try_edit`: commit and clear redo only on success; restore the previous scene on error. A test deliberately mutates then fails. The box is unlit here; the next shader change reveals its face directions.\n\n![A kernel box becomes a validated display mesh; a successful document transaction inserts it before the renderer uploads its triangles.](../illustrations/journey-17.svg)",
+-      "result": "Type `Example Box`, then `View Isometric`. A solid box appears. `Undo` removes that one object; `Redo` restores it.",
+-      "experiment": "Add a box and undo. In the rollback test, predict whether a failed new edit should erase the available redo. Run the test: it should not. Then redo the successful box addition. Separate three questions in your notes: did creation succeed, did the document change, and was the change uploaded?",
+-      "production": "The final viewer converts kernel geometry into renderable lanes while preserving document identity and transactional edits. This adapter is the first real kernel-to-display connection; later lessons retain face and edge provenance and share allocations across many objects.",
+-      "browser_status": "Kernel geometry becomes an undoable scene object.",
+-      "browser_actions": [
+-        {
+-          "command": "Example Box"
+-        },
+-        {
+-          "command": "View Isometric"
+-        }
+-      ],
+-      "image_result": "The new object is the pale grey box behind the triangles. Its faces have the same colour because lighting is not implemented yet. The helper adds a kernel box, uploads the scene, and checks its projected position and visible area.",
+-      "frame": "journey/checks/17-solid.rs",
+-      "tests": true,
+-      "frame_constructor": "make_renderer(device, queue, format)",
+-      "edits": [
+-        {
+-          "path": "src/mesh.rs",
+-          "before": "    pub fn vertices(&self) -> &[[f32; 6]] {\n",
+-          "snippet": "journey/code/17-solid-01.rs",
+-          "why": "Adapt kernel triangle data to the current vertex and index layout with a checked narrowing conversion."
+-        },
+-        {
+-          "path": "src/mesh.rs",
+-          "before": "    #[test]\n    fn invalid_connections_and_nonfinite_vertices_are_rejected() {\n",
+-          "snippet": "journey/code/17-solid-02.rs",
+-          "why": "Check the adapter using a solid with known topology."
+-        },
+-        {
+-          "path": "src/scene.rs",
+-          "before": "    pub fn toggle_extra(&mut self) {\n",
+-          "snippet": "journey/code/17-solid-03.rs",
+-          "why": "Construct and place a box, then insert it only after its display mesh is valid."
+-        },
+-        {
+-          "path": "src/history.rs",
+-          "before": "    pub fn edit(&mut self, scene: &mut Scene, action: impl FnOnce(&mut Scene)) {\n        let before = scene.clone();\n        action(scene);\n        if self.undo.len() == LIMIT {\n            self.undo.remove(0);\n        }\n        self.undo.push(before);\n        self.redo.clear();\n    }\n",
+-          "snippet": "journey/code/17-solid-04.rs",
+-          "why": "Make transaction recording depend on success. The existing edit wrapper remains convenient for actions that cannot return an error."
+-        },
+-        {
+-          "path": "src/history.rs",
+-          "before": "    #[test]\n    fn retained_history_has_a_fixed_count_limit() {\n",
+-          "snippet": "journey/code/17-solid-05.rs",
+-          "why": "Prove that a partial failed change cannot destroy either document contents or the redo branch."
+-        },
+-        {
+-          "path": "src/browser.rs",
+-          "snippet": "journey/code/17-solid-window-1.rs",
+-          "before": "        config.format.add_srgb_suffix(),\n        &[\n            \"Help\",\n            \"Example Triangle\",\n            \"Select Next\",\n            \"Delete\",\n",
+-          "why": "Add Example Box to the vocabulary."
+-        },
+-        {
+-          "path": "src/browser.rs",
+-          "snippet": "journey/code/17-solid-window-2.rs",
+-          "before": "                        .and_then(|ray| crate::picking::pick(&scene, &ray));\n                    renderer.set_scene(&scene, selected);\n                }\n                \"example triangle\" => {\n                    history.edit(&mut scene, Scene::toggle_extra);\n                    selected = selected.filter(|id| scene.contains(*id));\n",
+-          "why": "Insert the box as one fallible history edit and report construction errors."
+-        },
+-        {
+-          "path": "src/browser.rs",
+-          "snippet": "journey/code/17-solid-window-3.rs",
+-          "before": "    )?;\n    // The page has one listener for its lifetime; JavaScript must retain the Rust callback.\n    click.forget();\n    report(\"Orbit moves the eye around a fixed target.\");\n    Ok(())\n}\n\n",
+-          "why": "Report the undoable kernel object."
+-        }
+-      ],
+-      "browser_caption": "Example Box inserts the grey solid behind the triangles. Its faces have one flat colour at this checkpoint."
+-    },
+-    {
+-      "id": "18-light",
+-      "title": "Read the shape through light",
+-      "page": "journey/18-light.md",
+-      "hours": [
+-        1,
+-        2
+-      ],
+-      "goal": "Shade the box faces according to their direction, using the same mesh and renderer.",
+-      "trace": "World position → neighbouring surface directions → normal → light alignment → fragment colour",
+-      "question": "Why should orbiting the camera leave the brightness of a particular box face unchanged?",
+-      "answer": "Both the normal and the light direction are expressed in world coordinates. Orbit changes where we look from, not the face direction or the light. A different face may become visible, but the same face keeps the same brightness. Mixing a camera-space normal with a world-space light would break that relationship.",
+-      "story": "Shade the grey box according to surface direction. Pass world positions from the vertex shader to the fragment shader.\n\n`dpdx` and `dpdy` estimate horizontal and vertical position changes. Their cross product gives the triangle normal; normalisation makes it unit length. Dot it with the unit world-space light direction to measure alignment.\n\nUse `abs` for this display's two-sided lighting and retain a minimum brightness of 0.3. Multiply RGB before the existing sRGB output conversion.\n\nOnly shader logic changes. Mesh still supplies positions and colours, Camera positions the view, and Renderer submits the triangles. Adjoining box faces now have visibly different brightness.\n\n![Two directions along a face give its normal; comparing that normal with the light controls brightness.](../illustrations/journey-18.svg)",
+-      "result": "Type `Example Box` and `View Isometric`. Faces pointing in different directions should have different brightness, making the box’s shape easier to read.",
+-      "experiment": "Change the light to vec3<f32>(0.0, 0.0, 1.0). Predict the box first: the top should be bright and both vertical sides equally dark. Try it, then restore the original light. Explain why this changes colour without moving a single vertex.",
+-      "production": "This is flat lighting: each triangle has one surface direction. The final viewer also needs smooth normals, materials, two-sided surface rules and contact shadows. Those features will extend the same distinction between geometry, view and shading.",
+-      "browser_status": "Surface direction changes brightness, not geometry.",
+-      "browser_actions": [
+-        {
+-          "command": "Example Box"
+-        },
+-        {
+-          "command": "View Isometric"
+-        }
+-      ],
+-      "image_result": "Compare the box with lesson 17: its left face is darker than its right face, and its top is brightest. Geometry and camera are unchanged; the shader now shades each face. Three projected face samples check those brightness levels.",
+-      "frame": "journey/checks/18-light.rs",
+-      "frame_constructor": "make_renderer(device, queue, format)",
+-      "tests": true,
+-      "edits": [
+-        {
+-          "path": "src/triangle.wgsl",
+-          "before": "@group(0) @binding(0) var<uniform> transform: mat4x4<f32>;\n\nstruct VertexOutput {\n    @builtin(position) position: vec4<f32>,\n    @location(0) colour: vec3<f32>,\n}\n\n@vertex\nfn vertex(@location(0) position: vec3<f32>, @location(1) colour: vec3<f32>) -> VertexOutput {\n    var output: VertexOutput;\n    output.position = transform * vec4<f32>(position, 1.0);\n    output.colour = colour;\n    return output;\n}\n\n@fragment\nfn fragment(input: VertexOutput) -> @location(0) vec4<f32> {\n    return vec4<f32>(input.colour, 1.0);\n}\n",
+-          "snippet": "journey/code/18-light-01.wgsl",
+-          "why": "Pass world positions through the pipeline and turn face direction into brightness."
+-        },
+-        {
+-          "path": "src/browser.rs",
+-          "snippet": "journey/code/18-light-window-1.rs",
+-          "before": "    )?;\n    // The page has one listener for its lifetime; JavaScript must retain the Rust callback.\n    click.forget();\n    report(\"Kernel geometry becomes an undoable scene object.\");\n    Ok(())\n}\n\n",
+-          "why": "Report that lighting changes brightness without changing geometry."
+-        }
+-      ],
+-      "browser_caption": "Compare the box with lesson 17: the same geometry now has three face brightnesses."
+-    },
+-    {
+-      "id": "18a-editor",
+-      "title": "Give application state one owner",
+-      "page": "journey/18a-editor.md",
+-      "hours": [
+-        0.5,
+-        0.75
+-      ],
+-      "goal": "Own scene, selection, camera, background and history in one browser-independent value.",
+-      "trace": "Editor owns scene and history beside camera, background and selection",
+-      "story": "Editor owns application state. Action names an input; Change tells drawing whether scene data or only the view changed.\n\nKeep History private so document edits follow one path. Default constructs an editor with the existing demonstration scene.\n\n![Editor owns document and view state.](../illustrations/journey-direct-18a-editor.svg)",
+-      "result": "Inspect the supplied state fixtures. Zooming the owned camera preserves the document IDs and empty selection.",
+-      "question": "Why put these values in one struct?",
+-      "answer": "An input handler can borrow one editor rather than manage separate captured scene, camera, selection and history values.",
+-      "experiment": "Change the ownership test to pan the camera. Its scene IDs should still match; restore the original zoom check.",
+-      "production": "The application owner keeps document and view lifetimes together while history stores document changes only.",
+-      "tests": true,
+-      "frame": "journey/checks/18-light.rs",
+-      "frame_constructor": "make_renderer(device, queue, format)",
+-      "browser_status": "Surface direction changes brightness, not geometry.",
+-      "browser_actions": [
+-        {
+-          "command": "Example Box"
+-        },
+-        {
+-          "command": "View Isometric"
+-        }
+-      ],
+-      "browser_caption": "Native checks establish the new state owner. Chrome independently retains the preceding lighting and typed-command path; browser routing moves into Editor in the final step.",
+-      "edits": [
+-        {
+-          "path": "src/editor.rs",
+-          "before": null,
+-          "snippet": "journey/code/18a-editor-owner.rs",
+-          "why": "Declare the action names, change kinds and application owner. Check a camera change keeps document identity."
+-        },
+-        {
+-          "path": "src/lib.rs",
+-          "snippet": "journey/code/19-actions-fullscreen-1.rs",
+-          "before": "pub mod scene;\npub mod picking;\npub mod history;\npub mod gpu_mesh;\npub mod renderer;\n#[cfg(target_arch = \"wasm32\")]\n",
+-          "why": "Make the editor available to both the browser and native checks."
+-        }
+-      ],
+-      "image_same_as": "18-light"
+-    },
+-    {
+-      "id": "18b-actions",
+-      "title": "Apply document and view actions in Rust",
+-      "page": "journey/18b-actions.md",
+-      "hours": [
+-        1,
+-        1.5
+-      ],
+-      "goal": "Apply actions through one editor while preserving view settings during history and reset.",
+-      "trace": "Action → Editor::apply → History for document edits → Change::Scene or Change::View",
+-      "story": "Editor::apply handles an Action and returns the kind of drawing change. Document edits use History; camera and background changes stay outside it.\n\nResult propagates a failed add operation. After deletion or history travel, retain selection only if its ID still exists. View Reset keeps the current window aspect.\n\n![Actions update the editor and report the drawing change.](../illustrations/journey-direct-18b-actions.svg)",
+-      "result": "Inspect the supplied state fixtures. Undo removes the added box while keeping zoom and background; View Reset preserves the current aspect.",
+-      "question": "Why return Change rather than redraw here?",
+-      "answer": "The editor owns application values, not GPU objects. Its caller decides when to upload scene data and draw.",
+-      "experiment": "Set camera aspect to 2.0 in the reset test. Reset distance and orientation should change while that aspect stays 2.0.",
+-      "production": "Actions preserve the document/view boundary and describe the synchronization required. This checkpoint also retains aspect during reset before browser routing is introduced.",
+-      "tests": true,
+-      "frame": "journey/checks/19-actions.rs",
+-      "frame_constructor": "make_renderer(device, queue, format)",
+-      "browser_status": "Surface direction changes brightness, not geometry.",
+-      "browser_actions": [
+-        {
+-          "command": "Example Box"
+-        },
+-        {
+-          "command": "View Isometric"
+-        }
+-      ],
+-      "browser_caption": "Native checks exercise the new action route and render its selected box. Chrome retains the earlier event handler and lighting result; the following step connects browser input to Editor.",
+-      "edits": [
+-        {
+-          "path": "src/editor.rs",
+-          "before": "#[cfg(test)]\nmod tests {\n    use super::*;\n\n    #[test]\n    fn changing_the_owned_camera_keeps_document_identity() {\n        let mut editor = Editor::default();\n        let ids: Vec<_> = editor.scene.objects().iter().map(|object| object.id).collect();\n        editor.camera.zoom(2.0);\n        assert_eq!(editor.camera.distance, 1.5);\n        assert_eq!(editor.scene.objects().iter().map(|object| object.id).collect::<Vec<_>>(), ids);\n        assert!(editor.selected.is_none());\n    }\n}\n",
+-          "snippet": "journey/code/18b-actions-apply.rs",
+-          "why": "Implement the action route and check history preserves the view. Keep the current aspect when resetting the camera."
+-        }
+-      ]
+-    },
+-    {
+-      "id": "19-actions",
+-      "title": "Route browser input through the editor",
+-      "page": "journey/19-actions.md",
+-      "hours": [
+-        1,
+-        1.5
+-      ],
+-      "goal": "Move document actions into a browser-independent editor while keeping picking, undo and drawing working.",
+-      "trace": "Typed command or canvas click → Action → Editor::apply → Change → scene upload when required → draw",
+-      "question": "Why does Change::View skip set_scene?",
+-      "answer": "The scene data did not change. Redrawing with the editor camera or background is sufficient.",
+-      "story": "Convert submitted commands and canvas clicks to Action values. Apply them through Editor, upload only when Change is Scene, then redraw from the editor camera and background.\n\nThe closure captures one mutable editor. The GPU renderer keeps its derived representation separate from the document owner.\n\n![Browser input uses the same editor route and drawing-change result.](../illustrations/journey-direct-19-actions.svg)",
+-      "result": "Type Example Box, then Undo and Redo. The box disappears and returns through the editor route.",
+-      "experiment": "Pan Right, delete a selected object and Undo. The document returns while the camera stays where you put it.",
++      "goal": "Create a shaded kernel box and route selection, document edits and view changes through one editor.",
++      "trace": "kernel mesh -> validated display data -> reversible editor action -> conditional GPU upload -> shaded frame",
++      "question": "Why can a selection action require a scene upload without changing the document?",
++      "answer": "The display includes selected colours. Change::Scene requests a display refresh; it does not itself create a history transaction.",
++      "story": "The editor owns the scene, selection, camera, background and bounded history. Fallible document edits restore the previous scene on error. The browser maps input to actions, then decides whether to upload display data or only redraw.",
++      "result": "Example Box adds a shaded grey solid. Three Select Next commands select it yellow; Undo removes the box and Redo restores it without resetting the view.",
++      "experiment": "Add a box, pan the camera, undo and redo. Predict which document objects return and which camera values stay unchanged.",
+       "production": "The full command system will build on this boundary. commands, keyboard input and tools request document operations through the same owner, while rendering consumes the result. More commands should add behavior here or in focused command modules, not duplicate transactions in UI handlers.",
+-      "browser_status": "Every document action follows the same editor path.",
++      "browser_status": "Fresh consolidated native, wasm and browser acceptance pending.",
+       "browser_actions": [
+         {
+           "command": "Example Box"
+@@ -788,57 +579,53 @@
+       "tests": true,
+       "edits": [
+         {
+-          "path": "src/editor.rs",
+-          "before": "        assert_eq!(editor.background.rgb(), [0.9, 0.9, 0.9]);\n    }\n}\n",
+-          "snippet": "journey/code/19-actions-tests.rs",
+-          "why": "Check selection repair, redo preservation and picking through the editor’s current camera."
+-        },
+-        {
+-          "path": "src/browser.rs",
+-          "snippet": "journey/code/19-actions-window-1.rs",
+-          "before": "use crate::background::Background;\nuse crate::camera::Camera;\nuse crate::history::History;\nuse crate::renderer::Renderer;\nuse crate::scene::Scene;\nuse wasm_bindgen::{JsCast, JsValue, closure::Closure};\n\npub fn report(message: &str) {\n",
+-          "why": "Import the editor action types."
++          "path": "src/mesh.rs",
++          "before": "pub struct Mesh {\n    vertices: Vec<[f32; 6]>,\n    indices: Vec<u16>,\n}\n\nimpl Mesh {\n    pub fn new(vertices: Vec<[f32; 6]>, indices: Vec<u16>) -> Result<Self, &'static str> {\n        if indices.len() % 3 != 0 || indices.len() > u32::MAX as usize {\n            return Err(\"Indices must describe complete triangles within the draw limit\");\n        }\n        if indices.iter().any(|&index| index as usize >= vertices.len()) {\n            return Err(\"A triangle refers to a missing vertex\");\n        }\n        if vertices.iter().flatten().any(|value| !value.is_finite()) {\n            return Err(\"Vertex values must be finite\");\n        }\n        Ok(Self { vertices, indices })\n    }\n\n    pub fn vertices(&self) -> &[[f32; 6]] {\n        &self.vertices\n    }\n\n    pub fn indices(&self) -> &[u16] {\n        &self.indices\n    }\n}\n\n#[cfg(test)]\nmod tests {\n    use super::*;\n\n    #[test]\n    fn invalid_connections_and_nonfinite_vertices_are_rejected() {\n        assert!(Mesh::new(vec![[0.0; 6]; 3], vec![0, 1, 3]).is_err());\n        assert!(Mesh::new(vec![[0.0; 6]; 3], vec![0, 1]).is_err());\n        assert!(Mesh::new(vec![[f32::NAN; 6]; 3], vec![0, 1, 2]).is_err());\n        assert!(Mesh::new(vec![[0.0; 6]; 3], vec![0, 1, 2]).is_ok());\n    }\n}\n",
++          "snippet": "journey/code/17-editor-1.rs",
++          "why": "Validate kernel render data before allocating a scene object."
+         },
+         {
+-          "path": "src/browser.rs",
+-          "snippet": "journey/code/19-actions-window-2.rs",
+-          "before": "        .ok_or(\"No compatible surface format\")?;\n    config.view_formats = vec![config.format.add_srgb_suffix()];\n    surface.configure(&device, &config);\n    let mut scene = Scene::demo();\n    let mut renderer = Renderer::new(device, queue, config.format.add_srgb_suffix(), &scene);\n    renderer.resize(width, height);\n    let mut panel = crate::panel::Panel::new(\n        &renderer,\n",
+-          "why": "Create one editor and initialize drawing from its scene."
++          "path": "src/scene.rs",
++          "before": "use crate::mesh::Mesh;\nuse std::rc::Rc;\n\n#[derive(Clone, Copy, Debug, PartialEq, Eq)]\npub struct ObjectId(u32);\n\n#[derive(Clone)]\npub struct Object {\n    pub id: ObjectId,\n    pub mesh: Rc<Mesh>,\n}\n\n#[derive(Clone)]\npub struct Scene {\n    objects: Vec<Object>,\n    next_id: u32,\n    extra: Option<ObjectId>,\n}\n\nimpl Scene {\n    pub fn demo() -> Self {\n        let pink = Mesh::new(vec![\n            [-0.7, -0.6, 0.25, 0.9, 0.25, 0.45],\n            [ 0.5, -0.6, 0.25, 0.9, 0.25, 0.45],\n            [-0.1,  0.6, 0.25, 0.9, 0.25, 0.45],\n        ], vec![0, 1, 2]).expect(\"Valid pink triangle\");\n        let turquoise = Mesh::new(vec![\n            [-0.4, -0.2, 0.75, 0.05, 0.7, 0.7],\n            [ 0.8, -0.2, 0.75, 0.05, 0.7, 0.7],\n            [ 0.2,  0.8, 0.75, 0.05, 0.7, 0.7],\n        ], vec![0, 1, 2]).expect(\"Valid turquoise triangle\");\n        let mut scene = Self { objects: Vec::new(), next_id: 1, extra: None };\n        scene.insert(pink).expect(\"ID available\");\n        scene.insert(turquoise).expect(\"ID available\");\n        scene\n    }\n\n    pub fn restore(&mut self, mut saved: Self) {\n        saved.next_id = saved.next_id.max(self.next_id);\n        *self = saved;\n    }\n\n    pub fn objects(&self) -> &[Object] {\n        &self.objects\n    }\n\n    pub fn insert(&mut self, mesh: Mesh) -> Result<ObjectId, &'static str> {\n        let next = self.next_id.checked_add(1).ok_or(\"Object IDs exhausted\")?;\n        let id = ObjectId(self.next_id);\n        self.next_id = next;\n        self.objects.push(Object { id, mesh: Rc::new(mesh) });\n        Ok(id)\n    }\n\n    pub fn remove(&mut self, id: ObjectId) -> bool {\n        let Some(index) = self.objects.iter().position(|object| object.id == id) else { return false; };\n        self.objects.remove(index);\n        if self.extra == Some(id) {\n            self.extra = None;\n        }\n        true\n    }\n\n    pub fn contains(&self, id: ObjectId) -> bool {\n        self.objects.iter().any(|object| object.id == id)\n    }\n\n    pub fn next(&self, current: Option<ObjectId>) -> Option<ObjectId> {\n        if self.objects.is_empty() {\n            return None;\n        }\n        let index = self.objects.iter().position(|object| Some(object.id) == current)\n            .map_or(0, |index| index + 1);\n        Some(self.objects[index % self.objects.len()].id)\n    }\n\n    pub fn toggle_extra(&mut self) {\n        if let Some(id) = self.extra.take() {\n            self.remove(id);\n        } else {\n            let extra = Mesh::new(vec![\n                [-0.9, 0.3, 0.5, 0.2, 0.8, 0.3],\n                [-0.4, 0.3, 0.5, 0.2, 0.8, 0.3],\n                [-0.65, 0.9, 0.5, 0.2, 0.8, 0.3],\n            ], vec![0, 1, 2]).expect(\"Valid extra triangle\");\n            self.extra = Some(self.insert(extra).expect(\"ID available\"));\n        }\n    }\n}\n\n#[cfg(test)]\nmod tests {\n    use super::*;\n\n    #[test]\n    fn removal_moves_a_row_without_changing_its_identity() {\n        let mut scene = Scene::demo();\n        let first = scene.objects()[0].id;\n        let second = scene.objects()[1].id;\n        assert!(scene.remove(first));\n        assert_eq!(scene.objects()[0].id, second);\n        assert_eq!(scene.next(None), Some(second));\n        assert!(!scene.contains(first));\n        scene.toggle_extra();\n        assert_ne!(scene.objects()[1].id, first);\n        assert_ne!(scene.objects()[1].id, second);\n    }\n\n    #[test]\n    fn toggling_the_extra_object_uses_its_id_after_other_removals() {\n        let mut scene = Scene::demo();\n        scene.toggle_extra();\n        let extra = scene.objects()[2].id;\n        scene.remove(scene.objects()[0].id);\n        scene.toggle_extra();\n        assert!(!scene.contains(extra));\n        assert_eq!(scene.objects().len(), 1);\n    }\n}\n",
++          "snippet": "journey/code/17-editor-2.rs",
++          "why": "Create and place one kernel box with a stable identity."
+         },
+         {
+-          "path": "src/browser.rs",
+-          "snippet": "journey/code/19-actions-window-3.rs",
+-          "before": "        ],\n    );\n    panel.update(None, &canvas)?;\n    let mut history = History::default();\n    let mut selected = None;\n    let mut background = Background::default();\n    let mut camera = Camera { aspect: width as f64 / height as f64, ..Camera::default() };\n    present(\n        &surface,\n        &renderer,\n        &background,\n        &camera.uniform(),\n        &mut panel,\n    )?;\n    let input_canvas = canvas.clone();\n",
+-          "why": "Present the editor background and camera."
++          "path": "src/history.rs",
++          "before": "use crate::scene::Scene;\n\nconst LIMIT: usize = 64;\n\n#[derive(Default)]\npub struct History {\n    undo: Vec<Scene>,\n    redo: Vec<Scene>,\n}\n\nimpl History {\n    pub fn edit(&mut self, scene: &mut Scene, action: impl FnOnce(&mut Scene)) {\n        let before = scene.clone();\n        action(scene);\n        if self.undo.len() == LIMIT {\n            self.undo.remove(0);\n        }\n        self.undo.push(before);\n        self.redo.clear();\n    }\n\n    pub fn undo(&mut self, scene: &mut Scene) -> bool {\n        Self::travel(&mut self.undo, &mut self.redo, scene)\n    }\n\n    pub fn redo(&mut self, scene: &mut Scene) -> bool {\n        Self::travel(&mut self.redo, &mut self.undo, scene)\n    }\n\n    fn travel(from: &mut Vec<Scene>, to: &mut Vec<Scene>, scene: &mut Scene) -> bool {\n        let Some(saved) = from.pop() else { return false; };\n        to.push(scene.clone());\n        scene.restore(saved);\n        true\n    }\n}\n\n#[cfg(test)]\nmod tests {\n    use super::*;\n    use std::rc::Rc;\n\n    #[test]\n    fn undo_restores_identity_and_shares_the_original_mesh() {\n        let mut scene = Scene::demo();\n        let mut history = History::default();\n        let id = scene.objects()[0].id;\n        let mesh = Rc::clone(&scene.objects()[0].mesh);\n        history.edit(&mut scene, |scene| { scene.remove(id); });\n        assert!(!scene.contains(id));\n        assert!(history.undo(&mut scene));\n        assert_eq!(scene.objects()[0].id, id);\n        assert!(Rc::ptr_eq(&mesh, &scene.objects()[0].mesh));\n        assert!(history.redo(&mut scene));\n        assert!(!scene.contains(id));\n    }\n\n    #[test]\n    fn a_new_branch_discards_redo_without_reusing_an_old_id() {\n        let mut scene = Scene::demo();\n        let mut history = History::default();\n        history.edit(&mut scene, Scene::toggle_extra);\n        let old_id = scene.objects()[2].id;\n        history.undo(&mut scene);\n        history.edit(&mut scene, Scene::toggle_extra);\n        assert_ne!(scene.objects()[2].id, old_id);\n        assert!(!history.redo(&mut scene));\n    }\n\n    #[test]\n    fn retained_history_has_a_fixed_count_limit() {\n        let mut scene = Scene::demo();\n        let mut history = History::default();\n        for _ in 0..LIMIT + 1 {\n            history.edit(&mut scene, Scene::toggle_extra);\n        }\n        let mut count = 0;\n        while history.undo(&mut scene) {\n            count += 1;\n        }\n        assert_eq!(count, LIMIT);\n    }\n}\n",
++          "snippet": "journey/code/17-editor-3.rs",
++          "why": "Roll back failed edits without consuming the redo branch."
+         },
+         {
+           "path": "src/browser.rs",
+-          "snippet": "journey/code/19-actions-window-4.rs",
+-          "before": "            .then(|| \"canvas\".into())\n        });\n        if let Some(line) = line {\n            match line.as_str() {\n                \"canvas\" => {\n                    let Some(event) = event.dyn_ref::<web_sys::MouseEvent>() else {\n                        return;\n",
+-          "why": "Start converting submitted lines into actions."
++          "before": "use crate::background::Background;\nuse crate::camera::Camera;\nuse crate::history::History;\nuse crate::renderer::Renderer;\nuse crate::scene::Scene;\nuse wasm_bindgen::{JsCast, JsValue, closure::Closure};\n\npub fn report(message: &str) {\n    if let Some(document) = web_sys::window().and_then(|window| window.document()) {\n        if let Some(status) = document.get_element_by_id(\"status\") {\n            status.set_text_content(Some(message));\n            if message.starts_with(\"Cannot\") { let _ = status.remove_attribute(\"hidden\"); }\n        }\n    }\n}\n\npub async fn run() -> Result<(), JsValue> {\n    let window = web_sys::window().ok_or(\"No browser window\")?;\n    let document = window.document().ok_or(\"No document\")?;\n    let canvas: web_sys::HtmlCanvasElement = document\n        .get_element_by_id(\"canvas\")\n        .ok_or(\"Missing canvas\")?\n        .dyn_into()?;\n    let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {\n        backends: wgpu::Backends::BROWSER_WEBGPU,\n        flags: Default::default(),\n        memory_budget_thresholds: Default::default(),\n        backend_options: Default::default(),\n        display: None,\n    });\n    let surface = instance\n        .create_surface(wgpu::SurfaceTarget::Canvas(canvas.clone()))\n        .map_err(|error| JsValue::from_str(&error.to_string()))?;\n    let adapter = instance\n        .request_adapter(&wgpu::RequestAdapterOptions {\n            compatible_surface: Some(&surface),\n            ..Default::default()\n        })\n        .await\n        .map_err(|error| JsValue::from_str(&error.to_string()))?;\n    let (device, queue) = adapter\n        .request_device(&wgpu::DeviceDescriptor::default())\n        .await\n        .map_err(|error| JsValue::from_str(&error.to_string()))?;\n    device.on_uncaptured_error(std::sync::Arc::new(|error| report(&error.to_string())));\n    let limit = device.limits().max_texture_dimension_2d;\n    let density = window.device_pixel_ratio();\n    let density = if density.is_finite() && density > 0.0 { density } else { 1.0 };\n    let width = ((window.inner_width()?.as_f64().ok_or(\"No window width\")? * density).round() as u32).clamp(1, limit);\n    let height = ((window.inner_height()?.as_f64().ok_or(\"No window height\")? * density).round() as u32).clamp(1, limit);\n    canvas.set_width(width);\n    canvas.set_height(height);\n    let mut config = surface\n        .get_default_config(&adapter, width, height)\n        .ok_or(\"No compatible surface format\")?;\n    config.view_formats = vec![config.format.add_srgb_suffix()];\n    surface.configure(&device, &config);\n    let mut scene = Scene::demo();\n    let mut renderer = Renderer::new(device, queue, config.format.add_srgb_suffix(), &scene);\n    renderer.resize(width, height);\n    let mut panel = crate::panel::Panel::new(\n        &renderer,\n        config.format.add_srgb_suffix(),\n        &[\n            \"Help\",\n            \"Example Triangle\",\n            \"Select Next\",\n            \"Delete\",\n            \"Undo\",\n            \"Redo\",\n            \"Background\",\n            \"Zoom In\",\n            \"Zoom Out\",\n            \"Pan Left\",\n            \"Pan Right\",\n            \"Orbit Right\",\n            \"Orbit Up\",\n            \"View Isometric\",\n            \"View Reset\",\n        ],\n    );\n    panel.update(None, &canvas)?;\n    let mut history = History::default();\n    let mut selected = None;\n    let mut background = Background::default();\n    let mut camera = Camera { aspect: width as f64 / height as f64, ..Camera::default() };\n    present(\n        &surface,\n        &renderer,\n        &background,\n        &camera.uniform(),\n        &mut panel,\n    )?;\n    let input_canvas = canvas.clone();\n    let click = Closure::<dyn FnMut(web_sys::Event)>::new(move |event: web_sys::Event| {\n        let line = match panel.update(Some(&event), &input_canvas) {\n            Ok(line) => line,\n            Err(error) => {\n                report(&format!(\"Cannot read command: {error:?}\"));\n                return;\n            }\n        };\n\n        let line = line.or_else(|| {\n            let mouse = event.dyn_ref::<web_sys::MouseEvent>()?;\n            (event.type_() == \"click\"\n                && !panel.consumed\n                && mouse\n                    .target()\n                    .and_then(|target| target.dyn_into::<web_sys::Element>().ok())\n                    .is_some_and(|target| target.id() == \"canvas\"))\n            .then(|| \"canvas\".into())\n        });\n        if let Some(line) = line {\n            match line.as_str() {\n                \"canvas\" => {\n                    let Some(event) = event.dyn_ref::<web_sys::MouseEvent>() else {\n                        return;\n                    };\n                    let rect = input_canvas.get_bounding_client_rect();\n                    if rect.width() <= 0.0 || rect.height() <= 0.0 {\n                        return;\n                    }\n                    let screen = [\n                        (2.0 * (event.client_x() as f64 - rect.left()) / rect.width() - 1.0) as f32,\n                        (1.0 - 2.0 * (event.client_y() as f64 - rect.top()) / rect.height()) as f32,\n                    ];\n                    selected = camera\n                        .ray(screen)\n                        .and_then(|ray| crate::picking::pick(&scene, &ray));\n                    renderer.set_scene(&scene, selected);\n                }\n                \"example triangle\" => {\n                    history.edit(&mut scene, Scene::toggle_extra);\n                    selected = selected.filter(|id| scene.contains(*id));\n                    renderer.set_scene(&scene, selected);\n                }\n                \"select next\" => {\n                    selected = scene.next(selected);\n                    renderer.set_scene(&scene, selected);\n                }\n                \"delete\" => {\n                    if let Some(id) = selected.take() {\n                        history.edit(&mut scene, |scene| {\n                            scene.remove(id);\n                        });\n                        renderer.set_scene(&scene, selected);\n                    }\n                }\n                \"undo\" | \"redo\" => {\n                    if line == \"undo\" {\n                        history.undo(&mut scene);\n                    } else {\n                        history.redo(&mut scene);\n                    }\n                    selected = selected.filter(|id| scene.contains(*id));\n                    renderer.set_scene(&scene, selected);\n                }\n                \"background\" => background.toggle(),\n                \"zoom in\" => camera.zoom(2.0),\n                \"zoom out\" => camera.zoom(0.5),\n                \"pan left\" => camera.pan(-0.25, 0.0),\n                \"pan right\" => camera.pan(0.25, 0.0),\n                \"orbit right\" => camera.rotate(std::f32::consts::FRAC_PI_4),\n                \"orbit up\" => camera.orbit(0.0, std::f64::consts::FRAC_PI_6),\n                \"view isometric\" => camera.isometric(),\n                \"view reset\" => camera = Camera { aspect: camera.aspect, ..Camera::default() },\n                _ => return,\n            }\n        }\n        if let Err(error) = panel.update(None, &input_canvas) {\n            report(&format!(\"Cannot lay out commands: {error:?}\"));\n            return;\n        }\n        if let Err(error) = present(\n            &surface,\n            &renderer,\n            &background,\n            &camera.uniform(),\n            &mut panel,\n        ) {\n            report(&format!(\"Cannot redraw: {error:?}\"));\n        }\n    });\n    for name in [\n        \"pointerdown\",\n        \"pointermove\",\n        \"pointerup\",\n        \"pointercancel\",\n        \"lostpointercapture\",\n        \"contextmenu\",\n        \"keydown\",\n        \"keyup\",\n        \"blur\",\n        \"click\",\n    ] {\n        canvas.add_event_listener_with_callback(name, click.as_ref().unchecked_ref())?;\n    }\n    let options = web_sys::AddEventListenerOptions::new();\n    options.set_passive(false);\n    canvas.add_event_listener_with_callback_and_add_event_listener_options(\n        \"wheel\",\n        click.as_ref().unchecked_ref(),\n        &options,\n    )?;\n    // The page has one listener for its lifetime; JavaScript must retain the Rust callback.\n    click.forget();\n    report(\"Orbit moves the eye around a fixed target.\");\n    Ok(())\n}\n\nfn present(\n    surface: &wgpu::Surface<'_>,\n    renderer: &Renderer,\n    background: &Background,\n    transform: &[f32; 16],\n    panel: &mut crate::panel::Panel,\n) -> Result<(), JsValue> {\n    let frame = match surface.get_current_texture() {\n        wgpu::CurrentSurfaceTexture::Success(frame)\n        | wgpu::CurrentSurfaceTexture::Suboptimal(frame) => frame,\n        other => {\n            return Err(JsValue::from_str(&format!(\n                \"Surface unavailable: {other:?}\"\n            )));\n        }\n    };\n    let view = frame.texture.create_view(&wgpu::TextureViewDescriptor {\n        format: Some(frame.texture.format().add_srgb_suffix()),\n        ..Default::default()\n    });\n    renderer.draw(&view, background, transform);\n    panel.draw(renderer, &view);\n    frame.present();\n    Ok(())\n}\n",
++          "snippet": "journey/code/17-editor-4.rs",
++          "why": "Route commands and canvas input through the editor and upload only when required."
+         },
+         {
+-          "path": "src/browser.rs",
+-          "snippet": "journey/code/19-actions-window-5.rs",
+-          "before": "                    if rect.width() <= 0.0 || rect.height() <= 0.0 {\n                        return;\n                    }\n                    let screen = [\n                        (2.0 * (event.client_x() as f64 - rect.left()) / rect.width() - 1.0) as f32,\n                        (1.0 - 2.0 * (event.client_y() as f64 - rect.top()) / rect.height()) as f32,\n                    ];\n                    selected = camera\n                        .ray(screen)\n                        .and_then(|ray| crate::picking::pick(&scene, &ray));\n                    renderer.set_scene(&scene, selected);\n                }\n                \"example box\" => {\n                    if let Err(error) =\n                        history.try_edit(&mut scene, |scene| scene.add_box().map(|_| ()))\n                    {\n                        report(error);\n                        return;\n                    }\n                    renderer.set_scene(&scene, selected);\n                }\n                \"example triangle\" => {\n                    history.edit(&mut scene, Scene::toggle_extra);\n                    selected = selected.filter(|id| scene.contains(*id));\n                    renderer.set_scene(&scene, selected);\n                }\n                \"select next\" => {\n                    selected = scene.next(selected);\n                    renderer.set_scene(&scene, selected);\n                }\n                \"delete\" => {\n                    if let Some(id) = selected.take() {\n                        history.edit(&mut scene, |scene| {\n                            scene.remove(id);\n                        });\n                        renderer.set_scene(&scene, selected);\n                    }\n                }\n                \"undo\" | \"redo\" => {\n                    if line == \"undo\" {\n                        history.undo(&mut scene);\n                    } else {\n                        history.redo(&mut scene);\n                    }\n                    selected = selected.filter(|id| scene.contains(*id));\n                    renderer.set_scene(&scene, selected);\n                }\n                \"background\" => background.toggle(),\n                \"zoom in\" => camera.zoom(2.0),\n                \"zoom out\" => camera.zoom(0.5),\n                \"pan left\" => camera.pan(-0.25, 0.0),\n                \"pan right\" => camera.pan(0.25, 0.0),\n                \"orbit right\" => camera.rotate(std::f32::consts::FRAC_PI_4),\n                \"orbit up\" => camera.orbit(0.0, std::f64::consts::FRAC_PI_6),\n                \"view isometric\" => camera.isometric(),\n                \"view reset\" => camera = Camera { aspect: camera.aspect, ..Camera::default() },\n                _ => return,\n            }\n        }\n        if let Err(error) = panel.update(None, &input_canvas) {\n",
+-          "why": "Map commands to Action, apply through Editor, and synchronize according to Change."
++          "path": "src/triangle.wgsl",
++          "before": "@group(0) @binding(0) var<uniform> transform: mat4x4<f32>;\n\nstruct VertexOutput {\n    @builtin(position) position: vec4<f32>,\n    @location(0) colour: vec3<f32>,\n}\n\n@vertex\nfn vertex(@location(0) position: vec3<f32>, @location(1) colour: vec3<f32>) -> VertexOutput {\n    var output: VertexOutput;\n    output.position = transform * vec4<f32>(position, 1.0);\n    output.colour = colour;\n    return output;\n}\n\n@fragment\nfn fragment(input: VertexOutput) -> @location(0) vec4<f32> {\n    return vec4<f32>(input.colour, 1.0);\n}\n",
++          "snippet": "journey/code/17-editor-5.wgsl",
++          "why": "Derive flat normals from world-space fragment derivatives."
+         },
+         {
+-          "path": "src/browser.rs",
+-          "snippet": "journey/code/19-actions-window-6.rs",
+-          "before": "        if let Err(error) = present(\n            &surface,\n            &renderer,\n            &background,\n            &camera.uniform(),\n            &mut panel,\n        ) {\n            report(&format!(\"Cannot redraw: {error:?}\"));\n",
+-          "why": "Redraw from the editor state."
++          "path": "src/editor.rs",
++          "before": null,
++          "snippet": "journey/code/17-editor-6.rs",
++          "why": "Own document, selection and view state and apply typed actions."
+         },
+         {
+-          "path": "src/browser.rs",
+-          "snippet": "journey/code/19-actions-window-7.rs",
+-          "before": "    )?;\n    // The page has one listener for its lifetime; JavaScript must retain the Rust callback.\n    click.forget();\n    report(\"Surface direction changes brightness, not geometry.\");\n    Ok(())\n}\n\n",
+-          "why": "Report the shared action route."
++          "path": "src/lib.rs",
++          "before": "pub mod background;\npub mod camera;\npub mod mesh;\npub mod scene;\npub mod picking;\npub mod history;\npub mod gpu_mesh;\npub mod renderer;\n#[cfg(target_arch = \"wasm32\")]\nmod browser;\n\nuse wasm_bindgen::prelude::*;\n\n#[wasm_bindgen(start)]\npub fn start() {\n    console_error_panic_hook::set_once();\n    #[cfg(target_arch = \"wasm32\")]\n    wasm_bindgen_futures::spawn_local(async {\n        if let Err(error) = browser::run().await {\n            browser::report(&format!(\"Cannot draw: {error:?}\"));\n        }\n    });\n}\n\n#[cfg(any(test, target_arch = \"wasm32\"))]\nmod command_dock;\n\n#[cfg(test)]\n#[path = \"command_dock/tool_buttons_tests.rs\"]\nmod tool_buttons_tests;\n#[cfg(any(test, target_arch = \"wasm32\"))]\nmod command_vocabulary;\n\n#[cfg(target_arch = \"wasm32\")]\nmod panel;\n",
++          "snippet": "journey/code/17-editor-7.rs",
++          "why": "Register the editor module."
+         }
+       ],
+-      "browser_caption": "The box is yellow after Select Next reaches it. commands feed the shared Editor action path.",
++      "browser_caption": "Historical endpoint image; new consolidated runtime acceptance remains pending.",
+       "browser_check": "journey/checks/browser/editor-actions.cjs",
+-      "image_same_as": "18b-actions"
++      "authored": true,
++      "lock": "journey/release/15-perspective.lock",
++      "assets": []
+     },
+     {
+       "id": "19a-viewport",
+@@ -893,7 +680,7 @@
+           "why": "Make the size calculation usable by browser code and Rust tests."
+         }
+       ],
+-      "image_same_as": "18b-actions"
++      "image_same_as": "17-solid"
+     },
+     {
+       "id": "20-resize",
+@@ -89663,6 +89450,10 @@
+     "14a-perspective": "12-identity",
+     "14b-ray": "12-identity",
+     "15-perspective": "12-identity",
+-    "16-orbit": "12-identity"
++    "16-orbit": "12-identity",
++    "18-light": "17-solid",
++    "18a-editor": "17-solid",
++    "18b-actions": "17-solid",
++    "19-actions": "17-solid"
+   }
+ }

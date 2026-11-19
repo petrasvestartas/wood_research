@@ -1,0 +1,27 @@
+import hashlib,json,shutil
+from pathlib import Path
+root=Path('C:/pc/3_code/code_rust/wood_research')
+proofs=root/'.codex/tutorial-integration-20261113'
+candidate=proofs/'presentation-release-cache-candidates.json'
+digest=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+assert digest(candidate)=='e28e8088d03a477396177bf486da97fe8d674df3eb248fbff4bb1d701b328137'
+data=json.loads(candidate.read_text())
+cache=Path(data['cacheRoot']).resolve(); archive=Path(data['archiveRoot']).resolve()
+assert cache==(root/'session/session_viewer/target/course-cargo').resolve()
+assert archive==Path('C:/pc/tmp/tutorial-presentation-release-cache-20261114').resolve()
+plan=[]
+for entry in data['files']:
+    assert entry['path'].startswith(('release/','wasm32-unknown-unknown/release/'))
+    src=(archive/entry['path']).resolve();dst=(cache/entry['path']).resolve()
+    assert src.is_relative_to(archive) and dst.is_relative_to(cache)
+    assert src.is_file() and not dst.exists()
+    assert src.stat().st_size==entry['bytes'] and digest(src)==entry['sha256']
+    plan.append(dict(entry,source=str(src),destination=str(dst)))
+(proofs/'presentation-release-restoration-plan.json').write_text(json.dumps(plan,indent=2)+'\n')
+for entry in plan:
+    src=Path(entry['source']);dst=Path(entry['destination'])
+    dst.parent.mkdir(parents=True,exist_ok=True);shutil.move(src,dst)
+    assert digest(dst)==entry['sha256'] and not src.exists()
+result=dict(files=len(plan),bytes=sum(e['bytes'] for e in plan),allHashesVerified=True,candidateSha256=digest(candidate),destination=str(cache))
+(proofs/'presentation-release-restoration-result.json').write_text(json.dumps(result,indent=2)+'\n')
+print(json.dumps(result))

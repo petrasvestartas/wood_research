@@ -1,0 +1,2162 @@
+[
+  {
+    "path": "session_viewer/docs/journey/04-input.md",
+    "generated": "d4cc38b51b5205832d4a083510912da629fd5f9433a15400d96b3dbd923f3513",
+    "restored": "483d1d380df57e99dc8a1f0fbf4e4643b774ae7c8ed5013825cd1fdf3c770336",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/22a-records.md",
+    "generated": "c1f9a0f8797012919bb760637e892bd4a13431714830da0fa2cba85a8c8b2395",
+    "restored": "8d6c39bb433a77016ce3075747fe8cad841ee98d1caea419497ccdbf16b9a42d",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/22b-session.md",
+    "generated": "5848f5f8bb7d2d77b68adaec8f4cf754e7fae6ba638cc1de0aeaf5b890570f56",
+    "restored": "876790f7ef2e8d49e334593885deb9023c4a80d67eeae524b4a968c108c36cd7",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/22c-decode.md",
+    "generated": "fecd4a9c8f3f558eb03340c1d29fe6669c5ffd9e09001ad4df7c447546ba6fd3",
+    "restored": "99cb44a58400471a9094c0e202e38178a79ea5efa24a7c2568172e892ab43bf1",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/22d-import.md",
+    "generated": "f774b8b5fcaf319a4bd0bc4d7a513496dff37c825b0f40c909457d1d9725b66b",
+    "restored": "4cb805093160f10835fb69c6b948da853f2bbf65c384cd96bae7a66f95e927fc",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/22e-file-reader.md",
+    "generated": "8de37511583072454cca9b10ce2a6f7fc330bf25146b43e5425650b6d870c88e",
+    "restored": "1f4e49250d7af49a9ebed9a8dfdf8e02d44414afe3661716e78f74eaa4a0e569",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/23-import.md",
+    "generated": "fad2c3fe2a776e5942bb295142beebcdb57d9cd39aec6b25409aa83c643eadd3",
+    "restored": "ed6a3073fd4822df4deb8d0a5d974e5521d615a3893680f6d1ce201fdbe4dd4f",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/23a-bounds.md",
+    "generated": "35fde08e0bcd0e6629fd36ad0b66a683f878145f1de55df652c2d5afd14fcb18",
+    "restored": "84fef5e398741eac1a7847df5ef8bffed4475e266d06c30a1a98b0a815539c7e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/23b-fit-camera.md",
+    "generated": "01904494991418423d85d3cd542161b9b609dd7221cbd3cf5137eb84ed243de7",
+    "restored": "3c3ca3e1bfb9d7e74edc2ab80aa59f6b50275ab6d74e35cc35fd713b40148b24",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/24-fit.md",
+    "generated": "47271966ce32d6e2cf5878bec63408c7a38b75dedd63a616d6020addfb999892",
+    "restored": "494f7c86824954c77be730d84d710c0c7a0d6f123db3cab6470862f52db75d05",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/24a-projection.md",
+    "generated": "b2f41b5cbd5da10f70dcf76f0e9cd100a835c325643e8e728279732547f429d8",
+    "restored": "fb612c73e80efe4b1162284b2003aceae78475297afa62968f29dc1291d9a6b5",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/24b-projection-actions.md",
+    "generated": "4ed8e5ce9c8d4b0017a2e11491257c94a4f68079d643fd4d8452560a0aa972cd",
+    "restored": "eb17dab2a4329eda95f7084127c854b393131aac4e2712a8a88f403fb26c096b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/25-projection.md",
+    "generated": "b5a3bdf5058ea74dbbcadb75b8d5013fd4f788417bb3af3943cf23c1489209d8",
+    "restored": "bc8701f625475413113d4a381265a300f7e71db2b20f06889c6b6511a6fcb8d2",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/26-selected.md",
+    "generated": "4832eac01f0ff92c189810932039570c34c0b128941ed06dfeaa2db01f216d41",
+    "restored": "2b4d8c3fef943154a064097097d20852653565819124e5e3b00ba30264e9117a",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/26a-keys.md",
+    "generated": "93526a1c7bc7b5a90dad8042cb2bef211659af6c8dc3d9a6020c43cac3d9e452",
+    "restored": "4293be8206efb77caa38eb3cc7e7f50e1a345e277165245189c58dd970c2db2e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/27-placement.md",
+    "generated": "04b6a8da020234f217e7421af1b0160288677d7f73a3562528ac3141266c179f",
+    "restored": "38a98199eec7948a6d1216305d5ea0a1dcf829db4ce4e817c76df428c2f27d13",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/27a-world.md",
+    "generated": "dfb41ad10a8fd39112c5df3418c5e91917c18bc8f4221c06dfd548000ebf5360",
+    "restored": "e67e85ef702183d7721815db0ec0c1b0890b9a3c71af5e0ee37533be31f9fc54",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/27b-model.md",
+    "generated": "3ae8947032c4d2fa169780f61ac2c8bd63c010fd677d97d5a95cab3cb63309ca",
+    "restored": "a0787b6ce077a62a465b5fb6e935f96d56181466872081817452a384e3aa0a4c",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/27c-move.md",
+    "generated": "308f135742798763e38c644763dec846cddaf7d3e363f338e75d58db6d90a9c3",
+    "restored": "da81750cdc5f37402c58eb4429830371eadff591554af3331d3590f1d9dd3ce7",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/27d-history.md",
+    "generated": "760d5b00374a71261abe036c1df6ecde69a4b53a972a3b6a1f71ce0c9f2b02f2",
+    "restored": "4e4374832ebeef3680354138d3f734065c0bc6401a3c25907be5cd3c3e79a8b0",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/28-record.md",
+    "generated": "40eb9f05b221a9b68f428f87f5510fec9061659cdec66e29fed7bf2a443f3be1",
+    "restored": "419e63bb467dd0a72eda1fe61c9e5a984d4a6d481da45aba7472ffa1e563c900",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/28a-imported.md",
+    "generated": "e3340059c5e185c3fa2358765ed9cc78d6be52c243a2dd5c26ebcb9ee31836c3",
+    "restored": "2f42f596148f7527a5b044ac2398dc89df130ac68efe7a3b43d3ea0b197388c5",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/28b-generated.md",
+    "generated": "5f3e917ce988bcf3ad7739f1a9b539b852150f8d3578c019f4206da02975ab17",
+    "restored": "fa72501b0ede84f4a4c593b503cb2e17c22a527d90fa0d0b80bd203525d4eac0",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/28c-ownership.md",
+    "generated": "7d84ecddcf8606910c2e35b75136c9825c3297341c9079b7e358364bf22cd250",
+    "restored": "a41e40e9bda2ea64eea7f39f76e46426f09b052d955f5c1f638ba4402468d072",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/29-identity.md",
+    "generated": "c9f536f4ff66a48b2d927ecbc14c7706228861dad037a3c2e637a8a832147166",
+    "restored": "c1024fd7431f5902f58b2cc7f5709b0bf2bd98541b9f0521c4aaf84a475e81cf",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/29a-snapshot.md",
+    "generated": "aec32af191d35670dd8dc6b56e36c91064066e1ef3ce66d42a9e6f1970b06914",
+    "restored": "7c4420e3d4498db26751691eef3ba7617b99dffb26c61de0a4991d7ed8a9fb0a",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/29b-placements.md",
+    "generated": "d0306791a2c9d78fbc577f97f1fda41814762a8608994892a5f6a2d1454d8e69",
+    "restored": "a63e27c320bb71c1c488e86bf971c798f429be3e100b601178eb9c28255ed7d9",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/29c-roundtrip.md",
+    "generated": "d2529835f6e3c258875105221dd14ab497bb185985d61d49dc54495c9c9f7f88",
+    "restored": "307fd93127ba387a3cc4d6edd5d70260f3b104c4e456da1ab2a8a35d52614f89",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/29d-save.md",
+    "generated": "c023a33150c36860e09976ff31613aeb46316dcc34b620f5434040addbc1ed4a",
+    "restored": "c14bd375a82d50908b27fe79c60382abab211bf96c129bfff22831894e061910",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/30-feedback.md",
+    "generated": "a66a6444ff4a8430d1ba1a5a36505a30341a81b5b97906823334d858d48f6f1a",
+    "restored": "045df25db9cb8df3c58a0e22e7a8436a5bfae8de9ebbe258e7b1a73148228adb",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/30a-tickets.md",
+    "generated": "5cdc15aff0de2e8feafa2e3cc11d77f096d627995fdadafb9e56cc80214db8d1",
+    "restored": "815d43fe3d21a427f3f1a747f697b44ba5c3a5d526bd6f2e9c5922966a5c5dde",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/30b-cancel.md",
+    "generated": "59c30d89c00491ac7f7d7af7f6e1f70db8a1155ee827e8c1ec71e423ee2a30ac",
+    "restored": "6bd6ae3b85bada5614d889759be483bf037123de76e2bb04bf17b10885495273",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/30c-replace.md",
+    "generated": "7d474cc2e010a43d05012b92e508996217e6f4f2300c293635964e7a5b3d1034",
+    "restored": "958e3b362303eec6a5f1303bbfc73386312ca71d041665ef331f5ee6707f114f",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/30d-bridge.md",
+    "generated": "8f6e719f0329739cc717ffa329cc986e761b03c8c13ed8980468bf59b644dd1c",
+    "restored": "f26e71092f63179e2feb0364461643dfd260f06e550b7cb32189b66743db5122",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/30e-recovery.md",
+    "generated": "036f03e17e97bab97c1d46827dea6dbdd737eca0d568f68faedf02ca6fb4ed0f",
+    "restored": "655801c390f1580cc3b793fc4131ac9d0d41e8ebea54423639debe7bd483fcb4",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/31-settings.md",
+    "generated": "639a93724cba9d2a9b7bc2364d25547130a813877dae9e73a93ac1678b51fcb3",
+    "restored": "ea6ecba8d655bd7252feeabebce1e1fca096d5a1fcb4324d45f9d788a3cd4a88",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/31a-geometry.md",
+    "generated": "17857aaa9ab4572c2089eef44a2c54bba79d5bf1c07c7109b0b80a5b038000e2",
+    "restored": "4af8f0f2a8b4e01c12f87e14a389ffcdf367f4f7e59c3b64aae854238ac72870",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/31b-cache.md",
+    "generated": "e2ee85b05c5f5999c4fdd3f53cb07546b82b41e41baea59181e543781a2696ec",
+    "restored": "bf23aec56715bac1553a17b673bb3e2774675fa3ff39e9ec9adb28e7f6e7e453",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/31c-incremental.md",
+    "generated": "eb7a8b151e1afaed7accb5afd9e93706f21f8eac120debd7fd69c4d68537fa7f",
+    "restored": "e327fdbd4f6444e20385b6241b0e3082579b9e1aac6cff7f9ad7d86f7a4cce39",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32-history.md",
+    "generated": "a3a818ba3f875474dcb135b4edcee946205689e4a4ecfa8c5e9d5cb56d43bf6f",
+    "restored": "b449bd86888addf25141e8f77565b2490773e408a28ef8e2b1600dfff9606ac7",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32a-cpu.md",
+    "generated": "53bc38d3a78b403771a045ee202816886621923c56a76f2c4290e963b5185593",
+    "restored": "459bdb6f683dab11b876e366b3f1e4eba898ca2ae0b308c68c8727c676984921",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32b-gpu.md",
+    "generated": "21fc74f6b68df1e143bf7ec305245087cd61b11ba3453c3975a95627ad0ebbd1",
+    "restored": "7d3c7cacad2e7f3f8b9880968bfdf29f96ac5026ab4fb4e024fe2f8487c49874",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32c-close.md",
+    "generated": "6442ba684ffdd6a797e1af20cb9fcfb402e34f74f552bd3a4b046a7b196da1a2",
+    "restored": "0dd4b658cb940d3b3dd0c3426b88db37bfe2deec4a82327212b75b0600309db5",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32d-command.md",
+    "generated": "81603da7d23fda6590ba9a187a0d2e7633d5a3a81c8fd8f92bf2caee37ecb093",
+    "restored": "dbdc125a490ace665c2d9d02845ec2e19701827d033bb19fa589f1227859ed99",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32e-release.md",
+    "generated": "88785e43f279101a5eca2f8d33b09b99c675505629156f31c9ec30fc856e171f",
+    "restored": "679c57319571581953a0f53a8e35e1901ae62dd96cc7ca3c50b8dedf3f102871",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32f-metadata.md",
+    "generated": "a88cb5cb5f82f98ef8aa21f255bc0da670af2890c0eb3404ec939ae0ea209529",
+    "restored": "c2773f197632fa818bc7d7d6f57c4eb492b94e5aa3f2a77176232a9781ab91c7",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32fa-access.md",
+    "generated": "292bd46de189f3655626e20ca23e0dd5b5cb159ab12d43dbaadea43184cac95d",
+    "restored": "93ebd25b4efd007c43e5def6c4b03db896749ac8a14fad66fb426f42a9b61a8d",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32fb-boundary.md",
+    "generated": "af2529015500a75420a56d22fd6b207845b0ba4406f49107a7da1e2ba9ed7241",
+    "restored": "e6b641daf61923a10baaccf4af34c029bfe4a19415c958e086a1fb029adb9c3a",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32fc-version.md",
+    "generated": "87467b45194945c46234f50672c06ea7d73ec85e8eecb660c960f6a01b4c14d3",
+    "restored": "f8f4b77f6ba01a75a049c4da88425df2830d440744a555b9611fa18b5f10a2e2",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32fd-origin.md",
+    "generated": "dd57e5e3601fe6fbcf1f2bd6ebdec9ab49b02c48c3d444b2df459b7ef2b18896",
+    "restored": "64c787f727b2497138271c5170cea26936cdb6629d0b39851f5a1d081df1215e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32fe-location.md",
+    "generated": "60007e72cf49d9e326c82a0a0a14b70b94225655d844b53adff663ee28641253",
+    "restored": "bede9460152b195876039fe14672b37d000ff90a7cff7ba428783a283c792e03",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32ff-bridge.md",
+    "generated": "9d5fb4b1e992a9c1da40a9d1a476ad3ede1c9044debaa98ed341397044c19b08",
+    "restored": "f962b3c33e2d200875ef868c2120f5808abda2571c0b583430a3768f3baa59f1",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32fg-state.md",
+    "generated": "44df46a7ce0de0afe0d8ed725debdfd38d1b4835271668ba4c1ee6922ef437a7",
+    "restored": "d40d720580f0d23fcb73e7005d22ebbc8c0e4f0d4087f6eacdada2609b39e83e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32fh-policy.md",
+    "generated": "07fcbb836f5a947045c21fd3c9a05de9c6608590da72d8833a03ef174fe8f00d",
+    "restored": "42694ec5d590c0949cc446d2014ac1474e21742195a339675fd82990cf675217",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32fi-history.md",
+    "generated": "8034373342eb4835e31d6c140350b0f0931ff9e90e23f5eba36f72752bc6292c",
+    "restored": "1bd0a015bbab974c7d8689bc9e88aae677dbd5e04de57e94b64f3414f355f625",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32fj-proof.md",
+    "generated": "7e2ad47061ad460e05eeeef379af797e008c3147827d3a8960383e4df26e8672",
+    "restored": "5fa0b4cfb59dec97603b2cd9f66d9339122c75443ba289abd3c3e3ba5ac3ea4c",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32fk-command.md",
+    "generated": "90e80f28f5876ec40b9883081dd86fe9ee02ec2b7e673111c05ce7a11b5fadb1",
+    "restored": "88dced00ee81da7936a6f37b6577ef489971bec6f479ddf690060ba6e77854be",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32fl-guards.md",
+    "generated": "3cdaca81f5c81bcecbc10b49f2d2bddd06ca755bf1def8a03a3481e002770879",
+    "restored": "1a829da7acf301ee929c6ba8a67d26c288305822d2abce7bbc6b95888a4589c9",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32g-keys.md",
+    "generated": "eee2d7df6d8983160daa2e3b36dd7a4f815eeb76a3787b1f6d56af2fa65b3c38",
+    "restored": "bfca3ece443258f66035a1943082fe5d613c5fc4da86877a046e74431aa0df9e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32ga-prepare.md",
+    "generated": "b89b9180293252263c49390ada3f837848e196a4dacbe59124df58f79fd2db38",
+    "restored": "3eadecee7675c6fee38741377f407a8cd6004efc72ff214c44debad9fe8759dd",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gb-adopt.md",
+    "generated": "75b1a48bd011693ef0e0ec61d16cc2cffce650503b7ec7a4d9efe58e0b366236",
+    "restored": "945d8fcf5246ffeff62f22468557d03f544fdb6e6f568a4e95f411fd5e8e1ef1",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gc-roundtrip.md",
+    "generated": "4f561b730ac72bcfc6277883a3663894b96b936d99440aaeb1039295fcb7f239",
+    "restored": "6c3e263cdbfd77256648e602732cd21cc1e18ba7c42ab83935c40bd23abfe8d4",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gd-rejections.md",
+    "generated": "01d0752c81f820b56a273f61991bc13f13d5de35b5c15ba6a0a37ddb75d364cc",
+    "restored": "8ce48f60946c93d970fa3da4df081f8a30edfdd87bab52edffae55b9b9f920a4",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32ge-stale.md",
+    "generated": "3db3ff0c2c3578f65ff573d1f63deda63c4f3ee397dc0d01e464ebe5b6a6d4aa",
+    "restored": "f4f99840d5633a76a3bfc006b54020e21d37c6f6c4c2754bc2f36ed43c0aad3b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gf-request.md",
+    "generated": "8a42277edc84c0b9801b4dc2cde6d4ea910b4ffeb46e28cb834f9884d01d2c60",
+    "restored": "82a184a7963854d721a920eec6ea14951ff6b9554e2071c543c591aac65af2ae",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gfa-ownership.md",
+    "generated": "521eb4b6e99037d3b03ad0204d6e33e944a9f191a135f85d12572c7fbb8091a7",
+    "restored": "3943a6c73d805f94b9eccb108cf0f63579e5c2e2c74f2ace7a31aba334f96082",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gg-fetch.md",
+    "generated": "f7eb50ad65faaea034fbab4c4dc69f97b8f5f943225c507c22bb60a24b063676",
+    "restored": "a6657bf6e20bd3dcf443d7eb05e4a3602fdde91778a5ca299a1f3c99647fc943",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gga-flight.md",
+    "generated": "688521e3707ebd87357ff270b0e86ae8f1385175267b66675742b947416ff3aa",
+    "restored": "f2103ecc47b5dc0a43ae65fc46915b308b8ed3e38a4bcabbf8df3c7fbe7a8326",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32ggb-delivery.md",
+    "generated": "654b68c2b3ac63e5f22b7200a1197b4e68900ad94ffbac7edf2df03128499f4d",
+    "restored": "b5c35266c8f3ecf093a88f253b940e1f798415d634322541e9869604cba22304",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gh-command.md",
+    "generated": "9e096de21cd7f933f34a96bfe752c08be75f94ddf97a61737b65578e25611107",
+    "restored": "53d4dc3581291921b5ebf83d2f7ba3dbc3819bc51ca73b05e52b094c24075be1",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gha-cancel.md",
+    "generated": "b9124ee9e9f86396d67b2e6a301f2561c7acd73b57c3e33bdc921dcdfb787256",
+    "restored": "358f6c45367fc5aa1a2072cc1cae982979786228f23829ebd8970addc8c6caf2",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gi-capture.md",
+    "generated": "4e427f844e726ffa174b410d0c2ade4ebcac5246b8afc66b16b148c3c6618527",
+    "restored": "1439e9ac29e31925699f1dce55aaff95d9e5a8f64fac40bfdc6748f74d8b901c",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gia-scope.md",
+    "generated": "f0332cd328efc97a4aa29e0b5730c136f92c801db11cb4d74def41f0f815306d",
+    "restored": "ff30c9ba47f28d61b2f7f3f06d38dd9a39089e84f06c92f1216e56e57043f19a",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gib-move.md",
+    "generated": "4d562765411b7bb29b078c1ffafacd3f97e817d5cc8abb60b072f50fa1b47a3a",
+    "restored": "cd96a45df5b32e88820a3f5fc905ada20bed5e724cdc4f8c7fc615d6084f95ce",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32giba-delete.md",
+    "generated": "0d9c11621bebc07f08ca6cae69462ed988110ce6526a174694784d41dfac7220",
+    "restored": "c04eb36d7bf8e509b861d419ab2f57aac028b6c2eb5674a9c0613c037e48be6b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gibb-reply.md",
+    "generated": "91a6b5a4d00b2a4a2f8efdebec27cb77f9c08380bd49cc133e05de78dea05c33",
+    "restored": "1f449ec838fafee39e739dca7cdde6d1aa448cbeb3f1e93f1bcf5974ae96e885",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gic-owner.md",
+    "generated": "a7fb783282cea27b9d60376acb29cbcb04210b8b5b69ad7ae4b795b1b5c06c46",
+    "restored": "3ddaeeb16ea93bea3521746469b48b60edec5d8c0700ebe1020bc1f95b58b4ac",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gica-reply.md",
+    "generated": "3471809228a42bf0260781b60e7715216bcddc74001711825ee2f8666280ae41",
+    "restored": "5ec48e448e7e9e30aee493d75278c0d4c9013bfb4565791a5dfd4e5aa611f477",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gicb-bridge.md",
+    "generated": "e9b1e4eee299a4692fd428c32c1c0af68a0ca76fa96ad2c2038dacab2cf14e26",
+    "restored": "385c493ffb132dd95a7002ffad8293fff9c645033c627b60bd8267cebf9409bf",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gid-complete.md",
+    "generated": "7a4e7b9580533f3b78bec9c59d7f553c08a15d44736c45de0976d1c659908284",
+    "restored": "882ab811135c05bc2ce5c828f2cd33a933093bae197de6addb4f98583933d9f2",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gie-response.md",
+    "generated": "e8a664e19f44799c482948c34b7f4a3ff8d226a87ca7c8d00cae2c14d7fbbbc3",
+    "restored": "51797af7d9cd3ea3a04f958908ec66d5dbcb85e79c7b57ec2c69047168ab3175",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gif-auto.md",
+    "generated": "9f66f2e47214605c4a862070346d8654f6a6fc9addea51cb52692e10a5f5e4b1",
+    "restored": "67ecd2eeadeb97bdc7bb536330c5715954d77104a204a4317c22d934a9c9567b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gj-precision.md",
+    "generated": "a2e4198528dbaece043b25cb03e0b0d2d5020a08abd452db3adcd958a48c2945",
+    "restored": "0d1eb9bc02799699d34da0519738f142fb02ddf539caa62527f9b40c8aa985dd",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/32gja-failures.md",
+    "generated": "a9283cdf672aed66df59461263846124fde4d0fb821c3982a1a832449cfbc9ec",
+    "restored": "734e73bf699339ba3a80f2f27318769c295d8ee490181e299fb2ad8447d18c4e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/33a-runtime.md",
+    "generated": "8953a47277e86e0da068b1a58a27c9ef0e2c0e6ff34c68561df834bfa4741afd",
+    "restored": "c0fa158a58d15c09a6f5ef91a417dadf3e19aac4bad0e181aaa12420eb0c91dc",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/34a-stop.md",
+    "generated": "8adcf486645f547d1d6ee775c68554e36ced67aa5213f07d20c7e56b590f0b2b",
+    "restored": "dd4937875be39a6654309b433efc6deb2144b630e7223fbacd29bdfd8387fbd2",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/34d-download.md",
+    "generated": "88cae95a413ea1cf71ef09a4cfb301fb0e64537458ca66edfd3a8f31a38ffe76",
+    "restored": "6639ce54657f08d79afd2263763f10bedc90eed984d3412846e935fc3ab92cac",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/34fb-store.md",
+    "generated": "fe9e8510355db1ed7b71480598e212ca819d99b3afa54c87255466b005242363",
+    "restored": "0b6821d329430ed71de64b39f30916ba39a4290b5960a8fb6c3f2b0e7c5f3044",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/34gbca-startup.md",
+    "generated": "e6ff8e692a97a20c607c874f18d8cf907bc0c93dc44b94df4cbbc42e5f94ba22",
+    "restored": "d3c27e80dd8801bb9f87e7abe03fba1eea1735fed22737783033da3a69d509cb",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/34gda-browser.md",
+    "generated": "47da72c9f4c184d6a44f40ae35109ef8cb2b7b107a4031589293544376bfcc54",
+    "restored": "fbb5eaf676f763c89f04a1e91454ffba7a95f1250d3d33189e1773312907c478",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/34gdc-startup.md",
+    "generated": "915d667ddda5598fd7f6285e75a0cef94dd0104c9d9f3a3ff8e2c218af219f09",
+    "restored": "10821125f7664c71bc72d1d7d3e0c3c16b720321e00f388b79c64d3e983b8241",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/34gdga-revision.md",
+    "generated": "75460006ee410c5cf44d3bc60fd8303bbd1842abf2cd78ddccd65ffef124ae42",
+    "restored": "2edb14460aa94ed7caa1cdfce08b0cf5a63cf42747de831176776bf8a47cb803",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/34ge-owner.md",
+    "generated": "519119dc6fb2f5d07602e0fb7712d18947b14a5c5030decc9cca4969fdb3fe75",
+    "restored": "4cb8bb13c5edd734cba812367df338250f1316bb003a0f33a6bd1d323e42f16b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/34geb-reload.md",
+    "generated": "b56de2d8c1c1bdfe322e2b4905545bf419eabc4eb36ae444e8eb445a3034879a",
+    "restored": "95e5f7fd2afa6ae183cba2c88f753f13334cc7a1211631ec591e47bfe084433d",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/35cb-render.md",
+    "generated": "51b163d0334848c75e9f7bbe3ead56c6d20c2b6de4b00851478b1e0ae809c059",
+    "restored": "ee019e1ff8fb7cc3e8cdfbca26955fa8f6dd0a9cec475c80737d787602b4cb5b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/35d-input.md",
+    "generated": "eb1f24e2d3ee8aa6e69765f0e3e11af2879b226b56ec69017d35fc9ead90b3f6",
+    "restored": "536dead95aa5684a23025b15314275041997a17b6b2603972afc2e39440812b2",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/36e-input.md",
+    "generated": "63890f0b30914b7a4af2dd2d9c3b8a15a34018283cc0fcc4711da573b8f1467e",
+    "restored": "7590316d23185c79dab04522628f4adad4068a5b16ff221524a524734c31a91b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/37da-input.md",
+    "generated": "7e7070c1abefe1cbb472e351fe9366f017bf03ace1f245c4118a83cd953d06b2",
+    "restored": "014d649244784b7fa7fdbae8a7518a5b88f03ee0dda7bd3927515decf68cac13",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/38a-samples.md",
+    "generated": "3538a8e74912af89bca80bf37de533e83c2f22483399293d1989d2b327d7dbf7",
+    "restored": "cb133d6c9a6d6ed27d5d210d6707e378ca372c9ddeadda129c3d5f1065f35b35",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/38b-source.md",
+    "generated": "934e0f3ab6bb4b6e10ebd1469e3a09fcdcbc6e76a8401a06aa4417d592fcdade",
+    "restored": "2dd300b8d1260888f6b0e8bda31d27b1a976518f534f16e2360da90ffed81d20",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/38c-controls.md",
+    "generated": "64f63c7c91f817525dd084c81e36d2b477778c383a050b4553e7060434ff9097",
+    "restored": "56167c063589b6fd0d9b75069e2e2ca197575c987901fc3517979d3e6b697c81",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/38d-input.md",
+    "generated": "160363ff2321b6a7329864c908a7d8cb5c64e43f3f28e0662cdb4ad10b0c68dc",
+    "restored": "574bfeaaacf80651e0120710cc7f012b257520da090f307fc9fd869185a1e1cd",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/39-visible.md",
+    "generated": "11b9775f8a326dc310bb468c27ac47066a28bac6f2c7037e13ceeb509c26e3db",
+    "restored": "7cd1ea52bea47522d223c900061610400e5f628eaa88db25253c3ca550b5dbe8",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/39a-depth.md",
+    "generated": "1884fd23144d82132a40c5b91bb6d65901f907073f771c83bb521c60d03f8f86",
+    "restored": "e7e01c3baa428a23fb08deabc18b6b1db262489db6b45b86903ecdc695480943",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/40-colour.md",
+    "generated": "b7813df898ea36a707786c0bb363f5918a63d0071b5ebb29ee4f0aac8bc69910",
+    "restored": "bd55e863898a4c8224a1ce72e2ab5d22720c2535df91a016bac6efa5db0e751b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/40a-input.md",
+    "generated": "0d73c2aef4854ee1acb257d5bd12b3da04b0d7f359948721286a188d8410db75",
+    "restored": "abbb8ec72346ea5d5fd03b1c2a0f3de4dd8e7db02857c415d255747535e22fb3",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/40b-indices.md",
+    "generated": "8d572d879f39c39760f234990ee8ef651fc8d60f7a8525ce1b2c13868036ac32",
+    "restored": "8fc5ec7fe0740f0dbed8d9ec13f7ef1c117cd314e2d076f2b542ce70b4546604",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/41-normals.md",
+    "generated": "d1c0d970b8df644a5427d4f64cbbc6094f0a2dbbffac1c7cb397653344393084",
+    "restored": "e6eb44641b714ee71456abf49f1569b4c426099458d3ecc8ed70b967d28f866f",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/41a-placement.md",
+    "generated": "346e6930aafb26308a340986b3a3b99d08c8b843c14c4b18cf9fa7e8246f1c03",
+    "restored": "6a4b18c90b85e7432dcfccdccda64927b4268496a6f4710e123c1801091524cb",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/41b-drawing.md",
+    "generated": "2d8fa170131a90ecfdd4be5a9aee18563c54b54bfbe437eee6fbedd2b4bc01bb",
+    "restored": "0de52fab902fd4f05b9376e19caa3c6cb3c32f3b8a86efc4c1a7122d9bf6f900",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/41c-view.md",
+    "generated": "0b7a3c1b98a605c475ff30257b20f55ec0af682b1e3770d1f3d5deedcfc28e65",
+    "restored": "9a176188b3c90f9863deadee6373fbcd1cb343164eaa6a1a7dcb02261a108f00",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/41ca-input.md",
+    "generated": "b6a179e443907ffa6468707f0e760a30afaad61ef1d2c1346c1bdcb2cccf7a37",
+    "restored": "a65fce185b992c16eb9280667f41797642fd1aa7b5e5adf0ace613e98d1cc82b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/41d-grid.md",
+    "generated": "441724e0321cc836f45cc18e23f42e31fd165d14e0bc5b341284ed1d656a3ad4",
+    "restored": "cff0b2141e208b4e7333608a3ad81f957b8a14c02932bc18aac4375e127b00f0",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/41e-drawing.md",
+    "generated": "b1595620d796611b5340f4fc65798159dcbccba47f6fbe078b938f432818c650",
+    "restored": "c18529f5993e149b5e4df4c3eaaefbf87b57dacdf68571528c6a1423914e2fbd",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/41f-input.md",
+    "generated": "54edc9d1a14fc4af5b81a81f974ac8ba9b6e623b13f9f58856552b17645c9140",
+    "restored": "80583716798aef1f51a1b6c18d3dd438a0e2012140884758eb2661cbadf864a8",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/42-window.md",
+    "generated": "5f5e068a9e93022761380ad0d4a41477373c749d01ebc594c3f570b83d42e5db",
+    "restored": "e6bc023afdb37a8b362f2299dfe72880e087fa7cb8c1218b4a056242881b4369",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/42a-id.md",
+    "generated": "9900d949aa74d14837b0b8f3e096a7c3f1a9cd5662806dca245683cf7ea0f9b2",
+    "restored": "3cd77e6af23c8f7a1e223fb670134067f9cd65a01b4c5ed5070a5b8db22a40ae",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/42b-ink.md",
+    "generated": "dfd63a0c5ebcd662043ece92475fc1c2eacb23357b6309c945a250c0a946cdc7",
+    "restored": "c261383543350e5e1ce735d932e1bc64c6848c8e426bf0c9f8f74f86106000bf",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/42c-path.md",
+    "generated": "b6717f3a3ebe41657f1fe3c608d24107a6587cd3ef90a0a7ba6ebb3499e8fab4",
+    "restored": "e31753f941d5ebdc498c7d228f4ad2a91008455a8d8e5477070fed5c2627fbaa",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/42d-owners.md",
+    "generated": "359c6efd5a03affd40e83964301b512bd9ed4ed0e4ef6a7a13c3f49bab44de85",
+    "restored": "6c5d2aa9cdaae604f7c95cfc9be5708b43f4a520672bee0214f90d8b1565d961",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/42e-pass.md",
+    "generated": "1f1a32a1748aa84553d545ac0d6308ac062b792a548f273c579dc87cb3508a0c",
+    "restored": "de314e0ced620529c25a17af4c174ae59923b1a361f0bd94be996821322cb210",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/42f-mesh.md",
+    "generated": "822eb45d436b4f4c62061d9274187c29afab37d637866523ccb99e7488dea6ef",
+    "restored": "303537577a49d8568437e9155a8c90eb36ade16d110f2eedb1def07d6d6d95b0",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/42g-image.md",
+    "generated": "f03dac9b7a6a2a0e23a11f649a465a892d274b79c65dfcdc1de1aa01cd7ed049",
+    "restored": "0c9f6ebbb49ca58c9cc6f5ac09e2a23b76dc1f6b47dacc8f0797720ac8087f60",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/42h-owner.md",
+    "generated": "75947621e791045f1bd551292467873a70cba16296e53549e81a2a861b3466d9",
+    "restored": "89bcc75e65ffb096cdc6884500cc2a53362c97e31b7a5c666a8778d8491daf0d",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/42i-copy.md",
+    "generated": "3bc1830808ce437c1f46f90b24fec09a99fa7db4e62ddb60385a793c686ac890",
+    "restored": "2447b32109fb06da8e009bf40d3256961e7af7ce9af9862c688f290975821d7d",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/42j-read.md",
+    "generated": "a86bec15d8d53069f894bf74163ff937fe99de7476d14dee792afdf127731ef0",
+    "restored": "cc36463e9b201c7ac069240998e456674db4448ed06d1644c122b8f485daf823",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/42k-input.md",
+    "generated": "bf09ccfc19ff1de118ea1b66e1fe50a9fde17540f57a8af952c76ea42f0a01d7",
+    "restored": "020ba9380c25c2f359544b2504119bf2b5277bc15dcb27be6e942da0cbb7dce4",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/43-ticket.md",
+    "generated": "9c2ad891bca69f0cc047e6c74675203cb426226cbc27e385be97b0586cf9fea7",
+    "restored": "255d13e4638f28232f400820d359a41db73735b7279ab76fae42f0a3d2394f77",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/43a-flight.md",
+    "generated": "7e6b459077b898c4ebc0d5984df41908bf1b2704923e886a879b55af607335b6",
+    "restored": "2e7907aafcb76bff6e22e7759178593edf666a9819a14d4908386bf7fae1f1aa",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/43b-view.md",
+    "generated": "5efa90562501b1d2c4747d94da55b4743ff5f29681be14cb874709a4aca0f2a6",
+    "restored": "af13ffe7c5d65270ee83046f84b5c752342efd74cdd6b6f401e476322c2b7d00",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/44-topology.md",
+    "generated": "c7acc6e38492ef7129040e9957d924b19cab6cf01435ba438d05673df6dca547",
+    "restored": "337b2c237848c50b0d437797c4054cf1732bbda292001a6fc3bd6be845750d9f",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/44a-tags.md",
+    "generated": "a1d4f72e3c47766e25da15584db32c89164ee052e5c8b862328e97ef00ec2152",
+    "restored": "669f8f3714b8404fec4fe530698fdc6a814ce91f96678ea410f89ba59539bdf9",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/44b-sources.md",
+    "generated": "be728f9dbe469c565ab61b97c3f321d71a543f09343fb66131a60405bfbd880b",
+    "restored": "1ea0df88072c9861aabb7432f64c95fb74a76733a825eee7f10a7056da102e6c",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/44c-resolve.md",
+    "generated": "a32cc2bc2f5458c1d0c8add6c05c7a5b88106245d558f1d190c54e46ad629390",
+    "restored": "e7224bcdb9ad42e41894dd419e34fe9e1987bd2ea1861f7efb7c001e548bc222",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/44d-pulling.md",
+    "generated": "90d692ee311960a03f0ec3d25c96b1f969e73db758ea62c55bebe8f9c3335dbb",
+    "restored": "d5d9e83f4fba14c7285d311b187aa11128aa616f8c29073b79b721181c0359f7",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/44e-pipeline.md",
+    "generated": "4ae22e1cef56e35f89c053fdff564f39a69edb5371fff4a75f4141f3f65096f0",
+    "restored": "4fe0ff5e08952dc210d71e8502da68465bf599d0b79fbb97d340431bc447516e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/44f-metadata.md",
+    "generated": "8905d8352b368e4809216f8176f856caeec505a54f926ffacc21bd92208d8771",
+    "restored": "4e579d6e2035d942533ee180b9d2b7b2da256104b362725feb15259a6e93f7bf",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/44g-edge-ink.md",
+    "generated": "ac4b83e078e9339770c9f5b682a0cd209f8d9a1fef93aad106b2f7e015161dc5",
+    "restored": "b4ef296204ce3692304fb1afc6571fd47993340a19bc449aeb41ae6ec6eb43cf",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/44h-mode-gpu.md",
+    "generated": "83650bbb9d66409f4b3c6f031785c1d38c12a64600b3c6464e265fe71d2171e9",
+    "restored": "f8a705de361d7662d90d4b67f2725961895d4c9b0bda68425efc00f98cdb42b3",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/44i-ink-highlight.md",
+    "generated": "df5135fc04b2eefb2053bc75718c9df992e2bded9ae42d1eaeb7cb453337b63a",
+    "restored": "79cee1c828f0439c43b39319c081b4f3dfa8a885a54bb8fbab7dfc376c966439",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/44ia-original-ink.md",
+    "generated": "6ac7c07c59d56614e2244c9bc4d3d11c0ec37745e55caf4cffbd23e57f1a02c7",
+    "restored": "4795a9b6f4920c31a08e4535f133bd88901a3346e5622b0122874744c9f5b056",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/44j-face-highlight.md",
+    "generated": "975c861020f1eea48dcccea1096a726b2b9d94834a58843ffb0e383af2c46a33",
+    "restored": "c8ce3cb57696ca3ace3164db5606af859bbb2a183b005be26a75182b71e0932e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/44k-selection.md",
+    "generated": "c32a65779b5b07b2179424ca628745a906f3c9327af287e36621443d700619f8",
+    "restored": "68c4492784a217acd6a3753e0bd18e1f28a649ba659271403ffc29e384535b50",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/44l-input.md",
+    "generated": "4f9bbc4276fae11f24d733fc82954ff14de70cf5c7ae46fa29db3c4e25cf7317",
+    "restored": "0a5610325356abf8ed51dfa32a1536b106b6af6029ba2c9add1d6e99a1349ae6",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/45-order.md",
+    "generated": "fba27b087c3092d3ef58f678c4d41541d6d7ba5429e5a9e0236686253ac2aedd",
+    "restored": "a4e49c0e37c42e8b68dbe16f5d97e75cac6a8c6335490d76f6a1459260e939c9",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/45a-batch.md",
+    "generated": "9c5037fe8d3a0038620295012d54eba7911cdefaaf2e3cbef0d9550c1917aaa2",
+    "restored": "fc91ce550f01e613e7b8dbaefce3aa624b4d1b1c4df30392edb98e9d3f51d471",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/45b-membership.md",
+    "generated": "6c33ffd2b0f70bee5b4084ebee00006a8b429a7e87eeb4620d45f21a00c222e5",
+    "restored": "b930ca98fe47a8b52d41177e5ed91272652e7681e6fe77398b90574d04bfff2a",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/45bb-cycle.md",
+    "generated": "de30205d56933bd40e019cbfb0562069f2492726fe10b0a5380970cb012e01d3",
+    "restored": "ad0970cdc347cd7aae6f31643eeb01e328bea503be5ac647af389ff350f11a98",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/45c-input.md",
+    "generated": "8404ac33e0d0bb566e93e0b87a9decde1d4bd455345de939d66d53fa2f622236",
+    "restored": "91dcdeaf844e7fc0a61e0ce92321ec98ba39102189482507f4b68239d1c2fbc4",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/46-tool-panel.md",
+    "generated": "f80e9c985c17b7bcb05f170dde8c3e6474c6015e2cf538d9e020aade3aabb306",
+    "restored": "de7c86b823beaae010feb738ce9fae42c3aa0b77489a6ad8a84842e25636abff",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/47-registry.md",
+    "generated": "205df02504e9b78c487b060a6bf522efd6bbecf5520808fd4fb009fc144dc265",
+    "restored": "40b5d168af1b6a1031809801cafb0ce16b8b658ec28b0c7faf5eedde6e7fe025",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/47a-actions.md",
+    "generated": "120d859b76f18f0aeb9206a7b473d308a1062337b4b707a3681739094916a84a",
+    "restored": "362c8f13018210f714257d1033e18f4a8c8ecae9224ee3eca1a2eab4da048333",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/47b-parse.md",
+    "generated": "75e0225bb2d57949214b74d42bff4e4923a52ceba54107efbc55c3542fb266cd",
+    "restored": "daaa28ab4690ea84d14a8acc2959438c968f94bb7500a39d29a1b9ec9184cb52",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/47c-route.md",
+    "generated": "445953a60e34db0d0fb5b526b619350537197781029c0c9e73ebe3d9393345b1",
+    "restored": "c48eec659d9fd2d465908b82368ab169555f90d8985f223f3beb05559c8a38ed",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/48-coordinates.md",
+    "generated": "066627be856417bc43edaa822c71266c65887fdf765f8457ceb870a472e352b2",
+    "restored": "56c98290591a8eb2b21e7d723800893a91d55e09ca19cd63a16fbbdbc5bfe171",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/48a-draft.md",
+    "generated": "508f23c703f9dc8dcc3dab2d716aa377295efef2811792e0831459c171ba5dd5",
+    "restored": "36d67cff5cdc2828d20f20e2fb9283fe4e4392e0f7ef9222eb741042de4b79b7",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/48b-preview.md",
+    "generated": "a7909eb78ec586548bce7e80300cb7babdcd64d7d0819f73b09de3ebb5befd36",
+    "restored": "8fe6c9333adba0bdda0fda70726897e15d16de8951cd4e7a579da9b6926094b6",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/48c-commit.md",
+    "generated": "472189565f953775394bb594697d6e32d08bb05a26c10fb6ce75efcc22307094",
+    "restored": "ea7fe8480c50680f3f454d6dd533027f52d76468669e23c906e1337f33990fc2",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/48d-input.md",
+    "generated": "a73a554920702ba782a83e85d2968125d23292969402a0c2569b7552b2452094",
+    "restored": "610c72e171400188a2ab8c0dcd91f89b46fc9794f8301e5bc3e7569e701779dc",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/49f-input.md",
+    "generated": "9174846ecda21fd0d4730fa57adaf6e43bf07afe0b09acfa50e405e380323600",
+    "restored": "2554eb4728770f996950a5f46846c8b5846b4352683255c69b570ebc9ffeb7e8",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/50b-display.md",
+    "generated": "5cd8f42a286b026e4eface91b0e87756ebe50f0d6a49ae165753ea2a1a12a2be",
+    "restored": "efc872f0b965e2414c6a9d49fbaa1a1ee4e5eb775636e4b651e33ae808c5bf9a",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/51ez-pack-and-sample-local-handle-vertices.md",
+    "generated": "781a7c04c1e0222fae89a4aa1510350296fb10faa22a626effab1f4cde41ab3a",
+    "restored": "d19a185ce2a81d34b5c6fdac13d0e8c70c86b4b4e527c35236336498783ea8bd",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/51g-layout.md",
+    "generated": "f4b586bb9d982063bf3d10d306560d097fde2a2f9ef8fa06c51fbd95ca3ede06",
+    "restored": "3142c5a706747c9d39c44c4cccc343e0a182aeef4f0743478a5d608148534159",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/51u-selection.md",
+    "generated": "9a6239b3d63b01220bbbaafbfc23561dc4003f88299a59064f912622292c89b6",
+    "restored": "71b94d4a25223867ea53c1ef5d1fd4a416deec1cde1c5979b1f0bd1aef86798c",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/51z-number-submit.md",
+    "generated": "e70f9735d45a38c59873db1b0f03897e04c3448bcc92f8bc4686d32190939a2a",
+    "restored": "66baea134f14925878b1f4cdbecc874317d8baaa0e9141eaf6bd3bdc9e2c8549",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/51za-panel.md",
+    "generated": "17e7bdead75a03eaf0ee13f99096a574688fd1344de1e6fbdfc7f85747957827",
+    "restored": "8fb010d1cf0f30d9d9d034f246b93b2169ba3ca5c8decfc8c75a623522d0f4d6",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/51zb-presentation.md",
+    "generated": "50dc5d140a7f139e6db898127561564be0c85ea73f24a2e62947c01220ab3202",
+    "restored": "b0730b8a1d27a1722352bdfa970bd7e5180ee5afb4021ec1cb5b9fa7b39d65ba",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/51zc-pointer.md",
+    "generated": "179b4ca973dee8279f5300ed1faa0f2433dbb7db36125ab6a6ff398de5d5eba0",
+    "restored": "cfb434c9a850b2151e8aac30ddc026c72bf7e097d404200f952295996e956239",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/51zd-interruption.md",
+    "generated": "2ba399b952b378dfb898a08aade9810905dfb67c7aa5c0ca51a2a5117069b30a",
+    "restored": "634bcb0bc31000decbbe65dc42e40dacd00cf45446042f16f0760174f7ce373b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/52-tree.md",
+    "generated": "ebf2d357a49509a6e44b00afea21f3273d16e3432e7513c57714a29e6a12c68f",
+    "restored": "ae1857f2e7a32728e0a90f05bb16622d89fa0b10e6065b80c374046125ea41ab",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/52c-load.md",
+    "generated": "a91d4f3912cf5fa18ca6496f949b0cd171e3ccb9388896be1785bb01054970da",
+    "restored": "88c2d0360afc1668a7b246c5f48c7744ae03fdcbd65104e7866521a448b21098",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/52d-preview.md",
+    "generated": "75cece23ead280a3ab52aec4938d673042f0306ca51ea520518663ccf85d8589",
+    "restored": "a400ff67ed6b7eb31aa63aabedebb28610716e99718bab772de0f30b0d601841",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/52j-input.md",
+    "generated": "051a80f26d061ae19cc53f9c7841115a97ab18de251da34a230ad88b798e987f",
+    "restored": "b2097babea8f519bf11a1f37f56183362af6b1eab88e253a745cfcf75148c891",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/53a-ids.md",
+    "generated": "7559578540603e889a7301c018d3ae4e2b92e118cf739f1590f29b7be21a1760",
+    "restored": "47f8a84fb477c268b0ec8f56c05583e8f54194ea882676c33f7b78eb1611def7",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/53bb-eligibility.md",
+    "generated": "71b97af604f6027be17f352b96952899ed395e63c641b14ab6e4e04d26a686bd",
+    "restored": "c61d26ffcb5e448398d3615327b976772dfe0f67b114031c99e51ce5f5e4fa17",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/53h-layer-targets.md",
+    "generated": "8f76c5b23018c6e23d75332914c5cf99341a81b2dedddaef39f95fa6f1ffd2da",
+    "restored": "dce6d0117f728e81ec00f881ac20cff4b7624f19a463f3d71fb5636e1367f388",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/53n-routing.md",
+    "generated": "e005d657b356fac480a5e235baaed7893191b001911406eb73a41604e7d7da74",
+    "restored": "49ddf62abc69592b1ae268ffa22737c35f302ddfd725527614552ca7004224ca",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/53t-input.md",
+    "generated": "c844da7eb16b07ea45313618a1799fcfebe461e90757d48070d35d2e3edbe19b",
+    "restored": "22f2d05c0157af47cd5f5f12b710c97c35927003b0fa9770a56251147c240932",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/53u-layers.md",
+    "generated": "7a9b356d47ff1389f324a53e8726e54dc5d94bc19bd1fa99a49e6bf9d727cbd4",
+    "restored": "30cdf1a50678633f714947523f6e6c9a15b8f504f27caed6d98e9247546725f7",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/54-camera.md",
+    "generated": "322dcb6825efff60f4b9615c1d14b65a14cd30d9dea382196392fccc76183c4d",
+    "restored": "4bbaf2afc85123ed404d159a9b17eb21786034e8db818301a6452842a4724ff9",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/54a-selection.md",
+    "generated": "b252dd86e0d53f21a2981b1d5ceec03ad774fe8780f0531b4f8f49007e12bf75",
+    "restored": "a006c174bb445e577829dec67bc872b7ae8efca89d3ea7541bc1882258827491",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/54l-navigation.md",
+    "generated": "1d16450cc5ad6aade80990a270d054b389463d8e2f93ba5c59c2fcd843135808",
+    "restored": "8392563a54dc7b97b010b1f3c040d70c5bd5961903cb519b7df50427fc9d4326",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/54m-pick-release.md",
+    "generated": "3874993dfe0ff347589d35d441ae683fd0ae82871f5628bcf1684028bb3a3f0c",
+    "restored": "d425dbd222a386b48ab11d972c773c93c0fdce10cdfa0429f2b6ca8390e2fdb7",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/54n-cancellation.md",
+    "generated": "e5d5cf41335adbdb66eca265c3025ca0fd81e0074ffed5023262c1c63ec6931f",
+    "restored": "1601bf75ef849ca3a4c09f617aad7cba21978155b2564f27f4ea1e550ba3819f",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/54o-frame.md",
+    "generated": "5096a30ef64141f953b3c0fdd50a43f8b9a546895cc46abaf054a6d2cfd7f7c0",
+    "restored": "ec783c2d1dc317380dedd84918ac6a2477e38b3986f9cba783b316b9eb150e8b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/54p-navigation.md",
+    "generated": "2b63f42fbfe86b7908580037e84af12bf619189242471aa05d99cd1df35602db",
+    "restored": "d0b5f68bbe999a15552143c919e2623ae27bab034295a6e1c7b97e32f68655ea",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/55a-grid.md",
+    "generated": "769c4752fe1c79061d14031c5f7746564f37b0648cf35080148f22cbc13d1942",
+    "restored": "1f804b3000f93b9935b1fe9eba87ea65b4d381511704093ae52721fe9cd30f12",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/55b-normals.md",
+    "generated": "3aaf672b897857b988ae95b476a0dc0bdb29ed043d1bcd0d1a2c794e1177c17d",
+    "restored": "3c9a81e93432c73c559a5d197c50e5954ab2aa46aa188db6e24cd2c626e0bb63",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/55d-source-row.md",
+    "generated": "9b4ad5afd5af2dad2d88d657c146aeb65b1d6af21de1aaf648a49a0340162783",
+    "restored": "93b4392caab179e35ee34430fd46cd7e891feb7ca5fa3cae7452acd3384e0320",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/55za-read-original-edge-use-samples.md",
+    "generated": "8f3cd5443c888e138e89a33afd4d1906ede351beb04c2c3de03cc9357250f4be",
+    "restored": "2321ee7b91d97160775e6bbb8888b324d20559356a8d237f30ddf0aef241569a",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/56a-shared.md",
+    "generated": "e89ba13d6af48194d9c035c66955d509bd3554f3581c2058344aafca006910c5",
+    "restored": "705ec55c06c796a3666a93cdb8406a699e3b1bb9da35af8de23776d441ee47a8",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/56b-boundaries.md",
+    "generated": "e419cd6387032b77074a0ef100680368b3991bce7353e2b1d79b818a3b2b244f",
+    "restored": "6147889c6f0bfc5e3836ef5b9a01165edc2a25db33f4a6aced73f2d9da9b6ee3",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/57-parameters.md",
+    "generated": "7ef9ae758b67d51091676cd4cc960c952fff476cb52483cd70afc01007d8f133",
+    "restored": "37437b29b563425ec28c7c034a59ce77b641a08346ee08b8e067744e70cb6d39",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/57a-trims.md",
+    "generated": "c171e9e86bb36d0fce6a895d666cde3fceed35b1d060df7d4dcfd3ab8150b615",
+    "restored": "6a7acc841365347ee6da8be2de2fadae1ea764b863bf51645deef69808c3647a",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/58-uses.md",
+    "generated": "47a4522eb87c8b687b16752b3574e7c491322628464f1856b252c311f0775e39",
+    "restored": "8ea632bda8e03f46fa4ee8ae8115e2143dc13eed57f5b84f8126d87e6b9122b3",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/58a-periodic.md",
+    "generated": "08e250fcad81fdc8668d73a6e89ec681095d26cc493673efc0671882469544d5",
+    "restored": "e2df221be33cc1f528962a32bbb142042d0a7afc05e9ac1a866e2fba75a2d43c",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/58za-match-original-face-edge-directions.md",
+    "generated": "09cb4fcccf7b1711a31e3b5601c04a5aee042eac5a4204fd159f21012db66405",
+    "restored": "1c4fc7e23cbaf24b218ebb44118a38609b3202ad7d77aabc76339dbd6161b6e5",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/59b-display.md",
+    "generated": "5e845b4ae499282c3595fb7d0b384f1e54c030aa0e9e085d798426c394cd564d",
+    "restored": "244f27c19dca298f06b66be2c834efd0f3b7f0a04c9c0abbf431ebb55f12367b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/59c-source-row.md",
+    "generated": "98ff3dc366eff17f78c2fc4a42b46c4c33f0befd72c65448c0436b1b7ccd94da",
+    "restored": "b664e7305aa6505025a6107efd1760e3e7b7700fd3ee634920cfd7705d29de31",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/59d-identities.md",
+    "generated": "25dd3c74994daa2c25c224bc23c3fb1270b99384e180556752faa1dc03cce4df",
+    "restored": "848fe682144f2119e4a0f39de2a3b17aa1939bd0f09e09ed6d8e10d99e18c039",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/59e-cache.md",
+    "generated": "351ca4c42761a24e3fb505b1a8e3a59cf2d7c9b6fd331c5d61bafcbf4396fb9b",
+    "restored": "b5cf039afafc8a987e610c29ba88c5af8f6ded1a9190c26bcd26778f9363bc1e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/59f-cad.md",
+    "generated": "03463a5db0811ad0a30103a465cd158ef7d3a501433b829c11f05826041bdbda",
+    "restored": "52965306bb66211b6032420af52bb46000d7ff7a3451477b518f38fda634800b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/60-fonts.md",
+    "generated": "56a33eb7fe49abad1e25ce7150409eb466b31e7939528b988144b31a132e5e8a",
+    "restored": "4ae1e18334f70fa5c4f9ba9c3800cc8ce2ad060f2f93b581f34337298400a8ec",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/60a-labels.md",
+    "generated": "03568fbe6cacffd072877441470426e3210304cfdd1a9535c5a8c2c3987e3747",
+    "restored": "d693bd157cd159ec4f5a80b314bd2abd4d1d9ca5a8dda956ac1c8015c86c4d18",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/60b-coverage.md",
+    "generated": "07f70c3ddee38d927f8356756ed67accf433cd440b9b4754d92168e184c08404",
+    "restored": "5e4f0874fc0506e7bb61a71971ab87c172fe03809f65b8e71a6cbce4bc7a59eb",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/60ba-validation.md",
+    "generated": "35e44b3402c3fa6c171f41cdc298d5f933bfcbc6faa047cae104e4360911883d",
+    "restored": "18fd39d3289c4b3cfef80fad5f00a35d5d8a031f67f79aa30b00ea01dde618ca",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/60bb-shaping.md",
+    "generated": "a45980ceb1682398d0a65b0288143872784e09d3f1d289f864a2d905e4919ce7",
+    "restored": "97cb02891d620988fa46853579dc58edd24f3de32c97b143b5c1ce8aa3c71125",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/60c-document.md",
+    "generated": "5f71635d2da36f68552ae4ef0174a667b8b706c2fd5f137276168ce7f4e17c23",
+    "restored": "0f09e05c229564dea2e35cfd5c8ef1c287bcd7232f88ed946633aec6afe89aa5",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/60d-reuse.md",
+    "generated": "95081ab4e305a12b4b32928b77f3495d4a50fc20c7175fbd9abf68d1fb7511ca",
+    "restored": "3f503c8f4105f5b8c384583572add5dc28154cf39b91528c513ac52c3a49f9c8",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/60e-font-reload.md",
+    "generated": "a4914dd0294dd826c50d37024efa2745f93a846402c47ca88e83fca3ff2dfae2",
+    "restored": "8f0077a4d448119b7eacc34f420841a728b518d7a1c4b02405be9c9e5b48c742",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/60f-diagnostics.md",
+    "generated": "80f9b6bff0890926b49ea9d06e609e83063ac2ad7cbdb1e2c01267d29958f8ec",
+    "restored": "b39c3148251d99143edcbe0b69e9bd437f7726c2e1ccafe2e9cba22f85d99a41",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/60g-text-shaping.md",
+    "generated": "c77c1c8bf694ab4aead070ff93528f3694b1b4cc3f9f26e5e06320566c0695b7",
+    "restored": "b0f14772fdfb37d0de24e8bc56c61053d37da4300c535a246da52264d2cb257f",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/61-atlas.md",
+    "generated": "fd1f4faebf3a9604bd9c743ca6e432cd2e4ff5d6c747c36eea1bfe3e20d6231d",
+    "restored": "c41d2f9e23864c5199c9f5c52f4a5490c037b3659ab5b800e0d57919ffb1e49c",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/61a-coverage.md",
+    "generated": "e488e921015676a41c83c3761457c6754e42cd0ec322cf04ce6d1378360460ac",
+    "restored": "e37ba6e5aa800db60ee15d25a11bac22d3e5e944f5d9ff090508bd71e9f667f2",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/61b-specimen.md",
+    "generated": "88e5aeaab083a47e1cf604575856590541bc339b3053be114dd9f4e2ad847c91",
+    "restored": "d6b0f3264b0d4b58ab6862fbebe950f897b71588fc7751400ad67e5a014a36f5",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/61c-renderer.md",
+    "generated": "66bb08541ca968113d20310a6f280cdcd705e9183055306baa8bac0e3ade38bb",
+    "restored": "5a4ca200188f723132873338f321fcd832822fcdd00edcefe7398247096b1059",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/61d-glyphs.md",
+    "generated": "b2464806d97e3143ea72fce7d3925a8e6af9fb70b2f82e546fc795c2d3c31c42",
+    "restored": "a7a34fec7184650ff4381c42c67f87ed3738067fb6e05bffe22e022fbff91f33",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/62c-rows.md",
+    "generated": "d617f2784e30613752ee3707134486b93e4cf34f8e2b922d412058767f2fd52b",
+    "restored": "63fd6669f6ffe1d6b9e7b356aaecd3c0a77ba3ff338d208eeda0eae689ef81be",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/62d-identity.md",
+    "generated": "efe52a37c0ca2d5fe16279b09505f33e7e7e87a7f0ebc822d9b477b8bf55b900",
+    "restored": "02f0cc9f5bc9e675290640e76b5d493a6ee6e9848ceedaea9e172c6f333fa57e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/62i-coverage.md",
+    "generated": "36c2d6fe319642d675cb73cafc4f7342b1832111eda6a098561f9c2bb8793df5",
+    "restored": "cac8b81a7f467f44d2e67a5bf65c3651c4d44efdf183e44d4130e60bb57c496c",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/62k-lane-labels.md",
+    "generated": "f9d733bf19800084e9922919785d52539b95e90084a4149ceb11b8a11acb6b77",
+    "restored": "20330cb5420480adb40532d6283353390c4a3e2b68aca1696bb08054ef82d06e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/62n-diagnostics.md",
+    "generated": "4635b33bb9658bf7ad0ade9ffcda6b5427dc90fa35d572c765943de0a72bae74",
+    "restored": "7d8af31d015f2369fe7529e1a2eb95680e413cbb8a891049ac5a746eeec7284a",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/63-radius.md",
+    "generated": "bf436124760ac85ae421478ef6ca1939ddf7e3987adf5ca9a8cdd371b058144f",
+    "restored": "1cadbe87cd36e4245f33c7aa73e53601afc63c3915df21430d7fb8f48e090d29",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/63aa-pool-and-dilate-a-conservative-outline-mask.md",
+    "generated": "45f750cf0fc97c61aa112cd4df485e5bf0b3299d200cc18f8d62d3c7b77b54e5",
+    "restored": "1a4158ecd8433986b3ff3a3824705ea10932e18249065350a2231d4d49afbe52",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/64-nodes.md",
+    "generated": "7214d963db0c26c2507c47049d1151b8ddf3bef44c72ba07652de7f1e5f1bf39",
+    "restored": "f2bf264cea718da4717fc2b70daf29ab8681fea5c563a6ffda64768791794b70",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/64d-scene.md",
+    "generated": "7d4d12ae8837ea9b0317d5ed81ddeaa72eb427171ea202524921dc3bc028f8ae",
+    "restored": "13b7027c18de23062f855f90204ceffa70663d8f503064223e2ce83e99c0453c",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/64e-identity.md",
+    "generated": "89647d83a3b162bfd8709e61ff0c328bc3a668d20295fc5f8f7a1a6e1ee0e44b",
+    "restored": "7dcf5e90e45b2a260de8a1b85b65551a6c90828928afa0bb5ee1a3713c0814b2",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/64h-shaders.md",
+    "generated": "42c2a9ce7a4e470dda38d8bb7d3872e2a51ac59607620e70429d9744ccc72c15",
+    "restored": "2683a142483b69f8efb5df5c5fff77baed0a2a99ac80e8d96bf01b082e7eebf6",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/64i-columns.md",
+    "generated": "5d85208cda783965e534914f27cad3ecfc2abde4379bf120adb655ac9a2164c9",
+    "restored": "1236e1c0193b40c6b6446e410b241411c753703231f3d4aac43e0fa6e2c106d2",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/64s-diagnostics.md",
+    "generated": "5d3e6ff8d5d86de0055d6ac22219c7cdec182132b1baf4db76d6e8ad86024663",
+    "restored": "c768f5c5aad2dc51ac31881bfbcce15d44180da97cec36efcd92e9dccd483923",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/65-originals.md",
+    "generated": "0e9f80124b4de1d5bda28a78fbc9d0a374c8ac44e0d07ce4b96a7766af722352",
+    "restored": "5beb1ecc92a80a617c95b866ec05aed330ed395126f82419d694a84334002de6",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/65c-cloud-point.md",
+    "generated": "897a94a96d7b466bd5feefc075c94cc8ef9a3054a59e3c3eaab0d3e75cb2fe5e",
+    "restored": "5edd954e804d49e5244f49c6996a259ad23377070529dc820d264caeaad918e9",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/65za-read-original-manifest-records-and-placements.md",
+    "generated": "503be60e53b31ddeb8d8581493d3bfffd4f9014f2e8cd29254dbb895b4b476b3",
+    "restored": "3b5b701035a2c478aafe6943220733a71d0653f8a7ab9e605e878e060df24d81",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/66a-compare-live-byte-revisions.md",
+    "generated": "6ea1ddcd7243b52542a4df6c4ab7e4d8e8ea7cac823f560ff68ac32ea8e6ad0e",
+    "restored": "df7086c39415fb254e8ce495d7a2315667713640d98270d6cedaa55254a95e07",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/66ae-inspect-published-source-identities.md",
+    "generated": "d064943a8dc7345d2ef89aa1dd4fdab453091878d449a86a026d7ed127b77679",
+    "restored": "42084b7ebc98b432e8c9f082f00b4d84fc360a126bfb24191ad13e347a7f2172",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/66af-connect-browser-save-open-url-adoption.md",
+    "generated": "30f5d8877b3c0f967da026221f23a290c533d37584d7195e12e5b4ddd37fb58e",
+    "restored": "e5bf87cf5055bff7fb602ccb6d30b64c8c6c5b72bde2f212c75f744849ec241f",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/66b-validate-source-records-before-allocation.md",
+    "generated": "b6205ec4d43b32f28c3090b0c0c800135bd5718f098f1a368e5f405cdcab4f6b",
+    "restored": "ef59f60d213de2dd6ab026600d400fc049bbf4d488e7f6ebbf806e91ce5ab20e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/66c-describe-the-saved-scene-metadata.md",
+    "generated": "ba15f02ea5ebbf4e43abdca137199dd245caf0e6632de8b73eb67c4cd51b3fa0",
+    "restored": "f6573a44a39ccf87862ccb0762eb781f3940953fc47c3857b953a12ef23685eb",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/66e-give-copied-lines-independent-identities.md",
+    "generated": "06d7396bf79313ddfd9145357cd7edfaf401f563180cfb5dd1cc60b06a8a76ac",
+    "restored": "5242c16e2288d94efce870d70d30d20a0e107de689a2a2f3d7a21817ca0b10e5",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/66j-store-cloud-size-as-presentation.md",
+    "generated": "a2e28bdb88ec01ed115da92cb5e05cea488238128929495f76b2edb756cf8ca6",
+    "restored": "8e361bd460188b5a917c096b97dbc73583ba850e6273814e371f19ed7fe79ff7",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/66v-start-an-empty-scene-without-examples.md",
+    "generated": "50c14ecc285114dceee150994cec34f473819f6b270e1a48c103d3156ae6979a",
+    "restored": "995cec3f54a01502b1a9737c4bd84fb13ccceb5c4ab1b939b6c68ffdc5918620",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/66za-own-original-range-read-permits.md",
+    "generated": "0fcae7ac5f564a6a43dea1a61db1ea1d9eecbc3a16aaf5fdf970ddb0a63caa17",
+    "restored": "bdafdc7fe72313a0d6f8411bf7af4b3aafbce05ec3e4a09af980b1de3d0ebd43",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/67-supply-checked-array-layout-readers.md",
+    "generated": "59564db8de4e93f72a6b3eaff8e63b5d7c89182ff471cc138ee7c2547a1d61b2",
+    "restored": "2f932e0b8f4c407d10749f164d3c88a718df6edcc29085da62e924b1e110f87b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/67b-validate-exact-http-range-replies.md",
+    "generated": "c5eb58b6cae741f81fbebe3ca61ef998e8e5ee11b07afef38cf98ac5da145d20",
+    "restored": "05b3ff6e3248b4c586b3acc7e69a79e533c7ec799bcba4bbee65d687bc83fc34",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/67d-own-cancellable-range-requests.md",
+    "generated": "83465aeb35ac039000e2605d9eb3e274016e0a4d8eea98eabd84d6d13e706890",
+    "restored": "8b31161beb196d56890320ad0909d4305a0ab0a003296531f7d505f0092a6b45",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/67hza-queue-original-source-range-reads.md",
+    "generated": "e57daae733d6f4a8bf1d84a20cd20623424e504310d905771a693677efb6f185",
+    "restored": "0dbed98749b3bd223659b3b521cfbc26e80a26c51c62ee6a66a24affdd175355",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/67j-keep-original-ranged-source-identity.md",
+    "generated": "ece0218d90aed1488af00216d5073d6e4d220c48ed036f2b26ffb2e131df8e99",
+    "restored": "b7f2e726e2554412c642819acff155c3fb7baf31b14603524f7cdb093bc499c6",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/68ac-connect-current-pages-to-the-browser-renderer.md",
+    "generated": "0a114f7b4de513ca1e3957010e1e1f62cf3b35b3e527e2ba6de7b3bf6e40521b",
+    "restored": "e6e8ae5edecdf2ad0f879172f646ced88431ac76dfd4d0cefbeb146734986f76",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/68l-insert-streamed-rows-on-the-current-layer.md",
+    "generated": "2feb95cdf4c2c538a7ba85c9f9e2a1732712922958f1f6abcf2cd18e686d7699",
+    "restored": "b171b8798124bb2f0b3fa6b7f2cebfe399fe3e40298d7c7368e824d18f283ced",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/68m-carry-source-placement-through-scene-operations.md",
+    "generated": "55b88cbb5dbe3f1a766cebbd7204b95dfe2b67944bdf54a498583a1514c636c6",
+    "restored": "80d45b331a9610fccb81b34aa078ce007a73f0d56ad37fdbf319efb1785b3274",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/68o-account-for-original-and-retained-source-data.md",
+    "generated": "ae56e2b363364f9fe171134909f2a5bac9e784035037d384f913cd268e42a0b1",
+    "restored": "8907aa863cf30408ad0b3c97469d42074dc73dc751d8c2b6c407fc9b2ef0cfc8",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/68p-keep-original-attributes-in-ranged-pages.md",
+    "generated": "4c31edad12589cc41f6a651eb2d33b5b81f28194cede080c88e835af3ac6309c",
+    "restored": "4efb85a85aa73120c6493edaabf49e9ba5d854f8c7b785c44bb2394c57dd6d91",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/68u-decode-bounded-cancellable-source-streams.md",
+    "generated": "6a4284e943740bb143429ab8ba2463322025dfa288034077f12c1e779e1c5e33",
+    "restored": "84502bf850624ed202c5e26c2ef4739b44eab4b08f72a36e9fb1ef03061dfa50",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/69aa-retain-cloneable-derived-cad-values.md",
+    "generated": "cb88fbc9570c857f309693f8940345089d38e5d4b2d4032b7b100d0610e9dc31",
+    "restored": "ad71863a1d73bb4154148e8f76c8298dd24f28e01d8282902d91b1099e82e5bb",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/69ad-share-recordings-only-during-document-preparation.md",
+    "generated": "e81a669bb25f453b62dc2121def2d25cb341e458f909b5ac53d31b8fb7f91aac",
+    "restored": "dfceafcd01da0cb285ea4f479e8789f1702b4f3d74444da9d11ffe56045f9387",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/69c-keep-instance-bindings-through-scene-history.md",
+    "generated": "a3a7e9eb1abab2499f2160a9d31ddaf0c6a11049ef3324aa32f2416ec53b0afe",
+    "restored": "25dc58076163706d8168a403131a1c3ad304c2c41207aef2a5add1eb8d8277c6",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/69zza-move-between-original-rigid-frames.md",
+    "generated": "f7ad32fcc89d13ddafd130b5f668865c9e2f2e3b38ad18b8787c27eff3477920",
+    "restored": "b874052e956c0422cfd452efa6746b2edfad4decdc1c7182c17ac3be8e263d29",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/70d-exercise-rotated-and-mirrored-original-references.md",
+    "generated": "5ed1370c06489f911816f6cb0c5c345b66b50ac69e2d776f0d063bda7341f336",
+    "restored": "e5e4abf006e4d665dcd14ff17bbe232da76ba7bb85d913feace8b20802e9e089",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/70za-read-original-sheet-metadata-records.md",
+    "generated": "52e210705b95688d0e48e84ee3ebf902352a5bf9ee9931ed4a80045cb41a596a",
+    "restored": "0a6d5cf57a67452f80e1d7d4dcfd37621c537b59849aae15f7f66754c2846a01",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/71-read-original-sheet-entity-metadata.md",
+    "generated": "26f6029c48585a2dc0b1e46e61d08d209513430821a04b22c22c8b1d06d6af65",
+    "restored": "1778d4115302692315a36dd64f2b71166c9e52ec99e5afb39f9215ff8ad042fb",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/71ai-show-current-sheet-resources-and-selected-entity-answers.md",
+    "generated": "070e9fbad355ec94cbd884f9f36f0629b735b383de7fbe412e550ab14bdb27b5",
+    "restored": "2300509f78d5cf9de8db31f9a66f83b6a98942a83ea0f3c997ebca7b33a2688c",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/71i-register-original-drawing-rows-on-the-current-layer.md",
+    "generated": "391d32bbbfbcfa2a2b0692b842608712391f805330a99292a6d85c8aae5dc9db",
+    "restored": "b599532e5c7ae675b861e7e45eea1be70403a2e90ba783fcf68b995200779149",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/71j-carry-drawing-identity-through-scene-operations.md",
+    "generated": "9ed446f9a447da353fd512fc5a9fc579a28c0c66f21bbf1616a6c46ff8e731ce",
+    "restored": "1c75f129b88a211396787e5da1ca2b57ed35bd6b034c437eee9a873c25868656",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/73h-match-solid-command-options.md",
+    "generated": "69a30e2ced8de04656dc7aba59ad3f8a7307a7b27b4bfb96b203b37faa5d3303",
+    "restored": "c0f994c32133e4c0dfcb614e155d0f31fa82ab2f4bdad24cbb88229008b18565",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/74a-own-current-shape-questions-and-answer-state.md",
+    "generated": "8dc24ce4c438262276527d972cb0cbbac6d1c9e2dd18bb3ff3a1eb3d7be4a5eb",
+    "restored": "b1a846f7ab99f7216534d52dbe0d4b7d03b6033fb7abe461010bcc83351920ae",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/74o-keep-quick-mouse-drift-as-a-click-using-current-event-time.md",
+    "generated": "668faa0911bdcd3a53229a4cb351fdd113bc90a2c205002edf99d49aa4d1ab4a",
+    "restored": "4210b5031f694d5235a55e14d65ca24e1d0c164fabe83bd8930b2918c7652a86",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/74za-build-original-cylinders-with-signed-height.md",
+    "generated": "a57492e2270db366a2f309aeeb4e95a942dc329e9ad148cb368bcc043ae54035",
+    "restored": "b36039367403cdd6eb0a726f83b3957a1f69839ffad0eb4e8fc69c28a349bf27",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/75b-register-current-round-names-and-choices.md",
+    "generated": "052eab32185a859920024ec351e8738ed885818b802aa05ae9ea653a1053f500",
+    "restored": "72c847efdb425d82fd7ef9fcd05b6126fbc42a9d2c5f7eaa7b86eb3342ba1ebb",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/75za-build-original-planar-circles.md",
+    "generated": "7e00487cd98833e2dbec8bb4eeb14e7606cdab7752a6f5cf3cb2f825df32097c",
+    "restored": "74e4e794d2c0396660002743011a7feb3737ff7f617715e725110208ee006422",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/76a-expose-exact-curve-choices-in-the-existing-registry.md",
+    "generated": "3a823d2d456dcfcba7eef41dad0c3a4367b898f6ea40158197e84cee6bed51f9",
+    "restored": "104fbadbb31db232aad30c75bb73cb132f21f58b4f33ea035c720e857b170f0e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/76b-retain-editable-freeform-controls-in-the-point-collector.md",
+    "generated": "84017e0e8b2db90d0b0f10d33c997aaf893754d711117fb2a9291494431ed2fa",
+    "restored": "bc13afc9a6aaa9a4e10c3290f55d1f1f45109a4435200b665351b44ec6c884b8",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/76c-inspect-original-curve-data-through-the-browser-contract.md",
+    "generated": "2682ab3effb9fe6ca3b12b31fd96ec8f077246acc7a15219f17eceb4d591e62f",
+    "restored": "4be442e7e08ec0c34ac8a97d845661c0697caa9585f2768ced4cf0ab339b8d61",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/77-copy-current-transformation-and-source-edit-algorithms.md",
+    "generated": "8a4aeade82af43bf0f7664f72a61b28b272a0ac9ca0bf82d8bad35c2a5337beb",
+    "restored": "c99a2fc043557d4a3a852c070efd7702eca7ba7c1e4a3d558dafd43d645f0189",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/77a-own-transformation-questions-and-the-selected-original-targets.md",
+    "generated": "55df6749759e33a8087d27f5136d8bdabd2dc966c6d3174d4765f6ad7c4b3285",
+    "restored": "fced29c471567ac273cdc2089c46e7e02a8504ed85b7b7cc7940a6f8e1b10256",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/77zza-describe-curve-gathering-answers.md",
+    "generated": "45e8ad9d62d869acf24d9e413464a804288253de5d758326b91fbe87b460fa7e",
+    "restored": "fb115d2894aefc45739ee9b4498614f247b9777c88df1f41c6196eb986507ae0",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/78-copy-current-curve-collection-and-surfacing-recipes.md",
+    "generated": "2852991386e2b8b26946a12510529baf1ab60a6b47dd23afb481607e0b891bc4",
+    "restored": "8b2867eda9dcfaaa4a42986021df6ddc73a1bfed40b914950b441c4a19eb988d",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/78l-pick-original-profiles-through-the-browser-integer-pass.md",
+    "generated": "080caa9b6b68b8766f1fd1aa44cccedb9d7af144bca6eb869862c6c1636b178c",
+    "restored": "2249d4d8ef6f73317e8d6d1649faa4a0f5f4724fd858432e43e96594d0c11018",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/79-retain-current-loft-section-order-and-degree-options.md",
+    "generated": "92484430a2fb030fe65ed56197fdda608792d250c1bb951052ecc4f2f1a00c11",
+    "restored": "b29ff363ef513f4139ab602211677aa8b9247bfdd846f97a1f92c6905c6ae207",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/79c-register-loft-sweep-names-options-and-aliases.md",
+    "generated": "ac414ba34716784b1680cd757945d1c117e25c1bcae6ef072f0fd2941a7de420",
+    "restored": "75131c926cd2e56720f43e9827224f7be9adb157f2f74d5cce05af2941053f41",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/79zza-sample-original-network-curve-stations.md",
+    "generated": "3ae7f4e5aa9ceb198c45c2a15c214599017ad33acedbe4a34e122f7e4772d55e",
+    "restored": "f5c9abadddcdccf3ddc32d2e3f17e338741f70af2d990c6ab784018eb61c94fa",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/80b-guide-corner-questions-without-retaining-unrelated-profiles.md",
+    "generated": "e535abf17ea3e688803d78ae245a9573f823dfd0c1c2c4c8ccbebd2894fe930a",
+    "restored": "124b6d52841f52123a24f85c201555823397565e09fb5507a718a0e859d8fac3",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/80za-read-original-projection-planes.md",
+    "generated": "2cb635f81f58f2d2f025980ab548ab3478c2f5bcade12236ae6b47b8ef699cba",
+    "restored": "94fae785b5d7181f4b4b0a24662ed35f5452253b3a4f6045ff1d778551c13801",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/81-project-originals-through-the-current-plane-algorithms.md",
+    "generated": "175e14f62b37cb37468cf233fe40d95973ed551b0a329722d1d4f9bfc94c6b55",
+    "restored": "809224471ee3c850c8b8b3336f286d2ba06322ec938205d1c16fb9cea8169722",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/81a-find-source-cutters-and-current-extension-reach.md",
+    "generated": "f48528157bd47c05f7722a156c4e3cbf93467d3bc3a52f113b1032eaac18535f",
+    "restored": "7c2cb5b683c86fbafc74e5174f6f5f229595c8ec7cff1ac3db68621bbd6b6b7c",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/81u-route-whole-boundary-picks-and-observe-pending-edits.md",
+    "generated": "8d0a4b7208f266b4dc26f7b5b9fa4ae15bd6d7a77f2964ebc1d209733ae2436f",
+    "restored": "d170ee37dd4e1564094e2f213a497d8c0052f9efd68594b80d3a3091e4e7a066",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/81zza-read-original-cutters-in-object-frames.md",
+    "generated": "858da1ca6a4192ac38a11115b1c22514b540b4ba08e94b42b8c3eaa906a655f2",
+    "restored": "ab4677e318fb0c2391df1ea1d79d78265ff0c720347d9e81be1f5b1db34f5d7e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/81zzb-find-original-cutters-near-the-pointer.md",
+    "generated": "6e9751023d7b9265ce4b05f431bb16d258ac54c6d89dffc3dce453baff9c2bf1",
+    "restored": "04d5d65049cff878d69761a8e1cfadf5996e2f18fe9d8b901f42fcd324494968",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/81zzc-grow-original-domains-and-extract-the-tail.md",
+    "generated": "c806cd61183b773f479a824197e8d2cac160b6fd7b1af472bcbc55160adec2c3",
+    "restored": "f213c65206fab5162af5bfb4c1e960b282e5a0b2f2be30726eea70d44b0385ac",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/81zzd-find-original-end-directions-and-length-reach.md",
+    "generated": "081004f28890ba44aeb4e42344dbcb54217659400c49df864e8c90f9ba20d43f",
+    "restored": "d3b7ffba64b2bdf0d6b0127a3e3aacada11c93381059cd53f34599fdb10f5801",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/81zze-stop-straight-growth-at-the-first-boundary.md",
+    "generated": "4f14b806ee2ed4876dbb150e24f83ac579f0ceae1bbaf3d9989139c01a714486",
+    "restored": "b299c0b48f57fe7483b6418d28aba6a0d788a0fcd6bab743de17b9aa2138c703",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/81zzf-stop-curved-growth-at-an-original-boundary.md",
+    "generated": "70f05b7856ee0d245311dcf731facc71382d755bcb523fedce78ecd157d0b75e",
+    "restored": "16b6fd43a785f468b96d82425b377607ff61584a7a24a4486bb438efc02ca973",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/81zzg-dispatch-original-extension-families.md",
+    "generated": "512d2441386d3130af06d13db49aa54bc6cd1c739046f164c9573b67b0131a13",
+    "restored": "f3d0c149bf4e0e339ed11ef64e53c077ac44f0f6c5b98b8ec77f44bb94e9cfc6",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/82a-own-the-split-target-and-toggle-original-cutters.md",
+    "generated": "ef12e89d2213422bde48bf42039972306621edf368c360e7c9877d6fdec830ac",
+    "restored": "5f50be14de2cf34d67291ef3f035bba41d5a03092d1f0f358e3b2cfa2f68073e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/82f-register-split-and-route-mouse-touch-and-confirmation.md",
+    "generated": "bf97e4c52025d37913effacf18e73ad8aa221402f4fbf7d72c9cb78e55d0f5e0",
+    "restored": "97385f078e26e4b5e3c0b5cb2700f235fbc51ec083efc11043b464e54ca1aa65",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/83za-visit-original-mesh-triangles-and-format-measures.md",
+    "generated": "9d1dc56356d03021127e13f2470ddb76d8306101361235bf2fcaac70fa06eae7",
+    "restored": "be94e14bcef7404d770e19471a0ba667fdf9e65689f663aada0edca1fc102c1a",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/84a-validate-an-original-box-and-derive-wire-only-display.md",
+    "generated": "8e8616cd082224c879653191f82590cd3a193c02b36791d9fd7fed67164669ba",
+    "restored": "897311f69d7d157f0a0f2428ff8da0c48ddf1b5476289f3f83105b4a318f4b6b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/84b-adopt-original-boxes-and-retain-precise-placed-bounds.md",
+    "generated": "989aafbab88c77fa946717ce9b8a9d393b6bf00154c194db16323a99018ef8d2",
+    "restored": "bab80ce9f4e30f17e38b53f5004848c24447a7381a8bea574edd6ba006bf3147",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/84m-exercise-original-boxes-and-temporary-distance-annotations.md",
+    "generated": "7fcf0768258927e5512c607df09d3e5c14b2832d8a7fda8bd4d16f75ff8b4650",
+    "restored": "579c7690feb37e2ad38b1fc7d85bd6b8e89766d898c6dc5227b0d5e5fee55461",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/84zza-describe-removable-cad-parts.md",
+    "generated": "c59e456bd07b147c531960146dae88adc0a4d8b00212e56989e12585a1621248",
+    "restored": "3b247ace3afa7a23011707a197c60874255dfc7af302b248bf1878ee503786d4",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/85-copy-current-original-command-recipes.md",
+    "generated": "e9c7655d6e5293ba8b3a7210fe460734f6b57fb226590d713f71d4cdeb4198a4",
+    "restored": "60f5831bcd6f39988b91e03e6a6633b241255709df0231a6ec638c35b74330b8",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/85a-validate-original-plane-display-and-precise-bounds.md",
+    "generated": "0de1cf49214210e8b0111aaf9bd38d11ff739bd51205c5c38c772f85bcf9bbcf",
+    "restored": "ab1817d6b7ec498364b8b6e95add7a0894740a683ad693ca6397276080e6e80d",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/85as-register-current-names-views-and-command-aliases.md",
+    "generated": "296ef0b1df2fd5540891d177dc45436e81cef550fa5b40e430bcde19a0d0de02",
+    "restored": "ba6d0bd8aefb0d0bc684551c722952b5b387120fda3fdcd424c9e7fdb64017a9",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/85av-route-trim-and-lasso-pointer-input.md",
+    "generated": "6cdc1c993c46615a4247b3bb131888e499eb92cae669657f7abf33aaa5408c69",
+    "restored": "d750da32e96f79b54a156799ce80007b07560e4ecc84f034d1cc09deba4ae11b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/85aw-refresh-command-panels-source-loading-and-cached-previews.md",
+    "generated": "ad8179310a1bf2a5e67f48ac10c8f0120b2b935db5f1eb9f948e64b1bf854d02",
+    "restored": "8b3585a7b467fe6943a767a653bcbc93d3feaa9cfd8830a5ae0b775e1aa6f502",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/85ax-observe-current-original-command-state.md",
+    "generated": "5f18ca8e95dded9386fdd724aa2c835fcfb844510356f7c2222f44a6cfc4a8d2",
+    "restored": "7a982f627a1d93765c06a4927861161a04c83d0ffaca1b3244e20dabe734b5b7",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/85p-own-document-scoped-groups-and-links.md",
+    "generated": "540ab01dfbb34f662e7584153e9a6e0c8fd0138d089a81fc9074b9d770058379",
+    "restored": "786945cf9b33aa1bef3f04512f6cdb47f82cc84ca3f0cb85c7d756d71f78874b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/85v-append-namespaced-graphs-and-preserve-original-row-identities.md",
+    "generated": "3329e0bc978ec3664d0bfa0a1a622c2aa1eec54d13eeb9db96909d38006ef4b2",
+    "restored": "ee151c3afe71b5469e61a43b819887e9045af7294f559d26694a9314aabbf16f",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/85y-keep-named-views-and-grid-on-the-drawing-plane.md",
+    "generated": "3fa1a5a519f07f7aa9e5a30429c4e94efe9ad47c860dc3a84400ab70975759da",
+    "restored": "a3d594305ab7d6f4656521077865d220daddebc9ca56feb95ccf262983624c87",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/85z-connect-cached-guide-and-placed-grid-lanes.md",
+    "generated": "daaeb66ceca8e6bf9830e86125339a93639ec1853a87be88766c892210bbaa79",
+    "restored": "4f0c67957111c5cade0910d5539f39e89a0b5921d036ce0d69964906a6cad2b3",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/86-copy-finite-tile-allocation-rules.md",
+    "generated": "58493bf510c229bceab54849fe655725f25df93cc019821de3bb18004ca7bf7e",
+    "restored": "9e25da437e2d4e530aca57c6d4eb6985e27b978a58b9b416998f88b13cce42fe",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/86ac-carry-marker-axis-and-depth.md",
+    "generated": "0bd18b1aa940506def41cb3e823ec82bec179e4cc5d25b9bf7139f6bc634fa29",
+    "restored": "4e1b52c95ba7a7333ff4a324828fe95d3720728b51e27a77b265a4d249876eaa",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/86ad-reuse-original-marker-integer-coverage.md",
+    "generated": "c4f3bfc9c9d16a0652b1ad45afcb0ab73039eb51eb0b7124baed9d141795703b",
+    "restored": "df82a106e1e0867c433608fbeba5bf704ae396c5e2b733f6a99cedccfa1e5880",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/86ah-build-finite-shader-pipelines-with-original-layouts.md",
+    "generated": "4f72330d88e0d6c0f93466ba5edcc56a18d615eda6563f964e6606a155a6cbee",
+    "restored": "da64bf81dd5f07309a880860724f954134646b59d8744c8f3fa40604eee7950e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/86ap-observe-actual-derived-tile-resources.md",
+    "generated": "fd5201ec4ccc1333c77133d51a465b8293cb503f269fbe7a0551acb8175b6081",
+    "restored": "0ed40ddf1264ea37f2f5a818bebbd65607cfcc56b20db8d68f2c99a412315236",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/86g-wake-only-after-a-tile-report-arrives.md",
+    "generated": "6bc5dd9c2ab707efbe3094176de37bd5ca49f287a2e0e38001164252d9c1f99a",
+    "restored": "db28b1c6801e3a9b929deee31efb2f1176b0ba81914014f751922a5839a7435b",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/86h-read-actual-pool-demand-asynchronously.md",
+    "generated": "827d87e4ba7be4124d25a98832deac05c7914f00449fbc79e92f5d4246bd259c",
+    "restored": "99e11854ace98b8c5a641f8c4ecbe654bd3b101cf91f01396e13e4a1a14c3d9c",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/86i-describe-explicit-finite-gpu-layouts.md",
+    "generated": "3d4b2b185e1bc79158adf9e189e5e2f96032ffa38ad389483a1c4e5b1bb80ce3",
+    "restored": "37b9ddc697b1f35c86138eef87b59fb9fdd649295ef2aaa8cddd811d617e55c5",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/86u-carry-stroke-axis-and-depth.md",
+    "generated": "ba8ede61789314aefff658e12b52a2f6aeb642c30b52b4fb7f534d7c712def5e",
+    "restored": "e2c7a7d0b8d9ec714a51d349f15455e9e1ba10992faeeb2434898c9d6ecf35ee",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/86v-reuse-original-stroke-integer-coverage.md",
+    "generated": "e4a049017e160bbd67884b752b407f3b976050c247ae3caa71eadeadf3d37699",
+    "restored": "562056a7006bc12d7b1858995341df86c769bb03a8d464291cb1c526044b5042",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/86y-carry-chain-axis-and-depth.md",
+    "generated": "f654538d9d0807f13b49128628e0d2db38d6b1ab524773c13e44ce9741ba6459",
+    "restored": "778d5cee2d529bfed10a3fd142163db5cd16e6fb80e12228ee3cc172d951266a",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/86z-reuse-original-chain-integer-coverage.md",
+    "generated": "66fe3e983bb993f1dedca9bc525ccd2217dca7f2d1c4a14a07bbacce84ef2775",
+    "restored": "85e88c4969f375ea4a96f9a6845dd010501c71d7fe116634575927ec45c53b15",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/87a-gather-six-visible-original-world-planes.md",
+    "generated": "19fc2a10fdfbbc5e2d1c1dd18076fb51519599ffa3698573d963f41a46ccbbdb",
+    "restored": "e717d971dbc14218afc99fa1589ad44f8a4f61131ee2682bf0834767790d5eda",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/87aa-observe-actual-clipping-resources-and-errors.md",
+    "generated": "2aebfbadbb771b9cc2184eeef52419e12f243c21db62012a82dc2d5eb51cf6fd",
+    "restored": "520552bba5f52da9fe94b892afeddc03a2ce6357999b4f9705a73773af6f847a",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/87c-copy-conditioned-screen-and-hatch-projections.md",
+    "generated": "3bd3e7baf68d2ff035d5f9c3d4fa516e5a910ba8a16549677ad9ff7394002cce",
+    "restored": "4c1eff6e773b5dc13444eded6b9a66c5c580ee8e7e319a64331cec0187e97d6d",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/87d-parse-strict-clipping-modes-and-presentation-switches.md",
+    "generated": "748b8874b23a0d4f23f660cac3f3c45db8aadedd765da5293501780c16dea273",
+    "restored": "8b7873b64154bbd2aaa4e60361889adfb83e69b077ec9365e858159069da9ba5",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/87p-invalidate-selected-masks-on-clipping-changes.md",
+    "generated": "d295ba0a689b7712b09220de39588c3c969479570fdc04afb0e68f0040ee604c",
+    "restored": "9ca57b2c2e571094140efee4eec9a31bf1365f96238e6aa43eb45be1349f38ee",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/87q-share-clipping-at-finite-original-center-lines.md",
+    "generated": "5c1afb0de3aed6324275f8c92d5f1eecf520fb70c72f907504161a089f483d17",
+    "restored": "5134600c80a98008f0a7254aeaae53158f50f963756002e82e51666bcbce15ca",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/87s-bind-original-flags-without-changing-instance-strides.md",
+    "generated": "833dbb5d5a3424495598b6e35cbde60a264027800268c23f7024a41402fd64b6",
+    "restored": "e26b71b806480230b09d37cf946fe43ccae4572f7a7f349cfa590c9882f6e804",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/87x-clip-cached-original-point-cloud-discs.md",
+    "generated": "f129d9f3f73ae6e5727d27f0b2f044c0c25002ce3c3589ef45126e20bc6e150d",
+    "restored": "673c38a391bc7d3f7113d8e9219f24adc9ec38ae81997a2430962220b6e37a20",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/87y-clip-original-sheet-pens-and-integer-entities.md",
+    "generated": "864aab47c6e1968ea0cb3e209f0fbd4c50f8f08e81735b2a520da2e6ff2072c6",
+    "restored": "05b7d79a7abc957bd65709b87407f33cd7f91f333abaa2c07075fdfb55d9d193",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/88-copy-original-closedness-and-winding.md",
+    "generated": "1b267e64864c36ae722b4b1a78bd8de205537308df9af193ce72160b7f6d27e0",
+    "restored": "9cac7bee1b7665643ecc11a106063ad13a97b7b6c93bb8208597aa806284dc30",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/88a-cache-verified-original-solids-weakly.md",
+    "generated": "11e3409a281f6a15949ebb52a36255eba42c93a30b69c6711f7a704bb57f860f",
+    "restored": "30ced6ae45472086216fd8eee2f2a5571ff43916359d6e9862163bf1d1ceae32",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/88ad-exercise-original-sections-bores-and-ink.md",
+    "generated": "1ee1bb35d7882ab1873e31d512fd9c464640f0b7c974ea8f6fdb345ecd832eff",
+    "restored": "0383270851d5ceba755a02628140d91fff6690b937ee5ca063de78762a4e9452",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/88b-copy-conservative-plane-crossing-bounds.md",
+    "generated": "eef8434275cc185196a388c4ef2836089a6074c1dfba9d00378fe80efa404c92",
+    "restored": "66f1061355c2da59e7026d26ba6a1c66f1a7ca4fef4050d2d15f96234d61bf9d",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/88c-cache-local-bounds-and-apply-placement-once.md",
+    "generated": "9f51e2fff9d8bfd4e6bff650fbdcc2a9d65bc806d30be8f1bda598a2718c19b7",
+    "restored": "48dd8151dd1e0c8eb53b77634fa80289933577714471480c48c0b3b460b7acce",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/88g-copy-section-coverage-and-hatch-filtering.md",
+    "generated": "de9cf0cb85663e96899b66975648df40da65a6d954895b2723e89fbba19749fe",
+    "restored": "77f01e91327d13c277bb999e0a29a95fede349fb40c3eb97a814ee715e5c90d7",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/88h-adapt-color-sections-to-forward-depth.md",
+    "generated": "f295784092bc52ffe662e136eb1b126552ce9c4f3b1a0f47b921f6f7cee026a8",
+    "restored": "8e075bd8a15a74aaf9ce912230f23499bef28ab6ee139fdc58a13598950aed01",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/89-copy-density-scaled-depth-reduction.md",
+    "generated": "0ebfa05089d36fb131e96596a24f51870042b4e6045911d052617637ba25723f",
+    "restored": "e39457dea359cddfedc13547382a89b6054a58106769a1e51f26f802289cd938",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/89h-exercise-actual-depth-levels-and-cache-release.md",
+    "generated": "7a04f5fcd56a64dca55d6f94d696b78896ea7c2b8789834e4c580e5eabe082c9",
+    "restored": "db3526fdf17f1b9ec6fd0178fe444aa4c82430fd01b12970912cb0942a33df64",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/90a-copy-current-viewing-rays.md",
+    "generated": "28cf2901f8baa4c9f156c558338f373ac3434ddfedfaec802c0ee5e7fe72bacd",
+    "restored": "b6ec501bf7489c612eae802475478016906828c3a41872a2ef89934f50e60e5a",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/90da-reconstruct-original-surfaces-from-depth.md",
+    "generated": "27b46b9e0d3ea1a02fdb04d548c3b0c4b49ceb04fc5d149b2fb8ba83f7b2b596",
+    "restored": "cc3dc1a530116d51db25cc9b19209366415c27c0eaa7cbbf0d9c3bc483031852",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/90db-encode-normals-and-read-original-contact-metadata.md",
+    "generated": "86eccc1f117f267d1e6b172543db692dcc9b1309deb26e5e0295afc3d36a13e7",
+    "restored": "1e9221c9752ea84905124d82d10bd1af56392bdf3daa73ce7b6c619d4ccbdce8",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/90dc-prepare-a-compact-depth-radius-and-normal-target.md",
+    "generated": "ef4c4766a6b5dc1b24bf8f8b18df7fcd32aa99cd2dbaf8f2946961bdd26c3617",
+    "restored": "23e93703dad22cd1b82efb6a0ce937a7be155b2cdefd077b7ad7553045b3f145",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/90dd-measure-ground-contact-along-bounded-horizons.md",
+    "generated": "e63c5601a181c657773197005c61034b0c4789a6b92c57724a5269b51a92faaa",
+    "restored": "4e5e6f42d8ddc52fe27a38cbea26f14bd2db92a9ea87830d96aec9298cc3c60f",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/90de-integrate-cosine-weighted-surface-visibility.md",
+    "generated": "b61dfdf423cefc56e561bc9f9542349ea086f82970e783d150b41ad1de389ed0",
+    "restored": "aaaf0ce9baf158a785ea7543476a18b7f62c47c9ffdc859e98a28acf04fb163d",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/90df-filter-contact-without-crossing-unrelated-surfaces.md",
+    "generated": "ab28c968618912c1019d723530095d4c1c01a7840626cd2cf8a62705e647a7e6",
+    "restored": "9969389a7284756adc1697434c6663785c3107755533be9d40f6177efa172899",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/90dg-reject-invalid-ambient-history-before-blending.md",
+    "generated": "ef4a3be6b447c3b1b96b466d23d3b3925183cde9e6961867329ae640146c6d39",
+    "restored": "b764c72c7e21b7c9e8dc6bc42721495794cb2d49428a65d9be0f94aed70fa74f",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/90dh-reconstruct-full-resolution-contact-from-low-resolution-samples.md",
+    "generated": "d3f2f4ab453abc1fa63b7a1f8fdae9be24bff343e3e434daa22d261cae06a6a4",
+    "restored": "38545d26a4974c300463e177be011c6e82a03a1c7bb7d158fd1dfa8ed56956ee",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/90di-collect-bounded-sample-corrections-with-gpu-atomics.md",
+    "generated": "a57b8cce9d52e897ea9b453ac4f8c1a7a6a9929647c9bbe85f1380a9ad666ec7",
+    "restored": "b37def4bb6adffe96e63674b53371948230101362f3dcbf3a8a0a6512c00b013",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/90dj-composite-contact-as-black-alpha-over-the-original-scene.md",
+    "generated": "1af928615f834587ccb10e6a61b83e0dfc90389a156fda8f903302d814cff857",
+    "restored": "6547df419fb6f5ff9c028cd7941a8dfbfd8208b9985e5bc3d3b245ad151f24e8",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/90e-bind-real-original-normals-and-radii.md",
+    "generated": "8bb0299693c756bada5ee42bb1b8c29054071ca401e6b2e0a4bfc08917c1a287",
+    "restored": "1726f6f8992289e0e9a8b45bd7abf3630d6d0edc91c12d769237d82162d76aec",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/90u-enable-arctic-as-a-presentation-change.md",
+    "generated": "a290aea10b8836f31127e64830e109d2ad4e621e443a5ee807d9e3f02039f817",
+    "restored": "a3561d630cada5525e1ab3b52d92c929afd950db5da7c688fbff7e257d9be3f2",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/91-include-visible-section-coverage.md",
+    "generated": "813ae8b22c9e213ab21f68b9169855a003a64441794ad83cb8e5b9abf2cf8cf9",
+    "restored": "8ebad322a593542fa82fc5887235716bd1313f90a1f62bb41e0fd02e0488198e",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/91h-connect-outline-and-arctic-presentation-commands.md",
+    "generated": "aa435a01b5a0845d2d68a4fddbe2ac62bb8231a430ba82230db8e0c5739779d8",
+    "restored": "8b02de8aea76b643d812ec6ffc92af72ba98ddd5470ef67fbd41e56a010830f0",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/91zza-write-original-beam-column-and-plate-builders.md",
+    "generated": "9bb3155a76f67be8223f11def209894b34c1553476c976ac8edffed15dfa3657",
+    "restored": "eb060053f631396afc547c0f36da5eaa7c38ff9475caa1288b4bb04480ee8745",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/92-link-current-wood-element-builders.md",
+    "generated": "e1cd7670338fd110dc7b9901d2f3b8e0cd223a123e5880b286e71ba62f02cc19",
+    "restored": "15d2efce987657e0b311f41fe34370ed1e2cef8b80972cbb9d35e1b3373567ad",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/92b-own-original-element-geometry.md",
+    "generated": "386f949aa0740d3c50a8a3c830beee7a981a61520986a2271f30cd1638996846",
+    "restored": "f6ce3ae11e5e96119e6795f8d5ba26535d75fbcb261cea197817fb18a1fd201f",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/92n-pick-elements-through-the-real-command-dock.md",
+    "generated": "92a8e6478a6fa7f0a5251dcdb8248769d92641957d064e9df0f399f7aae8059b",
+    "restored": "c8f2d7d209feb5a558af0fd3c98e2932e3a5fa2863765172157fae30b7ad2d37",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/93-classify-original-solids-independently-of-clipping.md",
+    "generated": "fd8bfb20b00e4b8fc4a58ac94c8f7a514d12b3e72fa74ee366db71c7f6ad89b7",
+    "restored": "5b1d0197bc3c027438bb56d27efd32e0af35ff256f5b5ce1254377420a59c2e2",
+    "source": "HEAD740910f35"
+  },
+  {
+    "path": "session_viewer/docs/journey/93g-connect-strict-opacity-presentation-commands.md",
+    "generated": "64c7c1d74970944851ce5850edbdafbba7f4ee8e3c2b2d019d34875a5fbf6429",
+    "restored": "5a1762043ce72766a018a50a6b88edf761e7befb415d16ce41de795430927a8e",
+    "source": "HEAD740910f35"
+  }
+]

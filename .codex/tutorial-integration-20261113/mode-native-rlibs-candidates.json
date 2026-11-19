@@ -1,0 +1,467 @@
+{
+  "status": "READ_ONLY_PLAN_REQUIRES_BASELINE_OWNER_REVIEW",
+  "scope": "Native rlibs restored by mode probe, excluded current Viewer requirements; baseline protection explicitly recorded. Executable and metadata retained.",
+  "cacheRoot": "C:\\pc\\3_code\\code_rust\\wood_research\\session\\session_viewer\\target\\course-cargo",
+  "archiveRoot": "C:/pc/tmp/tutorial-mode-native-rlibs-20261114",
+  "protectedManifest": "C:\\pc\\3_code\\code_rust\\wood_research\\.codex\\viewer-quality-20261028\\current-viewer-protected-cache-20261114-01.json",
+  "protectedSha256": "29559f235d07f31120188d33e898664aa32fe3cffd00ebd31c6a38c957e34803",
+  "files": [
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libaccesskit-cc9b7a8916811de6.rlib",
+      "bytes": 1102098,
+      "mtimeNs": 1794615899445316200,
+      "sha256": "186bf542fe00ed0ad49615d14bb6f71ea71db3709706696df4d9833a2910e06e",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libahash-4c7e7f13dec9d4d9.rlib",
+      "bytes": 242870,
+      "mtimeNs": 1794615416859278200,
+      "sha256": "ffe2f2c7075cd4949375a7a7e62416795cbbfceddfd4c837ac6e7e39a4b67727",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libbytemuck-e49cbaed653b7e5a.rlib",
+      "bytes": 550248,
+      "mtimeNs": 1794615372561507500,
+      "sha256": "747e5919470b78c3780c41299f69df5e2437ce50ceb1752ef1dd05a4a85e5723",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libcodespan_reporting-7cbe6a763ef622f3.rlib",
+      "bytes": 759468,
+      "mtimeNs": 1794615376620258100,
+      "sha256": "8814f0969e1e0a311e9540be37d27ddf9977114fa633a97583fc3f18619a6ce5",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libcolor-987a717bc87d8394.rlib",
+      "bytes": 1485802,
+      "mtimeNs": 1794615394175045800,
+      "sha256": "69955a28d46cb5ef79ccef88daf7d20254e31e435e0dea39d5ce157ea5c8eda8",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libecolor-f2c66dc6fa1a29dc.rlib",
+      "bytes": 410434,
+      "mtimeNs": 1794615406594534400,
+      "sha256": "4cbfcc4b0d9c057f6a287d756bf8307e225be42c1256c29cd95f0541c001c01b",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libegui-cc49cb181878d14f.rlib",
+      "bytes": 19431682,
+      "mtimeNs": 1794615925747836800,
+      "sha256": "ba3d262fe61058b1a1006d481e2632d7f512937c20ba8e2625a5bc207a2c03ae",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libemath-4ea1ab9e55afb51a.rlib",
+      "bytes": 645388,
+      "mtimeNs": 1794615406397713200,
+      "sha256": "70d2edb3edd02fff591ce18d30782cafba00aca23a4fda50be003fddd246783b",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libepaint-d891e25f77f8222a.rlib",
+      "bytes": 5431696,
+      "mtimeNs": 1794615894613607200,
+      "sha256": "2bdbb9c675fe419e064b37572728bdc7c0061b82f9842c58c55828eb423036aa",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libequivalent-4f94a02d241b1660.rlib",
+      "bytes": 9264,
+      "mtimeNs": 1794615372686794600,
+      "sha256": "64691621f97b14a017084ad8545ecbf4b51bf5369fd9797821376b0b121f0f48",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libfearless_simd-4d0bbdc337ee93c7.rlib",
+      "bytes": 8349450,
+      "mtimeNs": 1794615400192493000,
+      "sha256": "e6187c84dc8d332345ee1910f827e12c812343ad6d36ab9e14e48b9d2c04d46b",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libfont_types-2ebf0fcbde07d1b0.rlib",
+      "bytes": 890368,
+      "mtimeNs": 1794615406062252100,
+      "sha256": "38b139b4a3adc7e7401118443acc860e74e8a101f0c29cb219fe023fbcaff63b",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libfont_types-58d89d4a309cf721.rlib",
+      "bytes": 780570,
+      "mtimeNs": 1794615398821680900,
+      "sha256": "5aa5a71fd4e26496fd2fa3f5f247a2349989d54e6c9359c928f405f4d6d482ac",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libgetrandom-535f2987159f0e52.rlib",
+      "bytes": 86590,
+      "mtimeNs": 1794615400295371700,
+      "sha256": "0486147ba860dfdab4d9b4d8e5b22b3941d0019b32fd5b583649ac840ddd3af9",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libglutin_wgl_sys-23e4ca940f3072a6.rlib",
+      "bytes": 128502,
+      "mtimeNs": 1794615393641891000,
+      "sha256": "9d1e3ca631df31e227d2032a968f622ae27ca6e32328b3649b7e64b479d51e75",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libgpu_allocator-bc19ffde6eaa1ea5.rlib",
+      "bytes": 1848994,
+      "mtimeNs": 1794615392417181600,
+      "sha256": "38512a157399c5680397f52eb6fd2c1fdb804ad61d4d59a4e971daa759dfe197",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libhalf-3fa44a3dff48f0c4.rlib",
+      "bytes": 773238,
+      "mtimeNs": 1794615377512899400,
+      "sha256": "1e21fbd05ee6c8d5831a18b41c6f3071501a3e83ed8415cd9003ab85ac933165",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libhashbrown-5316325e06db9540.rlib",
+      "bytes": 1341454,
+      "mtimeNs": 1794615375227417200,
+      "sha256": "432de560be929fe70bde445684d8ab82b7fd0564c1838b286a028d8b84ea96fc",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libindexmap-27fc4f3b1c976e0b.rlib",
+      "bytes": 1279186,
+      "mtimeNs": 1794615375929337100,
+      "sha256": "eb3df776e740eb51582994062b2c832b79810a7e26462083fde019b1ee77ca0f",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libinventory-98b4647ab77a3670.rlib",
+      "bytes": 42250,
+      "mtimeNs": 1794615899529502200,
+      "sha256": "bfbb37c185e31f1e3051d6dacbd6b0c9c47cc70d3f3ff39873dd816860644bda",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libitoa-9600da6beb7fb549.rlib",
+      "bytes": 127168,
+      "mtimeNs": 1794615406183267400,
+      "sha256": "72ebe0321d58ebceefe7973347ed883988c0da24a8f3e603738310193867bbd2",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libkhronos_egl-486593480728743a.rlib",
+      "bytes": 771604,
+      "mtimeNs": 1794615393533018400,
+      "sha256": "5dd9c7454d925c5f71ba71b915f1802eea9dc2a476b0a494b39e11ff373f2f3a",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libkurbo-d82af6352ffe3d9b.rlib",
+      "bytes": 3020576,
+      "mtimeNs": 1794615393221676400,
+      "sha256": "769e7661cc8774eff6eb20fcb4d1ff41851bab718347e41f7808081e042dcead",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/liblibc-8950e08a9227dcc0.rlib",
+      "bytes": 243064,
+      "mtimeNs": 1794615390711793600,
+      "sha256": "10089171ce997374aa8d36ec606acbd2a43fdf7ac734bc3d6b7c18f50225cd48",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/liblog-af86b7d03b01aeb7.rlib",
+      "bytes": 265024,
+      "mtimeNs": 1794615374889422000,
+      "sha256": "d51ddaf6016aeec05527fa4bc3615a888d03cd0cd3096a72a2b6dfac18b4d2f2",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libnaga-42494f629be2e247.rlib",
+      "bytes": 31431960,
+      "mtimeNs": 1794615384513511900,
+      "sha256": "be2d995608158559f3fb5fec8f175605e7598abf86a72b7c31117dff32fe7bab",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libordered_float-a7910776ca85da41.rlib",
+      "bytes": 444032,
+      "mtimeNs": 1794615393810270000,
+      "sha256": "a4827d530b68b30b3c55275744ad2d5dfb16e8bfd4802040cfc7e8bc66826ee1",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libparking_lot-f547dc2899af0e96.rlib",
+      "bytes": 708778,
+      "mtimeNs": 1794615377265998200,
+      "sha256": "6ffa5d09b9bbd995ae9dd2a1fd8a95ddf4f956db14952d0c6045cc90d7bff38d",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libparking_lot_core-38e194372bc9e97c.rlib",
+      "bytes": 351854,
+      "mtimeNs": 1794615376200418300,
+      "sha256": "c528d46d9dd376a8bed281c55829ee4807ed5de3336ee7b9365434083cbea49a",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libpeniko-6429b2ad79001a81.rlib",
+      "bytes": 502900,
+      "mtimeNs": 1794615398602357800,
+      "sha256": "b876053631eb0b15ba225dbbf3dd58d7bd2d515c3e90187a5658246bb5b00e26",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libppv_lite86-5d500b1aaf1315b8.rlib",
+      "bytes": 1146044,
+      "mtimeNs": 1794615405820893200,
+      "sha256": "c87287cfc0b78b2a816e680db340ee795a09508869c480d6f0b52c4e0bf1363e",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libprost-3f4d0421ebede939.rlib",
+      "bytes": 644860,
+      "mtimeNs": 1794615896542660900,
+      "sha256": "c25b057850905d6488e373421f651b1af4f27d614c4930879f82be7445752b71",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/librand-6677d9f536b4d92b.rlib",
+      "bytes": 1399672,
+      "mtimeNs": 1794615896901000500,
+      "sha256": "be19d10a5ad85352e23969001213af2992d3f6e69de4007f76f204e113ad0596",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/librand_chacha-8e63b1116dd79bc3.rlib",
+      "bytes": 580280,
+      "mtimeNs": 1794615411599241200,
+      "sha256": "02db87a83fe2e1bedcd094eb7822d1a43903588e7115d26cd46d9d7164f9ebda",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/librand_core-70c1c188e5e32430.rlib",
+      "bytes": 208634,
+      "mtimeNs": 1794615400426782200,
+      "sha256": "bbf89bba62b00adf4e075e9708d06dc242209279862f0c250c79d32eeae50b06",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libread_fonts-08d58fe7bf6eed9d.rlib",
+      "bytes": 22006250,
+      "mtimeNs": 1794615411307164800,
+      "sha256": "64441e70971eeaebcfdc594a3a329fc28b911e2e573664fa53c0fba1d182d9de",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libread_fonts-593edfa3294e49dc.rlib",
+      "bytes": 21935868,
+      "mtimeNs": 1794615405287414400,
+      "sha256": "46185edceee713f614066d6cc67b666a024da628ac4cfc18ef8011a30cb4acb3",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libserde-c042d92d1ef0b91c.rlib",
+      "bytes": 959606,
+      "mtimeNs": 1794615406906665900,
+      "sha256": "f7a0d832e0ccfe7eca4b34ac37d0a5c55122aa6239d6099b61092f11dafec1ec",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libserde_json-a2e899baa9adfc53.rlib",
+      "bytes": 3273340,
+      "mtimeNs": 1794615424907756400,
+      "sha256": "28289f97da5d590adbf13eab9f8ff81da46e85c176701414029290b7647bdb6d",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libserde_yaml_ng-6421da3e7d2436ee.rlib",
+      "bytes": 3656512,
+      "mtimeNs": 1794615902940515800,
+      "sha256": "51a51bc032f8460598608ff6dc3acedbde9d91831e7584eae8722a6123e33ede",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libsession_rust-189a9f48b7b2a113.rlib",
+      "bytes": 72775592,
+      "mtimeNs": 1794615921664977400,
+      "sha256": "f8b6ea67f9575e19923317725e58853d81232d5dd6801d39ec600af427a78559",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libskrifa-813fea966aa7ce14.rlib",
+      "bytes": 10020310,
+      "mtimeNs": 1794615899168005200,
+      "sha256": "eb1dbb2a42551b3e85cce0b24982b5342cc3b23f6740b64b29d79b944780fc72",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libskrifa-9ef582418daca59a.rlib",
+      "bytes": 8941490,
+      "mtimeNs": 1794615418892965700,
+      "sha256": "548b4e8d1a0fc53ed37ea1079ebe1ccc4bbd4b431fbd1894032032ad58c617bf",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libsmallvec-e0f96ec1308e2258.rlib",
+      "bytes": 226964,
+      "mtimeNs": 1794615374765963800,
+      "sha256": "04776508e6974378b95455e6634645b58481885777b3434c50534199ef52ffe3",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libswash-c56f8909047219de.rlib",
+      "bytes": 10675486,
+      "mtimeNs": 1794615901980300200,
+      "sha256": "eff4386d8773acbe6a62202b7edc903aef71a52e532bcb0934aa4846b216125a",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libthiserror-a365b464108c86c1.rlib",
+      "bytes": 31242,
+      "mtimeNs": 1794615376022593200,
+      "sha256": "fddeb5ce08f0fec7ff71b0aa4deec3d0de426fb6f1aaf611ebd3fd700c10c900",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libttf_parser-d1f720ae610e4de4.rlib",
+      "bytes": 3987298,
+      "mtimeNs": 1794615926727544000,
+      "sha256": "63806ffa2ce4b695fc289ba5650ca337dd11cd70952bcab0ed5305474de23ddf",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libunicode_ident-542713adac003268.rlib",
+      "bytes": 55588,
+      "mtimeNs": 1794615377997655600,
+      "sha256": "4c97111315f04bb4f6e72ef148ebe8c332f98ece9e85357997fcac826b80be0f",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libunicode_width-043767bc2baa1420.rlib",
+      "bytes": 169888,
+      "mtimeNs": 1794615376320055500,
+      "sha256": "36579f9ab746c64409a866e4f8b636a268aa4b103aad2d06210326dd7b9a8d89",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libuuid-761b2da0f0c48685.rlib",
+      "bytes": 895840,
+      "mtimeNs": 1794615405556474800,
+      "sha256": "e85bb41262b3aa0e277d2e9a5755b878c7f36c5dbff50c0ae776e65ada48a791",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libvello_common-0deb9e006551863d.rlib",
+      "bytes": 2781084,
+      "mtimeNs": 1794615401216154500,
+      "sha256": "da0d6c0f5bac726e89bf19458023ace9c61dc0bacb23672f90154268d59a3eaa",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libvello_cpu-356ee8233e303a70.rlib",
+      "bytes": 23893356,
+      "mtimeNs": 1794615424025551000,
+      "sha256": "15a99a3dfcf47836e3fe2e9189287c437f7b7683f2b82d6635dd4f743bb9e470",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libwgpu-b56c9154e9ddff5d.rlib",
+      "bytes": 6572924,
+      "mtimeNs": 1794615896288861400,
+      "sha256": "8c6a1ed8e45fb71a5c6a3750450c768fd49fc15829df2fe18642fb363c013f5a",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libwgpu_core-33a12666c74efe47.rlib",
+      "bytes": 25783174,
+      "mtimeNs": 1794615416701246400,
+      "sha256": "5d8f89d418e7ae283c426b95b06883eda4cc499055b90ddc33c9b0d3b7a43770",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libwgpu_core_deps_windows_linux_android-02730d038049b209.rlib",
+      "bytes": 3190,
+      "mtimeNs": 1794615405625097900,
+      "sha256": "2c7fecb0fdb2a90e28d4d15e5f42672a59e083c12bead8b2a4a9649fd34841a5",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libwgpu_hal-ba71e7fd50b4fb25.rlib",
+      "bytes": 20251864,
+      "mtimeNs": 1794615398411169600,
+      "sha256": "d13c0b8e8556310657c500c2c73e84a5bab0779c60e47ee3291956b46ac145e6",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libwgpu_naga_bridge-85af7cb080227e19.rlib",
+      "bytes": 25296,
+      "mtimeNs": 1794615393325473400,
+      "sha256": "64c7f0fbcd6be3ded683dcc5d0360d1ef00fdfb21472a69a399db6cf02247454",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libwgpu_types-a1959bc4d065808e.rlib",
+      "bytes": 6184182,
+      "mtimeNs": 1794615391895194900,
+      "sha256": "4613fd7cdd3cce3e21e6750a8874296ed9f0264b5616da231515391cb629f901",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libwindows-2888e5a2312c6bc5.rlib",
+      "bytes": 35428020,
+      "mtimeNs": 1794615390592091000,
+      "sha256": "33c8b4ada39724bb22aae2cf4c39876805a57e9eccc1f5a4d688cafc22925c67",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libwindows_collections-6c44f644b80e6c56.rlib",
+      "bytes": 524806,
+      "mtimeNs": 1794615377915395500,
+      "sha256": "1ff3d9878a49753a944099f8d64e72d3eeca1e1e0fa140f48884c94ea861650b",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libwindows_core-e5925b6e1cc12183.rlib",
+      "bytes": 930856,
+      "mtimeNs": 1794615375546988700,
+      "sha256": "b4fc43875c1443b055aa34900a2c1c722c1531774a7554d919fa10e2968fbd0f",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libwindows_future-d408668360351cfd.rlib",
+      "bytes": 1069118,
+      "mtimeNs": 1794615377007625000,
+      "sha256": "1bf6412a0d0c0787aba485e8b1f669e803003a85741b874feece130e5a5e64b2",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libwindows_numerics-ac61455fda922ead.rlib",
+      "bytes": 226068,
+      "mtimeNs": 1794615377630787800,
+      "sha256": "4e043a2191568b6ed5c96b081c3c380c460bfd261cfafd1bdad7d5e2f4c0e843",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libyazi-91678bc14b7b8a0f.rlib",
+      "bytes": 1018040,
+      "mtimeNs": 1794615899854030100,
+      "sha256": "4dc91e9f32685936c868c61a952f80e487ec70c6f17bfad2cb17d66695c17726",
+      "baselineProtected": true
+    },
+    {
+      "path": "x86_64-pc-windows-msvc/debug/deps/libzerocopy-677147ae1e2e1b60.rlib",
+      "bytes": 14743168,
+      "mtimeNs": 1794615374600439700,
+      "sha256": "ea6ac0c4de7dd42e45f6896015bc048791bd3b46ff711d277ad2828e7b7b868f",
+      "baselineProtected": true
+    }
+  ],
+  "count": 65,
+  "bytes": 386482422
+}

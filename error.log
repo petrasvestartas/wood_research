@@ -1,0 +1,43 @@
+[2026-11-12T21:18:45.504799200+00:00] startup: base_url=https://chatgpt.com/backend-api path_style=wham
+[2026-11-12T21:18:45.506109800+00:00] auth: mode=ChatGPT account_id=4236519c-921c-4f1f-ba6f-7404d430b8f8
+[2026-11-12T21:18:45.506595700+00:00] auth: set ChatGPT-Account-Id header: 4236519c-921c-4f1f-ba6f-7404d430b8f8
+[2026-11-12T21:18:45.849971+00:00] http.list_tasks: env=<all> limit=20 cursor_in=<none> cursor_out=<none> items=0
+[2026-11-12T21:20:43.897770600+00:00] startup: base_url=https://chatgpt.com/backend-api path_style=wham
+[2026-11-12T21:20:43.897970800+00:00] auth: mode=ChatGPT account_id=4236519c-921c-4f1f-ba6f-7404d430b8f8
+[2026-11-12T21:20:43.898099800+00:00] auth: set ChatGPT-Account-Id header: 4236519c-921c-4f1f-ba6f-7404d430b8f8
+[2026-11-12T21:20:43.899648500+00:00] startup: wham_force_internal=false ua=codex_cli_rs/0.167.1 (Windows 10.0.26300; x86_64) vscode/1.144.0 (codex_cloud_tasks_tui)
+[2026-11-12T21:20:43.917153800+00:00] env: git origins: [SanitizedGitUrl("https://github.com/petrasvestartas/wood_research.git")]
+[2026-11-12T21:20:43.917443500+00:00] env: parsed HTTP GitHub origin => petrasvestartas/wood_research
+[2026-11-12T21:20:43.917594900+00:00] env: GET https://chatgpt.com/backend-api/wham/environments/by-repo/github/petrasvestartas/wood_research
+[2026-11-12T21:20:43.920266700+00:00] env: parsed HTTP GitHub origin => petrasvestartas/wood_research
+[2026-11-12T21:20:44.193785800+00:00] http.list_tasks: env=<all> limit=20 cursor_in=<none> cursor_out=<none> items=0
+[2026-11-12T21:20:44.196611400+00:00] refresh.apply: env=<all> count=0
+[2026-11-12T21:20:44.986499+00:00] env: status=200 OK content-type=application/json
+[2026-11-12T21:20:45.238002900+00:00] env: status=200 OK content-type=application/json
+[2026-11-12T21:20:45.383557700+00:00] env: status=200 OK content-type=application/json
+[2026-11-12T21:20:45.384053+00:00] env: by-repo returned 0 env(s) for petrasvestartas/wood_research
+[2026-11-12T21:20:45.384172400+00:00] env: GET https://chatgpt.com/backend-api/wham/environments
+[2026-11-12T21:20:45.689323900+00:00] env: status=200 OK content-type=application/json
+[2026-11-12T21:20:45.690028800+00:00] env: /environments JSON (pretty):
+[]
+[2026-11-12T21:20:57.755286800+00:00] env: parsed HTTP GitHub origin => petrasvestartas/wood_research
+[2026-11-12T21:20:59.314354500+00:00] env: status=200 OK content-type=application/json
+[2026-11-12T21:20:59.580257300+00:00] env: status=200 OK content-type=application/json
+[2026-11-12T21:21:35.203213800+00:00] startup: base_url=https://chatgpt.com/backend-api path_style=wham
+[2026-11-12T21:21:35.203431500+00:00] auth: mode=ChatGPT account_id=4236519c-921c-4f1f-ba6f-7404d430b8f8
+[2026-11-12T21:21:35.203528200+00:00] auth: set ChatGPT-Account-Id header: 4236519c-921c-4f1f-ba6f-7404d430b8f8
+[2026-11-12T21:21:35.215427100+00:00] env: parsed HTTP GitHub origin => petrasvestartas/wood_research
+[2026-11-12T21:21:36.535280500+00:00] env: status=200 OK content-type=application/json
+[2026-11-12T21:21:36.784112500+00:00] env: status=200 OK content-type=application/json
+[2026-11-13T19:46:44.525926+00:00] startup: base_url=https://chatgpt.com/backend-api path_style=wham
+[2026-11-13T19:46:44.526122100+00:00] auth: mode=ChatGPT account_id=4236519c-921c-4f1f-ba6f-7404d430b8f8
+[2026-11-13T19:46:44.526240400+00:00] auth: set ChatGPT-Account-Id header: 4236519c-921c-4f1f-ba6f-7404d430b8f8
+[2026-11-13T19:46:44.833412400+00:00] http.list_tasks: env=<all> limit=20 cursor_in=<none> cursor_out=<none> items=0
+[2026-11-13T19:47:16.689397600+00:00] startup: base_url=https://chatgpt.com/backend-api path_style=wham
+[2026-11-13T19:47:16.689594200+00:00] auth: mode=ChatGPT account_id=4236519c-921c-4f1f-ba6f-7404d430b8f8
+[2026-11-13T19:47:16.689716200+00:00] auth: set ChatGPT-Account-Id header: 4236519c-921c-4f1f-ba6f-7404d430b8f8
+[2026-11-13T19:47:16.968607400+00:00] http.list_tasks: env=<all> limit=20 cursor_in=<none> cursor_out=<none> items=0
+[2026-11-13T19:47:27.239600+00:00] startup: base_url=https://chatgpt.com/backend-api path_style=wham
+[2026-11-13T19:47:27.239765800+00:00] auth: mode=ChatGPT account_id=4236519c-921c-4f1f-ba6f-7404d430b8f8
+[2026-11-13T19:47:27.239881700+00:00] auth: set ChatGPT-Account-Id header: 4236519c-921c-4f1f-ba6f-7404d430b8f8
+[2026-11-13T19:47:27.547642200+00:00] http.list_tasks: env=<all> limit=20 cursor_in=<none> cursor_out=<none> items=0

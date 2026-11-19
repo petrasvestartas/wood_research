@@ -1,143 +1,311 @@
+
 #!/usr/bin/env bash
-# Push the stack in DEPENDENCY ORDER, then the superproject.
+# Push all current working branches in the monorepo stack.
 #
-#   .claude/hooks/push_mono.sh                 push what is already committed
-#   .claude/hooks/push_mono.sh -m "message"    commit every tracked change first, then push
+# - Recursively discovers submodules.
+# - Pushes children before parents.
+# - Preserves each repository's current branch.
+# - Supports detached HEAD using .gitmodules branch configuration.
+# - Commits local changes when -m is provided.
+# - Updates parent submodule pointers after pushing children.
+# - Uses force-with-lease when remote history has diverged.
 #
-# As a Claude Code hook (UserPromptSubmit, wired in .claude/settings.json with --hook) the
-# prompt `pushmono` runs the first form and `pushmono <message>` the second; every other
-# prompt passes through untouched and the output goes to Claude as context.
+# Usage:
+#   push_mono.sh
+#   push_mono.sh -m "Update session viewer"
 #
-# Discover and initialize all submodules, pushing children before their parents.
-# Keep the package order session -> wood -> wood_nano so CI can
-# resolve dependency commits. Every other configured repository is included too.
+# Claude Code hook:
+#   pushmono
+#   pushmono Update session viewer
+
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$ROOT"
 
-# Publish explicitly prepared branches without touching shared indexes or history.
-if [ "${1:-}" = "--prepared" ]; then
-    shift
-    [ "$#" -gt 0 ] || { echo 'usage: push_mono.sh --prepared repo...' >&2; exit 2; }
-    for repo in "$@"; do
-        git -C "$repo" rev-parse --verify HEAD >/dev/null
-        git -C "$repo" symbolic-ref --quiet HEAD >/dev/null || exit 1
-        git -C "$repo" diff --cached --quiet || { echo "staged changes in $repo" >&2; exit 1; }
-    done
-    for repo in "$@"; do
-        branch=$(git -C "$repo" symbolic-ref --short HEAD)
-        git -C "$repo" push --set-upstream origin "$branch"
-    done
-    exit 0
-fi
-
 ORDER=()
-
+BRANCHES=()
 MESSAGE=""
-if [ "${1:-}" = "--hook" ]; then
-    # Hook mode: decide from the prompt, then re-run this script as a plain command and
-    # hand everything it printed to Claude. Always exit 0 so the output becomes context.
-    prompt=$(python3 -c 'import json,sys; print(json.load(sys.stdin).get("prompt",""))' 2>/dev/null || true)
+
+step() {
+    printf '\n========== %s ==========\n' "$*"
+}
+
+# Resolve the branch to publish.
+# Attached HEAD always takes priority.
+# Detached HEAD uses the configured submodule branch.
+resolve_branch() {
+    local repo="$1"
+    local fallback="${2:-main}"
+    local branch
+
+    branch=$(git -C "$repo" symbolic-ref --quiet --short HEAD || true)
+
+    if [[ -n "$branch" ]]; then
+        echo "$branch"
+    else
+        echo "$fallback"
+    fi
+}
+
+# Claude Code hook mode.
+if [[ "${1:-}" == "--hook" ]]; then
+    prompt=$(python3 -c \
+        'import json,sys; print(json.load(sys.stdin).get("prompt",""))' \
+        2>/dev/null || true)
+
     case "$prompt" in
-        pushmono) args=() ;;
-        pushmono\ *) args=(-m "${prompt#pushmono }") ;;
-        *) exit 0 ;;
+        pushmono)
+            args=()
+            ;;
+        pushmono\ *)
+            args=(-m "${prompt#pushmono }")
+            ;;
+        *)
+            exit 0
+            ;;
     esac
-    echo "pushmono: running .claude/hooks/push_mono.sh ${args[*]:-}"
-    set +e; bash "$0" "${args[@]}" 2>&1; rc=$?
-    echo "pushmono: exited $rc - report the result above to the user, do nothing else."
+
+    echo "pushmono: publishing monorepo"
+
+    set +e
+    bash "$0" "${args[@]}" 2>&1
+    rc=$?
+    set -e
+
+    echo "pushmono: exited $rc"
     exit 0
 fi
-while [ $# -gt 0 ]; do
+
+# Arguments.
+while [[ $# -gt 0 ]]; do
     case "$1" in
-        -m|--message) MESSAGE="${2:-}"; shift 2 ;;
-        -h|--help)    sed -n '2,9p' "$0"; exit 0 ;;
-        *)            echo "unknown argument: $1" >&2; exit 2 ;;
+        -m|--message)
+            MESSAGE="${2:?Missing commit message}"
+            shift 2
+            ;;
+        -h|--help)
+            echo "Usage: push_mono.sh [-m MESSAGE]"
+            exit 0
+            ;;
+        *)
+            echo "Unknown argument: $1" >&2
+            exit 2
+            ;;
     esac
 done
 
-step() { printf '\n== %s ==\n' "$*"; }
-
-# Initialize missing submodules and build a postorder traversal.
+# Discover repositories recursively.
 collect_repos() {
     local parent="$1"
-    local entry key path full name branch
+    local parent_branch="$2"
+    local entry key path full name configured branch
     local paths=()
-    [ -f "$parent/.gitmodules" ] || return 0
-    if [ "$parent" = "." ]; then
+
+    [[ -f "$parent/.gitmodules" ]] || return 0
+
+    # Preserve dependency order.
+    if [[ "$parent" == "." ]]; then
         paths=(session wood wood_nano)
     fi
+
     while IFS= read -r -d '' entry; do
-        key=${entry%%$'\n'*}
-        path=${entry#*$'\n'}
+        key="${entry%%$'\n'*}"
+        path="${entry#*$'\n'}"
+
         case " ${paths[*]:-} " in
             *" $path "*) ;;
             *) paths+=("$path") ;;
         esac
-    done < <(git -C "$parent" config -z -f .gitmodules --get-regexp '^submodule\..*\.path$' || true)
-    for path in ${paths[@]+"${paths[@]}"}; do
-        git -C "$parent" ls-files --stage -- "$path" | grep -q '^160000 ' || continue
+    done < <(
+        git -C "$parent" config -z -f .gitmodules \
+            --get-regexp '^submodule\..*\.path$' || true
+    )
+
+    for path in "${paths[@]}"; do
+
+        # Only actual submodules.
+        git -C "$parent" ls-files --stage -- "$path" |
+            grep -q '^160000 ' || continue
+
         full="$parent/$path"
-        if [ ! -e "$full/.git" ]; then
-            echo "   initializing repository: $full"
-            git -C "$parent" -c fetch.recurseSubmodules=false \
-                submodule update -q --init --remote -- "$path"
-            while IFS= read -r -d '' entry; do
-                if [ "${entry#*$'\n'}" = "$path" ]; then
-                    key=${entry%%$'\n'*}
-                    name=${key#submodule.}
-                    name=${name%.path}
-                    break
-                fi
-            done < <(git -C "$parent" config -z -f .gitmodules --get-regexp '^submodule\..*\.path$')
-            branch=$(git -C "$parent" config -f .gitmodules "submodule.$name.branch" || true)
-            branch=${branch:-main}
-            if [ "$branch" = "." ]; then
-                branch=$(git -C "$parent" symbolic-ref --short HEAD)
-            fi
-            git -C "$full" checkout -q -B "$branch" "origin/$branch"
+
+        # Initialize missing submodules at their recorded commit.
+        if ! git -C "$full" rev-parse --git-dir >/dev/null 2>&1; then
+            echo "Initializing $full"
+            git -C "$parent" submodule update --init -- "$path"
         fi
-        collect_repos "$full"
+
+        # Find submodule configuration name.
+        name=""
+
+        while IFS= read -r -d '' entry; do
+            key="${entry%%$'\n'*}"
+            configured="${entry#*$'\n'}"
+
+            if [[ "$configured" == "$path" ]]; then
+                name="${key#submodule.}"
+                name="${name%.path}"
+                break
+            fi
+        done < <(
+            git -C "$parent" config -z -f .gitmodules \
+                --get-regexp '^submodule\..*\.path$'
+        )
+
+        # Resolve configured branch for detached HEAD.
+        configured=""
+
+        if [[ -n "$name" ]]; then
+            configured=$(
+                git -C "$parent" config -f .gitmodules \
+                    "submodule.$name.branch" || true
+            )
+        fi
+
+        if [[ "$configured" == "." ]]; then
+            configured="$parent_branch"
+        elif [[ -z "$configured" ]]; then
+            configured="main"
+        fi
+
+        # Attached branch wins; detached HEAD uses configuration.
+        branch=$(resolve_branch "$full" "$configured")
+
+        git check-ref-format --branch "$branch" >/dev/null || {
+            echo "Invalid branch $branch in $full" >&2
+            exit 1
+        }
+
+        echo "Discovered: $full -> $branch"
+
+        collect_repos "$full" "$branch"
+
+        # Postorder: child before parent.
         ORDER+=("$full")
+        BRANCHES+=("$branch")
     done
 }
-collect_repos "."
-ORDER+=(".")
 
-# Validate every repository before pushing anything. Pointer changes are committed
-# after children are pushed, even when no explicit message was supplied.
-for repo in "${ORDER[@]}"; do
-    if ! git -C "$repo" symbolic-ref --quiet HEAD >/dev/null; then
-        echo "detached HEAD in $repo - run pullmono first" >&2
-        exit 1
-    fi
-    if [ -z "$MESSAGE" ] && [ -n "$(git -C "$repo" status --porcelain --ignore-submodules=all)" ]; then
-        echo "uncommitted changes in $repo; commit them or re-run with -m \"message\"" >&2
-        exit 1
-    fi
+# Root must have a named branch.
+ROOT_BRANCH=$(resolve_branch "." "")
+
+if [[ -z "$ROOT_BRANCH" ]]; then
+    echo "Root repository is detached. Checkout a branch first." >&2
+    exit 1
+fi
+
+collect_repos "." "$ROOT_BRANCH"
+
+# Root goes last.
+ORDER+=(".")
+BRANCHES+=("$ROOT_BRANCH")
+
+step "DISCOVERED REPOSITORIES"
+
+for i in "${!ORDER[@]}"; do
+    printf "%-35s -> %s\n" "${ORDER[$i]}" "${BRANCHES[$i]}"
 done
 
-for repo in "${ORDER[@]}"; do
-    branch=$(git -C "$repo" rev-parse --abbrev-ref HEAD)
-    step "$repo ($branch)"
+# Validate everything before modifying anything.
+step "VALIDATION"
 
-    if [ "$branch" = "HEAD" ]; then
-        echo "   detached HEAD - run .claude/hooks/pull_mono.sh (pullmono) first to get back on a branch" >&2
+for repo in "${ORDER[@]}"; do
+
+    git -C "$repo" rev-parse --verify HEAD >/dev/null
+
+    if ! git -C "$repo" remote get-url origin >/dev/null 2>&1; then
+        echo "Missing origin remote: $repo" >&2
         exit 1
     fi
+
+    if [[ -n "$(git -C "$repo" ls-files -u)" ]]; then
+        echo "Unresolved conflicts in $repo" >&2
+        exit 1
+    fi
+
+    if [[ -z "$MESSAGE" ]] &&
+       [[ -n "$(git -C "$repo" status --porcelain --ignore-submodules=all)" ]]; then
+        echo "Uncommitted changes in $repo." >&2
+        echo "Run again with -m \"your message\"." >&2
+        exit 1
+    fi
+
+    echo "OK: $repo"
+done
+
+# Commit local changes and submodule pointer changes.
+step "COMMIT"
+
+for repo in "${ORDER[@]}"; do
+
+    echo
+    echo "Repository: $repo"
 
     git -C "$repo" add -A
-    if ! git -C "$repo" diff --cached --quiet; then
-        git -C "$repo" commit -q -m "${MESSAGE:-Update submodule pointers}"
-        echo "   committed: $(git -C "$repo" log --oneline -1)"
-    fi
 
-    # Local history is authoritative for this monorepo stack. Do not pull/rebase here:
-    # overwrite the remote branch if it diverged so every package is pushed consistently.
-    git -C "$repo" push -q --force origin "$branch"
-    echo "   pushed: $(git -C "$repo" log --oneline -1)"
+    if ! git -C "$repo" diff --cached --quiet; then
+
+        commit_message="${MESSAGE:-Update submodule pointers}"
+
+        git -C "$repo" commit -m "$commit_message"
+
+        echo "Committed: $(git -C "$repo" log -1 --oneline)"
+    else
+        echo "Nothing to commit."
+    fi
 done
 
-step "state"
+# Push every repository to its resolved branch.
+step "PUSH"
+
+for i in "${!ORDER[@]}"; do
+
+    repo="${ORDER[$i]}"
+    branch="${BRANCHES[$i]}"
+
+    echo
+    step "$repo -> origin/$branch"
+
+    # Ensure remote branch state is known.
+    remote_sha=$(
+        git -C "$repo" ls-remote origin "refs/heads/$branch" |
+            awk 'NR == 1 {print $1}'
+    )
+
+    if [[ -n "$remote_sha" ]]; then
+
+        # Fetch remote branch into a private tracking ref.
+        git -C "$repo" fetch --no-tags origin \
+            "+refs/heads/$branch:refs/remotes/push_mono/$branch"
+
+        remote_sha=$(
+            git -C "$repo" rev-parse "refs/remotes/push_mono/$branch"
+        )
+
+        # Publish local HEAD, even when detached.
+        # Force-with-lease prevents overwriting a concurrent update.
+        git -C "$repo" push \
+            --force-with-lease="refs/heads/$branch:$remote_sha" \
+            origin "HEAD:refs/heads/$branch"
+
+    else
+
+        # New remote branch.
+        git -C "$repo" push \
+            origin "HEAD:refs/heads/$branch"
+
+    fi
+
+    echo "PUSHED: $repo -> origin/$branch"
+    echo "Commit: $(git -C "$repo" log -1 --oneline)"
+done
+
+step "FINAL STATE"
+
 git submodule status --recursive
+
+echo
+echo "======================================"
+echo "SUCCESS: ALL REPOSITORIES PUSHED"
+echo "======================================"
