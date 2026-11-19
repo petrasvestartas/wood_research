@@ -2,11 +2,16 @@
 # One process per boolean, appended to <run dir>/results.tsv as it finishes (a rerun resumes):
 #   suite case op status wall bool_s faces edges vertices valid solid volume message
 # The first boolean of each case also measures our operands: <run dir>/operands.tsv  suite case volA validA volB validB
-import os, sys, time, random, resource, subprocess, concurrent.futures as cf
+# Each result's geometry goes to <run dir>/geo/<suite>__<case>__<op>.json for geo.py (SCORE_GEO): the timeout is on the
+# boolean as before (its BOOL line), the measuring and the viewer's mesh after it have GEO_LIMIT seconds of their own
+# (<...>.json.mesh says so when the mesher is not back by then).
+import os, re, sys, time, random, resource, subprocess, concurrent.futures as cf
 drv, cases_f, out = sys.argv[1:4]
 opt = dict(zip(sys.argv[4::2], sys.argv[5::2]))
 jobs, limit = int(opt.get('--jobs', 2)), float(opt.get('--timeout', 60))
 OPS = ['intersection', 'union', 'a-b', 'b-a', 'xor']
+GEO_LIMIT = 60
+os.makedirs(out + '/geo', exist_ok=True)
 cases = {}
 for l in open(cases_f):
     if not l.startswith('#'):
@@ -37,18 +42,37 @@ def one(key):
     env = dict(os.environ)
     if first[(suite, case)] == key and (suite, case) not in measured:
         env['SCORE_OPS'] = '1'
+    geo = '%s/geo/%s__%s__%s.json' % (out, suite, re.sub(r'[^A-Za-z0-9_.-]', '_', case), op)
+    env['SCORE_GEO'] = geo
     t0 = time.time()
+    p = subprocess.Popen([drv, 'bool', w[4], w[5], op, w[3]], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, env=env, preexec_fn=cap)
     try:
-        p = subprocess.run([drv, 'bool', w[4], w[5], op, w[3]], capture_output=True, text=True, timeout=limit, env=env, preexec_fn=cap)
-        lines = p.stdout.splitlines()
+        try:
+            so, se = p.communicate(timeout=limit)
+        except subprocess.TimeoutExpired as e:
+            part = e.stdout or ''
+            if not re.search(r'^BOOL .*\n', part.decode(errors='replace') if isinstance(part, bytes) else part, re.M):
+                raise
+            try:
+                so, se = p.communicate(timeout=GEO_LIMIT)
+            except subprocess.TimeoutExpired:
+                p.kill()
+                so, se = p.communicate()
+        if 'GEO ok' not in so and os.path.exists(geo):
+            os.remove(geo)
+        if 'MESH ok' not in so:
+            open(geo + '.mesh', 'w').write('{"failed": "%s"}' % ('face_meshes() not back in %d s' % GEO_LIMIT if p.returncode == -9 else 'the process ended in face_meshes(): status %d' % p.returncode))
+        lines = so.splitlines()
         o = next((l.split()[1:] for l in lines if l.startswith('OPS ')), None)
         b = next((l.split(None, 10) for l in lines if l.startswith('BOOL ')), None)
         if b:
             rec = [b[2], b[3]] + b[4:10] + [' '.join(b[10:])]
         else:
             why = 'signal %d' % -p.returncode if p.returncode < 0 else 'exit %d' % p.returncode
-            rec = ['CRASH', '0', '0', '0', '0', '0', '0', 'nan', why + ' ' + (p.stderr.strip().splitlines() or [''])[-1][:200]]
+            rec = ['CRASH', '0', '0', '0', '0', '0', '0', 'nan', why + ' ' + (se.strip().splitlines() or [''])[-1][:200]]
     except subprocess.TimeoutExpired as e:
+        p.kill()
+        p.communicate()
         s = e.stdout or ''
         s = s.decode(errors='replace') if isinstance(s, bytes) else s
         o = next((l.split()[1:] for l in s.splitlines() if l.startswith('OPS ')), None)

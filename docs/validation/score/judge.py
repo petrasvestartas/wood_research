@@ -14,8 +14,15 @@
 # ∪ = ∩ + A−B + B−A within 1e-5); the oracles agree when their volumes are within 1e-5 relative or the band (SMLib
 # works on the NURBS form at its tolerance of 1e-5). Booleans where they disagree are listed with the side ours is on
 # (oracles.tsv); the one number stays against OCCT.
+# Geometry, when <run dir>/geo.tsv exists (geo.py; bounds and measures in its header): "equal" then also needs every
+# vertex, every edge over its range and every face's area and centroid to agree with OCCT's within the tolerances the
+# two results carry there (what the operands' tolerances became) or 1e-6 of the diagonal; the count-and-volume number stays beside it
+# as "equal by counts" (and is what volume-only / different / fail, --prev and the oracle lines are about). "draws
+# correctly": the results whose every face the viewer's mesher gives triangles of the right area (a tessellation
+# matter, apart from equal). Writes geo_diff.tsv (every measured result that differs, worst first) and mesh.tsv (every
+# undrawn or wrongly drawn face with the mesher's reason).
 # Writes judged.tsv (and changed.tsv, oracles.tsv).
-import os, re, sys, collections
+import os, re, sys, json, collections
 run = sys.argv[1]
 opt = dict(zip(sys.argv[2::2], sys.argv[3::2]))
 S = '/tmp/claude-0/-home-user-wood-research/8b288b7c-72c4-56e2-9565-a39939e050f9/scratchpad'
@@ -182,13 +189,61 @@ for k, (cat, where, c, why, r, _, _) in now.items():
 t = tally['N']
 n = sum(t.values())
 wide = sum(1 for k in widened if k in now and now[k][0] == 'equal' and now[k][1] == 'N')
-print('equal %d / %d (%.1f %%)%s, volume-only %d, different %d, fail %d' % (t['equal'], n, 100.0 * t['equal'] / max(n, 1), ', of which %d within operand difference' % wide if wide else '', t['volume-only'], t['different'], t['fail']))
+GEO = ['status', 'vertices', 'edges', 'faces', 'draws', 'v_worst', 'v_bound', 'v_ours', 'v_occt', 'e_worst_ours', 'e_worst_occt', 'e_bound', 'e_ours', 'e_occt', 'len_ours',
+       'len_occt', 'f_worst', 'f_differ', 'f_ours', 'f_occt', 'area_ours', 'area_occt', 'n_faces', 'undrawn', 'wrong', 'mesh_s', 'tol_ours', 'tol_occt', 'v_over', 'e_over', 'f_over', 'bbox', 'note']
+geo = {tuple(w[:3]): dict(zip(GEO, w[3:])) for w in tsv(run + '/geo.tsv')}
+
+
+def geometry(k):
+    # '' when vertices, edges and faces agree, else what does not
+    g = geo.get(k)
+    if g is None or g['status'] != 'ok':
+        return 'not measured' + (': ' + g['status'] if g else '')
+    return ', '.join(name for name in ('vertices', 'edges', 'faces') if g[name] != '1')
+
+
+if geo:
+    counted = [k for k, v in now.items() if v[1] == 'N']
+    same = [k for k in counted if now[k][0] == 'equal' and not geometry(k)]
+    print('equal %d / %d (%.1f %%); equal by counts %d / %d (%.1f %%)%s, volume-only %d, different %d, fail %d' % (
+        len(same), n, 100.0 * len(same) / max(n, 1), t['equal'], n, 100.0 * t['equal'] / max(n, 1), ', of which %d within operand difference' % wide if wide else '',
+        t['volume-only'], t['different'], t['fail']))
+    why = collections.Counter(geometry(k) for k in counted if now[k][0] == 'equal' and geometry(k))
+    if why:
+        print('  equal by counts, not by geometry: ' + '; '.join('%s %d' % x for x in why.most_common()))
+    split = [k for k in counted if now[k][0] == 'volume-only']
+    print('  volume-only with equal geometry (edges and faces split differently, or validity): %d of %d' % (sum(1 for k in split if not geometry(k)), len(split)))
+    measured = [k for k in now if geo.get(k, {}).get('status') == 'ok']
+    print('  draws correctly %d / %d measured results (a face undrawn in %d, wrongly drawn in %d; faces: %d undrawn, %d wrong of %d)' % (
+        sum(1 for k in measured if geo[k]['draws'] == '1'), len(measured), sum(1 for k in measured if geo[k]['undrawn'] != '0'), sum(1 for k in measured if geo[k]['wrong'] != '0'),
+        sum(int(geo[k]['undrawn']) for k in measured), sum(int(geo[k]['wrong']) for k in measured), sum(int(geo[k]['n_faces']) for k in measured)))
+    rows = []
+    for k in measured:
+        g, bad = geo[k], geometry(k)
+        if bad:
+            sev = max(num(g['v_over']), num(g['e_over']), num(g['f_over']))
+            rows.append((now[k][0] != 'equal', -sev, '\t'.join(list(k) + [now[k][0], now[k][1], bad, '%.3g' % sev,
+                         'vertices worst %s (%s x its bound), unmatched ours %s OCCT %s' % (g['v_worst'], g['v_over'], g['v_ours'], g['v_occt']),
+                         'edges worst ours %s OCCT %s (%s x its bound), without counterpart ours %s OCCT %s, length ours %s OCCT %s' % (g['e_worst_ours'], g['e_worst_occt'], g['e_over'], g['e_ours'], g['e_occt'], g['len_ours'], g['len_occt']),
+                         'faces worst relative area difference %s (%s x its bound), differ %s, unmatched ours %s OCCT %s, area ours %s OCCT %s' % (g['f_worst'], g['f_over'], g['f_differ'], g['f_ours'], g['f_occt'], g['area_ours'], g['area_occt']),
+                         'box %s' % g['bbox'], g['note']])))
+    with open(run + '/geo_diff.tsv', 'w') as f:
+        f.write('#suite\tcase\top\tby counts\twhere\tdiffers in\tworst, times its bound\tvertices\tedges\tfaces\tbox\tnote\n' + ''.join(r[2] + '\n' for r in sorted(rows)))
+    with open(run + '/mesh.tsv', 'w') as f:
+        f.write('#suite\tcase\top\tface\twhat\tarea\tmesh area\tallowed\ttriangles\treason\n')
+        for k in sorted(measured):
+            if geo[k]['draws'] != '1':
+                d = json.load(open('%s/geo/%s__%s__%s.cmp.json' % (run, k[0], re.sub(r'[^A-Za-z0-9_.-]', '_', k[1]), k[2])))
+                for m in d['mesh']:
+                    f.write('\t'.join(list(k) + [str(m['face']), m['what'], '%.9g' % m['area'], '%.9g' % m.get('mesh_area', 0), '%.3g' % m.get('allowed', 0), str(m.get('triangles', 0)), m.get('why', '')]) + '\n')
+else:
+    print('equal %d / %d (%.1f %%)%s, volume-only %d, different %d, fail %d' % (t['equal'], n, 100.0 * t['equal'] / max(n, 1), ', of which %d within operand difference' % wide if wide else '', t['volume-only'], t['different'], t['fail']))
 for w, label in (('operands', 'apart, operands differ from OCCT'), ('occt', 'apart, OCCT fails, invalid or inconsistent')):
     print('  %s: %d (%s)' % (label, sum(tally[w].values()), ', '.join('%s %d' % (c, tally[w][c]) for c in CATS)))
 unmeasured = sum(1 for v in now.values() if v[3] == 'unmeasured')
 if unmeasured:
     print('  operands unmeasured (counted): %d booleans' % unmeasured)
-print('  per family: ' + '; '.join('%s %d/%d' % (f, c['equal'], sum(c.values())) for f, c in sorted(fam.items())))
+print('  per family%s: ' % (' (by counts)' if geo else '') + '; '.join('%s %d/%d' % (f, c['equal'], sum(c.values())) for f, c in sorted(fam.items())))
 print('failure classes:')
 for c, k in classes.most_common(15):
     print('  %4d  %s' % (k, c.strip()))
@@ -199,7 +254,7 @@ for c, k in reasons.most_common(10):
     print('  %4d  %s' % (k, c))
 with open(run + '/judged.tsv', 'w') as f:
     for k, (cat, where, c, why, r, smv, smo) in sorted(now.items()):
-        f.write('\t'.join(list(k) + [family.get(k[:2], '?'), cat, where, c, why, smv, smo]) + '\n')
+        f.write('\t'.join(list(k) + [family.get(k[:2], '?'), cat, where, c, why, smv, smo] + ([geometry(k) or 'equal', geo.get(k, {}).get('draws', '-')] if geo else [])) + '\n')
 if sm:
     with_sm = {k: v for k, v in now.items() if v[5] != '-'}
     t = collections.Counter(v[5] for v in with_sm.values())

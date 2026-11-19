@@ -3,6 +3,8 @@
 #   occt_ref.py ref <cases.tsv> <out.tsv> [<k>/<n>]   the reference, shard k of n (skips cases in any occt_ref_full*.tsv beside out):
 #     suite case op status faces edges vertices valid volume meshvol meshacc [msg]
 #   occt_ref.py operands <cases.tsv> <out.tsv> [regex]   per operand: suite case side volume area tolband maxtol valid
+#   occt_ref.py geo <cases.tsv> <out dir> <k>/<n> <tier.tsv>...   the result shapes of the booleans the tiers list, for
+#     geo.py: <out dir>/<suite>__<case>__<op>.brep (or .fail with the reason); existing ones are kept
 # Volumes are GProp's adaptive ones (eps 1e-9). meshvol/meshacc (OCCT's mesh volume at 2e-5 of the diagonal and its
 # twice its change from 4e-5) only for the cases in MESH_CASES, where GProp is the outlier on an operand; '-' elsewhere.
 # tolband = sum over faces of area * face tolerance: how far the volume may move within the operand's own tolerance.
@@ -206,7 +208,8 @@ def booleans(sa, sb, out):
             print(op, 'LOADFAIL 0 0 0 0 nan - -', str(e)[:200], flush=True)
         return
     panels = [dump(a), dump(b)] if out else None
-    for op in OPS:
+    keep = os.environ.get('GEO_BREP')
+    for op in os.environ.get('GEO_OPS', ','.join(OPS)).split(','):
         try:
             if op == 'xor':
                 algo = BRepAlgoAPI_Fuse(BRepAlgoAPI_Cut(a, b).Shape(), BRepAlgoAPI_Cut(b, a).Shape())
@@ -218,10 +221,14 @@ def booleans(sa, sb, out):
                 raise RuntimeError('NotDone')
         except Exception as e:
             print(op, 'FAIL 0 0 0 0 nan - -', str(e)[:200], flush=True)
+            if keep:
+                open(keep + op + '.fail', 'w').write(str(e)[:200] + '\n')
             if panels is not None:
                 panels.append(dict(EMPTY, error='OCCT FAIL'))
             continue
         nf = count(r, TopAbs_FACE)
+        if keep:
+            BRepTools.Write_s(r, keep + op + '.brep')
         valid = int(nf == 0 or BRepCheck_Analyzer(r).IsValid())
         mesh = '- -'
         if os.environ.get('MESH') and nf:
@@ -281,9 +288,39 @@ def reference(cases, out, shard):
             f.flush()
 
 
+def geo_name(suite, case, op):
+    return '%s__%s__%s' % (suite, re.sub(r'[^A-Za-z0-9_.-]', '_', case), op)
+
+
+def geometry(cases, out, shard, tiers):
+    k, n = map(int, shard.split('/'))
+    os.makedirs(out, exist_ok=True)
+    rows = {(w[0], w[1]): w for w in (l.rstrip('\n').split('\t') for l in open(cases) if not l.startswith('#'))}
+    want = {}
+    for l in (l for t in tiers for l in open(t) if not l.startswith('#')):
+        s, c, op = l.split('\t')[:3]
+        if not any(os.path.exists('%s/%s.%s' % (out, geo_name(s, c, op), x)) for x in ('brep', 'fail')):
+            want.setdefault((s, c), []).append(op)
+    for i, (key, ops) in enumerate(sorted(want.items())):
+        if i % n != k or key not in rows:
+            continue
+        w, prefix = rows[key], '%s/%s' % (out, geo_name(key[0], key[1], ''))
+        try:
+            subprocess.run([sys.executable, '-I', os.path.abspath(__file__), 'bool', w[6], w[7]], capture_output=True, timeout=900,
+                           env=dict(os.environ, GEO_BREP=prefix, GEO_OPS=','.join(sorted(set(ops)))))
+        except subprocess.TimeoutExpired:
+            pass
+        for op in ops:
+            if not os.path.exists(prefix + op + '.brep') and not os.path.exists(prefix + op + '.fail'):
+                open(prefix + op + '.fail', 'w').write('no result within 900 s\n')
+        print(key[1], ' '.join(ops), flush=True)
+
+
 if __name__ == '__main__':
     if sys.argv[1] == 'bool':
         booleans(sys.argv[2], sys.argv[3], sys.argv[4] if len(sys.argv) > 4 else None)
+    elif sys.argv[1] == 'geo':
+        geometry(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5:])
     elif sys.argv[1] == 'ref':
         reference(sys.argv[2], sys.argv[3], sys.argv[4] if len(sys.argv) > 4 else '0/1')
     else:

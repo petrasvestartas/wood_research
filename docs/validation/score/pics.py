@@ -2,6 +2,9 @@
 # <run dir>/changed.tsv (judge.py --prev) or of --cases (suite, case, note, optional file prefix): ours (this run's
 # build and entry, driver relinked for coarse picture meshes) on top, OCCT below; columns operands, ∩, ∪, A−B, B−A, ⊕,
 # or with --ops only the operations that tier lists for the case. Counts and volumes under each, differences in red.
+# In red: on our row the faces our mesher gives no triangles (their boundary) or wrong ones (the triangles and the
+# boundary; wrong at the picture's coarser quality is twice geo.py's bounds), at the picture's quality or the viewer's, and our edges and vertices without a counterpart in OCCT's result; on OCCT's row
+# its edges and vertices without a counterpart in ours (geo.py against the stored shape, where there is one).
 # Writes <out>/<prefix><case>.png (out defaults to <run dir>/pics) and, with --ops, <out>/index.txt.
 import html, json, os, re, resource, shutil, subprocess, sys
 run = sys.argv[1]
@@ -28,7 +31,7 @@ NAMES = dict(zip(OPS, ['A ∩ B', 'A ∪ B', 'A − B', 'B − A', 'A ⊕ B']))
 only = {}
 for l in open(opt['--ops']) if '--ops' in opt else []:
     if not l.startswith('#'):
-        only.setdefault(tuple(l.split('\t')[:2]), []).append(l.split('\t')[2])
+        only.setdefault(tuple(l.split('\t')[:2]), []).append(l.rstrip('\n').split('\t')[2])
 todo = [l.rstrip('\n').split('\t') for l in open(opt.get('--cases', run + '/changed.tsv')) if l.strip()][:int(opt.get('--max', 40))]
 
 
@@ -44,6 +47,38 @@ def drv(args, wire=[]):
         except subprocess.TimeoutExpired:
             wire.append(1)
     raise subprocess.TimeoutExpired(args, 60)
+
+
+def marks(c, n, op, panel, wire):
+    # what geo.py finds for this boolean: red marks for our panel, and those for OCCT's
+    g = '%s/geo_%s_%s.json' % (work, n, op)
+    ref = '%s/geo/%s__%s__%s.brep' % (D, c[0], re.sub(r'[^A-Za-z0-9_.-]', '_', c[1]), op)
+    cmp = {}
+    try:
+        subprocess.run([DRV, 'bool', c[4], c[5], op, c[3]], capture_output=True, timeout=90, preexec_fn=cap, env=dict(os.environ, SCORE_GEO=g))
+    except subprocess.TimeoutExpired:
+        pass
+    if os.path.exists(g) and os.path.exists(ref):
+        subprocess.run(['timeout', '300', PY, '-I', HERE + '/geo.py', 'cmp', g, ref, g + '.cmp'], capture_output=True)
+        cmp = json.load(open(g + '.cmp')) if os.path.exists(g + '.cmp') else {}
+    area, allowed, cen, apart = (cmp.get(k, []) for k in ('face_area', 'face_allowed', 'face_centroid', 'face_apart'))
+    off = lambda i: i < len(area) and (abs(panel['farea'][i] - area[i]) > 2 * allowed[i] or sum((a - b) ** 2 for a, b in zip(panel['fcen'][i], cen[i])) ** 0.5 > 2 * apart[i])
+    viewer = {m['face']: m['what'] for m in cmp.get('mesh', [])}
+    undrawn = [i for i, k in enumerate(panel.get('ftri', [])) if (not k and not wire) or viewer.get(i) == 'undrawn']
+    wrong = [i for i, k in enumerate(panel.get('ftri', [])) if k and (viewer.get(i) == 'wrong' or off(i))]
+    start = [0]
+    for k in panel.get('ftri', []):
+        start.append(start[-1] + 3 * k)
+    panel['red_idx'] = [x for i in wrong for x in panel['idx'][start[i]:start[i + 1]]]
+    panel['red_edges'] = [panel['edges'][e] for i in undrawn + wrong for e in panel['fedge'][i]] + [e['pts'] for e in cmp.get('edges_ours', [])]
+    panel['red_verts'] = [x for v in cmp.get('vertices_ours', []) for x in v['p']]
+    said = [('%d faces undrawn' % len(undrawn)) if undrawn else '', ('%d wrongly drawn' % len(wrong)) if wrong else '',
+            ('%d edges, %d vertices not in OCCT' % (len(cmp.get('edges_ours', [])), len(cmp.get('vertices_ours', [])))) if cmp.get('edges_ours') or cmp.get('vertices_ours') else '',
+            'faces differ' if cmp and not cmp['faces'] else '']
+    panel['marks'] = ' · '.join(x for x in said if x)
+    other = {'red_edges': [e['pts'] for e in cmp.get('edges_occt', [])], 'red_verts': [x for v in cmp.get('vertices_occt', []) for x in v['p']]}
+    other['marks'] = '%d edges, %d vertices not in ours' % (len(other['red_edges']), len(other['red_verts']) // 3) if other['red_edges'] or other['red_verts'] else ''
+    return other
 
 
 def ours(c, n, wire, ops):
@@ -62,21 +97,22 @@ def ours(c, n, wire, ops):
         except Exception as e:
             panels.append(dict(EMPTY, error='TIMEOUT' if isinstance(e, subprocess.TimeoutExpired) else 'no result'))
         panels[-1]['name'] = NAMES[op]
+        red[op] = marks(c, n, op, panels[-1], wire) if 'error' not in panels[-1] else {}
     return panels
 
 
 def occt(c, n, ops):
     f = '%s/occt_%s_raw.json' % (work, n)
     try:
-        p = subprocess.run(['timeout', '900', PY, '-I', HERE + '/occt_ref.py', 'bool', c[6], c[7], f], capture_output=True, text=True)
+        p = subprocess.run(['timeout', '900', PY, '-I', HERE + '/occt_ref.py', 'bool', c[6], c[7], f], capture_output=True, text=True, env=dict(os.environ, GEO_OPS=','.join(ops)))
         volume = {l.split()[0]: float(l.split()[6]) for l in p.stdout.splitlines() if l.split()[1:2] == ['ok']}
         panels = json.load(open(f))
-        return panels[:2] + [dict(panels[2 + OPS.index(op)], name=NAMES[op], **({'volume': volume[op]} if op in volume else {})) for op in ops]
+        return panels[:2] + [dict(panels[2 + ops.index(op)], name=NAMES[op], **red.get(op, {}), **({'volume': volume[op]} if op in volume else {})) for op in ops]
     except Exception:
         return [dict(EMPTY, error='OCCT did not run'), dict(EMPTY)] + [dict(EMPTY, name=NAMES[op]) for op in ops]
 
 
-jobs, index = [], []
+jobs, index, red = [], [], {}
 for w in todo:
     c = cases[(w[0], w[1])]
     ops = only.get((w[0], w[1]), OPS)
@@ -92,10 +128,11 @@ for w in todo:
         differs = [name for name, i in (('faces', 0), ('edges', 1), ('vertices', 2)) if x['counts'][i] != y['counts'][i]]
         if vx is None or vy is None or abs(vx - vy) > 1e-6 * abs(vy):
             differs.append('volume' + (' (%+.3g relative)' % ((vx - vy) / vy) if vx is not None and vy else ''))
+        differs += [m for m in (x.get('marks'), y.get('marks')) if m]
         index.append('\t'.join([n + '.png', w[1], op, 'ours ' + (x.get('error') or '%d/%d/%d volume %.12g' % (*x['counts'], vx)),
                                 'OCCT ' + (y.get('error') or '%d/%d/%d volume %.12g' % (*y['counts'], vy if vy is not None else float('nan'))),
                                 'differs: ' + (', '.join(differs) or 'nothing')]))
-if only:
+if only or '--cases' in opt:
     open(pics + '/index.txt', 'w').write('#picture\tcase\top\tours faces/edges/vertices volume\tOCCT faces/edges/vertices volume\twhat differs\n' + '\n'.join(index) + '\n')
 for k in range(0, len(jobs), 8):
     batch = jobs[k:k + 8]

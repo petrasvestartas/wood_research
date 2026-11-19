@@ -32,8 +32,17 @@ async function run(name, title){
       sc.add(new THREE.Mesh(g, new THREE.MeshStandardMaterial({color, roughness:0.75, metalness:0, side:THREE.DoubleSide, transparent:opacity<1, opacity, polygonOffset:true, polygonOffsetFactor:1, polygonOffsetUnits:1, depthWrite:opacity>=1})));
       for (const e of s.edges){ const lg=new THREE.BufferGeometry(); lg.setAttribute('position', new THREE.Float32BufferAttribute(e,3)); sc.add(new THREE.Line(lg,new THREE.LineBasicMaterial({color:0x111111}))); }
       const pts = new THREE.BufferGeometry(); pts.setAttribute('position', new THREE.Float32BufferAttribute(s.verts,3));
-      sc.add(new THREE.Points(pts, new THREE.PointsMaterial({color:vcol, size:9, sizeAttenuation:false, depthTest:false})));
+      sc.add(new THREE.Points(pts, new THREE.PointsMaterial({color:vcol, size:7, sizeAttenuation:false, depthTest:false})));
     };
+    // in red: wrongly meshed faces, edges of undrawn faces, edges and vertices without a counterpart on the other row
+    const red = 0xe0101f;
+    if (s.red_idx && s.red_idx.length){ const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(s.pos,3)); g.setIndex(s.red_idx);
+      sc.add(new THREE.Mesh(g, new THREE.MeshBasicMaterial({color:red, side:THREE.DoubleSide, transparent:true, opacity:0.75, depthTest:false}))); }
+    for (const e of (s.red_edges||[])){ const p=[]; for (let i=0;i+5<e.length;i+=3){ const a=new THREE.Vector3(e[i],e[i+1],e[i+2]), b=new THREE.Vector3(e[i+3],e[i+4],e[i+5]);
+        const m=new THREE.Mesh(new THREE.CylinderGeometry(rad*0.006,rad*0.006,a.distanceTo(b),5,1,true), new THREE.MeshBasicMaterial({color:red, depthTest:false}));
+        m.position.copy(a).add(b).multiplyScalar(0.5); m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), b.clone().sub(a).normalize()); sc.add(m); } }
+    if (s.red_verts && s.red_verts.length){ const pts = new THREE.BufferGeometry(); pts.setAttribute('position', new THREE.Float32BufferAttribute(s.red_verts,3));
+      sc.add(new THREE.Points(pts, new THREE.PointsMaterial({color:red, size:16, sizeAttenuation:false, depthTest:false}))); }
     add(s, 0xc9d3de, 1); if (extra) add(extra, 0xe8c9a8, 1);
     return sc;
   }
@@ -44,8 +53,8 @@ async function run(name, title){
       const x = left + col*cw, y = top + row*ch;
       r.setViewport(x, H-y-ch, cw, ch); r.setScissor(x, H-y-ch, cw, ch);
       const s = col ? set[col+1] : set[0], ex = col ? null : set[1];
-      r.render(scene(s, ex, 0xd0021b), cam);
-      const l = document.createElement('div'); l.className='lab'; l.style.left=x+'px'; l.style.width=cw+'px'; l.style.top=(y+ch-48)+'px';
+      r.render(scene(s, ex, 0x30343a), cam);
+      const l = document.createElement('div'); l.className='lab'; l.style.left=x+'px'; l.style.width=cw+'px'; l.style.top=(y+ch-62)+'px';
       let cnt = '';
       const esc = t => String(t).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
       if (s.error){ cnt = '<br><span class="bad">'+esc(s.error).slice(0,90)+'</span>'; }
@@ -53,6 +62,7 @@ async function run(name, title){
         const vol = va===undefined ? '' : '<br>volume <span class="'+(vb!==undefined && !(Math.abs(va-vb)<=1e-6*Math.abs(vb)) ? 'bad':'')+'">'+Number(va).toPrecision(10)+'</span>';
         cnt = '<br><span class="cnt">faces <span class="'+(a[0]!=b[0]?'bad':'')+'">'+a[0]+'</span> · edges <span class="'+(a[1]!=b[1]?'bad':'')+'">'+a[1]+'</span> · vertices <span class="'+(a[2]!=b[2]?'bad':'')+'">'+a[2]+'</span>'+vol+'</span>'; }
       else { const ea=set[0].error||'', eb=set[1].error||''; if (ea||eb) cnt='<br><span class="bad">'+esc(ea||eb).slice(0,90)+'</span>'; }
+      if (s.marks) cnt += '<br><span class="bad">'+esc(s.marks)+'</span>';
       l.innerHTML = (s.name || names[col]) + cnt; labels.appendChild(l);
     }
   }
