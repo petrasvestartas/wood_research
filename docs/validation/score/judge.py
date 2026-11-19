@@ -1,5 +1,6 @@
 # judge.py <run dir> [--prev <run dir>] [--data <dir>]: every boolean of <run dir>/results.tsv against OCCT (ref.tsv).
-# equal: both valid, face/edge/vertex counts equal, volume within 1e-6 relative or within the operands' tolerance band;
+# equal: both valid, face/edge/vertex counts equal, volume within 1e-6 relative, within the operands' tolerance band or within
+# |dA| + |dB|, how far our operands' measured volumes are from OCCT's (those equals are counted in the summary line);
 # volume-only: volume within that bound, counts or validity differ; different: volume outside it; fail: no result.
 # Counted only where OCCT succeeds with a valid shape and our operands match OCCT's (stepfix/operands.tsv when it
 # exists, otherwise operand volumes measured here); the rest is listed apart. Where stepfix finds OCCT's GProp the
@@ -126,9 +127,18 @@ def operands_match(run_dir, results):
     return out
 
 
+widened = set()
+
+
 def judge(run_dir):
     results = {tuple(w[:3]): w[3:] for w in tsv(run_dir + '/results.tsv')}
     match = operands_match(run_dir, results)
+    # how far our operands' volumes are from OCCT's: a result may differ from OCCT's by that much
+    gap = collections.defaultdict(float)
+    for w in tsv(run_dir + '/operands.tsv'):
+        for i, side in enumerate('AB'):
+            d = abs(num(w[2 + 2 * i]) - occt_op.get((w[0], w[1], side), (float('nan'), 0.0))[0])
+            gap[(w[0], w[1])] += d if d == d else 0.0
     out = {}
     for k, r in results.items():
         o = ref.get(k)
@@ -136,6 +146,9 @@ def judge(run_dir):
         if r[0] == 'ok':
             bound = max(1e-6 * abs(num(o[5])), band[k[:2]]) if o else 0
             same_v = o is not None and (abs(vol - num(o[5])) <= bound or (k[:2] in outlier and abs(vol - num(o[6])) <= num(o[7])))
+            if o is not None and not same_v and abs(vol - num(o[5])) <= gap[k[:2]]:
+                same_v = True
+                widened.add(k)
             good = faces == '0' or (valid == '1' and solid == '1')
             cat = 'equal' if same_v and good and r[3:6] == o[1:4] else 'volume-only' if same_v else 'different'
         else:
@@ -168,7 +181,8 @@ for k, (cat, where, c, why, r, _, _) in now.items():
             (classes if cat == 'fail' else reasons)[c] += 1
 t = tally['N']
 n = sum(t.values())
-print('equal %d / %d (%.1f %%), volume-only %d, different %d, fail %d' % (t['equal'], n, 100.0 * t['equal'] / max(n, 1), t['volume-only'], t['different'], t['fail']))
+wide = sum(1 for k in widened if k in now and now[k][0] == 'equal' and now[k][1] == 'N')
+print('equal %d / %d (%.1f %%)%s, volume-only %d, different %d, fail %d' % (t['equal'], n, 100.0 * t['equal'] / max(n, 1), ', of which %d within operand difference' % wide if wide else '', t['volume-only'], t['different'], t['fail']))
 for w, label in (('operands', 'apart, operands differ from OCCT'), ('occt', 'apart, OCCT fails, invalid or inconsistent')):
     print('  %s: %d (%s)' % (label, sum(tally[w].values()), ', '.join('%s %d' % (c, tally[w][c]) for c in CATS)))
 unmeasured = sum(1 for v in now.values() if v[3] == 'unmeasured')

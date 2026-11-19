@@ -1,0 +1,6 @@
+#picture	case	op	ours faces/edges/vertices volume	OCCT faces/edges/vertices volume	what differs
+fixed_github_misc__as1-ac-214_box.png	github_misc__as1-ac-214#box	b-a	ours 13/33/22 volume 75664.0374095	OCCT 13/33/22 volume 75664.0374101	differs: nothing
+fixed_hf_brepmfr__zip_defaultamacchina000_box.png	hf_brepmfr__zip_defaultamacchina000#box	xor	ours 16/26/16 volume 94509150.9576	OCCT 16/26/16 volume 94509752.0654	differs: volume (-6.36e-06 relative)
+fixed_elem04_box.png	elem04_box	intersection	ours 16/43/29 volume 0.00100758766447	OCCT 16/43/29 volume 0.00100765585006	differs: volume (-6.77e-05 relative)
+fixed_elem12_box.png	elem12_box	b-a	ours 18/48/32 volume 0.00214527713197	OCCT 18/48/32 volume 0.00214517291732	differs: volume (+4.86e-05 relative)
+fixed_joint08_rot.png	joint08_rot	b-a	ours 30/81/50 volume 0.000659200618587	OCCT 30/81/50 volume 0.000658865664828	differs: volume (+0.000508 relative)
