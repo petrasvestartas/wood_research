@@ -9,7 +9,7 @@
 # Failure classes are the messages with numbers and names stripped; results that are not equal are ranked by what is
 # wrong (validity, closedness, volume, counts) and, for bop, the first note of its report.
 # Second oracle, when <data>/smlib_ref.tsv exists (smlib_ref.py): SMLib's result on the operands OCCT built. It counts
-# where SMLib's operand volumes equal OCCT's (1e-6 or the band) and its own results add up (∩ + A−B = A, ∩ + B−A = B,
+# where SMLib's volumes of the converted operands equal OCCT's (1e-6 or the band) and its own results add up (∩ + A−B = A, ∩ + B−A = B,
 # ∪ = ∩ + A−B + B−A within 1e-5); the oracles agree when their volumes are within 1e-5 relative or the band (SMLib
 # works on the NURBS form at its tolerance of 1e-5). Booleans where they disagree are listed with the side ours is on
 # (oracles.tsv); the one number stays against OCCT.
@@ -75,7 +75,7 @@ for key in {k[:2] for k in sm}:
     for side, v in (('A', va), ('B', vb)):
         vc, bc = occt_op.get(key + (side,), (float('nan'), 0.0))
         if first[0] == 'LOADFAIL' or not abs(v - vc) <= max(1e-6 * abs(vc), bc):
-            why = why or 'operand %s not converted' % side
+            why = why or "SMLib's operand %s differs" % side
     v = {op: num(x[5]) for op, x in r.items() if x[0] == 'ok'}
     sums = [('intersection', 'a-b', None, va), ('intersection', 'b-a', None, vb), ('intersection', 'a-b', 'b-a', v.get('union')), ('a-b', 'b-a', None, v.get('xor'))]
     if not why and any(a in v and b in v and (c is None or c in v) and t is not None and abs(v[a] + v[b] + (v[c] if c else 0) - t) > 1e-5 * abs(t) for a, b, c, t in sums):

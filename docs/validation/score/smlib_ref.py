@@ -8,7 +8,7 @@
 # against OCCT's before a result is believed.
 import os, sys, tempfile, subprocess, concurrent.futures as cf
 HERE = os.path.dirname(os.path.abspath(__file__))
-DRV = os.environ.get('SMLIB_DRV', '/tmp/claude-0/-home-user/8b288b7c-72c4-56e2-9565-a39939e050f9/scratchpad/smlib/smlib_drv')
+DRV = os.environ.get('SMLIB_DRV', '/tmp/claude-0/-home-user/8b288b7c-72c4-56e2-9565-a39939e050f9/scratchpad/smlib/build/smlib_drv')
 OPS = ['intersection', 'union', 'a-b', 'b-a', 'xor']
 
 

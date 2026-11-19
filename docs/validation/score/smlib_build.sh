@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # smlib_build.sh <usd-brep repo> <out dir> [jobs=2]: SMLib and SM_API alone (libSMLib.so, libSM_API.so), release flags of
-# the repo's premake files, no USD, no Packman. TBB (the only dependency) comes from the PyPI wheels tbb and tbb-devel.
+# the repo's premake files, no USD, no Packman, then the scoreboard's smlib_drv against them (<out dir>/smlib_drv). TBB (the only dependency) comes from the PyPI wheels tbb and tbb-devel.
 set -euo pipefail
 REPO=$(cd "$1" && pwd); OUT=$2; JOBS=${3:-2}
 mkdir -p "$OUT/tbb" "$OUT/obj"; OUT=$(cd "$OUT" && pwd)
@@ -26,4 +26,7 @@ FLAGS="-O2 -std=c++17 -fPIC -w -DNDEBUG -DNOMINMAX -DSM_GRAPHICS_CALLBACKS=1 -DT
     else echo "build libSM_API.so: so $objs | libSMLib.so"; echo "  libs = -L$OUT -lSMLib -L$OUT/tbb/lib -ltbb"; fi
   done
 } > "$OUT/build.ninja"
-nice ninja -C "$OUT" -j "$JOBS"
+nice ninja -C "$OUT" -j "$JOBS" > "$OUT/build.log" || { tail -20 "$OUT/build.log"; exit 1; }
+HERE=$(cd "$(dirname "$0")" && pwd)
+g++ -O1 -std=c++17 -w -DNDEBUG -DNOMINMAX -DSM_GRAPHICS_CALLBACKS=1 -I"$REPO/source/SM_API/inc" -I"$REPO/source/SMLib/inc" "$HERE/smlib_drv.cpp" \
+  -o "$OUT/smlib_drv" -L"$OUT" -lSM_API -lSMLib -L"$OUT/tbb/lib" -ltbb -Wl,-rpath,"$OUT" -Wl,-rpath,"$OUT/tbb/lib"
