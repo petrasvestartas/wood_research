@@ -152,7 +152,7 @@ static std::string dump(const BRep& r) {
     first = true;
     for (const BRepEdge& e : r.m_edges) {
         if (e.degenerated || e.curve_3d_index < 0) continue;
-        const NurbsCurve& c = r.m_curves_3d[e.curve_3d_index];
+        const NurbsCurve& c = r.m_curves_3d[e.curve_3d_index].nurbs();
         const auto [t0, t1] = c.domain();
         o << (first ? "" : ",") << "[";
         first = false;
