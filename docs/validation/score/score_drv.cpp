@@ -2,7 +2,8 @@
 //   score_drv bool <specA> <specB> <op> <tol> [dump.json]
 //     OPS <volA> <validA> <volB> <validB>                       only with SCORE_OPS=1, before the boolean
 //     BOOL <op> <status> <bool_s> <faces> <edges> <vertices> <valid> <solid> <volume> [message]
-//       message: the exception of a FAIL; for an ok bop result, what bop::Report noted (distinct notes, "; "-joined)
+//       message: the exception of a FAIL; for an ok bop result, what bop::Report noted (distinct notes, "; "-joined);
+//       a bop result whose Report::failure is set is a FAIL with that reason
 //   score_drv operands <specA> <specB> <dump.json>
 // Picture dumps mesh the faces coarsely (edges and vertices only where meshing throws, or with SCORE_NOMESH=1).
 // A spec is step=<path> (the shell of largest volume) or step=<path>#<i>, box=sx,sy,sz (centred), cyl=r,h, cone=r,h
@@ -175,6 +176,9 @@ static BRep apply(const BRep& a, const BRep& b, const std::string& op, double to
     std::vector<std::string> seen;
     for (const std::string& note : report.log)
         if (std::find(seen.begin(), seen.end(), note) == seen.end()) { seen.push_back(note); notes += (notes.empty() ? "" : "; ") + note; }
+    // a result bop itself declares untrustworthy is no result: FAIL with its reason (builds before Report::failure have none)
+    if constexpr (requires { report.failure; })
+        if (!report.failure.empty()) throw std::runtime_error("bop: " + report.failure + (notes.empty() ? "" : "; " + notes));
     return r;
 #else
     return brep_boolean::apply(first, second, o, tol);
