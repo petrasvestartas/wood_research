@@ -12,7 +12,7 @@ h1{position:absolute;left:40px;top:6px;margin:0;font-size:16px}
 async function run(name, title){
   const ours = await (await fetch('ours_'+name+'.json')).json();
   const occt = await (await fetch('occt_'+name+'.json')).json();
-  const cols = 6, cw = 330, ch = 300, top = 34, left = 30;
+  const cols = ours.length - 1, cw = 330, ch = 300, top = 34, left = 30;
   const W = left + cols*cw, H = top + 2*ch + 10;
   const canvas = document.getElementById('c'); canvas.width = W*2; canvas.height = H*2; canvas.style.width=W+'px'; canvas.style.height=H+'px';
   const r = new THREE.WebGLRenderer({canvas, antialias:true}); r.setPixelRatio(2); r.setSize(W,H); r.setClearColor(0xffffff); r.setScissorTest(true);
@@ -45,15 +45,17 @@ async function run(name, title){
       r.setViewport(x, H-y-ch, cw, ch); r.setScissor(x, H-y-ch, cw, ch);
       const s = col ? set[col+1] : set[0], ex = col ? null : set[1];
       r.render(scene(s, ex, 0xd0021b), cam);
-      const l = document.createElement('div'); l.className='lab'; l.style.left=x+'px'; l.style.width=cw+'px'; l.style.top=(y+ch-34)+'px';
+      const l = document.createElement('div'); l.className='lab'; l.style.left=x+'px'; l.style.width=cw+'px'; l.style.top=(y+ch-48)+'px';
       let cnt = '';
       const esc = t => String(t).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
       if (s.error){ cnt = '<br><span class="bad">'+esc(s.error).slice(0,90)+'</span>'; }
-      else if (col){ const a=s.counts, b=other[col+1].counts; cnt = '<br><span class="cnt">faces <span class="'+(a[0]!=b[0]?'bad':'')+'">'+a[0]+'</span> · edges <span class="'+(a[1]!=b[1]?'bad':'')+'">'+a[1]+'</span> · vertices <span class="'+(a[2]!=b[2]?'bad':'')+'">'+a[2]+'</span></span>'; }
+      else if (col){ const a=s.counts, b=other[col+1].counts, va=s.volume, vb=other[col+1].volume;
+        const vol = va===undefined ? '' : '<br>volume <span class="'+(vb!==undefined && !(Math.abs(va-vb)<=1e-6*Math.abs(vb)) ? 'bad':'')+'">'+Number(va).toPrecision(10)+'</span>';
+        cnt = '<br><span class="cnt">faces <span class="'+(a[0]!=b[0]?'bad':'')+'">'+a[0]+'</span> · edges <span class="'+(a[1]!=b[1]?'bad':'')+'">'+a[1]+'</span> · vertices <span class="'+(a[2]!=b[2]?'bad':'')+'">'+a[2]+'</span>'+vol+'</span>'; }
       else { const ea=set[0].error||'', eb=set[1].error||''; if (ea||eb) cnt='<br><span class="bad">'+esc(ea||eb).slice(0,90)+'</span>'; }
-      l.innerHTML = names[col] + cnt; labels.appendChild(l);
+      l.innerHTML = (s.name || names[col]) + cnt; labels.appendChild(l);
     }
   }
-  return 'ok';
+  return [W, H];
 }
 </script></body></html>

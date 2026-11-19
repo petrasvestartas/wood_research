@@ -4,7 +4,7 @@
 //     BOOL <op> <status> <bool_s> <faces> <edges> <vertices> <valid> <solid> <volume> [message]
 //       message: the exception of a FAIL; for an ok bop result, what bop::Report noted (distinct notes, "; "-joined)
 //   score_drv operands <specA> <specB> <dump.json>
-// Picture dumps mesh the faces coarsely; SCORE_NOMESH=1 dumps edges and vertices only.
+// Picture dumps mesh the faces coarsely (edges and vertices only where meshing throws, or with SCORE_NOMESH=1).
 // A spec is step=<path> (the shell of largest volume) or step=<path>#<i>, box=sx,sy,sz (centred), cyl=r,h, cone=r,h
 // or sph=r, then |-separated moves in order: t=x,y,z, r=ax,ay,az,deg,cx,cy,cz or m=<3x4 row-major>. op: intersection
 // union a-b b-a xor.
@@ -138,7 +138,9 @@ static std::string dump(const BRep& r) {
     std::ostringstream idx;
     size_t base = 0;
     bool first = true;
-    for (const Mesh& m : std::getenv("SCORE_NOMESH") ? std::vector<Mesh>{} : r.face_meshes_q(true, 30.0, 0.01)) {
+    std::vector<Mesh> meshes;
+    if (!std::getenv("SCORE_NOMESH")) try { meshes = r.face_meshes_q(true, 30.0, 0.01); } catch (const std::exception&) {}
+    for (const Mesh& m : meshes) {
         const auto [vs, fs] = m.to_vertices_and_faces();
         for (size_t i = 0; i < vs.size(); ++i) o << (base + i ? "," : "") << vs[i][0] << "," << vs[i][1] << "," << vs[i][2];
         for (const auto& f : fs)

@@ -7,6 +7,6 @@ const srv = http.createServer((q, s) => { const f = path.join(dir, decodeURIComp
   p.on('console', m => console.log('console', m.text())); p.on('pageerror', e => console.log('err', e.message));
   await p.goto('http://localhost:8797/page.html');
   const jobs = JSON.parse(process.argv[3]);
-  for (const [n, t] of jobs) { console.log(n, await p.evaluate(([n, t]) => run(n, t), [n, t])); await p.waitForTimeout(300); await p.screenshot({ path: path.join(dir, 'cmp_' + n + '.png'), fullPage: true }); }
+  for (const [n, t] of jobs) { const [w, h] = await p.evaluate(([n, t]) => run(n, t), [n, t]); await p.waitForTimeout(300); await p.screenshot({ path: path.join(dir, 'cmp_' + n + '.png'), clip: { x: 0, y: 0, width: Math.max(w, 700), height: h } }); }
   await b.close(); srv.close();
 });
