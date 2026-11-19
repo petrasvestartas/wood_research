@@ -51,3 +51,27 @@ pipeline removed when `bop` passes it everywhere. The four steps below are the s
    cases), freeform by the existing routes.
 
 Python and Rust follow once the C++ types settle. Measured by the same number: real booleans equal to OCCT.
+
+## What the boolean core needs from the types (from the core's present guesses)
+
+1. Surface kind with its axis placement as in STEP (location, axis, reference direction, radii, semi-angle; for a
+   plane also whether the placement is right-handed). Parameters in OCCT's units: u the angle in radians from the
+   reference direction, v a length (or latitude).
+2. The angle origin kept from the file, not moved to a seam edge. OCCT cuts every walked section where it crosses
+   u = 0 of either surface and starts closed sections there (the one-vertex differences on round parts).
+3. Periods as a property of the surface (2π in u; torus also in v); a face's uv box may run past the period.
+4. Pcurves free to cross the seam, and a query "this uv shifted by whole periods into this face's uv box".
+5. Seams as data: which edge of a face is its seam and at which u; degenerated edges (poles, apex) with a pcurve.
+6. Curve kinds with placement and true parameter: line (origin, direction, length), circle and ellipse (centre,
+   normal, X direction, radii, angle). Parameter 0 of a closed section is where OCCT puts its vertex.
+7. Edge = shared curve id + range + vertices; a split piece = the same curve id + sub-range.
+8. Pcurve = shared 2D curve id + range, with the map from the 3D curve's parameter.
+9. Exact 2D kinds for the common cases: line on a plane, cylinder, cone; circle and ellipse on a plane.
+10. Closed-form point inversion and distance for every analytic kind.
+11. Untrimmed analytic surfaces (a patch that ends short of a loose edge stops sections before the face boundary).
+12. Tolerances as OCCT's reader leaves them, the edge tolerance covering the gap to its pcurves on both faces.
+13. Surface identity: same surface object, and for analytic kinds an exact "same surface up to parameter shift or
+    reversal" test with the relative orientation.
+14. Face orientation against the surface normal; handedness of a plane's placement.
+15. From face/face: each section as curve + two pcurves with ranges, a closed flag, the parameter origin of a
+    closed analytic section; walked curves cut at u = 0 and v = 0 of periodic surfaces.
