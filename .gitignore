@@ -27,3 +27,4 @@ CLAUDE.local.md
 /.codex/occt-visualization-reference.json
 
 .DS_Store
+__pycache__/
