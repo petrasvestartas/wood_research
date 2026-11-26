@@ -2,7 +2,8 @@
 //   score_drv bool <specA> <specB> <op> <tol> [dump.json]
 //     OPS <volA> <validA> <volB> <validB>                       only with SCORE_OPS=1, before the boolean
 //     BOOL <op> <status> <bool_s> <faces> <edges> <vertices> <valid> <solid> <volume> [message]
-//       message: the exception of a FAIL; for an ok bop result, what bop::Report noted (distinct notes, "; "-joined);
+//       message: the exception of a FAIL; for an ok bop result, what bop::Report noted (distinct notes, "; "-joined),
+//       led by brep_check's summary of the result where the build has it;
 //       a bop result whose Report::failure is set is a FAIL with that reason
 //   score_drv operands <specA> <specB> <dump.json>
 //     GEO ok | GEO FAIL <message>                              only with SCORE_GEO=<file>, after BOOL: the result's geometry
@@ -21,6 +22,9 @@
 #include "brep.h"
 #include "brep_boolean.h"
 #include "file_step.h"
+#if __has_include("brep_check.h")
+#include "brep_check.h"
+#endif
 #include "xform.h"
 #include <algorithm>
 #include <array>
@@ -377,7 +381,17 @@ static std::string dump(const BRep& r) {
     size_t base = 0;
     bool first = true;
     std::vector<Mesh> meshes;
-    if (!std::getenv("SCORE_NOMESH")) try { meshes = r.face_meshes_q(true, 30.0, 0.01); } catch (const std::exception&) {}
+    if (!std::getenv("SCORE_NOMESH")) try { meshes = r.face_meshes_q(true, 30.0, 0.01); } catch (const std::exception&) {
+        // one face that does not mesh must not blank the part: each face alone, the failed ones left without triangles
+        meshes.assign(r.m_faces.size(), Mesh());
+        for (size_t fi = 0; fi < r.m_faces.size(); ++fi) {
+            BRep one = r;
+            one.m_faces = {r.m_faces[fi]};
+            one.m_shells.clear();
+            one.m_solids.clear();
+            try { const std::vector<Mesh> alone = one.face_meshes_q(true, 30.0, 0.01); if (!alone.empty()) meshes[fi] = alone[0]; } catch (const std::exception&) {}
+        }
+    }
     std::vector<size_t> ftri(r.m_faces.size(), 0);
     std::vector<Triangles> fmesh(r.m_faces.size());
     for (size_t fi = 0; fi < meshes.size(); ++fi) {
@@ -433,6 +447,11 @@ static BRep apply(const BRep& a, const BRep& b, const std::string& op, double to
     std::vector<std::string> seen;
     for (const std::string& note : report.log)
         if (std::find(seen.begin(), seen.end(), note) == seen.end()) { seen.push_back(note); notes += (notes.empty() ? "" : "; ") + note; }
+#if __has_include("brep_check.h")
+    // the check of what bop returned leads the message; SCORE_STEP=<file> also writes it, failed or not
+    notes = "check: " + brep_check::check(r).summary() + (notes.empty() ? "" : "; " + notes);
+    if (const char* path = std::getenv("SCORE_STEP")) file_step::write_file_step_brep(r, path);
+#endif
     // a result bop itself declares untrustworthy is no result: FAIL with its reason (builds before Report::failure have none)
     if constexpr (requires { report.failure; })
         if (!report.failure.empty()) throw std::runtime_error("bop: " + report.failure + (notes.empty() ? "" : "; " + notes));
