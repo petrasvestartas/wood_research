@@ -14,7 +14,7 @@
 # ∪ = ∩ + A−B + B−A within 1e-5); the oracles agree when their volumes are within 1e-5 relative or the band (SMLib
 # works on the NURBS form at its tolerance of 1e-5). Booleans where they disagree are listed with the side ours is on
 # (oracles.tsv); the one number stays against OCCT.
-# Geometry, when <run dir>/geo.tsv exists (geo.py; bounds and measures in its header): "equal" then also needs every
+# Geometry, when <run dir>/geo.tsv exists (geo.py; bounds and measures in its header): "equal by geometry" also needs every
 # vertex, every edge over its range and every face's area and centroid to agree with OCCT's within the tolerances the
 # two results carry there (what the operands' tolerances became) or 1e-6 of the diagonal; the count-and-volume number stays beside it
 # as "equal by counts" (and is what volume-only / different / fail, --prev and the oracle lines are about). "draws
@@ -189,9 +189,8 @@ for k, (cat, where, c, why, r, _, _) in now.items():
 t = tally['N']
 n = sum(t.values())
 wide = sum(1 for k in widened if k in now and now[k][0] == 'equal' and now[k][1] == 'N')
-GEO = ['status', 'vertices', 'edges', 'faces', 'draws', 'v_worst', 'v_bound', 'v_ours', 'v_occt', 'e_worst_ours', 'e_worst_occt', 'e_bound', 'e_ours', 'e_occt', 'len_ours',
-       'len_occt', 'f_worst', 'f_differ', 'f_ours', 'f_occt', 'area_ours', 'area_occt', 'n_faces', 'undrawn', 'wrong', 'mesh_s', 'tol_ours', 'tol_occt', 'v_over', 'e_over', 'f_over', 'bbox', 'note']
-geo = {tuple(w[:3]): dict(zip(GEO, w[3:])) for w in tsv(run + '/geo.tsv')}
+GEO = open(run + '/geo.tsv').readline().lstrip('#').rstrip('\n').split('\t')[3:] if os.path.exists(run + '/geo.tsv') else []
+geo = {tuple(w[:3]): collections.defaultdict(lambda: '-', zip(GEO, w[3:])) for w in tsv(run + '/geo.tsv')}  # columns by the file's own header
 
 
 def geometry(k):
@@ -205,17 +204,19 @@ def geometry(k):
 if geo:
     counted = [k for k, v in now.items() if v[1] == 'N']
     same = [k for k in counted if now[k][0] == 'equal' and not geometry(k)]
-    print('equal %d / %d (%.1f %%); equal by counts %d / %d (%.1f %%)%s, volume-only %d, different %d, fail %d' % (
-        len(same), n, 100.0 * len(same) / max(n, 1), t['equal'], n, 100.0 * t['equal'] / max(n, 1), ', of which %d within operand difference' % wide if wide else '',
-        t['volume-only'], t['different'], t['fail']))
+    print('equal by counts %d / %d (%.1f %%)%s, volume-only %d, different %d, fail %d' % (t['equal'], n, 100.0 * t['equal'] / max(n, 1),
+          ', of which %d within operand difference' % wide if wide else '', t['volume-only'], t['different'], t['fail']))
+    drawn = [k for k in counted if geo.get(k, {}).get('draws') == '1']
+    print('equal by geometry %d / %d (%.1f %%); draws correctly %d / %d (%.1f %%, %d not measured)' % (len(same), n, 100.0 * len(same) / max(n, 1), len(drawn), n,
+          100.0 * len(drawn) / max(n, 1), sum(1 for k in counted if geo.get(k, {}).get('status') != 'ok')))
     why = collections.Counter(geometry(k) for k in counted if now[k][0] == 'equal' and geometry(k))
     if why:
         print('  equal by counts, not by geometry: ' + '; '.join('%s %d' % x for x in why.most_common()))
     split = [k for k in counted if now[k][0] == 'volume-only']
     print('  volume-only with equal geometry (edges and faces split differently, or validity): %d of %d' % (sum(1 for k in split if not geometry(k)), len(split)))
     measured = [k for k in now if geo.get(k, {}).get('status') == 'ok']
-    print('  draws correctly %d / %d measured results (a face undrawn in %d, wrongly drawn in %d; faces: %d undrawn, %d wrong of %d)' % (
-        sum(1 for k in measured if geo[k]['draws'] == '1'), len(measured), sum(1 for k in measured if geo[k]['undrawn'] != '0'), sum(1 for k in measured if geo[k]['wrong'] != '0'),
+    print('  of %d measured results a face undrawn in %d, wrongly drawn in %d (faces: %d undrawn, %d wrong of %d)' % (
+        len(measured), sum(1 for k in measured if geo[k]['undrawn'] != '0'), sum(1 for k in measured if geo[k]['wrong'] != '0'),
         sum(int(geo[k]['undrawn']) for k in measured), sum(int(geo[k]['wrong']) for k in measured), sum(int(geo[k]['n_faces']) for k in measured)))
     rows = []
     for k in measured:

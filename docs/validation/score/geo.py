@@ -108,6 +108,8 @@ def compare(ours_f, brep_f, out_f):
         return dist, which
 
     ours = json.load(open(ours_f))
+    if any('c' not in f for f in ours['faces']):
+        raise SystemExit('ours measured by an older score_drv (faces without centroids): relink the driver')
     try:
         mesh = json.load(open(ours_f + '.mesh'))
     except (OSError, ValueError):
@@ -251,7 +253,7 @@ def compare(ours_f, brep_f, out_f):
         if not t['tris']:
             undrawn.append(i)
             mesh_rows.append({'face': i, 'what': 'undrawn', 'area': f['area'], 'why': t['why']})
-        elif not f['note'] and (abs(t['mesh_area'] - f['area']) > allowed[i] or math.dist(t['c'], f['c']) > apart[i]):
+        elif not f['note'] and (abs(t['mesh_area'] - f['area']) > allowed[i] or math.dist(t.get('c', f['c']), f['c']) > apart[i]):
             wrong.append(i)
             mesh_rows.append({'face': i, 'what': 'wrong', 'area': f['area'], 'mesh_area': t['mesh_area'], 'allowed': allowed[i], 'triangles': t['tris'],
                               'why': 'triangles %.3g from the face (allowed %.3g), area %+.1f %%' % (math.dist(t['c'], f['c']), apart[i], 100 * (t['mesh_area'] - f['area']) / f['area'])})
@@ -282,6 +284,8 @@ def compare(ours_f, brep_f, out_f):
 
 def run(run_dir, data, jobs):
     tsv = lambda f: [l.rstrip('\n').split('\t') for l in open(f) if l.strip() and not l.startswith('#')] if os.path.exists(f) else []
+    if os.path.exists(run_dir + '/geo.tsv') and open(run_dir + '/geo.tsv').readline() != '#' + '\t'.join(COLS) + '\n':
+        os.replace(run_dir + '/geo.tsv', run_dir + '/geo.tsv.old')  # written with other columns (KeyError 'f_over' in judge.py): measure again
     done = {tuple(w[:3]) for w in tsv(run_dir + '/geo.tsv')}
     todo = [tuple(w[:3]) for w in tsv(run_dir + '/results.tsv') if w[3] == 'ok' and tuple(w[:3]) not in done]
 
