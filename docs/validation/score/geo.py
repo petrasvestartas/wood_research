@@ -108,7 +108,10 @@ def compare(ours_f, brep_f, out_f):
         return dist, which
 
     ours = json.load(open(ours_f))
-    mesh = json.load(open(ours_f + '.mesh')) if os.path.exists(ours_f + '.mesh') else {'failed': 'not meshed'}
+    try:
+        mesh = json.load(open(ours_f + '.mesh'))
+    except (OSError, ValueError):
+        mesh = {'failed': 'face_meshes() not back'}
     drawn_box = mesh.get('bbox', ours['bbox'])
     shape = TopoDS_Shape()
     BRepTools.Read_s(shape, brep_f, BRep_Builder())
