@@ -56,11 +56,16 @@ def compare(ours_f, brep_f, out_f):
 
     class Crv:
         def __init__(self, ad, tol, seam):
-            self.ad, self.tol, self.seam = ad, tol, seam
+            self.ad, self.tol, self.seam, self.end = ad, tol, seam, tol
             self.t0, self.t1 = ad.FirstParameter(), ad.LastParameter()
             self.ts = np.linspace(self.t0, self.t1, 33)
             self.pts = np.array([(lambda p: (p.X(), p.Y(), p.Z()))(ad.Value(t)) for t in self.ts])
             self.length = GCPnts_AbscissaPoint.Length_s(ad)
+
+        def project(self, q):
+            from OCP.Extrema import Extrema_ExtPC
+            x = Extrema_ExtPC(gp_Pnt(*[float(v) for v in q]), self.ad)
+            return min([math.sqrt(x.SquareDistance(i)) for i in range(1, x.NbExt() + 1)] if x.IsDone() else [], default=float('inf'))
 
         def near(self, q, k):
             # distance from q to the curve within its range: Newton from stored point k, never worse than that point
@@ -86,24 +91,37 @@ def compare(ours_f, brep_f, out_f):
         if not curves or not len(points):
             return np.full(len(points), np.inf), np.full(len(points), -1)
         target = np.vstack([c.pts for c in curves])
+        half = np.array([0.5 * np.sqrt(((c.pts[1:] - c.pts[:-1]) ** 2).sum(1)).max() for c in curves])
         owner = np.repeat(np.arange(len(curves)), 33)
         dist, which = np.empty(len(points)), np.empty(len(points), int)
         rows = max(1, int(2e7 // len(target)))
         for a in range(0, len(points), rows):
             q = points[a:a + rows]
             d2 = (q * q).sum(1)[:, None] + (target * target).sum(1)[None, :] - 2.0 * q @ target.T
-            near = np.argpartition(d2, min(3, d2.shape[1] - 1), axis=1)[:, :4] if d2.shape[1] > 4 else np.argsort(d2, axis=1)
+            # every curve that can still be nearer: its nearest stored point within the best so far plus half its sample step
+            # (not the four nearest points: a short edge's 33 crowd the others out)
+            per = d2.reshape(len(q), len(curves), 33)
+            start, least = per.argmin(2), np.sqrt(np.maximum(per.min(2), 0.0))
             for i in range(len(q)):
-                best, at, seen = float('inf'), -1, set()
-                for j in sorted(near[i], key=lambda j: d2[i, j]):
-                    if owner[j] in seen:
-                        continue
-                    seen.add(owner[j])
-                    d = curves[owner[j]].near(q[i], j % 33)
-                    if d < best:
-                        best, at = d, owner[j]
+                best, at = float('inf'), -1
+                for c in np.argsort(least[i]):
                     if best < 0.01 * floor:
                         break
+                    if least[i, c] > best + half[c]:
+                        continue
+                    d = curves[c].near(q[i], start[i, c])
+                    if d < best:
+                        best, at = d, c
+                # Newton from a stored point can stall on an unevenly parametrized curve: the projection decides what is left
+                if best > floor:
+                    for c in np.argsort(least[i]):
+                        if best <= floor:
+                            break
+                        if least[i, c] > best + half[c]:
+                            continue
+                        d = curves[c].project(q[i])
+                        if d < best:
+                            best, at = d, c
                 dist[a + i], which[a + i] = best, at
         return dist, which
 
@@ -152,6 +170,11 @@ def compare(ours_f, brep_f, out_f):
         if not BRep_Tool.Degenerated_s(e):
             oe_index[i] = len(oe)
             oe.append(Crv(BRepAdaptor_Curve(e), BRep_Tool.Tolerance_s(e), i in seams))
+            # an edge's range may end anywhere inside its vertex: the end samples are bound by the vertex tolerance
+            x = TopExp_Explorer(e, TopAbs_VERTEX)
+            while x.More():
+                oe[-1].end = max(oe[-1].end, BRep_Tool.Tolerance_s(TopoDS.Vertex(x.Current())))
+                x.Next()
     of = []
     for i in range(1, fm.Extent() + 1):
         g = GProp_GProps()
@@ -210,6 +233,7 @@ def compare(ours_f, brep_f, out_f):
         for i, c in enumerate(src):
             di, wi = d[33 * i:33 * i + 33], w[33 * i:33 * i + 33]
             bound = np.array([max(c.tol, dst[k].tol if k >= 0 else 0.0, floor) for k in wi])
+            bound[0], bound[-1] = max(bound[0], c.end), max(bound[-1], c.end)
             worst.append(float(di.max()))
             over.append(float((di / bound).max()))
             if (di > bound).any():

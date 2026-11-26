@@ -1,0 +1,11 @@
+#picture	case	op	ours faces/edges/vertices volume	OCCT faces/edges/vertices volume	what differs
+fixed_nist_edm__fork_sph.png	nist_edm__fork#sph	b-a	ours 12/36/24 volume 3.46976777261	OCCT 12/36/24 volume 3.46718730146	differs: volume (+0.000744 relative), 1 wrongly drawn
+fixed_nist_edm__fork_sph.png	nist_edm__fork#sph	union	ours 108/285/179 volume 121.509802959	OCCT 108/285/179 volume 121.513314633	differs: volume (-2.89e-05 relative), 6 wrongly drawn
+fixed_nist_edm__moon_buggy_rot30x.png	nist_edm__moon_buggy#rot30x	xor	ours 378/834/450 volume 2103285939.23	OCCT 378/834/450 volume 2103285846.64	differs: 378 faces undrawn
+fixed_elem00_cyl.png	elem00_cyl	b-a	ours 5/11/8 volume 0.00264284945991	OCCT 5/11/8 volume 0.00264284947568	differs: nothing
+fixed_elem01_cyl.png	elem01_cyl	union	ours 9/19/14 volume 0.00639755080453	OCCT 9/19/14 volume 0.00639755078866	differs: nothing
+fixed_elem02_self.png	elem02_self	union	ours 86/218/126 volume 0.000878846545715	OCCT 86/218/126 volume 0.000878851010256	differs: volume (-5.08e-06 relative), 2 edges, 0 vertices not in OCCT, 14 edges, 0 vertices not in ours
+fixed_elem13_self.png	elem13_self	xor	ours 181/417/240 volume 0.000708789960701	OCCT 181/417/240 volume 0.000709175529086	differs: volume (-0.000544 relative), 1 edges, 0 vertices not in OCCT, 4 edges, 0 vertices not in ours
+fixed_elem04_self.png	elem04_self	a-b	ours 77/233/156 volume 0.000372935342436	OCCT 77/233/156 volume 0.000374198744949	differs: volume (-0.00338 relative), 4 edges, 0 vertices not in ours
+fixed_elem00_self.png	elem00_self	union	ours 32/82/52 volume 0.0674301741848	OCCT 32/82/52 volume 0.0674282249503	differs: volume (+2.89e-05 relative)
+fixed_nist_edm__chamber_box.png	nist_edm__chamber#box	a-b	ours 41/105/70 volume 179684.775666	OCCT 41/105/70 volume 179687.687775	differs: volume (-1.62e-05 relative), faces differ

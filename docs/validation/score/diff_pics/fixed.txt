@@ -1,0 +1,9 @@
+/tmp/claude-0/-home-user-wood-research/8b288b7c-72c4-56e2-9565-a39939e050f9/scratchpad/score/diff_pics/fixed_elem00_cyl.png
+/tmp/claude-0/-home-user-wood-research/8b288b7c-72c4-56e2-9565-a39939e050f9/scratchpad/score/diff_pics/fixed_elem00_self.png
+/tmp/claude-0/-home-user-wood-research/8b288b7c-72c4-56e2-9565-a39939e050f9/scratchpad/score/diff_pics/fixed_elem01_cyl.png
+/tmp/claude-0/-home-user-wood-research/8b288b7c-72c4-56e2-9565-a39939e050f9/scratchpad/score/diff_pics/fixed_elem02_self.png
+/tmp/claude-0/-home-user-wood-research/8b288b7c-72c4-56e2-9565-a39939e050f9/scratchpad/score/diff_pics/fixed_elem04_self.png
+/tmp/claude-0/-home-user-wood-research/8b288b7c-72c4-56e2-9565-a39939e050f9/scratchpad/score/diff_pics/fixed_elem13_self.png
+/tmp/claude-0/-home-user-wood-research/8b288b7c-72c4-56e2-9565-a39939e050f9/scratchpad/score/diff_pics/fixed_nist_edm__chamber_box.png
+/tmp/claude-0/-home-user-wood-research/8b288b7c-72c4-56e2-9565-a39939e050f9/scratchpad/score/diff_pics/fixed_nist_edm__fork_sph.png
+/tmp/claude-0/-home-user-wood-research/8b288b7c-72c4-56e2-9565-a39939e050f9/scratchpad/score/diff_pics/fixed_nist_edm__moon_buggy_rot30x.png
