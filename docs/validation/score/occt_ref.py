@@ -5,6 +5,9 @@
 #   occt_ref.py operands <cases.tsv> <out.tsv> [regex]   per operand: suite case side volume area tolband maxtol valid
 #   occt_ref.py geo <cases.tsv> <out dir> <k>/<n> <tier.tsv>...   the result shapes of the booleans the tiers list, for
 #     geo.py: <out dir>/<suite>__<case>__<op>.brep (or .fail with the reason); existing ones are kept
+#   occt_ref.py closure <geo dir> <out.tsv>   per result shape stored by geo: name closure, how far GProp's volume can move as
+#     the faces do not close: |A| times half the box diagonal over 3, A the net vector area from GK volumes against planes one
+#     unit apart (V(p) = F + p A in OCCT 8.0.1); existing rows are kept, a shape not measured in 120 s gets nan
 # Volumes are GProp's adaptive ones (eps 1e-9). meshvol/meshacc (OCCT's mesh volume at 2e-5 of the diagonal and its
 # twice its change from 4e-5) only for the cases in MESH_CASES, where GProp is the outlier on an operand; '-' elsewhere.
 # tolband = sum over faces of area * face tolerance: how far the volume may move within the operand's own tolerance.
@@ -28,7 +31,7 @@ from OCP.BRepMesh import BRepMesh_IncrementalMesh
 from OCP.TopLoc import TopLoc_Location
 from OCP.Bnd import Bnd_Box
 from OCP.BRepBndLib import BRepBndLib
-from OCP.gp import gp_Pnt, gp_Trsf, gp_Vec, gp_Ax1, gp_Dir
+from OCP.gp import gp_Pnt, gp_Trsf, gp_Vec, gp_Ax1, gp_Dir, gp_Pln
 
 OPS = ['intersection', 'union', 'a-b', 'b-a', 'xor']
 
@@ -288,6 +291,33 @@ def reference(cases, out, shard):
             f.flush()
 
 
+def closure_of(path):
+    s = TopoDS_Shape()
+    BRepTools.Read_s(s, path, BRep_Builder())
+    area = []
+    for d in range(3):
+        g = [GProp_GProps(), GProp_GProps()]
+        for at in (0, 1):
+            BRepGProp.VolumePropertiesGK_s(s, g[at], gp_Pln(gp_Pnt(*[float(at) * (i == d) for i in range(3)]), gp_Dir(*[float(i == d) for i in range(3)])), 1e-10)
+        area.append(g[1].Mass() - g[0].Mass())
+    print('%.6g' % (math.sqrt(sum(a * a for a in area)) * diagonal(s) / 6))
+
+
+def closure(geo_dir, out):
+    done = {l.split('\t')[0] for l in open(out)} if os.path.exists(out) else set()
+    with open(out, 'a') as f:
+        for path in sorted(glob.glob(geo_dir + '/*.brep')):
+            name = os.path.basename(path)[:-5]
+            if name in done:
+                continue
+            try:
+                value = subprocess.run([sys.executable, '-I', os.path.abspath(__file__), 'closure1', path], capture_output=True, text=True, timeout=120).stdout.strip() or 'nan'
+            except subprocess.TimeoutExpired:
+                value = 'nan'
+            f.write('%s\t%s\n' % (name, value))
+            f.flush()
+
+
 def geo_name(suite, case, op):
     return '%s__%s__%s' % (suite, re.sub(r'[^A-Za-z0-9_.-]', '_', case), op)
 
@@ -321,6 +351,10 @@ if __name__ == '__main__':
         booleans(sys.argv[2], sys.argv[3], sys.argv[4] if len(sys.argv) > 4 else None)
     elif sys.argv[1] == 'geo':
         geometry(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5:])
+    elif sys.argv[1] == 'closure1':
+        closure_of(sys.argv[2])
+    elif sys.argv[1] == 'closure':
+        closure(sys.argv[2], sys.argv[3])
     elif sys.argv[1] == 'ref':
         reference(sys.argv[2], sys.argv[3], sys.argv[4] if len(sys.argv) > 4 else '0/1')
     else:

@@ -2,6 +2,9 @@
 //   score_drv bool <specA> <specB> <op> <tol> [dump.json]
 //     OPS <volA> <validA> <volB> <validB>                       only with SCORE_OPS=1, before the boolean
 //     BOOL <op> <status> <bool_s> <faces> <edges> <vertices> <valid> <solid> <volume> [message]
+//     CLOSURE <error>                                           after an ok BOOL, built with -DSCORE_CLOSURE (link.sh, where
+//       brep_measure has volume_closure): how far the result's volume can move as its faces do not close; OPS then ends
+//       with the operands' closure errors
 //       message: the exception of a FAIL; for an ok bop result, what bop::Report noted (distinct notes, "; "-joined),
 //       led by brep_check's summary of the result where the build has it;
 //       a bop result whose Report::failure is set is a FAIL with that reason
@@ -21,6 +24,7 @@
 // union a-b b-a xor.
 #include "brep.h"
 #include "brep_boolean.h"
+#include "brep_measure.h"
 #include "file_step.h"
 #if __has_include("brep_check.h")
 #include "brep_check.h"
@@ -130,11 +134,16 @@ static BRep build(const std::string& spec) {
     return b;
 }
 
-static std::string volume_text(const BRep& r) {
+static std::string volume_text(const BRep& r, double& closure) {
     std::ostringstream o;
     o.precision(15);
+    closure = r.face_count() == 0 ? 0.0 : std::nan("");
     if (r.face_count() == 0) return "0";
+#ifdef SCORE_CLOSURE
+    try { const auto v = brep_measure::volume_closure(r); closure = v.closure_error; o << v.value; } catch (const std::exception&) {
+#else
     try { o << r.volume_exact(); } catch (const std::exception&) {
+#endif
         double v = std::nan("");
         try { v = r.volume(); } catch (...) {}
         o << v << "(mesh)";
@@ -484,8 +493,15 @@ int main(int argc, char** argv) {
         std::cout << "BOOL " << op << " LOADFAIL 0 0 0 0 0 0 nan " << clean(e.what()) << "\n";
         return 0;
     }
-    if (std::getenv("SCORE_OPS"))
-        std::cout << "OPS " << volume_text(a) << " " << valid_solid(a) << " " << volume_text(b) << " " << valid_solid(b) << "\n" << std::flush;
+    double closure = 0.0, closure_b = 0.0;
+    if (std::getenv("SCORE_OPS")) {
+        const std::string va = volume_text(a, closure), vb = volume_text(b, closure_b);
+        std::cout << "OPS " << va << " " << valid_solid(a) << " " << vb << " " << valid_solid(b);
+#ifdef SCORE_CLOSURE
+        std::cout << " " << closure << " " << closure_b;
+#endif
+        std::cout << "\n" << std::flush;
+    }
     BRep r;
     std::string notes;
     const auto t0 = std::chrono::steady_clock::now();
@@ -500,7 +516,10 @@ int main(int argc, char** argv) {
     try { valid = r.is_valid(); } catch (...) {}
     try { solid = r.is_solid(); } catch (...) {}
     std::cout << "BOOL " << op << " ok " << seconds << " " << r.face_count() << " " << r.edge_count() << " " << r.vertex_count() << " "
-              << valid << " " << solid << " " << std::flush << volume_text(r) << " " << clean(notes) << "\n" << std::flush;
+              << valid << " " << solid << " " << std::flush << volume_text(r, closure) << " " << clean(notes) << "\n" << std::flush;
+#ifdef SCORE_CLOSURE
+    std::cout << "CLOSURE " << closure << "\n" << std::flush;
+#endif
     if (argc > 6) {
         std::ofstream out(argv[6]);
         out << dump(r);

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # link.sh <session_cpp build dir> <out binary> [old|bop]: score_drv.cpp compiled with that build's flags, linked
-# against its objects (no library is rebuilt).
+# against its objects (no library is rebuilt). Where brep_measure has volume_closure, with -DSCORE_CLOSURE (closure errors).
 set -euo pipefail
 B=$(cd "$1" && pwd); OUT=$2; ENTRY=${3:-old}
 HERE=$(cd "$(dirname "$0")" && pwd)
@@ -15,6 +15,7 @@ if [ "$ENTRY" = bop ]; then
 elif [ "$ENTRY" != old ]; then
   echo "entry must be old or bop" >&2; exit 2
 fi
+grep -q "volume_closure" "$SRC/src/brep_measure.h" && FLAGS="$FLAGS -DSCORE_CLOSURE"
 cd "$B"
 CC=$(ninja -t commands point_minitest | grep "brep_boolean.cpp.o -c" | sed 's/ -MD .*//; s/ -Winvalid-pch -include [^ ]*//; s/.*&& //')
 nice $CC $FLAGS -w -c "$HERE/score_drv.cpp" -o "$OUT.o"

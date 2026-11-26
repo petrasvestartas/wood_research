@@ -1,7 +1,8 @@
 # run.py <driver> <cases.tsv> <run dir> [--subset subset.tsv] [--jobs 2] [--timeout 60]
 # One process per boolean, appended to <run dir>/results.tsv as it finishes (a rerun resumes):
-#   suite case op status wall bool_s faces edges vertices valid solid volume message
-# The first boolean of each case also measures our operands: <run dir>/operands.tsv  suite case volA validA volB validB
+#   suite case op status wall bool_s faces edges vertices valid solid volume message [closure]
+# The first boolean of each case also measures our operands: <run dir>/operands.tsv  suite case volA validA volB validB [closureA closureB]
+# closure: how far the volume can move as the solid's faces do not close, where the driver prints it (CLOSURE)
 # Each result's geometry goes to <run dir>/geo/<suite>__<case>__<op>.json for geo.py (SCORE_GEO): the timeout is on the
 # boolean as before (its BOOL line), the measuring and the viewer's mesh after it have GEO_LIMIT seconds of their own
 # (<...>.json.mesh says so when the mesher is not back by then).
@@ -66,7 +67,7 @@ def one(key):
         o = next((l.split()[1:] for l in lines if l.startswith('OPS ')), None)
         b = next((l.split(None, 10) for l in lines if l.startswith('BOOL ')), None)
         if b:
-            rec = [b[2], b[3]] + b[4:10] + [' '.join(b[10:])]
+            rec = [b[2], b[3]] + b[4:10] + [' '.join(b[10:])] + [l.split()[1] for l in lines if l.startswith('CLOSURE ')][:1]
         else:
             why = 'signal %d' % -p.returncode if p.returncode < 0 else 'exit %d' % p.returncode
             rec = ['CRASH', '0', '0', '0', '0', '0', '0', 'nan', why + ' ' + (se.strip().splitlines() or [''])[-1][:200]]

@@ -1,6 +1,8 @@
 # judge.py <run dir> [--prev <run dir>] [--data <dir>]: every boolean of <run dir>/results.tsv against OCCT (ref.tsv).
 # equal: both valid, face/edge/vertex counts equal, volume within 1e-6 relative, within the operands' tolerance band or within
-# |dA| + |dB|, how far our operands' measured volumes are from OCCT's (those equals are counted in the summary line);
+# |dA| + |dB|, how far our operands' measured volumes are from OCCT's (those equals are counted in the summary line), or within
+# that bound widened by ours plus OCCT's closure error where either result's faces do not close (how far its volume can move with
+# the field's anchor: results.tsv's last column, <data>/occt_closure.tsv by occt_ref.py closure; also counted);
 # volume-only: volume within that bound, counts or validity differ; different: volume outside it; fail: no result.
 # Counted only where OCCT succeeds with a valid shape and our operands match OCCT's (stepfix/operands.tsv when it
 # exists, otherwise operand volumes measured here); the rest is listed apart. Where stepfix finds OCCT's GProp the
@@ -73,6 +75,7 @@ for key in {k[:2] for k in ref}:
         occt_bad.add(key)
 
 
+occt_closure = {w[0]: num(w[1]) for w in tsv(D + '/occt_closure.tsv') if num(w[1]) == num(w[1])}
 sm = {tuple(w[:3]): w[3:] for w in tsv(D + '/smlib_ref.tsv')}
 sm_case = {}
 for key in {k[:2] for k in sm}:
@@ -134,7 +137,7 @@ def operands_match(run_dir, results):
     return out
 
 
-widened = set()
+widened, leaked = set(), set()
 
 
 def judge(run_dir):
@@ -156,6 +159,10 @@ def judge(run_dir):
             if o is not None and not same_v and abs(vol - num(o[5])) <= gap[k[:2]]:
                 same_v = True
                 widened.add(k)
+            leak = (num(r[10]) if len(r) > 10 and num(r[10]) == num(r[10]) else 0.0) + occt_closure.get('%s__%s__%s' % (k[0], re.sub(r'[^A-Za-z0-9_.-]', '_', k[1]), k[2]), 0.0)
+            if o is not None and not same_v and abs(vol - num(o[5])) <= bound + leak:
+                same_v = True
+                leaked.add(k)
             good = faces == '0' or (valid == '1' and solid == '1')
             cat = 'equal' if same_v and good and r[3:6] == o[1:4] else 'volume-only' if same_v else 'different'
         else:
@@ -189,6 +196,8 @@ for k, (cat, where, c, why, r, _, _) in now.items():
 t = tally['N']
 n = sum(t.values())
 wide = sum(1 for k in widened if k in now and now[k][0] == 'equal' and now[k][1] == 'N')
+leaks = sum(1 for k in leaked if k in now and now[k][0] == 'equal' and now[k][1] == 'N')
+wide_text = ', of which ' + ', '.join('%d %s' % (n, what) for n, what in ((wide, 'within operand difference'), (leaks, 'within closure error')) if n) if wide or leaks else ''
 GEO = open(run + '/geo.tsv').readline().lstrip('#').rstrip('\n').split('\t')[3:] if os.path.exists(run + '/geo.tsv') else []
 geo = {tuple(w[:3]): collections.defaultdict(lambda: '-', zip(GEO, w[3:])) for w in tsv(run + '/geo.tsv')}  # columns by the file's own header
 
@@ -205,7 +214,7 @@ if geo:
     counted = [k for k, v in now.items() if v[1] == 'N']
     same = [k for k in counted if now[k][0] == 'equal' and not geometry(k)]
     print('equal by counts %d / %d (%.1f %%)%s, volume-only %d, different %d, fail %d' % (t['equal'], n, 100.0 * t['equal'] / max(n, 1),
-          ', of which %d within operand difference' % wide if wide else '', t['volume-only'], t['different'], t['fail']))
+          wide_text, t['volume-only'], t['different'], t['fail']))
     drawn = [k for k in counted if geo.get(k, {}).get('draws') == '1']
     print('equal by geometry %d / %d (%.1f %%); draws correctly %d / %d (%.1f %%, %d not measured)' % (len(same), n, 100.0 * len(same) / max(n, 1), len(drawn), n,
           100.0 * len(drawn) / max(n, 1), sum(1 for k in counted if geo.get(k, {}).get('status') != 'ok')))
@@ -238,7 +247,7 @@ if geo:
                 for m in d['mesh']:
                     f.write('\t'.join(list(k) + [str(m['face']), m['what'], '%.9g' % m['area'], '%.9g' % m.get('mesh_area', 0), '%.3g' % m.get('allowed', 0), str(m.get('triangles', 0)), m.get('why', '')]) + '\n')
 else:
-    print('equal %d / %d (%.1f %%)%s, volume-only %d, different %d, fail %d' % (t['equal'], n, 100.0 * t['equal'] / max(n, 1), ', of which %d within operand difference' % wide if wide else '', t['volume-only'], t['different'], t['fail']))
+    print('equal %d / %d (%.1f %%)%s, volume-only %d, different %d, fail %d' % (t['equal'], n, 100.0 * t['equal'] / max(n, 1), wide_text, t['volume-only'], t['different'], t['fail']))
 for w, label in (('operands', 'apart, operands differ from OCCT'), ('occt', 'apart, OCCT fails, invalid or inconsistent')):
     print('  %s: %d (%s)' % (label, sum(tally[w].values()), ', '.join('%s %d' % (c, tally[w][c]) for c in CATS)))
 unmeasured = sum(1 for v in now.values() if v[3] == 'unmeasured')
