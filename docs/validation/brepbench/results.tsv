@@ -1,0 +1,582 @@
+case	boolean	ours	occt	smlib	our_s	occt_s	vol	vol_exp	area	area_exp	why
+boolean/boss-on-a-lobe-of-the-same-radius	True	pass	pass	missing	0.242658691	0.014681533	15870.8287	15870.8287	5076.10991	5076.10991	
+boolean/box-minus-through-cylinder	True	pass	pass	pass	0.006157111	0.005656626	717.256661	717.256661	731.946891	731.946891	
+boolean/boxes-common	True	pass	pass	pass	0.005152916	0.005902752	250	250	250	250	
+boolean/boxes-cut	True	pass	pass	pass	0.005961435	0.006181748	750	750	550	550	
+boolean/boxes-sharing-a-face	True	pass	pass	pass	0.006404624	0.00542334	2000	2000	1000	1000	
+boolean/boxes-sharing-part-of-a-face	True	pass	pass	pass	0.007036333	0.006076351	2000	2000	1100	1100	
+boolean/boxes-union	True	pass	pass	pass	0.007987416	0.007259521	1750	1750	950	950	
+boolean/chain-of-three-balls	True	pass	pass	missing	0.03167559	0.01764221	859.779109	859.779109	529.941801	529.941801	
+boolean/chain-of-three-balls-halved	True	pass	pass	missing	0.06920948	0.023028806	429.889555	429.889555	407.745557	407.745557	
+boolean/countersink-undercutting-a-counterbore	True	pass	pass	missing	0.053488003	0.024999168	1029862.24	1029862.24	95877.5452	95877.5452	
+boolean/cross-drilled-cube	True	refused	pass	pass	0.854585104	0.324606392		19755.2609		9970.34654	bop::apply returned an empty result: result is not a closed solid
+boolean/drilled-plate	True	pass	pass	pass	0.105872321	0.027607841	18869.0266	18869.0266	7304.77868	7304.77868	
+boolean/elbow-tighter-than-its-tube	True	refused	pass	missing	3.244e-06	0.041948114		136053.439		16109.1391	session_cpp has no revolve or sweep of a disk; the turn crosses its axis, so no torus primitive bounds it
+boolean/golf-ball	True	pass	pass	pass	23.176536	1.26487141	4124.02811	4124.02811	1314.85018	1314.85018	
+boolean/half-cylinder-boss-tangent	True	pass	pass	pass	0.012971927	0.007890917	1392.69908	1392.69908	735.619449	735.619449	
+boolean/half-torus	True	pass	pass	pass	0.004864606	0.004752274	394.784176	394.784176	419.916917	419.916917	
+boolean/hemisphere	True	pass	pass	pass	0.003460731	0.0041331	261.799388	261.799388	235.619449	235.619449	
+boolean/indexed-pattern	True	pass	pass	pass	0.061249366	0.017039643	5906.19419	5906.19419	3367.78732	3367.78732	
+boolean/linked-tori	True	pass	pass	pass	0.054059651	0.008070578	29.6088132	29.6088132	118.435253	118.435253	
+boolean/napkin-ring	True	pass	pass	pass	0.005705079	0.00508802	268.082573	268.082573	402.12386	402.12386	
+boolean/nested-shells	True	pass	pass	wrong	0.10776932	0.00620291	2714.33605	2714.33605	2764.60154	2764.60154	
+boolean/offset-hole-sphere	True	pass	pass	pass	0.012575042	0.02922907	29240.8444	29240.8444	6171.86195	6171.86195	
+boolean/reuleaux-tetrahedron	True	wrong	pass	pass	0.233160571	0.039362984		422.157733		297.547172	its STEP's faces do not close into a solid
+boolean/ring-of-balls	True	pass	pass	pass	0.724154613	0.084474198	1320.56354	1320.56354	1170.86978	1170.86978	
+boolean/sphere-lens	True	pass	pass	pass	0.009716993	0.010463061	108.908545	108.908545	125.663706	125.663706	
+boolean/sphere-pocket	True	pass	pass	pass	0.005200184	0.005181627	3738.20061	3738.20061	1678.53982	1678.53982	
+boolean/spheres-union	True	pass	pass	pass	0.010433478	0.010866171	938.289006	938.289006	502.654825	502.654825	
+boolean/steinmetz-common	True	wrong	pass	pass	0.019446179	0.009864226	2356.19449	666.666667	1099.55743	400	volume 2356.19449019 against 666.666666667 (its STEP's); area 1099.55742876 against 400 (its STEP's)
+boolean/steinmetz-union	True	wrong	pass	pass	0.008828577	0.011145352	2356.19449	4045.72231	1099.55743	1799.11486	volume 2356.19449019 against 4045.72231372 (its STEP's); area 1099.55742876 against 1799.11485751 (its STEP's)
+boolean/stepped-shaft	True	pass	pass	pass	0.006138128	0.00444961	1068.1415	1068.1415	659.734457	659.734457	
+boolean/tori-common	True	pass	pass	pass	0.047820039	0.013041834	154.361489	154.361489	263.189451	263.189451	
+boolean/tube	True	pass	pass	pass	0.006141599	0.005120698	502.654825	502.654825	603.185789	603.185789	
+boolean/tube-flush-ends	True	pass	pass	pass	0.008613104	0.005082793	502.654825	502.654825	603.185789	603.185789	
+boolean/unequal-lens-aslant	True	pass	pass	pass	0.010504377	0.015210419	42.2450113	42.2450113	69.3909885	69.3909885	
+chamfer/ball-in-conical-seat-distance-1-angle-45	False	refused	pass	missing	3.474e-06	0.014108459		2049.07394		974.919463	session_cpp has no chamfer
+chamfer/ball-in-conical-seat-distance-2-angle-30	False	refused	pass	missing	3.878e-06	0.014422296		2068.63287		969.224373	session_cpp has no chamfer
+chamfer/ball-in-conical-seat-distance-3-angle-15	False	refused	pass	missing	2.38e-06	0.014696675		2069.68482		969.934897	session_cpp has no chamfer
+chamfer/ball-on-plate-rim-distance-1-angle-50	False	refused	pass	missing	3.15e-06	0.011482222		1490.46527		766.242579	session_cpp has no chamfer
+chamfer/ball-on-plate-rim-distance-2-angle-40	False	refused	pass	missing	2.653e-06	0.01162875		1534.43342		758.185114	session_cpp has no chamfer
+chamfer/ball-on-plate-rim-distance-2-angle-45	False	refused	pass	missing	3.14e-06	0.01186305		1552.99397		759.225704	session_cpp has no chamfer
+chamfer/ball-on-post-two-distances	False	refused	pass	missing	2.489e-06	0.009315039		693.237119		423.899369	session_cpp has no chamfer
+chamfer/ball-segment-rim-chamfered-to-its-center	False	refused	pass	missing	3.282e-06	0.007719725		438.1581		289.675104	session_cpp has no chamfer
+chamfer/ball-segment-rim-two-distances	False	refused	pass	missing	2.406e-06	0.009173048		449.841642		291.43283	session_cpp has no chamfer
+chamfer/block-ridge	False	refused	refused	pass	3.056e-06	0.001240646		200		216.568542	session_cpp has no chamfer
+chamfer/bored-ball-rim-chamfered-through-its-bore	False	refused	pass	missing	2.635e-06	0.009003235		345.340653		406.001698	session_cpp has no chamfer
+chamfer/bored-ball-rim-two-distances	False	refused	pass	missing	2.171e-06	0.009449039		390.298894		389.281389	session_cpp has no chamfer
+chamfer/box-top-asymmetric	False	refused	pass	pass	2.523e-06	0.00563919		1142.66667		709.219807	session_cpp has no chamfer
+chamfer/capped-frustum-rim-distance-1-angle-45	False	refused	pass	missing	2.174e-06	0.013635005		127.59072		127.683242	session_cpp has no chamfer
+chamfer/capped-frustum-rim-distance-1-angle-60	False	refused	pass	missing	2.966e-06	0.013863635		116.515309		120.896017	session_cpp has no chamfer
+chamfer/capped-frustum-rim-distance-2-angle-45	False	refused	pass	missing	2.577e-06	0.014295468		95.3457525		105.862881	session_cpp has no chamfer
+chamfer/cube-all-edges	False	refused	pass	pass	2.924e-06	0.009953789		802.666667		447.359566	session_cpp has no chamfer
+chamfer/cube-all-edges-mitered	False	refused	pass	pass	2.583e-06	0.016494009		808		453.587878	session_cpp has no chamfer
+chamfer/cylinder-rim-to-point	False	refused	pass	refused	3.621e-06	0.003560646		523.598776		346.691522	session_cpp has no chamfer
+chamfer/elliptic-cylinder-rim	False	refused	pass	missing	2.279e-06	0.008306036		1414.23406		720.40446	session_cpp has no chamfer
+chamfer/elliptic-hole-rim	False	refused	pass	missing	2.393e-06	0.043760117		2158.22546		1587.43925	session_cpp has no chamfer
+chamfer/hemisphere-rim-chamfered-to-its-center	False	refused	pass	missing	2.152e-06	0.007998148		209.701967		202.7902	session_cpp has no chamfer
+chamfer/hemisphere-rim-distance-1-angle-45	False	refused	pass	missing	2.045e-06	0.008249942		248.053682		214.846973	session_cpp has no chamfer
+chamfer/hemisphere-rim-distance-2-angle-45	False	refused	pass	missing	2.207e-06	0.008583288		213.87539		190.120403	session_cpp has no chamfer
+chamfer/hemisphere-rim-two-distances	False	refused	pass	missing	3.687e-06	0.008884508		234.396145		207.325442	session_cpp has no chamfer
+chamfer/hole-through-post-at-plate-edge	True	refused	pass	missing	2.055e-06	0.011227093		213646.486		31691.7309	session_cpp has no chamfer
+chamfer/l-block-inside-consumed	False	refused	refused	pass	2.163e-06	0.004587015		755		509.994949	session_cpp has no chamfer
+chamfer/lens-rim-two-distances	False	refused	pass	missing	2.271e-06	0.009156373		85.1635951		101.475822	session_cpp has no chamfer
+chamfer/narrow-sector-rim-distance-2-angle-45	False	refused	pass	missing	2.243e-06	0.010299864		28.8296988		48.4501194	session_cpp has no chamfer
+chamfer/octahedron-all-edges	False	refused	refused	pass	5.157e-06	0.010275287		917.333333		478.380256	session_cpp has no chamfer
+chamfer/octahedron-all-edges-mitered	False	refused	pass	pass	2.355e-06	0.038201947		981.333333		518.144758	session_cpp has no chamfer
+chamfer/spherical-sector-rim-distance-1-angle-45	False	refused	pass	missing	2.019e-06	0.010318612		94.2722263		108.404828	session_cpp has no chamfer
+chamfer/spherical-sector-rim-distance-2-angle-60	False	refused	pass	missing	2.107e-06	0.010250381		57.1519009		75.6039609	session_cpp has no chamfer
+chamfer/spherical-sector-rim-distance-3-angle-30	False	refused	pass	missing	2.52e-06	0.010329598		61.2151312		82.1538408	session_cpp has no chamfer
+chamfer/spherical-sector-rim-two-distances	False	refused	pass	missing	2.183e-06	0.010529676		84.0726472		100.890942	session_cpp has no chamfer
+chamfer/spline-boss-rim	False	refused	pass	missing	2.138e-06	0.010197813		1265.31065		736.40559	session_cpp has no chamfer
+chamfer/variable-distance-edge	False	refused	pass	missing	2.483e-06	0.018249973		980		584.681813	session_cpp has no chamfer
+chamfer/variable-distance-semicircular-rim	False	refused	refused	missing	2.199e-06	2.444e-06		219.256987		215.007651	session_cpp has no chamfer
+chamfer/wide-sector-rim-distance-1-angle-45	False	refused	pass	missing	2.313e-06	0.010591478		148.770918		149.577257	session_cpp has no chamfer
+chamfer/wide-sector-rim-distance-2-angle-30	False	refused	pass	missing	2.442e-06	0.01072696		134.420605		139.497617	session_cpp has no chamfer
+chamfer/wide-sector-rim-distance-3-angle-20	False	refused	pass	missing	2.206e-06	0.010240366		125.658545		136.62184	session_cpp has no chamfer
+cnc/ball-end-surface-raster	True	refused	crashed	missing	2.088e-06	0.394228462		119999.944		21722.6912	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+cnc/bull-nose-profile	True	refused	pass	missing	2.424e-06	14.5363751		208489.649		41667.5586	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+cnc/five-axis-dome	True	refused	refused	missing	2.244e-06	8.73732728					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+cnc/flat-end-mill-profile	True	refused	pass	missing	2.144e-06	3.35685598		147468.744		32743.752	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+cnc/pocket-with-an-island	True	refused	pass	missing	2.532e-06	21.1249763		257360.112		52871.6363	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+draft/boss-on-plate	True	refused	pass	missing	2.088e-06	0.00529801		10168.5183		4532.98053	session_cpp has no draft
+draft/box-about-its-middle	False	refused	pass	missing	2.231e-06	0.004392823		2402.55142		1123.97555	session_cpp has no draft
+draft/box-cross-drilled	False	refused	pass	missing	2.538e-06	0.008003644		9508.99591		3564.81649	session_cpp has no draft
+draft/box-four-sides	False	refused	pass	missing	2.403e-06	0.004440495		2130.24197		1034.38452	session_cpp has no draft
+draft/box-one-side	False	refused	pass	missing	2.425e-06	0.003823097		2294.20381		1083.05926	session_cpp has no draft
+draft/box-outward	False	refused	pass	missing	2.375e-06	0.004303751		2690.16941		1216.62829	session_cpp has no draft
+draft/box-top-drafted-away	False	refused	refused	missing	2.096e-06	0.001235678		1154.70054		900	session_cpp has no draft
+draft/cylinder-parted-both-ways	False	refused	pass	missing	2.166e-06	0.005078834		5959.64993		1789.57433	session_cpp has no draft
+draft/hole-tapered	False	refused	pass	missing	2.456e-06	0.006337036		15319.8983		4751.80424	session_cpp has no draft
+draft/l-block-sides	False	refused	pass	missing	2.142e-06	0.006463514		4593.02651		2034.02284	session_cpp has no draft
+draft/l-block-sides-drafted-until-its-arms-close	False	refused	pass	missing	2.21e-06	0.034785439		306.717331		450	session_cpp has no draft
+draft/pocket-walls	False	refused	pass	missing	2.406e-06	0.008287979		14297.3374		5228.47913	session_cpp has no draft
+draft/rounded-box-sides	False	refused	pass	missing	2.127e-06	0.009604007		5463.2674		2000.7496	session_cpp has no draft
+draft/rounded-pocket-walls	False	refused	pass	missing	3.345e-06	0.016005811		14466.9131		5158.67056	session_cpp has no draft
+draft/t-block-sides-drafted-until-its-bar-and-stem-close	False	refused	pass	missing	2.398e-06	0.035711877		182		366.960461	session_cpp has no draft
+edit/ball-flat-deleted	False	refused	pass	missing	2.387e-06	0.005187738		523.598776		314.159265	session_cpp has no direct edit that moves a solid's faces
+edit/ball-on-plate-root-bevel-deleted	False	refused	pass	missing	2.162e-06	0.013779641		485.899664		552.920307	session_cpp has no direct edit that moves a solid's faces
+edit/ball-on-plate-root-round-deleted	False	refused	pass	missing	2.679e-06	0.016241925		485.899664		552.920307	session_cpp has no direct edit that moves a solid's faces
+edit/blind-bore-floor-bevel-deleted	False	refused	pass	missing	2.379e-06	0.009959238		3698.40711		1750.79645	session_cpp has no direct edit that moves a solid's faces
+edit/blind-bore-floor-round-deleted	False	refused	pass	missing	2.221e-06	0.009368199		3698.40711		1750.79645	session_cpp has no direct edit that moves a solid's faces
+edit/block-bevel-deleted	False	refused	pass	missing	2.223e-06	0.012712904		2000		1000	session_cpp has no direct edit that moves a solid's faces
+edit/block-edge-round-deleted	False	refused	pass	missing	2.577e-06	0.011447071		2000		1000	session_cpp has no direct edit that moves a solid's faces
+edit/block-top-moved-up	False	refused	wrong	missing	2.155e-06	0.008216773		17943.3629		4985.57519	session_cpp has no direct edit that moves a solid's faces
+edit/block-two-rounds-deleted	False	refused	pass	missing	2.076e-06	0.02452854		2000		1000	session_cpp has no direct edit that moves a solid's faces
+edit/boss-deleted	False	refused	pass	missing	2.253e-06	0.005624778		804.247719		603.185789	session_cpp has no direct edit that moves a solid's faces
+edit/boss-root-round-deleted	False	refused	pass	missing	2.198e-06	0.008690418		1030.44239		753.982237	session_cpp has no direct edit that moves a solid's faces
+edit/box-every-round-deleted	False	refused	pass	missing	2.209e-06	0.024969166		3840		1504	session_cpp has no direct edit that moves a solid's faces
+edit/countersink-deleted	False	refused	pass	missing	2.306e-06	0.013632271		1874.33629		1100.53096	session_cpp has no direct edit that moves a solid's faces
+edit/cube-corner-rounds-deleted	False	refused	pass	missing	2.295e-06	0.017301226		1000		600	session_cpp has no direct edit that moves a solid's faces
+edit/cylinder-both-rims-rounds-deleted	False	refused	pass	missing	2.071e-06	0.009397034		1130.97336		603.185789	session_cpp has no direct edit that moves a solid's faces
+edit/cylinder-rim-bevel-deleted	False	refused	pass	missing	2.295e-06	0.007394856		1130.97336		603.185789	session_cpp has no direct edit that moves a solid's faces
+edit/cylinder-rim-round-deleted	False	refused	pass	missing	2.494e-06	0.006457973		1130.97336		603.185789	session_cpp has no direct edit that moves a solid's faces
+edit/domed-post-cap-turned-rounds-deleted	False	refused	wrong	missing	2.107e-06	0.036119505		356.047167		263.893783	session_cpp has no direct edit that moves a solid's faces
+edit/domed-post-round-deleted	False	refused	wrong	missing	2.343e-06	0.018831795		356.047167		263.893783	session_cpp has no direct edit that moves a solid's faces
+edit/double-frustum-ridge-round-deleted	False	refused	pass	missing	2.304e-06	0.020845291		368.613538		263.193483	session_cpp has no direct edit that moves a solid's faces
+edit/double-frustum-turned-rounds-deleted	False	refused	pass	missing	2.26e-06	0.036597155		368.613538		263.193483	session_cpp has no direct edit that moves a solid's faces
+edit/frustum-flat-deleted	False	refused	pass	missing	2.22e-06	0.010343388		1319.46891		713.184684	session_cpp has no direct edit that moves a solid's faces
+edit/frustum-rim-bevel-deleted	False	refused	pass	missing	2.311e-06	0.008509239		395.840674		331.041667	session_cpp has no direct edit that moves a solid's faces
+edit/frustum-rim-round-deleted	False	refused	pass	missing	2.164e-06	0.007255934		395.840674		331.041667	session_cpp has no direct edit that moves a solid's faces
+edit/frustum-ring-groove-deleted	False	refused	pass	missing	2.237e-06	0.015355985		1319.46891		713.184684	session_cpp has no direct edit that moves a solid's faces
+edit/half-torus-both-rims-rounds-deleted	False	refused	pass	missing	2.202e-06	0.064197577		236.870506		387.666953	session_cpp has no direct edit that moves a solid's faces
+edit/half-torus-outer-rim-round-deleted	False	refused	pass	missing	2.099e-06	0.016952279		236.870506		387.666953	session_cpp has no direct edit that moves a solid's faces
+edit/hemisphere-rim-round-deleted	False	refused	wrong	missing	2.183e-06	0.014138533		261.799388		235.619449	session_cpp has no direct edit that moves a solid's faces
+edit/hole-both-rim-rounds-deleted	False	refused	pass	missing	2.13e-06	0.015185581		1874.33629		1100.53096	session_cpp has no direct edit that moves a solid's faces
+edit/hole-deleted	False	refused	pass	missing	2.478e-06	0.007857089		2000		1000	session_cpp has no direct edit that moves a solid's faces
+edit/hole-rim-round-deleted	False	refused	pass	missing	2.063e-06	0.010571807		1874.33629		1100.53096	session_cpp has no direct edit that moves a solid's faces
+edit/hole-widened	False	refused	wrong	missing	2.155e-06	0.008208512		8368.49568		3563.9823	session_cpp has no direct edit that moves a solid's faces
+edit/holes-widened-until-merged	False	refused	pass	missing	2.227e-06	0.014194627		7862.46752		3576.35105	session_cpp has no direct edit that moves a solid's faces
+edit/hub-keyway-deleted	False	refused	pass	missing	2.162e-06	0.018319564		5277.87566		2287.07945	session_cpp has no direct edit that moves a solid's faces
+edit/l-block-inside-round-deleted	False	refused	pass	missing	2.027e-06	0.016746413		1200		860	session_cpp has no direct edit that moves a solid's faces
+edit/l-block-riser-moved	False	refused	pass	missing	2.261e-06	0.006542073		18000		4600	session_cpp has no direct edit that moves a solid's faces
+edit/l-block-step-deleted	False	refused	pass	missing	2.069e-06	0.011797201		2400		1160	session_cpp has no direct edit that moves a solid's faces
+edit/open-slot-deleted	False	refused	pass	missing	2.252e-06	0.017452674		2000		1000	session_cpp has no direct edit that moves a solid's faces
+edit/rounded-block-top-moved-up	False	refused	wrong	missing	2.168e-06	0.01405546		19122.7433		4584.63273	session_cpp has no direct edit that moves a solid's faces
+edit/rounded-box-top-rim-chain-deleted	False	refused	pass	missing	3.344e-06	0.053619218		1858.19467		935.345115	session_cpp has no direct edit that moves a solid's faces
+edit/rounded-frustum-rounds-deleted	False	refused	pass	missing	2.101e-06	0.011430014		395.840674		331.041667	session_cpp has no direct edit that moves a solid's faces
+edit/rounded-frustum-top-round-deleted	False	refused	pass	missing	2.364e-06	0.008437623		352.101915		263.796044	session_cpp has no direct edit that moves a solid's faces
+edit/shaft-flat-deleted	False	refused	pass	missing	2.106e-06	0.012470402		1570.79633		785.398163	session_cpp has no direct edit that moves a solid's faces
+edit/shaft-open-keyway-deleted	False	refused	pass	missing	2.471e-06	0.010500537		1570.79633		785.398163	session_cpp has no direct edit that moves a solid's faces
+edit/shaft-ring-groove-deleted	False	refused	pass	missing	2.06e-06	0.011251458		1570.79633		785.398163	session_cpp has no direct edit that moves a solid's faces
+edit/shaft-round-groove-deleted	False	refused	pass	missing	2.081e-06	0.009618679		1570.79633		785.398163	session_cpp has no direct edit that moves a solid's faces
+edit/shaft-two-flats-deleted	False	refused	pass	missing	2.674e-06	0.027733696		1570.79633		785.398163	session_cpp has no direct edit that moves a solid's faces
+edit/shaft-v-groove-deleted	False	refused	pass	missing	2.008e-06	0.020506217		1570.79633		785.398163	session_cpp has no direct edit that moves a solid's faces
+edit/side-notch-deleted	False	refused	pass	missing	2.406e-06	0.013413983		2000		1000	session_cpp has no direct edit that moves a solid's faces
+edit/tube-bore-ring-groove-deleted	False	refused	pass	missing	2.104e-06	0.011579482		5277.87566		2287.07945	session_cpp has no direct edit that moves a solid's faces
+edit/turned-post-cone-turned-rounds-deleted	False	refused	pass	missing	2.235e-06	0.036256306		634.601716		389.557489	session_cpp has no direct edit that moves a solid's faces
+edit/turned-post-round-deleted	False	refused	pass	missing	2.056e-06	0.018575704		634.601716		389.557489	session_cpp has no direct edit that moves a solid's faces
+feature/hole-through-the-upper-arm	False	pass	pass	missing	0.010105787	0.007233805	11458.4071	11458.4071	5386.26548	5386.26548	
+feature/pad-down-to-cylinder	False	refused	pass	missing	2.18e-06	0.009201179		12751.846		3268.38195	session_cpp has no extrude or revolve up to a face
+feature/post-up-to-dome	False	refused	pass	missing	1.944e-06	0.01201837		7559.30989		7352.66529	session_cpp has no extrude or revolve up to a face
+feature/rib-revolved-to-a-stop	False	refused	pass	missing	2.043e-06	0.019003503		5085.45311		2445.44598	session_cpp has no extrude or revolve up to a face
+fill/coons-patch-of-four-lines	False	refused	pass	missing	3.051e-06	0.00505466		750		528.078928	session_cpp has no surface fill of a boundary
+fill/coons-patch-of-four-parabolas	False	refused	pass	missing	2.288e-06	0.005384131		1000		614.121005	session_cpp has no surface fill of a boundary
+fillet/ball-and-post	False	refused	pass	pass	2.496e-06	0.011778344		4467.13671		1395.71908	session_cpp has no fillet (rolling-ball blend)
+fillet/bezier-dome-one-edge	False	refused	built	built	2.189e-06	0.055897783					session_cpp has no fillet (rolling-ball blend)
+fillet/boss-s-curve	False	refused	refused	pass	2.187e-06	0.002287233		6718.97823		3911.72838	session_cpp has no fillet (rolling-ball blend)
+fillet/box-all-edges	False	refused	pass	pass	2.269e-06	0.010896752		975.587014		547.362818	session_cpp has no fillet (rolling-ball blend)
+fillet/box-one-edge	False	refused	pass	pass	2.219e-06	0.004680924		991.415927		589.699112	session_cpp has no fillet (rolling-ball blend)
+fillet/conic-edge	False	refused	pass	pass	2.009e-06	0.023456708		1985		985.696757	session_cpp has no fillet (rolling-ball blend)
+fillet/cylinder-rim	False	refused	pass	pass	2.097e-06	0.003686053		778.957433		457.310241	session_cpp has no fillet (rolling-ball blend)
+fillet/cylinder-rim-to-dome	False	refused	pass	pass	2.087e-06	0.003534407		654.498469		392.699082	session_cpp has no fillet (rolling-ball blend)
+fillet/elliptic-boss-root	False	refused	pass	missing	2.216e-06	0.030273614		5977.20797		3224.27817	session_cpp has no fillet (rolling-ball blend)
+fillet/elliptic-cylinder-rim	False	refused	pass	missing	2.259e-06	0.010019385		1466.54883		739.818668	session_cpp has no fillet (rolling-ball blend)
+fillet/elliptic-hole-rim	False	refused	pass	missing	2.34e-06	0.046449958		2167.26667		1591.13392	session_cpp has no fillet (rolling-ball blend)
+fillet/elliptic-section-cylinder-rim	False	refused	pass	missing	2.055e-06	0.003320239		766.075973		448.137747	session_cpp has no fillet (rolling-ball blend)
+fillet/eye-across-a-bar	False	refused	pass	missing	2.138e-06	0.018470236		18307.7406		5384.4204	session_cpp has no fillet (rolling-ball blend)
+fillet/frame-rim-lobe-into-reverse-arc	False	refused	pass	missing	2.266e-06	0.013043644		33002.5565		8912.96954	session_cpp has no fillet (rolling-ball blend)
+fillet/half-cylinder-every-edge-rounded	False	refused	missing	missing	2.176e-06			376.548703		301.055305	session_cpp has no fillet (rolling-ball blend)
+fillet/hole-waist	False	refused	refused	pass	2.015e-06	0.003077247		734.758662		925.8595	session_cpp has no fillet (rolling-ball blend)
+fillet/knife-edge	False	refused	pass	missing	2.188e-06	0.006273012		24.9640029		108.147921	session_cpp has no fillet (rolling-ball blend)
+fillet/l-block-end-mixed-corner	False	refused	pass	pass	2.114e-06	0.02091996		2024.68316		1176.56221	session_cpp has no fillet (rolling-ball blend)
+fillet/l-block-inside-consumed	False	refused	refused	pass	2.045e-06	0.00460471		615.1549		492.986723	session_cpp has no fillet (rolling-ball blend)
+fillet/l-pocket-floor-round-as-tight-as-its-corners	False	refused	pass	missing	2.335e-06	0.028141103		10655.2717		4902.6572	session_cpp has no fillet (rolling-ball blend)
+fillet/lobed-plate-rims	False	refused	pass	missing	2.16e-06	0.019136845		65332.0519		14285.3622	session_cpp has no fillet (rolling-ball blend)
+fillet/nearly-flat-ridge	False	refused	crashed	missing	2.183e-06	0.142977557		240.794714		236.266254	session_cpp has no fillet (rolling-ball blend)
+fillet/notched-cube-inside-corner	False	refused	pass	pass	8.1535e-05	0.009860948		7053.42258		2365.89159	session_cpp has no fillet (rolling-ball blend)
+fillet/nurbs-cylinder-rim	False	refused	pass	pass	2.562e-06	0.030708759		778.957433		457.310241	session_cpp has no fillet (rolling-ball blend)
+fillet/octahedron-all-edges	False	refused	pass	wrong	2.147e-06	0.018407781		1270.76571		619.295047	session_cpp has no fillet (rolling-ball blend)
+fillet/parabolic-cylinder-rim	False	refused	pass	missing	2.104e-06	0.003748677		766.129728		446.199358	session_cpp has no fillet (rolling-ball blend)
+fillet/plate-full-round	False	refused	refused	missing	2.054e-06	0.00312607		6649.0087		2838.37158	session_cpp has no fillet (rolling-ball blend)
+fillet/plate-rim-over-a-blended-lug	False	refused	pass	missing	2.165e-06	0.022795881		52471.1037		11133.591	session_cpp has no fillet (rolling-ball blend)
+fillet/pocket-floor-round-as-tight-as-its-corners	False	refused	pass	missing	2.329e-06	0.015075856		62443.8704		15341.3096	session_cpp has no fillet (rolling-ball blend)
+fillet/rectangular-pyramid-all-edges	False	refused	pass	wrong	2.127e-06	0.016072359		848.690972		527.660727	session_cpp has no fillet (rolling-ball blend)
+fillet/round-swallowing-a-tiny-face	False	refused	refused	missing	2.234e-06	0.007196024		498.926991		397.424778	session_cpp has no fillet (rolling-ball blend)
+fillet/rounded-block-top-rim	False	refused	pass	pass	2.036e-06	0.009605069		1149.04363		733.093175	session_cpp has no fillet (rolling-ball blend)
+fillet/slab-half-round	False	refused	refused	pass	2.242e-06	0.001313774		222.831853		227.398224	session_cpp has no fillet (rolling-ball blend)
+fillet/sliver-strip	False	refused	pass	pass	2.19e-06	0.00529025		391.417643		501.975334	session_cpp has no fillet (rolling-ball blend)
+fillet/spline-boss-rim	False	refused	pass	missing	2.08e-06	0.01171001		1280.73904		746.136083	session_cpp has no fillet (rolling-ball blend)
+fillet/square-boss-root-mixed-corners	False	refused	pass	pass	2.4965e-05	0.012114893		8535.66971		3639.75797	session_cpp has no fillet (rolling-ball blend)
+fillet/tee-of-two-cylinders	False	refused	wrong	pass	2.041e-06	0.032856128		4786.20621		1906.16973	session_cpp has no fillet (rolling-ball blend)
+fillet/vane-on-a-spherical-crown	False	refused	built	missing	2.024e-06	0.055073188					session_cpp has no fillet (rolling-ball blend)
+fillet/variable-radius-concave-edge	False	refused	wrong	missing	2.114e-06	0.017404312		1289.29941		889.618508	session_cpp has no fillet (rolling-ball blend)
+fillet/variable-radius-edge	False	refused	wrong	pass	2.548e-06	0.015157819		994.992624		592.499552	session_cpp has no fillet (rolling-ball blend)
+fillet/variable-radius-obtuse-edge	False	refused	wrong	missing	2.1e-06	0.016635557		931.544832		543.475069	session_cpp has no fillet (rolling-ball blend)
+fillet/variable-radius-semicircular-rim	False	refused	wrong	missing	2.274e-06	0.019570674		228.318604		221.090309	session_cpp has no fillet (rolling-ball blend)
+fillet/variable-radius-to-a-point	False	refused	wrong	missing	2.29e-06	0.011964088		997.138642		594.877838	session_cpp has no fillet (rolling-ball blend)
+geometry/ellipsoid	False	refused	pass	missing	2.612e-06	0.00329442		301.592895		231.248215	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/ellipsoid-half	True	refused	pass	missing	2.393e-06	0.034882573		150.796447		191.022331	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/elliptic-cylinder	False	refused	pass	missing	2.232e-06	0.00301824		471.238898		349.517768	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/elliptic-hole	True	refused	pass	missing	2.228e-06	0.030778037		2619.61066		1527.42542	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/high-degree-bezier-dome	False	refused	pass	missing	2.185e-06	0.081554163		2795.3125		1358.75046	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/horn-torus	False	pass	pass	missing	0.000156989	0.002607589	2467.4011	2467.4011	986.96044	986.96044	
+geometry/hyperboloid	False	refused	pass	missing	2.22e-06	0.00344826		804.247719		564.450888	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/hyperboloid-of-two-sheets	False	refused	pass	missing	2.167e-06	0.002975927		201.06193		322.747245	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/hyperboloid-ruled	False	refused	pass	missing	2.016e-06	0.003837719		523.598776		426.266522	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/lemon	False	refused	pass	missing	2.107e-06	0.002734788		57.2996675		76.5363816	no revolve, and create_torus gives the whole spindle surface, not its inner part
+geometry/nurbs-cone	False	refused	pass	missing	1.99e-06	0.012180741		261.799388		254.160185	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/nurbs-sphere	False	refused	pass	missing	2.07e-06	0.003074374		523.598776		314.159265	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/oblate-spheroid	False	refused	pass	missing	2.166e-06	0.002740795		452.389342		312.187777	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/paraboloid	False	refused	pass	missing	2.055e-06	0.002968343		804.247719		542.208394	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/periodic-bspline-prism	False	refused	pass	missing	2.365e-06	0.003062456		3333.33333		1315.95676	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/periodic-bspline-ring	False	refused	pass	missing	2.45e-06	0.003437855		1884.95559		1223.883	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/saddle-drum	True	refused	pass	missing	2.129e-06	0.04252082		2010.6193		948.801479	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/saddle-drum-bored	True	refused	pass	missing	2.04e-06	0.066163564		1727.87596		1079.7765	session_cpp has no primitive for this surface and no extrude or revolve of a curve
+geometry/spindle-torus	False	refused	pass	missing	2.153e-06	0.002754058		1537.74033		668.712646	create_torus makes the self-crossing spindle surface, not the solid within 5 of the circle; no revolve
+geometry/torus-nearly-horn	False	pass	pass	missing	0.000237835	0.002604145	2457.54137	2457.54137	984.986519	984.986519	
+integration/benchy	True	refused	wrong	missing	2.152e-06	1.31900727		15550.9999		9432.40365	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+integration/utah-teapot	True	refused	pass	missing	2.059e-06	0.291465209		25.9956738		52.2260168	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+loft/slab-pinched-on-four-guides	False	refused	pass	missing	2.018e-06	0.088729074		2436.06857		2124	session_cpp has no loft of sections into a solid
+loft/square-spire-on-four-guides	False	refused	pass	missing	2.294e-06	0.09470777		9423.77143		2397.6	session_cpp has no loft of sections into a solid
+loft/square-to-octagon	False	refused	pass	missing	1.988e-06	0.005637267		33760		6188.2547	session_cpp has no loft of sections into a solid
+loft/square-to-round	False	refused	pass	missing	2.044e-06	0.00706414		35068.5835		6241.37284	session_cpp has no loft of sections into a solid
+loft/square-to-round-three-times-larger	False	refused	missing	missing	2.494e-06			946851.754		56172.3556	session_cpp has no loft of sections into a solid
+loft/twisted-tapering-square	False	refused	pass	missing	2.438e-06	0.006161057		17333.3333		4643.7644	session_cpp has no loft of sections into a solid
+loft/twisted-thin-blade	False	refused	pass	missing	2.269e-06	0.007198522		960		7351.88447	session_cpp has no loft of sections into a solid
+nurbs/bezier-dome	False	refused	pass	missing	2.072e-06	0.027756125		3150		1309.32293	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+nurbs/bspline-dome	False	refused	pass	missing	2.087e-06	0.047967684		3081.00556		1285.3684	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+nurbs/cuspidal-patch-sliced-through-its-cusp	True	refused	pass	missing	1.948e-06	0.024799746		0.510312722		4.29494915	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+nurbs/drilled-dome	True	refused	pass	missing	2.427e-06	0.046875469		2872.94489		1431.79569	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+nurbs/drum-in-a-nurbs-sleeve	True	refused	pass	missing	2.281e-06	0.048342101		1237.78751		697.433569	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+nurbs/flat-bspline-slabs-united	True	refused	pass	missing	2.515e-06	0.043812472		700		610	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+nurbs/folded-patch-notched-at-its-rim	True	refused	wrong	missing	2.443e-06	0.023148699		0.48658855		4.12673856	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+nurbs/groin-vault	True	refused	wrong	missing	2.149e-06	0.426552693		7632		2256	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+nurbs/lens-of-two-nurbs-balls	True	refused	pass	missing	2.532e-06	0.061370144		108.908545		125.663706	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+nurbs/patch-over-a-near-layer-pierced	True	refused	pass	missing	2.467e-06	0.02962841		0.543369076		5.07025332	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+nurbs/pinched-patch-sliced-beside-its-pinch	True	refused	pass	missing	2.131e-06	0.034274532		0.524490649		4.59193121	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+nurbs/sliced-dome	True	refused	pass	missing	2.087e-06	0.055769752		2854.4123		1276.25411	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+nurbs/vault-tangent-plane	True	refused	pass	missing	2.261e-06	0.031018308		8175.39418		2404.93541	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+offset/ball-tipped-cone-shrunk-past-its-tip	False	refused	pass	missing	2.129e-06	0.002680939		95.5298446		129.783998	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/ball-tipped-cone-shrunk-twice-its-tip	False	refused	pass	missing	2.12e-06	0.002666438		44.2222348		77.6644415	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/barrel-shrunk	False	refused	missing	missing	2.082e-06			184.306769		175.929189	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/blind-bored-block-grown-past-its-bore	False	refused	missing	missing	2.398e-06			13175.6984		3059.33105	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/box-grown	False	refused	pass	missing	2.426e-06	0.009952219		935.587014		539.362818	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/box-shrunk	False	refused	pass	missing	2.817e-06	0.007045674		192		208	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/box-with-a-spheroidal-cavity-grown	False	refused	missing	missing	2.2e-06			10392.2363		2985.44103	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/box-with-a-spheroidal-cavity-shrunk	False	refused	missing	missing	2.116e-06			4998.79878		2397.62476	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/cone-grown	False	refused	pass	missing	2.074e-06	0.003482332		150.721758		154.835859	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/cylinder-cut-at-thirty-degrees-grown	False	refused	pass	missing	2.151e-06	0.008827335		598.540836		386.365503	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/cylinder-grown	False	refused	pass	missing	2.058e-06	0.003608229		1341.5898		645.333166	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/drilled-plate-grown	False	refused	wrong	missing	2.198e-06	0.012862429		2781.02474		1449.39459	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/drilled-plate-grown-by-its-hole	False	refused	crashed	missing	2.092e-06	0.124653648		6300.90401		2070.48467	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/drilled-plate-grown-past-its-hole	False	refused	crashed	missing	2.266e-06	0.153516119		8548.44725		2430.16666	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/dumbbell-split	False	refused	pass	missing	2.081e-06	0.026786683		295.440473		366.095413	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/elliptic-cylinder-grown	False	refused	pass	missing	2.091e-06	0.007713837		896.459099		505.111424	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/elliptic-cylinder-shrunk	False	refused	pass	missing	2.063e-06	0.035709909		197.907869		203.427476	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/elliptic-cylinder-shrunk-past-its-curvature	False	refused	timeout	missing	2.105e-06	0.052216607					not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/filleted-ball-on-plate-grown-past-its-fillet	False	refused	crashed	missing	2.164e-06	0.125653847		1966.21068		944.145872	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/filleted-ball-on-plate-grown-twice-its-fillet	False	refused	crashed	missing	2.039e-06	0.129625266		3024.91811		1177.45777	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/filleted-blind-bore-grown-past-its-fillet	False	refused	pass	missing	2.144e-06	0.004213909		7025.94946		2050.26447	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/filleted-cone-boss-grown-by-its-fillet	False	refused	crashed	missing	2.304e-06	3.36377686		1190.97648		756.87599	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/filleted-cone-boss-grown-past-its-fillet	False	refused	pass	missing	2.019e-06	0.009902051		2055.75809		976.654898	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/filleted-cone-boss-grown-twice-its-fillet	False	refused	pass	missing	2.073e-06	0.009484105		3152.22164		1220.23988	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/filleted-post-grown-past-its-fillet	False	refused	pass	missing	2.052e-06	0.004191714		4390.70928		1514.47002	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/flanged-drum-shrunk	False	refused	wrong	missing	2.209e-06	0.01270921		624.366229		496.60238	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/flat-elliptic-cylinder-grown	False	refused	missing	missing	2.203e-06			1275.79285		753.272824	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/frustum-top-rounded-shrunk-past-its-round	False	refused	pass	missing	2.14e-06	0.00645527		32.7273626		65.5819662	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/grooved-drum-grown	False	refused	wrong	missing	2.177e-06	0.014769855		4519.35015		1545.42376	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/l-block-grown	False	refused	pass	missing	2.459e-06	0.015289311		2197.27432		1138.4513	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/l-block-grown-sharp	False	refused	pass	missing	2.23e-06	0.007888876		2240		1228	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/l-block-rounded-inside-grown-past-its-round	False	refused	missing	missing	2.445e-06			9324.09951		2485.94717	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/l-block-shrunk	False	refused	pass	missing	2.114e-06	0.011431056		505.287611		537.853982	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/napkin-ring-grown	False	refused	wrong	missing	2.081e-06	0.005952375		737.077697		535.866389	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/nurbs-ball-grown	False	refused	refused	missing	2.16e-06	0.001671036		1436.75504		615.75216	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/oblate-spheroid-grown	False	refused	missing	missing	2.433e-06			833.201216		453.62476	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/plate-with-a-square-hole-grown	False	refused	missing	missing	2.429e-06			533.103236		449.06193	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/plus-shaped-plate-grown	False	refused	missing	missing	2.276e-06			316.159285		293.362818	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/plus-shaped-plate-shrunk	False	refused	missing	missing	2.199e-06			27.7168147		80.2831853	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/pocketed-block-grown-past-its-corners	False	refused	missing	missing	2.236e-06			25008.1087		5633.35564	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/recessed-plate-grown-past-its-recess	False	refused	missing	missing	2.247e-06			8554.1492		2428.38259	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/rounded-frustum-shrunk-past-its-rounds	False	refused	pass	missing	2.175e-06	0.006884923		32.7273626		65.5819662	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/rounded-frustum-shrunk-to-a-stub	False	refused	pass	missing	2.171e-06	0.006753657		9.19722796		30.6329675	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/rounded-hemisphere-shrunk-past-its-round	False	refused	wrong	missing	2.383e-06	0.012872561		35.6047167		75.3982237	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/rounded-puck-shrunk-by-its-rounds	False	refused	pass	missing	2.254e-06	0.002766937		301.592895		251.327412	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/rounded-puck-shrunk-past-its-rounds	False	refused	pass	missing	2.442e-06	0.002677563		113.097336		131.946891	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/slant-cut-cylinder-grown	False	refused	pass	missing	2.242e-06	0.009196903		607.91056		397.767392	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/slant-cut-cylinder-grown-by-a-half	False	refused	pass	missing	2.623e-06	0.009254428		427.700505		324.120023	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/slant-cut-cylinder-grown-by-four	False	refused	pass	missing	2.523e-06	0.009259175		2605.41073		971.598498	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/slant-cut-cylinder-grown-by-one-and-a-half	False	refused	pass	missing	2.6e-06	0.009460094		826.515095		477.697947	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/slant-cut-cylinder-grown-by-two	False	refused	pass	missing	3.34e-06	0.008915053		1086.6557		563.911686	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/slant-cut-cylinder-grown-past-its-ellipse-curvature	False	refused	pass	missing	2.173e-06	0.009159366		1391.47398		656.408611	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/square-pocketed-block-grown	False	refused	missing	missing	2.386e-06			3715.16813		1643.85838	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/star-prism-grown	False	refused	missing	missing	2.548e-06			535.27864		539.816006	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/tetrahedron-grown	False	refused	pass	missing	2.308e-06	0.008225527		249.53323		234.547592	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/torus-grown-past-its-hole	False	refused	wrong	missing	2.543e-06	0.002795709		1984.28744		816.334443	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/torus-grown-to-its-hole	False	refused	missing	missing	3.456e-06			1263.30936		631.654682	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/torus-shrunk	False	refused	pass	missing	2.581e-06	0.002785464		444.132198		592.176264	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/turned-post-shrunk-past-its-round	False	refused	pass	missing	3.164e-06	0.016132181		211.075756		187.317462	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/turned-post-shrunk-twice-past-its-round	False	refused	pass	missing	2.934e-06	0.020424956		130.550628		136.135682	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/u-shaped-plate-grown	False	refused	missing	missing	2.148e-06			432.43952		394.495559	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/wide-hole-plate-grown-by-its-hole	False	refused	missing	missing	2.259e-06			362114.348		29124.709	not written in this runner: BRep::offset exists but these cases were not implemented here
+offset/windowed-plate-grown-past-its-corners	False	refused	missing	missing	3.544e-06			14575.5273		4580.55213	not written in this runner: BRep::offset exists but these cases were not implemented here
+parts/flange	True	pass	pass	missing	0.164750766	0.021095985	22135.6618	22135.6618	9324.247	9324.247	
+parts/pin-lug	True	pass	pass	missing	0.00635939	0.005567102	29989.3807	29989.3807	8900.53096	8900.53096	
+parts/pocketed-tray	True	pass	pass	missing	0.086036223	0.019825565	21371.1503	21371.1503	14967.4335	14967.4335	
+parts/shelf-bracket	False	refused	pass	missing	2.639e-06	0.004326216		40137.3452		12393.1327	session_cpp has no revolve, extrude of a curved outline, fillet or draft
+parts/star-handle	False	refused	pass	missing	2.258e-06	0.008712041		19179.0409		6148.76005	session_cpp has no revolve, extrude of a curved outline, fillet or draft
+parts/turned-shaft	False	refused	pass	missing	1.98e-06	0.00364319		120915.323		17470.5913	session_cpp has no revolve, extrude of a curved outline, fillet or draft
+parts/v-belt-pulley	True	pass	pass	missing	0.152487231	0.008419476	41490.5654	41490.5654	10484.5696	10484.5696	
+primitives/box	False	pass	pass	pass	0.000286371	0.003369984	6000	6000	2200	2200	
+primitives/cone-frustum	False	pass	pass	pass	0.000229096	0.002753436	245.044227	245.044227	238.627296	238.627296	
+primitives/cylinder	False	pass	pass	pass	0.000197034	0.00265502	785.398163	785.398163	471.238898	471.238898	
+primitives/extruded-l	False	pass	pass	pass	0.001054748	0.003917018	1200	1200	860	860	
+primitives/revolved-sector	False	pass	pass	pass	0.03285987	0.003931659	201.06193	201.06193	233.06193	233.06193	
+primitives/revolved-washer	False	pass	pass	pass	0.006590675	0.003339398	804.247719	804.247719	804.247719	804.247719	
+primitives/sphere	False	pass	pass	pass	0.000134335	0.002396626	523.598776	523.598776	314.159265	314.159265	
+primitives/torus	False	pass	pass	pass	0.000147505	0.002528001	789.568352	789.568352	789.568352	789.568352	
+scale/ball-screwed-round-a-tight-helix-ten-times-larger	False	refused	missing	missing	2.328e-06			253449.374		22031.4739	session_cpp has no sweep of a solid
+scale/balls-united-a-million-from-the-origin	True	pass	pass	missing	0.014833607	0.012518785	765.950209	765.950209	459.570125	459.570125	
+scale/balls-united-tens-of-metres-across	True	pass	pass	missing	0.027236084	0.016149037	7.65950209e+14	7.65950209e+14	4.59570125e+10	4.59570125e+10	
+scale/box-screwed-inside-a-rod-a-hundred-times-larger	True	refused	missing	missing	2.896e-06			1.52231622e+09		9611374.88	session_cpp has no sweep of a solid
+scale/cone-spun-about-a-line-through-it-ten-times-larger	False	refused	missing	missing	2.208e-06			288495.057		26700.8824	session_cpp has no sweep of a solid
+scale/cylinders-crossed-a-million-from-the-origin	True	pass	pass	missing	0.063328632	0.011561345	144	144	144	144	
+scale/drilled-plate-grown-by-its-hole-ten-times-larger	False	refused	missing	missing	2.64e-06			6300904.01		207048.467	not written in this runner: offset cases not implemented here
+scale/micro-cylinder-rim-rounded-unequally	False	refused	missing	missing	2.466e-06			0.000766075973		0.0448137747	session_cpp has no fillet
+scale/micron-balls-united	True	pass	pass	missing	0.009887053	0.008347625	7.65950209e-07	7.65950209e-07	0.000459570125	0.000459570125	
+scale/micron-cylinders-crossed	True	wrong	pass	missing	0.018295016	0.007250744	5.65486678e-07	1.44e-07	0.000433539786	0.000144	volume 5.65486677646e-07 against 1.44e-07 (its STEP's); area 0.000433539786195 against 0.000144 (its STEP's)
+scale/spline-bar-screwed-through-rod-ten-times-larger	True	refused	missing	missing	3.431e-06			1335319.59		81056.8232	session_cpp has no sweep of a solid
+scale/villarceau-half-torus-ten-thousand-times-larger	True	pass	missing	missing	0.118575073		4.44132198e+14	4.44132198e+14	4.08438243e+10	4.08438243e+10	
+scale/viviani-common-a-thousand-times-larger	True	wrong	missing	missing	0.101524628			1.20550621e+12		628318531	its STEP's faces do not close into a solid
+scale/viviani-cut-a-thousand-times-larger	True	wrong	missing	missing	0.1034726			2.98328399e+12		1.42831853e+09	its STEP's faces do not close into a solid
+scale/viviani-union-a-thousand-times-larger	True	wrong	missing	missing	0.104847119			4.86823958e+12		1.5393804e+09	its STEP's faces do not close into a solid
+shell/ball-tipped-cone-hollowed-past-its-tip	False	refused	pass	missing	3.435e-06	0.010216615		356.143967		493.628071	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/ball-tipped-cone-shelled-open-past-its-tip	False	refused	pass	missing	2.14e-06	0.011303977		282.474358		436.413294	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/bored-frustum-sealed-below-its-opening	False	refused	pass	missing	2.311e-06	0.012838269		206.646983		435.634181	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/bored-frustum-sealed-below-its-opening-at-three-point-one-times-the-size	False	refused	missing	missing	2.484e-06			6156.22028		4186.44448	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/box-five-faces-open	False	refused	pass	missing	2.33e-06	0.00469904		80		196	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/box-hairline-cavity	False	refused	pass	missing	2.036e-06	0.00721211		479.918796		384.2008	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/box-hollowed	False	refused	pass	missing	2.079e-06	0.007861085		288		584	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/box-open-top	False	refused	pass	missing	2.103e-06	0.007290285		240		516	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/box-open-top-and-bottom	False	refused	pass	missing	2.414e-06	0.006974426		192		448	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/box-open-top-and-front	False	refused	pass	missing	2.609e-06	0.006699417		200		446	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/box-open-top-outward	False	refused	pass	missing	2.49e-06	0.009244834		345.218285		731.672558	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/box-open-top-outward-sharp	False	refused	pass	missing	2.201e-06	0.006246142		360		764	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/box-paper-thin	False	refused	pass	missing	2.319e-06	0.00725912		0.295940004		591.916008	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/box-walls-meeting	False	refused	wrong	missing	2.024e-06	0.007548129		480		376	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/capsule-open-at-its-dome	False	refused	pass	missing	2.054e-06	0.007087044		389.557489		838.805239	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/capsule-open-base	False	refused	pass	missing	2.143e-06	0.006300464		410.50144		851.371609	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/cone-open-base	False	refused	pass	missing	2.086e-06	0.004947792		151.952728		348.847684	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/cylinder-open-top	False	refused	pass	missing	2.24e-06	0.004567255		333.008821		697.433569	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/cylinder-side-open	False	refused	refused	missing	2.13e-06	0.000579232		157.079633		376.991118	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/drilled-block-open-at-its-bore	False	refused	pass	missing	2.184e-06	0.01081427		1351.45133		2748.60178	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/drilled-block-open-top	False	refused	pass	missing	2.003e-06	0.010602655		1253.646		2606.14156	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/dumbbell-neck-filled	False	refused	pass	missing	2.183e-06	0.022684397		804.839291		1173.70265	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/frustum-bottom-rounded-shelled-open-past-its-round	False	refused	wrong	missing	2.099e-06	0.00649269		308.813414		335.52745	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/frustum-open-at-both-ends-closing-below-its-top	False	refused	refused	missing	2.029e-06	0.002798643		238.638323		297.17503	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/frustum-sealed-below-its-opening	False	refused	wrong	missing	2.111e-06	0.004141261		263.59219		285.759268	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/frustum-too-thick-to-hollow	False	refused	pass	missing	2.155e-06	0.00369041		263.893783		282.743339	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/half-torus-open-ends	False	refused	pass	missing	2.3872e-05	0.005540963		103.630846		425.518959	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/hemisphere-open	False	refused	pass	missing	2.278e-06	0.004828784		127.758101		285.884931	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/hemisphere-shelled-outward-open-at-its-dome	False	refused	pass	missing	2.282e-06	0.005279184		77.4926188		185.353967	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/hemisphere-shelled-outward-open-at-its-dome-by-a-half	False	refused	pass	missing	2.281e-06	0.005301176		39.1390085		172.002198	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/hemisphere-shelled-outward-open-at-its-dome-by-two	False	refused	pass	missing	2.179e-06	0.005301527		148.702052		207.345115	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/hole-skin-merging-wall	False	refused	pass	missing	1.95e-06	0.011861896		1241.87358		2534.89876	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/l-block-open-at-its-step-outward-sharp	False	refused	wrong	missing	2.155e-06	0.008634445		1868		3814	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/l-block-open-at-its-step-sharp	False	refused	wrong	missing	2.146e-06	0.008723787		1448		2970	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/l-block-open-top	False	refused	pass	missing	1.94e-06	0.011414761		610.497787		1290.99557	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/l-block-open-top-sharp	False	refused	pass	missing	2.218e-06	0.01165666		612		1294	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/oblate-spheroid-hollowed	False	refused	missing	missing	2.052e-06			251.941262		508.071313	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/prolate-spheroid-hollowed	False	refused	missing	missing	2.033e-06			145.463412		295.115614	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/puck-bottom-rounded-shelled-open-past-its-round	False	refused	wrong	missing	2.067e-06	0.005260576		903.101308		700.992181	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/round-consumed	False	refused	pass	missing	2.066e-06	0.015146611		1981.66371		1506.79645	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/round-shrunk-to-an-edge	False	refused	crashed	missing	2.186e-06	0.129435892		1485.66371		1614.79645	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/rounded-frustum-hollowed-past-its-rounds	False	refused	wrong	missing	2.074e-06	0.007710992		316.739273		325.366803	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/rounded-hemisphere-hollowed-past-its-round	False	refused	crashed	missing	2.176e-06	0.132287858		244.192733		251.71882	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/rounded-puck-hollowed-past-its-rounds	False	refused	wrong	missing	2.387e-06	0.006086545		957.9726		666.85168	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/rounded-tray	False	refused	pass	missing	2.191e-06	0.015976758		829.389372		1723.34512	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/sphere-hollowed	False	refused	pass	missing	2.117e-06	0.002913574		255.516202		515.221195	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/sphere-open-at-a-cap	False	refused	pass	missing	2.189e-06	0.005125695		212.581103		455.530935	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/sphere-opening-sealed	False	refused	wrong	missing	2.156e-06	0.00499491		251.720111		514.435797	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/sphere-pinhole-opening	False	refused	pass	missing	2.421e-06	0.005143003		240.852609		512.073948	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/tall-frustum-sealed-below-its-opening	False	refused	wrong	missing	2.364e-06	0.004314519		439.822972		483.805269	not written in this runner: BRep::hollow exists but these cases were not implemented here
+shell/torus-hollowed	False	refused	pass	missing	2.359e-06	0.003123838		207.261692		829.04677	not written in this runner: BRep::hollow exists but these cases were not implemented here
+singular/ball-cut-aslant-through-a-pole	True	pass	pass	missing	0.028623921	0.006856782	493.199541	493.199541	307.421614	307.421614	
+singular/ball-dimpled-a-hair-from-its-cutters-pole	True	pass	missing	missing	0.015656567		4188.4725	4188.4725	1257.08172	1257.08172	
+singular/ball-halved-through-its-poles	True	wrong	pass	missing	0.014790836	0.004606524		261.799388		235.619449	its STEP's faces do not close into a solid
+singular/balls-meeting-through-a-pole	True	wrong	pass	missing	0.00622494	0.0092022	523.598776	938.289006	314.159265	502.654825	volume 523.598775598 against 938.289005872 (its STEP's); area 314.159265359 against 502.654824574 (its STEP's)
+singular/cone-cut-aslant-through-its-apex	True	wrong	pass	missing	0.010920032	0.004814553		210.617317		224.899368	its STEP's faces do not close into a solid
+singular/cone-halved-through-its-apex	True	wrong	pass	missing	0.006409328	0.004810046		130.899694		177.080092	its STEP's faces do not close into a solid
+singular/cylinder-hoof	True	pass	pass	missing	0.008480498	0.007096408	48.1125224	48.1125224	113.482406	113.482406	
+singular/napkin-ring-poles-near-its-rims	True	pass	pass	missing	0.01909777	0.016707816	268.082573	268.082573	402.12386	402.12386	
+singular/napkin-ring-poles-on-its-rims	True	crashed	pass	missing	0.034787599	0.008283193		268.082573		402.12386	exit -11
+singular/saddle-drum-cut-level-through-its-saddle	True	refused	pass	missing	1.945e-06	0.059125086		1882.6193		862.790081	not written: needs a face on a given B-spline surface, which only BRep's low-level builders could make
+singular/sectors-sharing-an-apex	True	wrong	pass	missing	0.133613402	0.038396316		146.516406		179.057094	its STEP's faces do not close into a solid
+singular/sectors-sharing-an-apex-ten-times-larger	True	wrong	missing	missing	0.153043258			146516.406		17905.7094	its STEP's faces do not close into a solid
+spline/peanut-prism	False	refused	pass	missing	2.506e-06	0.003233421		2472.15278		1319.21654	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+spline/pipe-on-planar-cubic	False	refused	pass	missing	2.388e-06	0.005062642		65345.1272		9047.78684	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+spline/pipe-on-twisted-cubic	False	refused	pass	missing	2.201e-06	0.004923886		8042.47719		2412.74316	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+spline/rational-cap	False	refused	pass	missing	2.369e-06	0.003353839		3534.29174		1178.09725	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+spline/rational-spheroid	False	refused	pass	missing	5.708e-06	0.00340072		1507.96447		663.172248	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+spline/revolved-cubic-dome	False	refused	pass	missing	2.173e-06	0.003284006		2464.71408		983.946819	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+spline/square-on-planar-cubic	False	refused	pass	missing	2.287e-06	0.005990523		16000		4000	not written in this runner: needs faces on given NURBS surfaces or curves, which only BRep's low-level builders could make
+sweep/circle-along-a-nearly-full-arc	False	refused	missing	missing	4.47e-06			767.635898		792.768639	session_cpp has no sweep of a section along a path
+sweep/circle-along-arc	False	refused	pass	pass	2.144e-06	0.003581047		197.392088		222.524829	session_cpp has no sweep of a section along a path
+sweep/duct-elbow	False	refused	pass	pass	2.066e-06	0.004751509		6031.85789		6287.85789	session_cpp has no sweep of a section along a path
+sweep/helical-pipe	False	refused	pass	wrong	2.239e-06	0.009326566		594.048305		1194.3798	session_cpp has no sweep of a section along a path
+sweep/helical-pipe-forty-turns	False	refused	missing	missing	2.201e-06			7920.64407		15847.5713	session_cpp has no sweep of a section along a path
+sweep/helical-pipe-round-ends	False	refused	pass	wrong	4.409e-06	0.190139598		598.237095		1200.66298	session_cpp has no sweep of a section along a path
+sweep/hollow-reducer	False	refused	pass	pass	2.25e-06	0.0394625		5120		5433.27959	session_cpp has no sweep of a section along a path
+sweep/mitered-elbow	False	refused	pass	pass	4.208e-06	0.006156519		8000		3400	session_cpp has no sweep of a section along a path
+sweep/mitered-picture-frame	False	refused	pass	pass	2.137e-06	0.017123045		9864		6544	session_cpp has no sweep of a section along a path
+sweep/mitered-pipe-on-cube-edges	False	refused	pass	pass	2.073e-06	0.017748455		1130.97336		1156.1061	session_cpp has no sweep of a section along a path
+sweep/narrowing-bend	False	refused	pass	pass	2.072e-06	0.080121718		4900.88454		5119.17284	session_cpp has no sweep of a section along a path
+sweep/round-cornered-pipe	False	refused	pass	wrong	2.221e-06	0.00705744		1688.73437		1179.79636	session_cpp has no sweep of a section along a path
+sweep/square-along-a-nearly-full-arc	False	refused	missing	missing	3.912e-06			244.346095		496.692191	session_cpp has no sweep of a section along a path
+sweep/twisted-duct	False	refused	pass	pass	2.257e-06	0.004606072		12373.3333		3515.67071	session_cpp has no sweep of a section along a path
+swept/ball-along-spline-groove	True	refused	pass	missing	2.739e-06	0.084914048		10173.8287		4026.63923	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/ball-end-mill-screwed-across-ring-sector	True	refused	pass	missing	2.175e-06	0.491724978		109.195626		242.286539	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/ball-on-a-leaning-stem-swung-partway	True	refused	refused	missing	2.153e-06	2.193e-06		71.0332486		164.172954	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/ball-screwed-round-a-tight-helix	False	refused	refused	missing	2.522e-06	2.303e-06		253.449374		220.314739	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/ball-screwed-round-a-tight-helix-on-a-tilted-axis	False	refused	missing	missing	2.297e-06			253.449374		220.314739	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/ball-swung-across-its-own-center-line	False	refused	pass	missing	2.054e-06	0.085389084		59.3331944		75.5328705	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/ball-swung-groove	True	refused	pass	missing	2.067e-06	0.026190074		4284.97201		2012.82988	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/ball-thread-groove	True	refused	pass	missing	3.261e-06	0.662403479		1343.00889		880.554032	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/ball-turned-while-slid	False	refused	refused	missing	2.38e-06	2.123e-06		61.325376		126.839542	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/bar-end-turned-into-a-floor	True	refused	pass	missing	2.541e-06	0.93884687		53.5645534		131.121295	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/bar-plunged-aslant-into-plate	True	refused	pass	missing	2.117e-06	0.02659786		764.869608		681.245049	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/bar-swung-partway-into-ring-sector	True	refused	pass	missing	3.36e-06	0.04672249		76.4953761		168.186155	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/bar-turned-facing-the-axis	True	refused	pass	missing	2.077e-06	0.266379048		37.7453541		84.8810866	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/box-screwed-inside-a-rod	True	refused	pass	missing	2.057e-06	13.0648195		1522.31622		961.137488	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/box-screwed-inside-a-tilted-rod	True	refused	missing	missing	2.14e-06			1522.31622		961.137488	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/box-slid-along-its-face	False	refused	missing	missing	2.227e-06			632		519.471849	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/box-slid-aslant	False	refused	pass	missing	2.066e-06	0.01619957		812		542.618932	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/bull-nose-along-a-looping-spline	True	refused	refused	missing	2.344e-06	1.883e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/bull-nose-along-line-arc-line	True	refused	pass	missing	2.036e-06	0.546848831		24653.5167		7159.25541	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/bull-nose-carried-along-a-spline	True	refused	refused	missing	2.1e-06	2.073e-06		10507.5864		3968.62573	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/bull-nose-pushed-in-at-a-lean	True	refused	refused	missing	2.397e-06	2.233e-06		1986.59022		1075.28823	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/bull-nose-swung-partway-into-ring-sector	True	refused	pass	missing	2.183e-06	0.040167021		71.991901		175.628531	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/coil-spring-pushed-aslant-through-plate	True	refused	refused	missing	2.152e-06	2.203e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/coin-turned-about-a-line-through-its-rim	False	refused	pass	missing	2.1e-06	0.259254864		46.5470011		71.4550572	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/cone-point-screwed-through-rod	True	refused	refused	missing	2.078e-06	2.864e-06		1513.2456		878.883039	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/cone-spun-about-a-line-through-it	False	refused	refused	missing	2.068e-06	1.21725852		288.495057		267.008824	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/core-drill-pushed-aslant-through-plate	True	refused	pass	missing	2.103e-06	0.017407047		1541.95842		1207.06237	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/creased-bar-turned-through-ring-sector	True	refused	pass	missing	2.483e-06	1.01999029		38.0283546		84.1782537	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/cube-spun-on-its-diagonal-inside-a-block	True	refused	pass	missing	3.837e-06	1.51020511		201.489605		248.297617	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/domed-mill-swung-partway-into-ring-sector	True	refused	pass	missing	3.565e-06	0.042126692		63.2129522		159.700968	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/drafted-slot-screwed-through-rod	True	refused	refused	missing	2.123e-06	2.493e-06		1401.31396		896.760894	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/drill-pushed-through-plate	True	refused	pass	missing	2.528e-06	0.009401988		749.734518		665.132741	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/drill-swung-partway-into-ring-sector	True	refused	pass	missing	3.208e-06	0.056421079		65.8741334		156.99586	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/drum-end-screwed-through-rod	True	refused	refused	missing	2.103e-06	2.664e-06		1339.5489		904.797493	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/drum-leaning-across-a-turn	True	refused	refused	missing	4.243e-06	2.043e-06		798.142042		806.412078	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/drum-leaning-to-a-screw	True	refused	refused	missing	2.098e-06	1.873e-06		50.2500187		143.614545	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/drum-plunged-aslant-into-plate	True	refused	pass	missing	2.822e-06	0.164530704		665.412934		680.67772	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/drum-pushed-through-plate	True	refused	pass	missing	2.022e-06	0.021203255		672		672	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/drum-screwed-across-ring-sector	True	refused	built	missing	4.347e-06	2.48437699					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/drum-swung-partway-into-ring-sector	True	refused	pass	missing	2.014e-06	0.018338843		71.7330323		177.362818	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/ellipsoid-pushed-aslant-through-plate	True	refused	pass	missing	2.224e-06	0.185438069		3522.26542		2307.9843	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/end-mill-slid-across-block	True	refused	pass	missing	3.247e-06	0.020165082		1760		1096	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/end-mill-turned-about-a-line-through-its-end	True	refused	pass	missing	2.049e-06	0.022346738		1906.75134		1249.35629	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/fine-thread-with-sharp-crests	True	refused	pass	missing	3.336e-06	15.3889432		1276.703		916.120396	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/flat-ring-swung-partway-into-ring-sector	True	refused	pass	missing	3.429e-06	0.11543714		70.5860825		181.759219	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/frustum-screwed-across-ring-sector	True	refused	pass	missing	2.006e-06	0.536951703		65.2000035		160.463771	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/half-drum-swung-partway-into-ring-sector	True	refused	pass	missing	3.771e-06	0.026047522		73.3038286		173.079633	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/helicon-face-gear-hobbed-by-its-worm	False	refused	refused	missing	2.015e-06	1.973e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/hypoid-gear-cut-by-its-pinion	True	refused	refused	missing	2.018e-06	2.234e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/key-carried-along-a-spline	True	refused	pass	missing	2.341e-06	1.28147636		10652.88		3996.72503	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/pin-swung-through-ring-sector	True	refused	pass	missing	2.191e-06	0.284793242		53.8434074		198.492308	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/plus-cut-wheel	True	refused	refused	missing	2.171e-06	1.893e-06		17485.5244		8193.4216	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/rack-cut-tooth-space	True	refused	refused	missing	2.05e-06	1.853e-06		9042.50279		3872.68353	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/ring-carried-along-a-spline	True	refused	refused	missing	2.693e-06	2.054e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/ring-lying-flat-turned-whole	False	refused	wrong	missing	2.081e-06	0.946134868		761.09946		919.01313	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/ring-pushed-in-at-a-lean	True	refused	refused	missing	3.499e-06	2.834e-06		1880.89125		1186.34258	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/ring-pushed-in-past-its-fold	True	refused	refused	missing	2.285e-06	2.223e-06		1907.00212		1164.56867	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/ring-slid-flat-past-its-hole	False	refused	pass	missing	2.175e-06	0.28330086		1631.26573		1061.82622	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/ring-slid-flat-short-of-its-hole	False	refused	pass	missing	3.582e-06	0.63542959		1031.87623		748.657818	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/rod-spun-about-a-line-through-it	False	refused	refused	missing	3.369e-06	0.275994986		41.6857062		111.350262	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/rounded-block-slid-aslant	False	refused	wrong	missing	2.122e-06	0.024560559		694.654453		474.114511	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/short-bar-screwed-through-rod	True	refused	pass	missing	2.345e-06	2.55785616		1326.86356		882.290973	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/spheroid-wheel-screwed-through-rod	True	refused	refused	missing	2.834e-06	2.514e-06		1559.4641		794.460009	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/spiroid-face-gear-hobbed-by-its-worm	False	refused	refused	missing	2.165e-06	2.273e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/spline-bar-screwed-through-rod	True	refused	refused	missing	2.06e-06	1.893e-06		1335.31959		810.568232	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/square-bar-on-its-edge-swung	False	refused	pass	missing	2.19e-06	0.026597853		137.097336		181.888017	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/square-bar-screwed-partway-up-rod	True	refused	pass	missing	2.901e-06	0.711639716		1431.58574		806.935176	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/square-bar-screwed-through-rod	True	refused	pass	missing	2.271e-06	1.58880107		1300.55021		821.167156	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/square-on-a-planet-carrier	False	refused	refused	missing	2.309e-06	2.363e-06		155.336678		282.192712	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/square-thread-at-a-growing-lead	True	refused	pass	missing	4.862e-06	1.41867398		1324.47827		808.437626	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/square-thread-with-a-run-out	True	refused	pass	missing	2.239e-06	1.19573765		1364.02421		822.633577	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/straight-bevel-gear-cut-by-its-pinion	True	refused	refused	missing	2.154e-06	2.113e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/tetrahedron-screwed	False	refused	pass	missing	2.129e-06	2.72962103		153.463114		324.905084	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/tilted-box-pushed-aslant-through-plate	True	refused	pass	missing	2.33e-06	0.021586424		3546.37037		2309.91723	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/torus-screwed-through-a-tilted-rod	True	refused	missing	missing	2.071e-06			1460.63		791.563223	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/torus-screwed-through-rod	True	refused	refused	missing	2.181e-06	2.113e-06		1460.63		791.563223	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/torus-slid-through-rod	True	refused	pass	missing	2.463e-06	0.588347527		1493.75457		794.360899	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/torus-turned-across-block	True	refused	refused	missing	2.128e-06	1.822e-06		57.5718997		115.836625	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/tumbling-cube	False	refused	refused	missing	2.211e-06	2.213e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/tumbling-torus	False	refused	refused	missing	2.413e-06	2.263e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/tumbling-torus-crossed-difference	True	refused	refused	missing	2.331e-06	1.913e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/tumbling-torus-crossed-forward	False	refused	refused	missing	2.347e-06	2.404e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/tumbling-torus-crossed-intersection	True	refused	refused	missing	2.317e-06	1.973e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/tumbling-torus-crossed-reverse	False	refused	refused	missing	2.098e-06	2.033e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/tumbling-torus-crossed-union	True	refused	refused	missing	2.11e-06	3.275e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/tumbling-torus-full-turn	False	refused	refused	missing	2.143e-06	2.333e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/tumbling-torus-half-turn	False	refused	refused	missing	2.195e-06	2.264e-06		12.2377155		79.6439923	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/tumbling-torus-near-orthogonal	False	refused	refused	missing	2.106e-06	1.863e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/tumbling-torus-near-orthogonal-thick	False	refused	refused	missing	2.912e-06	2.123e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/tumbling-torus-thin	False	refused	refused	missing	1.999e-06	2.033e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/two-beads-slid-through-rod	True	refused	pass	missing	2.063e-06	1.26757363		1486.44987		787.234904	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/v-bit-engraving-stopped	True	refused	pass	missing	2.153e-06	0.024604704		5931.62242		2230.05797	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/v-wheel-screwed-through-rod	True	refused	refused	missing	2.227e-06	2.454e-06		1554.38097		812.521505	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/v-wheel-slid-across-block	True	refused	pass	missing	2.127e-06	0.019500941		1953.81198		1041.56922	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/v-wheel-turned-once-round-rod	True	refused	refused	missing	2.165e-06	2.163e-06		1536.48105		805.674236	session_cpp has no sweep of a solid along a path (slide, turn or screw)
+swept/worm-wheel-hobbed-by-its-worm	False	refused	refused	missing	2.147e-06	2.023e-06					session_cpp has no sweep of a solid along a path (slide, turn or screw)
+tangent/ball-in-a-paraboloid-cup	True	refused	pass	pass	4.044e-06	0.030462159		654.498469		455.329476	session_cpp has no paraboloid primitive and no revolve of a curve
+tangent/ball-in-band	True	wrong	pass	pass	0.044548904	0.006286352		580.147443		370.707933	its STEP's faces do not close into a solid
+tangent/bore-a-micron-from-the-wall	True	pass	pass	wrong	0.010241286	0.005076042	282.743339	282.743339	622.035345	622.035345	
+tangent/coaxial-overlap	True	pass	pass	pass	0.005947414	0.005343409	1256.63706	1256.63706	659.734457	659.734457	
+tangent/cone-hollowed-to-a-thousandth-wall	True	pass	pass	missing	0.01499463	0.02995124	0.104709283	0.104709283	351.230002	351.230002	
+tangent/cone-tip-on-face	True	pass	pass	pass	0.005158196	0.005596416	4276.3438	4276.3438	1781.61362	1781.61362	
+tangent/cube-turned-a-hair	True	pass	pass	pass	0.031894427	0.012168354	1000.00873	1000.00873	600.005236	600.005236	
+tangent/cylinder-bored-to-a-ten-thousandth-wall	True	pass	pass	missing	0.0160439	0.024982077	0.0314156124	0.0314156124	628.318531	628.318531	
+tangent/cylinder-bored-to-a-thirty-thousandth-wall	True	pass	pass	missing	0.014989195	0.017379997	0.00942474969	0.00942474969	628.318531	628.318531	
+tangent/cylinder-bored-to-a-thousandth-wall	True	pass	pass	missing	0.015644302	0.050914018	0.314127849	0.314127849	628.318524	628.318524	
+tangent/cylinder-inscribed-through-a-cube	True	wrong	pass	pass	0.019678119	0.010946346	1570.79633	1785.39816	785.398163	914.159265	volume 1570.79632679 against 1785.3981634 (its STEP's); area 785.398163397 against 914.159265359 (its STEP's)
+tangent/grazing-cylinders	True	pass	pass	wrong	0.004750043	0.012438585	0.00157001089	0.00157001088	0.628161414	0.628161411	
+tangent/hairline-slot	True	pass	pass	wrong	0.006656989	0.007444606	999.99995	999.99995	699.99999	699.99999	
+tangent/half-balls-overlapping	True	wrong	pass	pass	0.029783861	0.008118759		392.699082		314.159265	its STEP's faces do not close into a solid
+tangent/half-tori-overlapping	True	pass	pass	pass	0.026207243	0.016220722	1332.39659	1332.39659	1105.03429	1105.03429	
+tangent/ice-cream-cone	True	pass	pass	pass	0.015301183	0.007133062	15079.6447	15079.6447	3015.92895	3015.92895	
+tangent/inscribed-ball-common	True	pass	pass	pass	0.038927157	0.004851077	523.598776	523.598776	314.159265	314.159265	
+tangent/inscribed-ball-union	True	pass	pass	pass	0.040066086	0.005569646	1000	1000	600	600	
+tangent/knife-edge-dish	True	pass	pass	pass	0.009984846	0.00491352	523.598776	523.598776	549.778714	549.778714	
+tangent/midsphere-common	True	wrong	pass	pass	0.055045725	0.041037553	1000	965.068858	600	547.466718	volume 1000 against 965.068858215 (its STEP's); area 600 against 547.46671805 (its STEP's)
+tangent/paraboloid-tip-a-ten-thousandth-high	True	refused	pass	wrong	2.453e-06	0.012631442		1.25663706e-07		0.00502657966	session_cpp has no paraboloid primitive and no revolve of a curve
+tangent/paraboloid-tip-on-face	True	refused	pass	pass	2.001e-06	0.026715496		4706.85835		1824.49516	session_cpp has no paraboloid primitive and no revolve of a curve
+tangent/pole-cap-a-ten-thousandth-high	True	pass	pass	wrong	0.003983346	0.004083585	1.57078585e-07	1.57078585e-07	0.00628315389	0.00628315389	
+tangent/small-box-widened-a-hundredth-cut	True	pass	pass	missing	0.007361296	0.005940348	6.78375e-11	6.78375e-11	1.818045e-05	1.818045e-05	
+tangent/small-cone-widened-a-hundredth-cut	True	pass	pass	missing	0.023819847	0.008700834	1.7759816e-11	1.7759816e-11	7.9859646e-06	7.9859646e-06	
+tangent/small-cube-raised-a-hundredth-common	True	pass	pass	missing	0.005869117	0.006280755	3.34125e-09	3.34125e-09	1.341e-05	1.341e-05	
+tangent/small-cube-raised-a-hundredth-cut	True	pass	pass	missing	0.005752811	0.005770475	3.375e-11	3.375e-11	4.59e-06	4.59e-06	
+tangent/small-cube-raised-a-hundredth-united	True	pass	pass	missing	0.008136303	0.006961026	3.40875e-09	3.40875e-09	1.359e-05	1.359e-05	
+tangent/small-cube-turned-about-its-edge-common	True	pass	pass	missing	0.007211068	0.006641431	9.79272351e-10	9.79272351e-10	5.9170894e-06	5.9170894e-06	
+tangent/small-cylinder-raised-a-hundredth-common	True	pass	pass	missing	0.021179245	0.004594525	2.62421161e-09	2.62421161e-09	1.05321894e-05	1.05321894e-05	
+tangent/small-cylinder-raised-a-hundredth-cut	True	pass	pass	missing	0.022333525	0.004425474	2.6507188e-11	2.6507188e-11	3.60497757e-06	3.60497757e-06	
+tangent/small-cylinder-raised-a-hundredth-united	True	pass	pass	missing	0.024772046	0.004752982	2.67722599e-09	2.67722599e-09	1.0673561e-05	1.0673561e-05	
+tangent/small-cylinder-slid-a-fiftieth-common	True	wrong	pass	missing	0.020498036	0.010994146	2.6507188e-09	2.61696936e-09	1.06028752e-05	1.05128752e-05	volume 2.65071880147e-09 against 2.61696936397e-09 (its STEP's); area 1.06028752059e-05 against 1.05128752058e-05 (its STEP's)
+tangent/small-cylinder-slid-a-fiftieth-cut	True	refused	pass	missing	0.018562456	0.01079471		3.37494375e-11		7.11358272e-06	bop::apply returned an empty result
+tangent/small-cylinder-slid-a-fiftieth-united	True	wrong	pass	missing	0.056527704	0.011805153	2.66196889e-09	2.68446824e-09	1.06478756e-05	1.06928752e-05	volume 2.66196889421e-09 against 2.68446823896e-09 (its STEP's); area 1.06478755768e-05 against 1.06928752059e-05 (its STEP's)
+tangent/small-cylinder-widened-a-hundredth-cut	True	pass	pass	missing	0.017081482	0.006441964	5.32794479e-11	5.32794479e-11	1.4278892e-05	1.4278892e-05	
+tangent/tangent-tee-common	True	pass	pass	wrong	0.021706262	0.030921883	239.746429	239.746429	214.855941	214.855941	
+tangent/tangent-tee-union	True	pass	pass	refused	0.02170633	0.032957402	2964.67808	2964.67808	1506.73683	1506.73683	
+tangent/thin-lens	True	pass	pass	wrong	0.008836744	0.005683966	7.85397962e-12	7.85398137e-12	3.14159265e-05	3.14159265e-05	
+tangent/torus-in-drum	True	pass	pass	pass	0.076667594	0.023830783	2098.60998	2098.60998	1442.4814	1442.4814	
+tangent/torus-through-a-square-slab	True	wrong	pass	pass	0.039948997	0.018556377	1352	2388.75167	1560	1777.26026	volume 1352 against 2388.75166741 (its STEP's); area 1560 against 1777.26026487 (its STEP's)
+tangent/villarceau-half-torus	True	wrong	pass	wrong	0.041580169	0.039345566		444.132198		408.438243	its STEP's faces do not close into a solid
+tangent/viviani-common	True	wrong	pass	wrong	0.058882271	0.036432321		1205.50621		628.318531	its STEP's faces do not close into a solid
+tangent/viviani-cut	True	wrong	pass	wrong	0.060051279	0.037292542		2983.28399		1428.31853	its STEP's faces do not close into a solid
+tangent/viviani-union	True	wrong	pass	wrong	0.060109501	0.03860908		4868.23958		1539.3804	its STEP's faces do not close into a solid
+tangent/wedge-a-millionth-steep	True	refused	pass	wrong	0.003521935	0.005444169		0.000125		100.000075	bop::apply returned an empty result
+thicken/angle-bracket-inward	False	refused	pass	missing	2.463e-06	0.00529685		152		358	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/angle-bracket-rounded	False	refused	pass	missing	2.608e-06	0.005378281		166.283185		390.137167	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/angle-bracket-sharp	False	refused	pass	missing	2.389e-06	0.005416198		168		394	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/bent-flange	False	refused	pass	missing	2.189e-06	0.005615905		191.415927		446.685835	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/bent-flange-past-its-bend	False	refused	wrong	missing	2.262e-06	0.006110241		497.132741		501.415927	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/cone-frustum	False	refused	pass	missing	2.173e-06	0.003429302		153.93804		369.451296	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/cup-past-its-bend	False	refused	pass	missing	1.997e-06	0.004676598		903.101308		700.992181	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/half-pipe-inward	False	refused	pass	missing	2.291e-06	0.004205367		251.327412		341.592895	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/half-pipe-outward	False	refused	pass	missing	2.111e-06	0.004299776		172.787596		400.132711	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/hemisphere-both-sides	False	refused	pass	missing	2.259e-06	0.003700825		318.348056		389.557489	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/hemisphere-to-its-center	False	refused	wrong	missing	2.165e-06	0.004431483		261.799388		235.619449	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/narrow-cup-thickened-twice-its-bend	False	refused	pass	missing	2.367e-06	0.004685691		741.99043		480.191042	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/open-box-inward	False	refused	pass	missing	2.274e-06	0.007246482		424		888	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/open-box-outward-rounded	False	refused	pass	missing	2.257e-06	0.009251144		564.926248		1175.08848	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/open-box-outward-sharp	False	refused	pass	missing	2.338e-06	0.006328766		584		1216	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/pan-thickened-three-times-its-bend	False	refused	pass	missing	2.343e-06	0.004713873		755.617902		605.409922	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/parabolic-trough	False	refused	pass	missing	2.033e-06	0.004729497		83.9695043		204.73291	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/plate-with-holes	False	refused	pass	missing	3.119e-06	0.004367848		686.902664		922.300888	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/rectangle	False	refused	pass	missing	2.182e-06	0.003715548		160		232	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/sphere-skin	False	refused	pass	missing	2.22e-06	0.00319298		381.179909		766.548607	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/spherical-cap	False	refused	pass	missing	2.116e-06	0.003176796		609.887854		723.822947	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/torus-inner-half	False	refused	pass	missing	2.723e-06	0.003309704		216.501118		504.21167	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/tube	False	refused	pass	missing	2.274e-06	0.003360079		345.575192		760.265422	not written in this runner: brep_thicken exists but these cases were not implemented here
+thicken/v-bracket-sharp	False	refused	missing	missing	2.239e-06			173.856406		407.176915	not written in this runner: brep_thicken exists but these cases were not implemented here
