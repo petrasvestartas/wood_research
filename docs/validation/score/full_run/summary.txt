@@ -1,0 +1,19 @@
+equal by counts 2123 / 2494 (85.1 %), of which 100 within operand difference, 49 within closure error, volume-only 171, different 59, fail 141
+equal by geometry 515 / 2494 (20.6 %); draws correctly 693 / 2494 (27.8 %, 1746 not measured)
+  equal by counts, not by geometry: not measured: no OCCT shape 1603; faces 3; vertices, edges 1; edges 1
+  volume-only with equal geometry (edges and faces split differently, or validity): 43 of 171
+  of 752 measured results a face undrawn in 38, wrongly drawn in 17 (faces: 3160 undrawn, 39 wrong of 57619)
+  apart, operands differ from OCCT: 0 (equal 0, volume-only 0, different 0, fail 0)
+  apart, OCCT fails, invalid or inconsistent: 211 (equal 11, volume-only 22, different 78, fail 100)
+  per family (by counts): BRepGround 158/225; BRepMFR 306/363; McNeel 35/45; NIST 349/460; OCCT data 154/222; Zero-To-CAD 208/225; chair 70/70; forum 35/35; github 49/50; pair 15/15; timber element 376/405; timber joint 368/379
+failure classes:
+   101  bop: result is not a closed solid
+    25  timeout
+    15  bop: result fails the check: N issues: ToleranceOutOfProportion
+volume-only and different, by what is wrong:
+   171  counts differ, noted: check: valid
+    57  volume differs, noted: check: valid
+     2  result not valid, noted: check: valid
+SMLib as second oracle on 690 of these booleans: SMLib's operand A differs 250, results do not add up 135, agrees 110, agrees in volume 85, SMLib's operand B differs 45, fails 42, disagrees 23
+  where OCCT and SMLib disagree or OCCT has no result (23): ours with OCCT 11, SMLib 7, no result 3, neither 2
+  where both oracles agree (195 counted): equal 193, volume-only 2, different 0, fail 0
